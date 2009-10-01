@@ -1,0 +1,17 @@
+#!/bin/sh
+PREFS=$HOME/Preferences/bin
+DEST=/usr/local/bin
+RM='/bin/rm -v'
+LN='ln -sv'
+
+cd $PREFS
+
+rmln() {
+	$RM $DEST/$FILE
+	$LN $PREFS/$FILE $DEST/$FILE
+}
+
+for FILE in *
+do
+	rmln
+done
