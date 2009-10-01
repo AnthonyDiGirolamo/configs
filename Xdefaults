@@ -1,0 +1,82 @@
+! Sizes for Inconsolata
+! dpi: 124 size 16
+! dpi: 110 size 18
+! dpi: 115 size 15
+
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+
+Xft.dpi: 115
+xterm*faceName: Inconsolata
+xterm*faceSize: 15
+
+xterm*dynamiccolors: true
+!xterm*scrollTtyOutput: false
+!xterm*scrollKey: true
+xterm*scrollBar: false
+xterm*background: black
+xterm*foreground: gray
+xterm*utf8: 1
+
+xterm*colorMode:		on
+xterm*colorBD:			lightyellow
+xterm*colorBDMode:		on
+xterm*colorUL:			yellow
+xterm*colorULMode:		on
+xterm*highlightSelection:	true
+
+! tango color scheme
+xterm*customization: -color
+! Black + DarkGrey
+xterm*color0:  #2E3436
+xterm*color8:  #555753
+! DarkRed + Red
+xterm*color1:  #CC0000
+xterm*color9:  #EF2929
+! DarkGreen + Green
+xterm*color2:  #4E9A06
+xterm*color10: #8AE234
+! DarkYellow + Yellow
+xterm*color3:  #C4A000
+xterm*color11: #FCE94F
+! DarkBlue + Blue
+xterm*color4:  #3465A4
+xterm*color12: #729FCF
+! DarkMangenta + Mangenta
+xterm*color5:  #75507B
+xterm*color13: #AD7FA8
+!DarkCyan + Cyan
+xterm*color6:  #06989A
+xterm*color14: #34E2E2
+! LightGrey + White
+xterm*color7:  #D3D7CF
+xterm*color15: #EEEEEC
+
+! light tango color scheme
+!xterm*customization: -color
+!! Black (not tango) + DarkGrey
+!xterm*color0:  #000000
+!xterm*color8:  #555753
+!! DarkRed + Red
+!xterm*color1:  #ff6565
+!xterm*color9:  #ff8d8d
+!! DarkGreen + Green
+!xterm*color2:  #93d44f
+!xterm*color10: #c8e7a8
+!! DarkYellow + Yellow
+!xterm*color3:  #eab93d
+!xterm*color11: #ffc123
+!! DarkBlue + Blue
+!xterm*color4:  #204a87
+!xterm*color12: #3465a4
+!! DarkMangenta + Mangenta
+!xterm*color5:  #ce5c00
+!xterm*color13: #f57900
+!!DarkCyan + Cyan (both not tango)
+!xterm*color6:  #89b6e2
+!xterm*color14: #46a4ff
+!! LightGrey + White
+!xterm*color7:  #cccccc
+

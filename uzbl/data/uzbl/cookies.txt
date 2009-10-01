@@ -1,0 +1,86 @@
+    # Netscape HTTP Cookie File
+    # http://www.netscape.com/newsref/std/cookie_spec.html
+    # This is a generated file!  Do not edit.
+
+.ads.pointroll.com	TRUE	/	FALSE	1577836800	PRID	0C294DA0-4EC3-4C5A-8C22-19D0B0055420
+.ads.pointroll.com	TRUE	/	FALSE	1577836800	PRca	|AHaM*793:1|#
+.ads.pointroll.com	TRUE	/	FALSE	1577836800	PRcp	|AHaMAAMn:1|#
+.ads.pointroll.com	TRUE	/	FALSE	1577836800	PRcr	|FGUd:1|#
+.ads.pointroll.com	TRUE	/	FALSE	1577836800	PRimp	8746A07E-90C1-46F2-8C31-A75144118937
+.ads.pointroll.com	TRUE	/	FALSE	1577836800	PRpc	|DQ6bFGUd:1|#
+.ads.pointroll.com	TRUE	/	FALSE	1577836800	PRpl	|DQ6b:1|#
+.advertising.com	TRUE	/	FALSE	1316432931	ACID	gd900012533609310021
+.advertising.com	TRUE	/	FALSE		ASCID	gd900012533609310021
+.advertising.com	TRUE	/	FALSE	1316432931	BASE	jkA1zGIEDbeZYLJ!
+.advertising.com	TRUE	/	FALSE	1316432931	C2	kUMtKRqcII5NGAH
+.advertising.com	TRUE	/	FALSE	1316432931	F1	BQSx0qEBAAAABAAAAEAAgEA
+.advertising.com	TRUE	/	FALSE	1316432931	ROLL	qGg+CAMbJTRLCpC!
+.advertising.com	TRUE	/click	FALSE		200530	_4ab4c524,4243450636,755720^756777^1^0,0_
+.blogger.com	TRUE	/	FALSE		blogger_TID	204b4293ab8ebb9a
+.blogger.com	TRUE	/dyn-css	FALSE		blogger_TID	648942077c37bc62
+.bluekai.com	TRUE	/	FALSE		bkc	KJyfhXM9W1wYyeOM0kRF/JwCcJOxWA4koXLQI9eIBQGm
+.bluekai.com	TRUE	/	FALSE		bko	
+.bluekai.com	TRUE	/	FALSE		bkou	
+.bluekai.com	TRUE	/	FALSE		bku	pQW99JiD+Dojt3R9
+.bluekai.com	TRUE	/	FALSE		bkw4	
+.burstnet.com	TRUE	/	FALSE	1261136920	TID	15b9h8o1pbok1a
+.cc-dt.com	TRUE	/link	FALSE	1568720926	GUID	6386376A-A512-11DE-94D4-84045530B603
+.cheezburger.com	TRUE	/	FALSE		ASP.NET_SessionId	0emfdvyqcynllenk535kc245
+.community.npr.org	TRUE	/	FALSE		ASP.NET_SessionId	yhmzmpygrlocez55s3w2zi55
+.community.npr.org	TRUE	/	FALSE		plckarptnpr	R4181524522
+.delicious.com	TRUE	/	FALSE	1568717923	_user	anthonysavatar%202.1%201253357923%20-1%201%20aacb2cbf7f214b1de00c702dd47245ab%20yLoZdzPyFt7FToQRQgGP1zOfJ7Q-
+.delicious.com	TRUE	/	FALSE		delicious_us_production	uk68kPag7F7qDza.bCnA0YJcqpEvqy2UWTa2fZLddGMhWbPUstC75Z1tKYaUAyJaKUV0P.K8u5oPVG6m1vq5p6Ud9kSSQutSmXigYezP2EDEXIGdR4duP6dZnzI__lpNmZWufY0Ldz6kQusLoMmbVKvb.UoNfi2OdUCrhNWYdnlPNWRBtvYgLenXY4amXI1qQe6R5.62vG7P.dNc.gJtljYzwLfjYU.Yyb35AC4uOx2paq7sLTrtdCJYna0.GYH2D8gErNRbksAjFAgzP0tEJpRFXW_iIko75eZ4IFD6aR_W68fIBQ0y4giMhkDO4H2NJ6SSZCVq4QQ-
+.delicious.com	TRUE	/	FALSE	1284893923	lt	d
+.delicious.com	TRUE	/	FALSE	2100000000	prefs	a%3A2%3A%7Bs%3A25%3A%22bookmarklist_detail_level%22%3Bs%3A1%3A%221%22%3Bs%3A5%3A%22items%22%3Bi%3A25%3B%7D
+.docs.google.com	TRUE	/	FALSE		WRITELY_SID	DQAAAIMAAAAlJIdiqRmUjmQJpo3bRlUyPMwdii2HGWWWXoToyBPOkyp5-lk2cf_QNRDEgcDT0NJ2fJYANO1HvtWuu0yduG74RDh_D94kDpXOeKJSnR6MNmZ2vLlGJDyoyuqEbLnadsqXgYwj1DZEvvdV7FfzfEY69skpGuqGWnR9xKpTbBKJgxSARYvKTUzlMr_3mbTMzEs
+.doubleclick.net	TRUE	/	FALSE	1316432027	id	221c10df090000d8||t=1253360027|et=730|cs=3ar8f4nw
+.doubleclick.net	TRUE	/	FALSE		test_cookie	
+.facebook.com	TRUE	/	FALSE	1316513363	datr	1253513363-48e79758f3df6da58f6a67cdce4a995d9ac0a2faee79c50abc5e1
+.facebook.com	TRUE	/	FALSE	1254046169	locale	en_US
+.facebook.com	TRUE	/	FALSE		reg_fb_gate	http%3A%2F%2Fwww.facebook.com%2Fconnect%2Fconnect.php%3Fid%3D126426811202%26connections%3D0%26stream%3D0
+.facebook.com	TRUE	/	FALSE		reg_fb_ref	http%3A%2F%2Fwww.facebook.com%2Fconnect%2Fconnect.php%3Fid%3D126426811202%26connections%3D0%26stream%3D0
+.github.com	TRUE	/	FALSE		_github_ses	BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNoSGFzaHsABjoKQHVzZWR7AA%3D%3D--884981fc5aa85daf318eeff084d98e2cff92578f
+.google.com	TRUE	/	FALSE		HSID	AdXvzmwcqrdKnmPtl
+.google.com	TRUE	/	FALSE		NID	27=eA4PNSTCqZ0cyiwOIxNDDrCQuouI8kTlSaCxrBGKlGW1npsivs5JqP9ovnlKRV_woCKjMYcBKpDwLnuCFXIPva7xfB1XtK7b2Kw2G87pTEy19L6U8ZH83xxbPQCzVCA2
+.google.com	TRUE	/	FALSE	1316453550	PREF	ID=6c1c47b21d4a59be:U=6048df23c422010f:TM=1253358240:LM=1253381550:GM=1:S=cfyKTHV3sMRc7AxS
+.google.com	TRUE	/	FALSE		SID	DQAAAIIAAABoiKf5lGyKIy0Uf2n3c2SBvJBVUr_iqU6lmpsqtlSIX1uFTRdiHDxYwoSQZ9UEa1XU_2nsIBJ7nzI1bidJG93cK4bxbQcCfrnXCN9aPAVdNtZv2a3gOXMd7qcy8Hm4jCTjDJzatGTo4yYELNG4u_NhbURgsnLcg7C_CVcQSqY2IkYk-i-1etB6qUVQPxCHiG8
+.google.com	TRUE	/	TRUE		SSID	Av1IUyAQIavcIyc7F
+.google.com	TRUE	/verify	FALSE		SNID	27=76SrfQ0hHicHJUuAS-V0BvNTvI0o9MNqgz43BDwQ=tdkEQ923MGFiAUiz
+.infolinks.com	TRUE	/	FALSE		cnoi	0
+.infolinks.com	TRUE	/	FALSE		cuid	06c2a612-f0fe-49a5-847c-761236d31bcf
+.js-kit.com	TRUE	/	FALSE	1261140533	jsKitUser	FCJp7ZXckOhL8T7MgM9sUBgDj_MKOvW9ADOBY_mgQ6tqwktNVNT66w--
+.mail.google.com	TRUE	/mail	TRUE		GMAIL_AT	xn3j30m4rubi5bb6a82kx4utqm3v3w
+.mail.google.com	TRUE	/mail	TRUE		GX	DQAAAIMAAAD0BAUXhP8ARIEV-yyoU1zvWHZHvZSS3Hr4RQ7OulbIDGM-oajMjdDci53Wtsbd5gXkkdayKG4DbEZgsowjApHdKRML5uLN0gsraZ0q9oJyKOmGRzyfz1cFc7TV1J2Tled12Ioix5o9YxRupCF2j-cI0Hco1ie-cRYrDJ_LO7trqHJZmJoNatyt7CDzIj5afq8
+.mail.google.com	TRUE	/mail	TRUE		GXSP	S
+.mail.google.com	TRUE	/mail	TRUE		S	gmail=ove0OUopCh_0B10DlO6tqA:gmproxy=ttK6XHnGjx4XFjRnyQ52uA
+.npr.org	TRUE	/	FALSE	1330559999	GUID	0000B687729E0AB520C5D0EE61626364
+.npr.org	TRUE	/	FALSE		SiteLifeHost	l3vm107l3pluckcom
+.npr.org	TRUE	/	FALSE	1284941088	anonId	dcd30f82-c9de-4a46-b250-efa80a137d46
+.npr.org	TRUE	/	FALSE	1411085345	s_vi	[CS]v1|255AB950851D2EED-4000010640010B8E[CE]
+.npr.org	TRUE	/	FALSE	1582122480	v1st	47AF79B7D8452423
+.quantserve.com	TRUE	/	FALSE	1568891079	mc	4ab4bac7-39d98-ba263-60b38
+.recaptcha.net	TRUE	/	FALSE	2147368447	uid	f35sDozRoNZskUQp819gVKruS2MX4-xtbOZSKA2FTdcuu7RKAwMD
+.rfihub.com	TRUE	/	FALSE	1884226651	a	b30117822669062991
+.rfihub.com	TRUE	/	FALSE	1884226655	e	bf
+.rfihub.com	TRUE	/	FALSE		j	b30117822669062991
+.rfihub.com	TRUE	/	FALSE	1884226655	n	"aACnNWUVw==AE2225AAABI9rRpMA=AE2225AAABI9rRlQ4="
+.scorecardresearch.com	TRUE	/	FALSE		UID	5829521-72.24.125.231-1253360925
+.scorecardresearch.com	TRUE	/	FALSE		UIDPATH	/
+.sharethis.com	TRUE	/	FALSE	1285049605	__stid	sQL1Ckq3GYW6+nuVxeZuAg==
+.statcounter.com	TRUE	/	FALSE	1411040916	session_2316699	1253360916%260
+.t.hulu.com	TRUE	/	FALSE		ASP.NET_SessionId	lj1v3laokidrxiapwrry403u
+.vimeo.com	TRUE	/	FALSE		5flash_bg_timestamp	1253513553
+.vimeo.com	TRUE	/	FALSE		5vimeo_flasher	4ab71951411a1
+.www.burstnet.com	TRUE	/	FALSE	1253965720	/PC	0
+.www.burstnet.com	TRUE	/	FALSE		/SC	0
+.www.burstnet.com	TRUE	/	FALSE		/ad18082.12188	,CFC,GFC
+.www.google.com	TRUE	/accounts	TRUE		GALX	68GfHZ4fg_4
+.www.google.com	TRUE	/accounts	TRUE		GAUSR	mail|writely:anthony.digirolamo@gmail.com
+.www.google.com	TRUE	/accounts	TRUE		LSID	mail|writely:DQAAAIQAAAAlJIdiqRmUjmQJpo3bRlUyPMwdii2HGWWWXoToyBPOkyp5-lk2cf_QNRDEgcDT0NIaUJf2dB5UbCOESOWDkVhpktKdZtrUSqkNsVzdPQMaGwSNZ2MmSo494dbyehLpH4dleQh-8A9Cz2TVfvgoDWFiEz2RwtPYMWCBTO3a2LnhEC9tNxouY0maPzQF83SvZpY
+.www.google.com	TRUE	/calendar	FALSE		CAL	DQAAAIQAAAA2SXAs8ZrkrCRzTNEuQICm3dUKKS2fJQ4F-BR8GXIWU4dgT_jdK0LVXAz_RjnWpsQGU58N-HjuUg2vmYvcAyo6XRWqGDa-A5vHeibjr6ePlIoRifq8GA4doanC7P4jc5IHh0o7tUHOI5E40KX7ffqjN3FqNoLZaOCziY4jg9kltxR6714r_ryHdjbpn4WEJzw
+.www.google.com	TRUE	/reader/	FALSE		GRLD	UNSET:16674217849979585038
+.www.google.com	TRUE	/search	FALSE		SS	Q0=YXJjaCBsaW51eA
+.www.uzbl.org	TRUE	/wiki/	FALSE		DokuWiki	lshqlnqgeeofonjltkcbfdtd45
+.youtube.com	TRUE	/	FALSE		GEO	6de8ba29e0beec9fe4f9d28517bacabfcwsAAAAzVVNGorxmSrb+Zw==
+.youtube.com	TRUE	/	FALSE	1274094383	VISITOR_INFO1_LIVE	Pml03jq3NZA
+.youtube.com	TRUE	/	FALSE		use_hitbox	72c46ff6cbcdb7c5585c36411b6b334edAEAAAAw

@@ -1,0 +1,11 @@
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[user]
+	name = adigiro
+	email = anthony.d@asu.edu
+[giggle]
+	compact-mode = false
+	main-window-maximized = true
+	main-window-geometry = 0x0+0+0

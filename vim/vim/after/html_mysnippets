@@ -1,0 +1,7 @@
+if !exists('loaded_snippet') || &cp
+    finish
+endif
+
+exe "Snippet t <<{tag}>><{}></<{tag}>><CR>"
+exe "Snippet r <%= <{}> %><CR>"
+exe "Snippet rr <% <{}> %><CR>"
