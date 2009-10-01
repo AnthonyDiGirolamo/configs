@@ -1,0 +1,8 @@
+#!/bin/sh
+DISPLAY=:0.0 /usr/bin/notify-send -u critical -t 10000 -i mail-send-receive "Syncing Mail" "GMail via offlineimap"
+offlineimap
+COUNT=`ls -1 /home/adigiro/Preferences/Mail/INBOX/new/ | wc -l`
+if [ "$COUNT" -gt "0" ]; then
+	DISPLAY=:0.0 /usr/bin/notify-send -u critical -t 10000 -i mail-unread "Mutt: New Mail" "$COUNT new message(s)"
+fi
+

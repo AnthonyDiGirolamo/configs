@@ -1,0 +1,2 @@
+#!/bin/sh
+grep -h -e "^$1" $HOME/apps/mthesaur.txt

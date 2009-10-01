@@ -1,0 +1,2 @@
+#!/bin/sh
+env WINEPREFIX="/home/adigiro/WineFolders/office" wine "C:\\Program Files\\Microsoft Office\\Office12\\POWERPNT.EXE" &

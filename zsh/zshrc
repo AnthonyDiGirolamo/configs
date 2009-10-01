@@ -44,17 +44,10 @@ alias df='df -hTP'
 ### Variables
 export EDITOR=vim
 export PATH=/opt/e17/bin:$PATH
-export PATH=$HOME/apps:$PATH
-export PATH=$HOME/apps/git/bin:$PATH
-export PATH=$HOME/apps/naim/bin:$PATH
-export PATH=$HOME/apps/vim/bin:$PATH
-export PATH=$HOME/apps/screen/bin:$PATH
+export PATH=$HOME/Preferences/bin:$PATH
+
 export GDBASE_PREFIX=/home/adigiro/apps/gdbase
 export PATH=$HOME/apps/gdbase/bin:$PATH
-# export PATH=$HOME/apps/buildtools/bin:$PATH
-# export PATH=$HOME/apps/sss/bin:$PATH
-# export PATH=$HOME/apps/sss/sbin:$PATH
-# export LD_LIBRARY_PATH=$HOME/apps/sss/lib:$LD_LIBRARY_PATH
 
 ### MVAPICH
 #export PATH=$HOME/apps/mvapich/bin:/home/adigiro/apps/valgrind-mvapich/bin:$PATH
@@ -69,6 +62,7 @@ export PATH=$HOME/apps/gdbase/bin:$PATH
 export PATH=$HOME/apps/ompi132/bin:/home/adigiro/apps/valgrind-openmpi/bin:$PATH
 export LD_LIBRARY_PATH=$HOME/apps/ompi132/lib/openmpi:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$HOME/apps/ompi132/lib:$LD_LIBRARY_PATH
+
 
 function authme {
     ssh $@ 'cat >>.ssh/authorized_keys' <~/.ssh/id_rsa.pub

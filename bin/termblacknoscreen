@@ -1,0 +1,2 @@
+#!/bin/sh
+xterm -fg lightgray -bg black &

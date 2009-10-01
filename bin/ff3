@@ -1,0 +1,33 @@
+#!/bin/bash
+export MOZ_DISABLE_PANGO=1
+
+# Change this to match your correct profile
+PROFILE="cwqjn56n.default"
+
+cd "${HOME}/.mozilla/firefox"
+
+if test -z "$(mount | grep -F "mozilla/firefox/${PROFILE}" )"
+then
+	mount "firefox"
+fi
+
+if test -f "${PROFILE}/.unpacked"
+then
+	echo "already mounted"
+	#tar --exclude '.unpacked' -cpf packed.tmp.tar "$PROFILE"
+	#mv packed.tar packed.tar.old
+	#mv packed.tmp.tar packed.tar
+else
+	tar xpf packed.tar &&\
+	touch "${PROFILE}/.unpacked"
+fi
+
+LD_PRELOAD=/usr/lib/libGL.so.1 /home/adigiro/apps/firefox35/firefox
+
+if test -f "${PROFILE}/.unpacked"
+then
+	tar --exclude '.unpacked' -cpf packed.tmp.tar "$PROFILE"
+	mv packed.tar packed.tar.old
+	mv packed.tmp.tar packed.tar
+fi
+

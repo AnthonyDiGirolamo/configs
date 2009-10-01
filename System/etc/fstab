@@ -1,0 +1,17 @@
+# /etc/fstab: static file system information.
+#
+# Use 'vol_id --uuid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+proc            /proc           proc    defaults        0       0
+# / was on /dev/sda4 during installation
+UUID=f396659f-39d7-4373-869c-724b63b36922 /               ext4    noatime,errors=remount-ro 0       1
+/dev/sda3		/home			ext4    noatime,nodev,nosuid	0       2
+# swap was on /dev/sda2 during installation
+#UUID=3de3a314-cd57-4248-ae0f-1449d3098786 none            swap    sw              0       0
+/dev/sda5 none            swap    sw              0       0
+/dev/scd0       /media/cdrom0   udf,iso9660 user,noauto,exec,utf8 0       0
+firefox /home/adigiro/.mozilla/firefox/cwqjn56n.default tmpfs size=128M,noauto,user,exec,uid=1001,gid=1001 0 0
+

@@ -1,0 +1,2 @@
+#!/bin/sh
+MAC=`head /dev/urandom | openssl md5 | sed 's/\(..\)/\1:/g' | cut -c1-17`; echo $MAC

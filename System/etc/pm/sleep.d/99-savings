@@ -1,0 +1,93 @@
+#!/bin/bash
+
+# Go fast on AC power.  Similar to default Ubuntu settings
+if on_ac_power; then
+  # Set the drive to mostly stay awake
+  hdparm -B 200 -S 240 -M 254 /dev/sda
+
+  # Remount ext3 filesystems so the journal commit only happens every 60
+  # seconds.  By default this is 5 but, I prefer to reduce the disk
+  # activity a bit.
+  mount -o remount,commit=60 /
+
+  # Turn off the laptop mode disk optimization
+  echo 0 > /proc/sys/vm/laptop_mode
+
+  # Manually set the wifi driver to no power savings.
+  echo 6 > /sys/bus/pci/drivers/iwl????/0000\:??\:00.0/power_level  
+
+  # Set kernel dirty page value back to default
+  echo 10 > /proc/sys/vm/dirty_ratio
+  echo 5 > /proc/sys/vm/dirty_background_ratio
+
+  # Only wakeup every 60 seconds to see if we need to write dirty pages
+  # By default this is every 5 seconds but, I prefer 60 to reduce disk
+  # activity.
+  echo 6000 > /proc/sys/vm/dirty_writeback_centisecs
+
+  # Turn off sound card power savings
+  echo 0 > /sys/module/snd_hda_intel/parameters/power_save
+  
+  # Set the SATA to max performance
+  echo max_performance > /sys/class/scsi_host/host0/link_power_management_policy
+  # echo max_performance > /sys/class/scsi_host/host1/link_power_management_policy
+
+  # Make sure ondemand governor is set
+  echo ondemand > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 
+
+  # Enable USB and Bluetooth
+  modprobe  hci_usb
+  modprobe  rfcomm
+  modprobe  l2cap
+  modprobe  bluetooth
+  modprobe  usbhid
+  modprobe  uhci_hcd
+  modprobe  ehci_hcd
+
+  bat usenone
+  bat p
+
+else # Save power
+
+  # Set the disks to aggressively save power and use the lowest acoustic
+  # level.  Note: Currently Firefox is very poorly behaved and some
+  # might find these settings too aggressive.  If so, change "-S 4" to
+  # something larger like -S 24 (two minutes).
+  hdparm -B 1 -S 12 -M 128 /dev/sda
+  
+  # Change the commit times to 10 minutes.  This reduces disk activity
+  mount -o remount,commit=600 /
+
+  # Set laptop disk write mode
+  echo 5 > /proc/sys/vm/laptop_mode
+
+  # Manually set the iwl3945 driver to power savings.
+  echo 5 > /sys/bus/pci/drivers/iwl????/0000\:??\:00.0/power_level  
+
+  # Reduce disk activity by waiting up to 10 minutes before doing writes
+  echo 90 > /proc/sys/vm/dirty_ratio
+  echo 1 > /proc/sys/vm/dirty_background_ratio
+  echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
+
+  # Set sound card power savings
+  echo 10 > /sys/module/snd_hda_intel/parameters/power_save
+
+  # Set SATA to minimum power
+  echo min_power > /sys/class/scsi_host/host0/link_power_management_policy
+  # echo min_power > /sys/class/scsi_host/host1/link_power_management_policy
+
+  # Make sure ondemand governor is set
+  echo ondemand > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 
+
+  # Remove USB and Bluetooth
+  modprobe -r hci_usb
+  modprobe -r rfcomm
+  modprobe -r l2cap
+  modprobe -r bluetooth
+  modprobe -r usbhid
+  modprobe -r uhci_hcd
+  modprobe -r ehci_hcd
+
+  bat use0
+
+fi
