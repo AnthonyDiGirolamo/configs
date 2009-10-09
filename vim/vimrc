@@ -73,8 +73,8 @@ map <s-Tab><s-Tab> :tabprevious<cr>
 map <space><space> <c-W>w<c-W>_
 
 " F10 to make and view a latex pdf
-map <F10> :w<CR>:!make clean; make; evince `basename % .tex`.pdf &<cr>
-imap <F10> <ESC>:w<CR>:!make clean; make; evince `basename % .tex`.pdf &<cr>
+map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
+imap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
 
 " Removes trailing spaces
 function TrimWhiteSpace()

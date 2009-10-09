@@ -2,6 +2,21 @@
 #                             LATEX SNIPPETS                              #
 ###########################################################################
 
+snippet Verb "Verbatim Figure"
+\begin{figure}[${1:!tbh}]
+\begin{center}
+\begin{minipage}[h]{1.0\textwidth}
+\begin{Verbatim}[fontsize=${2:\footnotesize},numbers=${3:left},label=${4:Label},frame=${5:single}]
+${0}
+\end{Verbatim}
+\end{minipage}
+\end{center}
+\caption{${5:caption}}
+\label{${6:reference_id}}
+\end{figure}
+
+endsnippet
+
 snippet r "\ref{}"
 \ref{$1}
 endsnippet
