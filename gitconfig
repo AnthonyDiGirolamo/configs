@@ -6,6 +6,6 @@
 	name = adigiro
 	email = anthony.d@asu.edu
 [giggle]
-	compact-mode = false
+	compact-mode = true
 	main-window-maximized = true
 	main-window-geometry = 0x0+0+0
