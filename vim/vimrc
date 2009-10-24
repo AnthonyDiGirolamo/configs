@@ -28,6 +28,7 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 set foldmethod=syntax
+set foldlevel=99
 
 set number				" line numbering
 set tabstop=4			" set tabs to 3 spaces
