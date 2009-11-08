@@ -13,16 +13,15 @@ static const char font[]            = "-*-terminus-bold-r-normal-*-24-*-*-*-*-*-
 // Dark 204a87 Light 3465a4
 
 static const char normbordercolor[] = "#2e3436";
-static const char selbordercolor[]  = "#3465a4";
-// #da3f3f salmon color
-//F2EBE4 2e3436
+//static const char selbordercolor[]  = "#fce94f";
+static const char selbordercolor[]  = "#3465a4"; // blue
 
 static const char normbgcolor[]     = "#222222"; // darker
 static const char normfgcolor[]     = "#EEEEEC";
 static const char selbgcolor[]      = "#585858"; // lighter
 static const char selfgcolor[]      = "#EEEEEC";
 
-static unsigned int borderpx        = 0;        /* border pixel of windows */
+static unsigned int borderpx        = 1;        /* border pixel of windows */
 static unsigned int snap            = 32;       /* snap pixel */
 static Bool showbar                 = True;     /* False means no bar */
 static Bool topbar                  = True;     /* False means bottom bar */
@@ -80,9 +79,11 @@ static const char *dmenucmd[] = { "dmenu_run", "-xs", "-fn", font, "-nb", normbg
 static const char *termcmd[]  = { "/usr/local/bin/term", NULL };
 static const char *rebootcmd[]  = { "gksudo", "reboot", NULL };
 static const char *shutdowncmd[]  = { "gksudo", "halt", NULL };
+static const char *filemanager[]  = { "/usr/bin/nautilus", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ Mod4Mask,                     XK_f,      spawn,          {.v = filemanager } },
 	{ Mod4Mask,                     XK_r,      spawn,          {.v = rebootcmd } },
 	{ Mod4Mask,                     XK_h,      spawn,          {.v = shutdowncmd } },
 	{ Mod4Mask,                     XK_space,  spawn,          {.v = dmenucmd } },

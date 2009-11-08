@@ -58,11 +58,10 @@ export PATH=$HOME/apps/gdbase/bin:$PATH
 #export LD_LIBRARY_PATH=$HOME/apps/openmpi126/lib/openmpi:$LD_LIBRARY_PATH
 #export LD_LIBRARY_PATH=$HOME/apps/openmpi126/lib:$LD_LIBRARY_PATH
 
-# OPENMPI 1.3.2
-export PATH=$HOME/apps/ompi132/bin:/home/adigiro/apps/valgrind-openmpi/bin:$PATH
-export LD_LIBRARY_PATH=$HOME/apps/ompi132/lib/openmpi:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$HOME/apps/ompi132/lib:$LD_LIBRARY_PATH
-
+# OPENMPI 1.3.3
+export PATH=$HOME/apps/openmpi133/bin:$PATH
+export LD_LIBRARY_PATH=$HOME/apps/openmpi133/lib/openmpi:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$HOME/apps/openmpi133/lib:$LD_LIBRARY_PATH
 
 function authme {
     ssh $@ 'cat >>.ssh/authorized_keys' <~/.ssh/id_rsa.pub
