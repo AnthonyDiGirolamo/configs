@@ -43,6 +43,9 @@ alias du='du -hsc'
 alias df='df -hTP'
 alias g=gvim
 alias v=vim
+alias t='vim ~/Notes/GTD.mkd'
+alias tg='gvim ~/Notes/GTD.mkd'
+alias today='grep `date +%m/%d` ~/Notes/GTD.mkd'
 
 alias s1='ssh -X saguaro1.fulton.asu.edu'
 alias 360slice='ssh -X adigiro@67.207.147.15'

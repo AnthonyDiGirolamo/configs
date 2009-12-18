@@ -55,6 +55,7 @@ set thesaurus+=~/.vim/mthesaur-vim.txt
 " set iskeyword+=32,- " This messes up syntax highlighting
 
 set ignorecase
+set wildmenu
 
 " make misspelled words appear underlined
 highlight clear SpellBad
@@ -81,12 +82,12 @@ map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.p
 imap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
 
 " Removes trailing spaces
-function TrimWhiteSpace()
+function! TrimWhiteSpace()
 : %s/\s\s*$//gc
 : ''
 :endfunction
-map <s-F12>  :call TrimWhiteSpace()<CR>
-imap <s-F12> <ESC>:call TrimWhiteSpace()<CR>i
+map <silent> <F3>  :call TrimWhiteSpace()<CR>
+imap <silent> <F3> <ESC>:call TrimWhiteSpace()<CR>i
 
 " Save key
 map <F4> :w<CR>
@@ -152,16 +153,50 @@ let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_classes_in_global = 1
 let g:rubycomplete_rails = 1
 
-set wildmenu
-" Use visual bell instead of beeping when doing something wrong
-set visualbell
 
-" And reset the terminal code for the visual bell.  If visualbell is set, and
-" this line is also included, vim will neither flash nor beep.  If visualbell
-" is unset, this does nothing.
-set t_vb=
-
-" Map <C-L> (redraw screen) to also turn off search highlighting until the
-" next search
+" Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
+
+function! InsertDate(spaces)
+	let today = strftime("%m/%d")
+	let pattern = "\s*$"
+	let line = getline(".")
+
+	let repl = ""
+	for i in range(80-strlen(line)-strlen(today)-a:spaces)
+		let repl .= " "
+	endfor
+	let repl .= today
+
+	let newline = substitute(line, pattern, repl, "")
+	call setline(".", newline)
+endfunction
+
+function! RemoveTask()
+	:s/^\s*[\*-] \[ \] //
+	:s/\s*\d\d.\d\d$//
+endfunction
+
+function! NewTask()
+	:s/^\s*/\* \[ \] /
+	call InsertDate(0)
+endfunction
+
+function! SubTask()
+	:s/^\s*/\t- \[ \] /
+	call InsertDate(3)
+endfunction
+
+function! MarkDone()
+	try
+		:s/\[ \]/\[x\]/
+	catch
+		:s/\[x\]/\[ \]/
+	endtry
+endfunction
+
+nmap <silent> ;a :call NewTask()<CR>
+nmap <silent> ;s :call SubTask()<CR>
+nmap <silent> ;d :call MarkDone()<CR>
+nmap <silent> ;D :call RemoveTask()<CR>
 
