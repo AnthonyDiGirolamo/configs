@@ -2,7 +2,7 @@
 
 /* appearance */
 //static const char font[]            = "-*-terminus-bold-r-normal-*-16-*-*-*-*-*-*-*";
-static const char font[]            = "-*-terminus-bold-r-normal-*-24-*-*-*-*-*-*-*";
+static const char font[]            = "-*-terminus-bold-r-normal-*-28-*-*-*-*-*-*-*";
 // static const char font[]            = "-*-fixed-*-*-*-*-14-*-*-*-*-*-*-*";
 
 // Browns:
