@@ -45,12 +45,15 @@ colors molokai
 "colors gardener
 "colors koehler			" good 16 color scheme
 set guifont=Inconsolata\ 16
+set visualbell
+set t_vb=
 
 setlocal spell spelllang=en_us		" set the spellcheck to english
 set mousemodel=popup_setpos			" set the right click in gvim to spellcheck
 
 set thesaurus+=~/.vim/mthesaur-vim.txt
-set iskeyword+=32,-
+" set iskeyword+=32,- " This messes up syntax highlighting
+
 set ignorecase
 
 " make misspelled words appear underlined
@@ -114,10 +117,10 @@ imap <F11> <ESC>gqip
 " imap <F11> <ESC>{V}!fmt<CR>}
 
 " Map shift space to esc
-imap jj <Esc>
-imap <M-Space> <Esc>
-nnoremap <C-space> i
-imap <C-space> <Esc>
+imap jj <Esc>l
+"imap <M-Space> <Esc>
+"nnoremap <C-space> i
+"imap <C-space> <Esc>
 
 "imap <Home> 0
 " map <Home> 0
@@ -137,8 +140,8 @@ map <M-c> "+y
 map <M-v> "+p
 
 autocmd FileType python set complete+=k~/.vim/syntax/python.vim isk+=.,(
-autocmd FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class  
-"autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class  
+autocmd FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+"autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 
 augroup mkd

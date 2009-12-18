@@ -13,15 +13,15 @@ static const char font[]            = "-*-terminus-bold-r-normal-*-24-*-*-*-*-*-
 // Dark 204a87 Light 3465a4
 
 static const char normbordercolor[] = "#2e3436";
-//static const char selbordercolor[]  = "#fce94f";
-static const char selbordercolor[]  = "#3465a4"; // blue
+static const char selbordercolor[]  = "#fce94f";
+//static const char selbordercolor[]  = "#3465a4"; // blue
 
 static const char normbgcolor[]     = "#222222"; // darker
 static const char normfgcolor[]     = "#EEEEEC";
 static const char selbgcolor[]      = "#585858"; // lighter
 static const char selfgcolor[]      = "#EEEEEC";
 
-static unsigned int borderpx        = 1;        /* border pixel of windows */
+static unsigned int borderpx        = 0;        /* border pixel of windows */
 static unsigned int snap            = 32;       /* snap pixel */
 static Bool showbar                 = True;     /* False means no bar */
 static Bool topbar                  = True;     /* False means bottom bar */
@@ -31,15 +31,17 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating */
-	{ NULL,       NULL,       "panel",    0,       True },
-	{ NULL,       NULL,       "Nitrogen", 0,       True },
-	{ NULL,       NULL,       "Downloads", 0,       True },
-	{ NULL,       NULL,       "Save a Bookmark ", 0,       True },
-	{ NULL,       NULL,       "Edit Bookmark ", 0,       True },
+	{ NULL,       NULL,       "panel",                   ~0,       True },
+	{ NULL,       NULL,       "Nitrogen",                0,       True },
+	{ NULL,       NULL,       "Downloads",               0,       True },
+	{ NULL,       NULL,       "Save a Bookmark ",        0,       True },
+	{ NULL,       NULL,       "Edit Bookmark ",          0,       True },
 	{ NULL,       NULL,       "Calculator - Scientific", 0,       True },
-	{ NULL,       NULL,       "Calculator", 0,       True },
-	{ NULL,       NULL,       "Kupfer", 0,       True },
-	{ NULL,       NULL,       "VLC media player", 0,       True },
+	{ NULL,       NULL,       "Calculator",              0,       True },
+	{ NULL,       NULL,       "Kupfer",                  0,       True },
+	{ NULL,       NULL,       "VLC media player",        0,       True },
+	{ NULL,       NULL,       "Top Expanded Edge Panel", ~0,       True },
+	{ NULL,       NULL,       "Bottom Expanded Edge Panel", ~0,       True },
 };
 
 /* layout(s) */
@@ -80,9 +82,13 @@ static const char *termcmd[]  = { "/usr/local/bin/term", NULL };
 static const char *rebootcmd[]  = { "gksudo", "reboot", NULL };
 static const char *shutdowncmd[]  = { "gksudo", "halt", NULL };
 static const char *filemanager[]  = { "/usr/bin/nautilus", NULL };
+static const char *powercmd[] = { "gnome-session-save", "--shutdown-dialog", NULL };
+static const char *logoutcmd[]= { "gnome-session-save", "--logout-dialog", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ Mod4Mask,                     XK_p,      spawn,          {.v = powercmd } },
+	{ Mod4Mask,                     XK_l,      spawn,          {.v = logoutcmd } },
 	{ Mod4Mask,                     XK_f,      spawn,          {.v = filemanager } },
 	{ Mod4Mask,                     XK_r,      spawn,          {.v = rebootcmd } },
 	{ Mod4Mask,                     XK_h,      spawn,          {.v = shutdowncmd } },
@@ -104,7 +110,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[5]} },
 	{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[6]} },
 	{ MODKEY,                       XK_d,      setlayout,      {.v = &layouts[7]} },
-	{ MODKEY,                       XK_p,  setlayout,      {0} },
+	{ MODKEY,                       XK_p,      setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },

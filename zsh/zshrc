@@ -1,4 +1,5 @@
 #!/usr/bin/zsh
+
 # Set colors
 autoload colors zsh/terminfo
 if [[ "$terminfo[colors]" -ge 8 ]]; then
@@ -27,6 +28,7 @@ fi
 alias randmac="head /dev/urandom | openssl md5 | sed 's/\(..\)/\1:/g' | cut -c1-17"
 alias rm='mv --verbose -i --target-directory ~/.Trash/'
 alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
+alias lltr='ll -tr'
 alias lla='ls -lhA'
 alias ll='ls -lh'
 alias la='ls -A'
@@ -35,11 +37,15 @@ alias mutt='TERM=xterm-256color mutt'
 alias c='clear'
 alias gl='git log --pretty=oneline'
 alias gits='git status'
-alias s1='ssh -X saguaro1.fulton.asu.edu'
 alias o='gvfs-open'
 alias h='history'
-alias du='du -hs'
+alias du='du -hsc'
 alias df='df -hTP'
+alias g=gvim
+alias v=vim
+
+alias s1='ssh -X saguaro1.fulton.asu.edu'
+alias 360slice='ssh -X adigiro@67.207.147.15'
 
 ### Variables
 export EDITOR=vim

@@ -3,11 +3,11 @@
 set runtimepath=/home/adigiro/.vimperator
 source! /home/adigiro/.vimperatorrc.local
 
-" vim: set ft=vimperator:
-
 colorscheme simple
+map <M-b> :set guioptions+=B<CR>
 map J gt
 map K gT
+map E :bmarks 
 
 javascript <<EOF
 function delicious() {
@@ -29,3 +29,5 @@ document.getElementById("security-button"));
         document.getElementById("security-button").collapsed = true;
     })();
 EOF
+
+" vim: set ft=vim:

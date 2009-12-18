@@ -1,0 +1,7 @@
+fonts/*.ttf
+fonts/*.otf
+fonts/*.TTF
+*.o
+*.zip
+*.bz2
+*.tar.gz
