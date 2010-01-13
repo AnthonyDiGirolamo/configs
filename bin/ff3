@@ -1,5 +1,5 @@
-#!/bin/bash
-export MOZ_DISABLE_PANGO=1
+#!/bin/sh
+LD_PRELOAD=/usr/lib/libGL.so MOZ_DISABLE_PANGO=1 firefox &
 
 # Change this to match your correct profile
 #PROFILE="cwqjn56n.default"
@@ -23,7 +23,6 @@ export MOZ_DISABLE_PANGO=1
 #fi
 #
 #LD_PRELOAD=/usr/lib/libGL.so.1 /home/adigiro/apps/firefox37/firefox
-firefox
 #
 #if test -f "${PROFILE}/.unpacked"
 #then

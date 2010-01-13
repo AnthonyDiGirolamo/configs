@@ -19,21 +19,47 @@
 #---- Constants -------------------------------------------------
 
 # Name of this version of winetricks (YYYYMMDD)
-VERSION=20090815
+VERSION=20091213
+
+early_wine()
+{
+    WINEDLLOVERRIDES=mshtml= $WINE "$@"
+}
 
 # Default values for important settings if not already in environment.
 # These settings should not need editing here.
-WINE=${WINE:-wine}
-WINEPREFIX=${WINEPREFIX:-$HOME/.wine}
+case "$OS" in
+ "Windows_NT")
+    # Cheezy fix for getting rid of double slashes when running cygwin in wine
+    case $HOME in
+      /) HOME="" ;;
+    esac
+    WINE=""
+    WINEPREFIX=${WINEPREFIX:-$HOME/.wine}
+    DRIVE_C="C:/"
+    XXXPATH=cygpath
+    ;;
+ *)
+    WINE=${WINE:-wine}
+    WINEPREFIX=${WINEPREFIX:-$HOME/.wine}
+    DRIVE_C="$WINEPREFIX/drive_c"
+    XXXPATH="early_wine winepath"
+    ;;
+esac
 
 # Internal variables; these locations are not too important
 WINETRICKS_CACHE=$HOME/winetrickscache
 # Default to hiding the directory, by popular demand
 test -d "$WINETRICKS_CACHE" || WINETRICKS_CACHE=$HOME/.winetrickscache
-WINETRICKS_TMP="$WINEPREFIX"/drive_c/winetrickstmp
+WINETRICKS_CACHE_WIN="`$XXXPATH -w $WINETRICKS_CACHE`"
+WINETRICKS_TMP="$DRIVE_C"/winetrickstmp
 WINETRICKS_TMP_WIN='c:\winetrickstmp'
+mkdir -p $WINETRICKS_TMP
 
-WINDIR="$WINEPREFIX/drive_c/windows"
+# Overridden for windows
+ISO_MOUNT_ROOT=/mnt/winetricks
+
+WINDIR="$DRIVE_C/windows"
 
 # Which sourceforge mirror to use.  Rotate based on time, since
 # their mirror picker sometimes persistantly sends you to a broken
@@ -102,6 +128,7 @@ die_if_user_not_dirowner() {
 
 usage() {
     set +x
+    # WARNING: do not use single quote in any package description; that breaks the gui menu.
     echo "Usage: $0 [options] package [package] ..."
     echo "This script can help you prepare your system for Windows applications"
     echo "that mistakenly assume all users' systems have all the needed"
@@ -113,7 +140,10 @@ usage() {
     echo " -v         verbose"
     echo " -V         display Version"
     echo "Packages:"
-    echo " art2kmin      MS Access 2000 runtime.  Requires Access 2000 Dev license!"
+    echo " art2kmin      MS Access 2007 runtime"
+    echo " atmlib        Adobe Type Manager. Needed for Adobe CS4"
+    echo " autohotkey    Autohotkey (open source gui scripting language)"
+    echo " cmake         CMake, the cross-platform, open-source build system"
     echo " colorprofile  Standard RGB color profile"
     echo " comctl32      MS common controls 5.80"
     echo " comctl32.ocx  MS comctl32.ocx and mscomctl.ocx, comctl32 wrappers for VB6"
@@ -121,41 +151,54 @@ usage() {
     echo " corefonts     MS Arial, Courier, Times fonts"
     echo " cygwin        Unix apps for Windows (needed by some build scripts)"
     echo " d3dx9         MS d3dx9_??.dll (from DirectX 9 user redistributable)"
-    echo " dcom98        MS DCOM (ole32, oleaut32); requires Win98 license!"
+    echo " dcom98        MS DCOM (ole32, oleaut32); requires Windows 98 license, but does not check for one"
     echo " dinput8       MS dinput8.dll (from DirectX 9 user redistributable)"
     echo " dirac0.8      the obsolete Dirac 0.8 directshow filter"
     echo " directplay    MS DirectPlay (from DirectX 9 user redistributable)"
     echo " directx9      MS DirectX 9 user redistributable (not recommended! use d3dx9 instead)"
     echo " divx          divx video codec"
-    echo " dotnet11      MS .NET 1.1 (requires Windows license)"
-    echo " dotnet20      MS .NET 2.0 (requires Windows license)"
-    echo " dotnet30      MS .NET 3.0 (requires Windows license)"
+    echo " dotnet11      MS .NET 1.1 (requires Windows license, but does not check for one)"
+# Doesn't work yet, don't make it public
+#    echo " dotnet11sdk   MS .NET Framework SDK Version 1.1 (requires Windows license, but does not check for one; may not work yet)"
+    echo " dotnet20      MS .NET 2.0 (requires Windows license, but does not check for one)"
+# Doesn't work yet, don't make it public
+#    echo " dotnet20sdk   MS .NET Framework SDK Version 2.0 (requires Windows license, but does not check for one, may not work yet)"
+    echo " dotnet20sp2   MS .NET 2.0 sp2 (requires Windows license, but does not check for one)"
+    echo " dotnet30      MS .NET 3.0 (requires Windows license, but does not check for one, might not work yet)"
     echo " droid         Droid fonts (on LCD, looks better with fontsmooth-rgb)"
     echo " ffdshow       ffdshow video codecs"
+    echo " firefox       Firefox web browser"
     echo " flash         Adobe Flash Player ActiveX and firefox plugins"
     echo " fm20          MS Forms 2.0 Object Library"
     echo " fontfix       Fix bad fonts which cause crash in some apps (e.g. .net)."
+    echo " fontsmooth-bgr        Enables subpixel smoothing for BGR LCDs"
     echo " fontsmooth-disable    Disables font smoothing"
     echo " fontsmooth-gray       Enables grayscale font smoothing"
     echo " fontsmooth-rgb        Enables subpixel smoothing for RGB LCDs"
-    echo " fontsmooth-bgr        Enables subpixel smoothing for BGR LCDs"
-    echo " gdiplus       MS gdiplus.dll (from powerpoint viewer)"
-    echo " gecko         The HTML rendering Engine (Mozilla)"
+    echo " gdiplus       MS gdiplus.dll"
     echo " gecko-dbg     The HTML rendering Engine (Mozilla), with debugging symbols"
+    echo " gecko         The HTML rendering Engine (Mozilla)"
     echo " hosts         Adds empty C:\windows\system32\drivers\etc\{hosts,services} files"
     echo " icodecs       Intel Codecs (Indeo)"
+    echo " ie6           Microsoft Internet Explorer 6.0"
+    echo " ie7           Microsoft Internet Explorer 7.0"
     echo " jet40         MS Jet 4.0 Service Pack 8"
+    echo " kde           KDE for Windows installer"
     echo " liberation    Red Hat Liberation fonts (Sans, Serif, Mono)"
     echo " mdac25        MS MDAC 2.5: Microsoft ODBC drivers, etc."
     echo " mdac27        MS MDAC 2.7"
     echo " mdac28        MS MDAC 2.8"
     echo " mfc40         MS mfc40 (Microsoft Foundation Classes from Visual C++ 4)"
     echo " mfc42         MS mfc42 (same as vcrun6 below)"
+    echo " mingw-gdb     GDB for MinGW"
+    echo " mingw         Minimalist GNU for Windows, including GCC for Windows!"
     echo " mono20        mono-2.0.1"
     echo " mono22        mono-2.2"
     echo " mono24        mono-2.4"
-    echo " msi2          MS Installer 2.0"
+    echo " mozillabuild  Mozilla build environment"
+    echo " mpc           Media Player Classic"
     echo " mshflxgd      MS Hierarchical Flex Grid Control"
+    echo " msi2          MS Installer 2.0"
     echo " msls31        MS Line Services 3.1 (needed by native riched?)"
     echo " msmask        MS Masked Edit Control"
     echo " msscript      MS Script Control"
@@ -166,9 +209,16 @@ usage() {
     echo " ole2          MS 16 bit OLE"
     echo " openwatcom    Open Watcom C/C++ compiler (can compile win16 code!)"
     echo " pdh           MS pdh.dll (Performance Data Helper)"
+    echo " physx         NVIDIA/AGEIA PhysX runtime"
+    echo " psdk2003      MS Platform SDK 2003"
+    echo " psdkvista     MS Vista SDK (does not install yet)"
+    echo " psdkwin7      MS Windows 7 SDK (installing just headers and c++ compiler works)"
+    echo " python26      Python 2.6.2 (and pywin32)"
+    echo " python-comtypes Python 0.6.1-1 comtypes package"
     echo " quicktime72   Apple Quicktime 7.2"
     echo " riched20      MS riched20 and riched32"
     echo " riched30      MS riched30"
+    echo " richtx32      MS Rich TextBox Control 6.0"
     echo " shockwave     Adobe Shockwave Player"
     echo " tahoma        MS Tahoma font (not part of corefonts)"
     echo " urlmon        MS urlmon.dll"
@@ -176,37 +226,49 @@ usage() {
     echo " vb3run        MS Visual Basic 3 runtime"
     echo " vb4run        MS Visual Basic 4 runtime"
     echo " vb5run        MS Visual Basic 5 runtime"
-    echo " vb6run        MS Visual Basic 6 runtime"
-    echo " vcrun6        MS Visual C++ 6 sp4 libraries (mfc42, msvcp60, msvcrt)"
+    echo " vb6run        MS Visual Basic 6 Service Pack 6 runtime"
+    echo " vc2005express MS Visual C++ 2005 Express"
+    echo " vc2005expresssp1 MS Visual C++ 2005 Express SP1 (does not work yet)"
+    echo " vc2005sp1     MS Visual C++ 2005 Service Pack 1 (install trial 1st)"
+    echo " vc2005trial   MS Visual C++ 2005 Trial"
     echo " vcrun2003     MS Visual C++ 2003 libraries (mfc71,msvcp71,msvcr71)"
-    echo " vcrun2005     MS Visual C++ 2005 libraries (mfc80,msvcp80,msvcr80)"
-    echo " vcrun2005sp1  MS Visual C++ 2005 sp1 libraries"
+    echo " vcrun2005     MS Visual C++ 2005 sp1 libraries (mfc80,msvcp80,msvcr80)"
     echo " vcrun2008     MS Visual C++ 2008 libraries (mfc90,msvcp90,msvcr90)"
-    echo " vcrun2008sp1  MS Visual C++ 2008 sp1 libraries"
-    echo " vjrun20       MS Visual J# 2.0 libraries (requires dotnet20)"
-    echo " wininet       MS wininet.dll (requires Windows license)"
-    echo " wme9          MS Windows Media Encoder 9 (requires Windows license)"
-    echo " wmp9          MS Windows Media Player 9 (requires Windows license)"
-    echo " wmp10         MS Windows Media Player 10 (requires Windows license)"
+    echo " vcrun6        MS Visual C++ 6 sp4 libraries (mfc42, msvcp60, msvcrt)"
+    echo " vcrun6sp6     MS Visual C++ 6 sp6 libraries (mfc42, msvcp60, msvcrt; 64 MB download)"
+    echo " vjrun20       MS Visual J# 2.0 SE libraries (requires dotnet20)"
+    echo " vlc           VLC media player"
     echo " wenquanyi     WenQuanYi CJK font (on LCD looks better with fontsmooth-rgb)"
-    echo " wsh56         MS Windows Scripting Host 5.6"
+    echo " wininet       MS wininet.dll (requires Windows license, but does not check for one)"
+    echo " wme9          MS Windows Media Encoder 9 (requires Windows license, but does not check for one)"
+    echo " wmp10         MS Windows Media Player 10 (requires Windows license, but does not check for one)"
+    echo " wmp9          MS Windows Media Player 9 (requires Windows license, but does not check for one)"
     echo " wsh56js       MS Windows scripting 5.6, jscript only, no cscript"
+    echo " wsh56         MS Windows Scripting Host 5.6"
     echo " wsh56vb       MS Windows scripting 5.6, vbscript only, no cscript"
     echo " xact          MS XACT Engine (x3daudio?_?.dll, xactengine?_?.dll)"
     echo " xvid          xvid video codec"
-    echo "Apps:"
-    echo " autohotkey    Autohotkey (open source gui scripting language)"
-    echo " firefox       Firefox"
-    echo " ie6           Microsoft Internet Explorer 6.0"
-    echo " kde           KDE for Windows installer"
-    echo " mpc           Media Player Classic"
-    echo " vlc           VLC media player"
     echo "Pseudopackages:"
     echo " allfonts      All listed fonts (corefonts, tahoma, liberation)"
     echo " allcodecs     All listed codecs (xvid, ffdshow, icodecs)"
     echo " fakeie6       Set registry to claim IE6sp1 is installed"
-    echo " native_mdac   Override odbc32 and odbccp32"
+    echo " glsl-disable  Disable GLSL use by Wine Direct3D"
+    echo " glsl-enable   Enable GLSL use by Wine Direct3D (default)"
+    echo " heapcheck     Enable heap checking"
+    echo " native_mdac   Override odbc32, odbccp32 and oledb32"
     echo " native_oleaut32 Override oleaut32"
+    echo " nocrashdialog Disable the graphical crash dialog"
+    echo " orm=backbuffer Registry tweak: OffscreenRenderingMode=backbuffer"
+    echo " orm=fbo        Registry tweak: OffscreenRenderingMode=fbo (default)"
+    echo " orm=pbuffer    Registry tweak: OffscreenRenderingMode=pbuffer"
+    echo " sandbox       Sandbox the wineprefix - remove links to ~"
+    echo " sound=alsa       Set sound driver to ALSA"
+    echo " sound=audioio    Set sound driver to AudioIO"
+    echo " sound=coreaudio  Set sound driver to CoreAudio"
+    echo " sound=esound     Set sound driver to Esound"
+    echo " sound=jack       Set sound driver to Jack"
+    echo " sound=nas        Set sound driver to Nas"
+    echo " sound=oss        Set sound driver to OSS"
     echo " nt40          Set windows version to nt40"
     echo " win98         Set windows version to Windows 98"
     echo " win2k         Set windows version to Windows 2000"
@@ -295,12 +357,28 @@ try() {
     # Adding this explicit export works around it.
     export WINEDLLOVERRIDES
     echo Executing "$@"
-    "$@"
+    # Mark executable - needed if running on windows vista
+    case "$1" in
+    *.exe) chmod +x "$1" || true
+      cmd /c "$@"
+      ;;
+    *)
+      "$@"
+      ;;
+    esac
     status=$?
     if test $status -ne 0
     then
         die "Note: command '$@' returned status $status.  Aborting."
     fi
+}
+
+try_regedit() {
+    try early_wine regedit "$@"
+}
+
+regedit() {
+    die oops, bug, please report
 }
 
 # verify an sha1sum
@@ -348,6 +426,16 @@ download() {
            # fortunately, we know it
            try curl -L -o "$file" -C - --header "Accept-Encoding: gzip,deflate" "$2"
         fi
+        # Need to decompress .exe's that are compressed, else cygwin fails
+        # Only affects cygwin, so don't barf if 'file' not installed
+        FILE=`which file`
+        case $FILE-$file in
+        /*-*.exe)
+            case `file $file` in
+            *gzip*) mv $file $file.gz; gunzip < $file.gz > $file;;
+            esac
+        esac
+           
         cd "$olddir"
     fi
     if [ "$3"x != ""x ]
@@ -365,7 +453,7 @@ REGEDIT4
 "Version"="$1"
 
 _EOF_
-    try $WINE regedit "$WINETRICKS_TMP"/set-winver.reg
+    try_regedit "$WINETRICKS_TMP"/set-winver.reg
 }
 
 set_app_winver() {
@@ -379,8 +467,59 @@ set_app_winver() {
     echo "\"Version\"=\"$version\""
     ) > "$WINETRICKS_TMP"/set-winver.reg
 
-    try $WINE regedit "$WINETRICKS_TMP"/set-winver.reg
+    try_regedit "$WINETRICKS_TMP"/set-winver.reg
     rm "$WINETRICKS_TMP"/set-winver.reg
+}
+
+set_orm() {
+    echo "Setting OffscreenRenderingMode to $1"
+    cat > "$WINETRICKS_TMP"/set-orm.reg <<_EOF_
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Wine\Direct3D]
+"OffscreenRenderingMode"="$1"
+
+_EOF_
+    try_regedit "$WINETRICKS_TMP"/set-orm.reg
+}
+
+set_sound_driver() {
+    echo "Setting sound driver to to $1"
+    cat > "$WINETRICKS_TMP"/set-sound.reg <<_EOF_
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Wine\Drivers]
+"Audio"="$1"
+
+_EOF_
+    try_regedit "$WINETRICKS_TMP"/set-sound.reg
+}
+
+disable_crashdialog() {
+    echo "Disabling graphical crash dialog"
+    cat > "$WINETRICKS_TMP"/crashdialog.reg <<_EOF_
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Wine\WineDbg]
+"ShowCrashDialog"=dword:00000000
+
+_EOF_
+    try_regedit "$WINETRICKS_TMP"/crashdialog.reg
+}
+
+sandbox() {
+    # remove symlinks
+    try rm "$WINEPREFIX/drive_c/users/$USER/Desktop"
+    try rm "$WINEPREFIX/drive_c/users/$USER/My Documents"
+    try rm "$WINEPREFIX/drive_c/users/$USER/My Music"
+    try rm "$WINEPREFIX/drive_c/users/$USER/My Pictures"
+    try rm "$WINEPREFIX/drive_c/users/$USER/My Videos"
+    # create replacement directories
+    try mkdir "$WINEPREFIX/drive_c/users/$USER/Desktop"
+    try mkdir "$WINEPREFIX/drive_c/users/$USER/My Documents"
+    try mkdir "$WINEPREFIX/drive_c/users/$USER/My Music"
+    try mkdir "$WINEPREFIX/drive_c/users/$USER/My Pictures"
+    try mkdir "$WINEPREFIX/drive_c/users/$USER/My Videos"
 }
 
 unset_winver() {
@@ -392,7 +531,7 @@ REGEDIT4
 "Version"=-
 
 _EOF_
-    try $WINE regedit "$WINETRICKS_TMP"/unset-winver.reg
+    try_regedit "$WINETRICKS_TMP"/unset-winver.reg
 }
 
 override_dlls() {
@@ -415,7 +554,7 @@ _EOF_
         shift
     done
 
-    try $WINE regedit "$WINETRICKS_TMP"/override-dll.reg
+    try_regedit "$WINETRICKS_TMP"/override-dll.reg
     rm "$WINETRICKS_TMP"/override-dll.reg
 }
 
@@ -442,7 +581,7 @@ override_app_dlls() {
         shift
     done
 
-    try $WINE regedit "$WINETRICKS_TMP"/override-dll.reg
+    try_regedit "$WINETRICKS_TMP"/override-dll.reg
     rm "$WINETRICKS_TMP"/override-dll.reg
 }
 
@@ -458,35 +597,65 @@ REGEDIT4
 "$font"="$file"
 _EOF_
     # too verbose
-    #try $WINE regedit "$WINETRICKS_TMP"/register-font.reg
-    $WINE regedit "$WINETRICKS_TMP"/register-font.reg
+    try_regedit "$WINETRICKS_TMP"/register-font.reg
 }
 
+append_path() {
+# Get the %PATH%
+WIN_PATH="`WINEDEBUG= $WINE cmd.exe /c echo "%PATH%"`"
+
+# Set the path. Make sure to not remove any other variables in %PATH% set by the user/other programs:
+    NEW_PATH="$1"
+    cat > "$WINETRICKS_TMP"/path.reg <<_EOF_
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment]
+_EOF_
+
+    printf '"PATH"="' >>"$WINETRICKS_TMP"/path.reg
+    printf "$NEW_PATH;$WIN_PATH"'\"' | sed "s/\\\\/\\\\\\\\/g" >> "$WINETRICKS_TMP"/path.reg
+
+    try_regedit "$WINETRICKS_TMP"/path.reg
+    rm -f "$WINETRICKS_TMP"/path.reg
+
+}
 #----- common download for several verbs
 helper_directx_dl() {
-    # Mar 2009 DirectX 9c User Redistributable
-    # http://www.microsoft.com/downloads/details.aspx?FamilyID=0cf368e5-5ce1-4032-a207-c693d210f616&displaylang=en
-    download . http://download.microsoft.com/download/3/C/4/3C46A69A-CB0F-4CCA-B1E8-248D43270D5F/directx_mar2009_redist.exe 29957ee0d29b95019b082a47da5eab52f50cde0d
+    # Aug 2009 DirectX 9c User Redistributable
+    # http://www.microsoft.com/downloads/details.aspx?displaylang=en&FamilyID=04ac064b-00d1-474e-b7b1-442d8712d553
+    download . http://download.microsoft.com/download/B/7/9/B79FC9D7-47B8-48B7-A75E-101DEBEB5AB4/directx_aug2009_redist.exe 563b96a3d78d6038d10428f23954f083320b4019
 
-    DIRECTX_NAME=directx_mar2009_redist.exe
+    DIRECTX_NAME=directx_aug2009_redist.exe
 }
 
 #----- One function per package, in alphabetical order ----------
 
 load_art2kmin() {
-    # See http://support.microsoft.com/kb/243957
-    download . http://download.microsoft.com/download/office2000dev/art2kmin/1/win98/en-us/art2kmin.exe 73be2622254d1f857a204a03f068787542b985e9
-    try unzip -o $WINETRICKS_UNIXQUIET -d "$WINETRICKS_TMP" "$WINETRICKS_CACHE"/art2kmin.exe
+    # See http://www.microsoft.com/downloads/details.aspx?familyid=d9ae78d9-9dc6-4b38-9fa6-2c745a175aed&displaylang=en
+    download . http://download.microsoft.com/download/D/2/A/D2A2FC8B-0447-491C-A5EF-E8AA3A74FB98/AccessRuntime.exe 571811b7536e97cf4e4e53bbf8260cddd69f9b2d
+    cd "$WINETRICKS_CACHE"
+    try $WINE AccessRuntime.exe $WINETRICKS_QUIET
+    cd "$olddir"
+}
+
+#----------------------------------------------------------------
+
+load_atmlib() {
+    # http://www.microsoft.com/downloads/details.aspx?FamilyID=1001AAF1-749F-49F4-8010-297BD6CA33A0&displaylang=en
+    # FIXME: This is a huge download for a single dll.
+    download . http://download.microsoft.com/download/E/6/A/E6A04295-D2A8-40D0-A0C5-241BFECD095E/W2KSP4_EN.EXE fadea6d94a014b039839fecc6e6a11c20afa4fa8
     cd "$WINETRICKS_TMP"
-    try $WINE Setup.exe INSTALLPFILES=1 /wait $WINETRICKS_QUIET
+    try cabextract "$WINETRICKS_CACHE"/W2KSP4_EN.EXE i386/atmlib.dl_
+    try cp atmlib.dll "$WINDIR"/system32
+    try rm -rf i386
     cd "$olddir"
 }
 
 #----------------------------------------------------------------
 
 load_autohotkey() {
-    download . http://www.autohotkey.net/programs/AutoHotkey104803_Install.exe 5cf0f16e9aa2f2e96a3b08e0d938602aff39a33e
-    try $WINE "$WINETRICKS_CACHE"/AutoHotkey104803_Install.exe $WINETRICKS_S
+    download . http://www.autohotkey.net/programs/AutoHotkey104805_Install.exe 13e5a9ca6d5b7705f1cd02560c3af4d38b1904fc
+    try $WINE "$WINETRICKS_CACHE"/AutoHotkey104805_Install.exe $WINETRICKS_S
 }
 
 #----------------------------------------------------------------
@@ -495,12 +664,24 @@ load_cc580() {
     # http://www.microsoft.com/downloads/details.aspx?familyid=6f94d31a-d1e0-4658-a566-93af0d8d4a1e
     download . http://download.microsoft.com/download/platformsdk/redist/5.80.2614.3600/w9xnt4/en-us/cc32inst.exe 94c3c494258cc54bd65d2f0153815737644bffde
 
-    try $WINE "$WINETRICKS_CACHE"/cc32inst.exe "/T:`$WINE winepath -w "$WINETRICKS_TMP"`" /c $WINETRICKS_QUIET
+    try $WINE "$WINETRICKS_CACHE"/cc32inst.exe "/T:$winetricks_tmp_win" /c $WINETRICKS_QUIET
     try unzip -o $WINETRICKS_UNIXQUIET -d "$WINDIR"/temp "$WINETRICKS_TMP"/comctl32.exe
-    try $WINE "$WINDIR"/temp/x86/50ComUpd.Exe "/T:`$WINE winepath -w "$WINETRICKS_TMP"`" /c $WINETRICKS_QUIET
+    try $WINE "$WINDIR"/temp/x86/50ComUpd.Exe "/T:$winetricks_tmp_win" /c $WINETRICKS_QUIET
     try cp "$WINETRICKS_TMP"/comcnt.dll "$WINDIR"/system32/comctl32.dll
 
     override_dlls native,builtin comctl32
+
+    # some builtin apps don't like native comctl32
+    override_app_dlls winecfg.exe builtin comctl32
+    override_app_dlls explorer.exe builtin comctl32
+    override_app_dlls iexplore.exe builtin comctl32
+}
+
+#----------------------------------------------------------------
+
+load_cmake() {
+    download . http://www.cmake.org/files/v2.6/cmake-2.6.4-win32-x86.exe 00bd502423546b8bce19ffc180ea78e0e2f396cf
+    try $WINE "$WINETRICKS_CACHE"/cmake-2.6.4-win32-x86.exe
 }
 
 #----------------------------------------------------------------
@@ -634,10 +815,10 @@ load_corefonts() {
 #----------------------------------------------------------------
 
 load_cygwin() {
-    download cygwin http://cygwin.com/setup.exe
-    mkdir "$WINEPREFIX"/drive_c/cygpkgs
-    cp "$WINETRICKS_CACHE/cygwin/setup.exe" "$WINEPREFIX"/drive_c/cygpkgs
-    cd "$WINEPREFIX"/drive_c/cygpkgs
+    download cygwin http://cygwin.com/setup.exe 5cfb8ebe4f385b0fcffa04d22d607ec75ea05180
+    mkdir -p "$DRIVE_C"/cygpkgs
+    cp "$WINETRICKS_CACHE/cygwin/setup.exe" "$DRIVE_C"/cygpkgs
+    cd "$DRIVE_C"/cygpkgs
     try $WINE setup.exe
     cd "$olddir"
 }
@@ -657,7 +838,7 @@ load_d3dx9() {
     # For now, not needed, but when Wine starts preferring our builtin dll over native it will be.
     override_dlls native d3dx9_24 d3dx9_25 d3dx9_26 d3dx9_27 d3dx9_28 d3dx9_29 d3dx9_30
     override_dlls native d3dx9_31 d3dx9_32 d3dx9_33 d3dx9_34 d3dx9_35 d3dx9_36 d3dx9_37
-    override_dlls native d3dx9_38 d3dx9_39 d3dx9_40 d3dx9_41
+    override_dlls native d3dx9_38 d3dx9_39 d3dx9_40 d3dx9_41 d3dx9_42
 }
 
 #----------------------------------------------------------------
@@ -720,7 +901,7 @@ load_directx9() {
     # We should probably remove most of these...?
     override_dlls native d3dim d3drm d3dx8 d3dx9_24 d3dx9_25 d3dx9_26 d3dx9_27 d3dx9_28 d3dx9_29
     override_dlls native d3dx9_30 d3dx9_31 d3dx9_32 d3dx9_33 d3dx9_34 d3dx9_35 d3dx9_36 d3dx9_37
-    override_dlls native d3dx9_38 d3dx9_39 d3dx9_40 d3dx9_41 d3dxof
+    override_dlls native d3dx9_38 d3dx9_39 d3dx9_40 d3dx9_41 d3dx9_42 d3dxof
     override_dlls native dciman32 ddrawex devenum dmband dmcompos dmime dmloader dmscript dmstyle
     override_dlls native dmsynth dmusic dmusic32 dnsapi dplay dplayx dpnaddr dpnet dpnhpast dpnlobby
     override_dlls native dswave dxdiagn mscoree msdmo qcap quartz streamci
@@ -743,17 +924,20 @@ load_directx9() {
 
 load_divx() {
     # 6.8.2: 02203fdc4dddd13e789c39b22902837da31d2a1d ?
-    # 6.8.2: e36bf87c1675d0cf9169839bc0cd8f866b9db026 as of 4 jun 2008 as http://download.divx.com/divx/DivXInstaller.exe
-    # 6.8.3: f4f4387ef89316aea440a29f3e24c1f1945e14af as of 20 jun 2008 as http://download.divx.com/divx/abt/b1/DivXInstaller.exe
+    # 6.8.2: e36bf87c1675d0cf9169839bc0cd8f866b9db026 as of 4 Jun 2008 as http://download.divx.com/divx/DivXInstaller.exe
+    # 6.8.3: f4f4387ef89316aea440a29f3e24c1f1945e14af as of 20 Jun 2008 as http://download.divx.com/divx/abt/b1/DivXInstaller.exe
     # 6.8.4: c5fcb1465a1bb24d1c104c2588fdb6706d1e1476 as of 10 Jul 2008 as http://download.divx.com/divx/abt/b1/DivXInstaller.exe
     # 6.8.4: d28a2b041f4af45d22c4dedfe7608f2958cf997d as of 23 Aug 2008 as http://download.divx.com/divx/DivXInstaller.exe
 
     # 7.? 4d91ef90ae26a6088851560c4263ef0cdbf09123 as of 22 Mar 2009 as http://download.divx.com/divx/DivXInstaller.exe
     # 7.0.? 19c9ba3104025d1fab335e405e7f411dfbbcb477 as of 28 May 2009 as http://download.divx.com/divx/DivXInstaller.exe
     # 7.0.? 786aef0f421df5e7358d2d740d9911f9afd055de as of 24 June 2009 as http://download.divx.com/divx/DivXInstaller.exe
-    download divx-7 http://download.divx.com/divx/DivXInstaller.exe 786aef0f421df5e7358d2d740d9911f9afd055de
+    # 7.0.? ad420bf8bf72e924e658c9c6ad6bba76b848fb79 as of 23 Sep 2009 as http://download.divx.com/divx/DivXInstaller.exe
+    # 7.0.? 3385aa8f6ba64ae32e06f651bbbea247bcc1a44d as of 12 Dec 2009 as http://download.divx.com/divx/DivXInstaller.exe
+    
+    download divx-7 http://download.divx.com/divx/DivXInstaller.exe 3385aa8f6ba64ae32e06f651bbbea247bcc1a44d
 
-    try $WINE "$WINETRICKS_CACHE"/divx-7/DivXInstaller $WINETRICKS_SILENT
+    try $WINE "$WINETRICKS_CACHE"/divx-7/DivXInstaller
 }
 
 #----------------------------------------------------------------
@@ -797,6 +981,13 @@ load_dcom98() {
 load_dotnet11() {
     DOTNET_INSTALL_DIR="$WINDIR/Microsoft.NET/Framework/v1.1.4322"
 
+    # If this is just a dependency check, don't re-install
+    if test $PACKAGE != dotnet11 && test -d "$DOTNET_INSTALL_DIR"
+    then
+        echo "prerequisite dotnet11 already installed, skipping"
+        return
+    fi
+
     # need corefonts, else installer crashes
     load_corefonts
 
@@ -812,12 +1003,33 @@ load_dotnet11() {
 
 #----------------------------------------------------------------
 
+load_dotnet11sdk() {
+    load_dotnet11
+
+    warn "Installer hangs at end... not sure if it works fully."
+    # http://www.microsoft.com/downloads/details.aspx?familyid=9B3A2CA6-3647-4070-9F41-A333C6B9181D
+    download dotnet11sdk http://download.microsoft.com/download/5/2/0/5202f918-306e-426d-9637-d7ee26fbe507/setup.exe 9509b14924bcaf84a7780de3f6ad7894004c3450
+    cd "$WINETRICKS_CACHE"/dotnet11sdk
+    try $WINE setup.exe
+    cd "$olddir"
+}
+
+#----------------------------------------------------------------
+
 load_dotnet20() {
+    # If this is just a dependency check, don't re-install
+    if test $PACKAGE != dotnet20 && test -f "$WINDIR"/system32/l_intl.nls
+    then
+        echo "prerequisite dotnet20 already installed, skipping"
+        return
+    fi
+    warn "Instaling .net 2.0 runtime.  Can take several minutes.  See http://wiki.winehq.org/MicrosoftDotNet for tips."
+
     # Recipe from http://bugs.winehq.org/show_bug.cgi?id=10467#c57
     test -d "$WINDIR/gecko" || test -d "$WINDIR/system32/gecko" || load_gecko
     set_winver win2k
     # See http://kegel.com/wine/l_intl-sh.txt for how l_intl.nls was generated
-    download dotnet20 http://kegel.com/wine/l_intl.nls
+    download dotnet20 http://kegel.com/wine/l_intl.nls 0d2e3f025bcdf852b192c9408a361ac2659fa249
     try cp -f "$WINETRICKS_CACHE"/dotnet20/l_intl.nls "$WINDIR/system32/"
 
     # http://www.microsoft.com/downloads/details.aspx?FamilyID=0856eacb-4362-4b0d-8edd-aab15c5e04f5
@@ -830,11 +1042,52 @@ load_dotnet20() {
     fi
     unset_winver
 }
+#----------------------------------------------------------------
+
+load_dotnet20sp2() {
+    warn "Instaling .net 2.0 runtime.  Can take several minutes.  See http://wiki.winehq.org/MicrosoftDotNet for tips."
+
+    # Recipe from http://bugs.winehq.org/show_bug.cgi?id=10467#c57
+    test -d "$WINDIR/gecko" || test -d "$WINDIR/system32/gecko" || load_gecko
+    #set_winver win2k
+    # See http://kegel.com/wine/l_intl-sh.txt for how l_intl.nls was generated
+    download dotnet20 http://kegel.com/wine/l_intl.nls 0d2e3f025bcdf852b192c9408a361ac2659fa249
+    try cp -f "$WINETRICKS_CACHE"/dotnet20/l_intl.nls "$WINDIR/system32/"
+
+    # http://www.microsoft.com/downloads/details.aspx?familyid=5B2C0358-915B-4EB5-9B1D-10E506DA9D0F
+    download dotnet20 http://download.microsoft.com/download/c/6/e/c6e88215-0178-4c6c-b5f3-158ff77b1f38/NetFx20SP2_x86.exe 22d776d4d204863105a5db99e8b8888be23c61a7
+    if [ "$WINETRICKS_QUIET"x = ""x ]
+    then
+       try $WINE "$WINETRICKS_CACHE"/dotnet20/NetFx20SP2_x86.exe
+    else
+       try $WINE "$WINETRICKS_CACHE"/dotnet20/NetFx20SP2_x86.exe /q /c:"install.exe /q"
+    fi
+    unset_winver
+}
+
+#----------------------------------------------------------------
+
+load_dotnet20sdk() {
+    load_dotnet20
+
+    # http://www.microsoft.com/downloads/details.aspx?familyid=9B3A2CA6-3647-4070-9F41-A333C6B9181D
+    download dotnet20sdk http://download.microsoft.com/download/c/4/b/c4b15d7d-6f37-4d5a-b9c6-8f07e7d46635/setup.exe 4e4b1072b5e65e855358e2028403f2dc52a62ab4
+    cd "$WINETRICKS_CACHE"/dotnet20sdk
+    try $WINE setup.exe
+    cd "$olddir"
+}
 
 #----------------------------------------------------------------
 
 load_dotnet30() {
-    echo "Have to install dotnet20 before installing dotnet30... please be patient..."
+    # If this is just a dependency check, don't re-install
+    if test $PACKAGE != dotnet30 && test -d "$WINDIR/Microsoft.NET/Framework/v3.0/Microsoft .NET Framework 3.0"
+    then
+        echo "prerequisite dotnet30 already installed, skipping"
+        return
+    fi
+
+    warn "Instaling .net 3.0 runtime.  Can take 15-30 minutes.  See http://wiki.winehq.org/MicrosoftDotNet for tips."
     load_dotnet20
 
     # http://msdn.microsoft.com/en-us/netframework/bb264589.aspx
@@ -846,6 +1099,25 @@ load_dotnet30() {
        try $WINE "$WINETRICKS_CACHE"/dotnet30/dotnetfx3.exe
     else
        try $WINE "$WINETRICKS_CACHE"/dotnet30/dotnetfx3.exe /q /c:"install.exe /q"
+    fi
+}
+
+#----------------------------------------------------------------
+
+load_dotnet35() {
+    warn "This does not work yet"
+
+    # According to AF's recipe, installing dotnet30 first works around msi bugs
+    load_dotnet30
+
+    # http://www.microsoft.com/downloads/details.aspx?FamilyId=333325FD-AE52-4E35-B531-508D977D32A6
+    download dotnet35 http://download.microsoft.com/download/6/0/f/60fc5854-3cb8-4892-b6db-bd4f42510f28/dotnetfx35.exe 
+
+    if [ "$WINETRICKS_QUIET"x = ""x ]
+    then
+       try $WINE "$WINETRICKS_CACHE"/dotnet35/dotnetfx35.exe
+    else
+       try $WINE "$WINETRICKS_CACHE"/dotnet35/dotnetfx35.exe /q /c:"install.exe /q"
     fi
 }
 
@@ -897,7 +1169,7 @@ _EOF_
     echo -n "${programfilesdir_win}" | sed "s/\\\\/\\\\\\\\/" >>"$WINETRICKS_TMP"/fakeie6.reg
     echo '\\\\Internet Explorer"' >>"$WINETRICKS_TMP"/fakeie6.reg
 
-    try $WINE regedit "$WINETRICKS_TMP"/fakeie6.reg
+    try_regedit "$WINETRICKS_TMP"/fakeie6.reg
 
     # On old wineprefixes iexplore.exe is not created. Create a fake dll using
     # shdocvw.dll that should have similar VERSIONINFO.
@@ -915,12 +1187,12 @@ _EOF_
 #----------------------------------------------------------------
 
 load_firefox() {
-    download . "http://releases.mozilla.org/pub/mozilla.org/firefox/releases/3.5/win32/en-US/Firefox%20Setup%203.5.exe" a9ef21ba8173a5d850b408fc448a7bc889eb68cb "Firefox Setup 3.5.exe"
+    download . "http://releases.mozilla.org//pub/mozilla.org/firefox/releases/3.5.5/win32/en-US/Firefox%20Setup%203.5.5.exe" 39126be271b28ef50c48e3acbe52ee83bbf31066 "Firefox Setup 3.5.5.exe"
     if [ "$WINETRICKS_QUIET"x = ""x ]
     then
-       try $WINE "$WINETRICKS_CACHE"/"Firefox Setup 3.5.exe"
+       try $WINE "$WINETRICKS_CACHE"/"Firefox Setup 3.5.5.exe"
     else
-       try $WINE "$WINETRICKS_CACHE"/"Firefox Setup 3.5.exe" -ms
+       try $WINE "$WINETRICKS_CACHE"/"Firefox Setup 3.5.5.exe" -ms
     fi
 }
 
@@ -946,8 +1218,9 @@ load_flash() {
     # 2008-11-27: 10 sha1sum 7f6850ae815e953311bb94a8aa9d226f97a646dd
     # 2009-02-27: sha1sum 86745020a25edc9695a1a6a4d59eae375665a0b3
     # 2009-07-31: sha1sum 11a81ad1b19344c28b1e1249169f15dfbd2a04f5
+    # 2009-12-09: sha1sum f4ec0e95099e354fd01cd3bb27c202f54932dc70
 
-    download . http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_ax.exe 11a81ad1b19344c28b1e1249169f15dfbd2a04f5
+    download . http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_ax.exe f4ec0e95099e354fd01cd3bb27c202f54932dc70
     try $WINE "$WINETRICKS_CACHE"/install_flash_player_ax.exe $WINETRICKS_S
 
     # Mozilla / Firefox plugin
@@ -955,8 +1228,9 @@ load_flash() {
     # 2008-11-27: sha1sum 20ec0300a8cae19105c903a7ec6c0801e016beb0
     # 2009-02-27: sha1sum 770db9ad471ffd4357358bc16ff0bb6c98d71e5d
     # 2009-07-31: sha1sum 9590fb87cc33d3a3a1f2f42a1918f06b9f0fd88d
-
-    download . http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player.exe 9590fb87cc33d3a3a1f2f42a1918f06b9f0fd88d
+    # 2009-12-09: sha1sum ccb4811b1cc26721c4abb2e5a080868acdee7b87
+    
+    download . http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player.exe ccb4811b1cc26721c4abb2e5a080868acdee7b87
     try $WINE "$WINETRICKS_CACHE"/install_flash_player.exe $WINETRICKS_S
 }
 
@@ -1012,7 +1286,7 @@ REGEDIT4
 "FontSmoothingType"=dword:00000000
 
 _EOF_
-    try $WINE regedit "$WINETRICKS_TMP"/fs_disable.reg
+    try_regedit "$WINETRICKS_TMP"/fs_disable.reg
 }
 #----------------------------------------------------------------
 load_fs_grayscale() {
@@ -1027,7 +1301,7 @@ REGEDIT4
 "FontSmoothingType"=dword:00000001
 
 _EOF_
-    try $WINE regedit "$WINETRICKS_TMP"/fs_grayscale.reg
+    try_regedit "$WINETRICKS_TMP"/fs_grayscale.reg
 }
 #----------------------------------------------------------------
 load_fs_bgr() {
@@ -1042,7 +1316,7 @@ REGEDIT4
 "FontSmoothingType"=dword:00000002
 
 _EOF_
-    try $WINE regedit "$WINETRICKS_TMP"/fs_bgr.reg
+    try_regedit "$WINETRICKS_TMP"/fs_bgr.reg
 }
 #----------------------------------------------------------------
 load_fs_rgb() {
@@ -1057,7 +1331,7 @@ REGEDIT4
 "FontSmoothingType"=dword:00000002
 
 _EOF_
-    try $WINE regedit "$WINETRICKS_TMP"/fs_rgb.reg
+    try_regedit "$WINETRICKS_TMP"/fs_rgb.reg
 }
 #----------------------------------------------------------------
 
@@ -1124,7 +1398,10 @@ _EOF_
     cd "$olddir"
 
     # set install-path
-    try $WINE regedit "$WINETRICKS_TMP"/geckopath.reg
+    try_regedit "$WINETRICKS_TMP"/geckopath.reg
+    
+    # register the dll, since it was disabled before
+    try $WINE regsvr32 mshtml
 }
 
 #----------------------------------------------------------------
@@ -1185,23 +1462,51 @@ _EOF_
     cd "$olddir"
 
     # set install-path
-    try $WINE regedit "$WINETRICKS_TMP"/geckopath.reg
+    try_regedit "$WINETRICKS_TMP"/geckopath.reg
+    
+    # register the dll, since it was disabled before
+    try $WINE regsvr32 mshtml
 }
 
 #----------------------------------------------------------------
 
 load_gdiplus() {
-    # gdiplus is documented here as a redistributable:
-    # http://msdn.microsoft.com/library/en-us/gdicpp/GDIPlus/GDIPlus.asp
-    # however, there's no standalone installer.  So install a random
-    # app that happens to bundle it.
-    download . http://download.microsoft.com/download/a/1/a/a1adc39b-9827-4c7a-890b-91396aed2b86/ppviewer.exe 4d13ca85d1d366167b6247ac7340b7736b1bff87
-    try $WINE "$WINETRICKS_CACHE"/ppviewer.exe $WINETRICKS_QUIET
+    # http://www.microsoft.com/downloads/details.aspx?familyid=6A63AB9C-DF12-4D41-933C-BE590FEAA05A&displaylang=en
+    download . http://download.microsoft.com/download/a/b/c/abc45517-97a0-4cee-a362-1957be2f24e1/WindowsXP-KB975337-x86-ENU.exe b9a84bc3de92863bba1f5eb1d598446567fbc646
+    try $WINE "$WINETRICKS_CACHE"/WindowsXP-KB975337-x86-ENU.exe /extract:$WINETRICKS_TMP_WIN $WINETRICKS_QUIET
     # And then make it globally available.
-    try cp "$programfilesdir_unix/Microsoft Office/PowerPoint Viewer/GDIPLUS.DLL" "$WINDIR"/system32/
+    try cp "$WINETRICKS_TMP/asms/10/msft/windows/gdiplus/gdiplus.dll" "$WINDIR"/system32/
 
     # For some reason, native,builtin isn't good enough...?
     override_dlls native gdiplus
+}
+
+#----------------------------------------------------------------
+
+load_glsl_disable() {
+    echo "Disabling GLSL"
+    cat > "$WINETRICKS_TMP"/disableglsl.reg <<_EOF_
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Wine\Direct3D]
+"UseGLSL"="disabled"
+
+_EOF_
+    try_regedit "$WINETRICKS_TMP"/disableglsl.reg
+}
+
+#----------------------------------------------------------------
+
+load_glsl_enable() {
+    echo "Enabling GLSL"
+    cat > "$WINETRICKS_TMP"/enableglsl.reg <<_EOF_
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Wine\Direct3D]
+"UseGLSL"="enabled"
+
+_EOF_
+    try_regedit "$WINETRICKS_TMP"/enableglsl.reg
 }
 
 #----------------------------------------------------------------
@@ -1219,6 +1524,20 @@ load_hosts() {
 }
 
 #----------------------------------------------------------------
+
+set_heapcheck() {
+    cat > "$WINETRICKS_TMP"/heapcheck.reg <<_EOF_
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager]
+"GlobalFlag"=dword:00200030
+
+_EOF_
+    try_regedit "$WINETRICKS_TMP"/heapcheck.reg
+}
+
+#----------------------------------------------------------------
+
 load_icodecs() {
     # http://downloadcenter.intel.com/Detail_Desc.aspx?strState=LIVE&ProductID=355&DwnldID=2846
     download . http://downloadmirror.intel.com/2846/eng/codinstl.exe 2c5d64f472abe3f601ce352dcca75b4f02996f8a
@@ -1239,7 +1558,7 @@ load_ie6() {
     # Change the override to the native so we are sure we use and register them
     override_dlls native,builtin iexplore.exe itircl itss jscript mlang mshtml msimtf shdoclc shdocvw shlwapi urlmon
 
-    # Remove the fake dlls from the existing WINEPREFIX
+    # Remove the fake dlls, if any
     mv "$programfilesdir_unix"/"Internet Explorer"/iexplore.exe "$programfilesdir_unix"/"Internet Explorer"/iexplore.exe.bak
     for dll in itircl itss jscript mlang mshtml msimtf shdoclc shdocvw shlwapi urlmon
     do
@@ -1258,6 +1577,10 @@ load_ie6() {
 
     # Install
     download . http://download.microsoft.com/download/ie6sp1/finrel/6_sp1/W98NT42KMeXP/EN-US/ie6setup.exe f3ab61a785eb9611fa583612e83f3b69377f2cef
+    
+    # Workaround http://bugs.winehq.org/show_bug.cgi?id=21009
+    # See also http://code.google.com/p/winezeug/issues/detail?id=78
+    rm -f "$WINDIR"/system32/browseui.dll "$WINDIR"/system32/inseng.dll
 
     # Silent install recipe from:
     # http://www.axonpro.sk/japo/info/MS/SILENT%20INSTALL/Unattended-Silent%20Installation%20Switches%20for%20Windows%20Apps.htm
@@ -1299,6 +1622,69 @@ load_ie6() {
 
 #----------------------------------------------------------------
 
+load_ie7() {
+    # Unregister Wine IE
+    try $WINE iexplore -unregserver
+
+    # Change the override to the native so we are sure we use and register them
+    override_dlls native,builtin iexplore.exe itircl itss jscript mshtml msimtf shdoclc shdocvw shlwapi urlmon xmllite
+
+    # Bundled updspapi cannot work on wine
+    override_dlls builtin updspapi
+
+    # Remove the fake dlls from the existing WINEPREFIX
+    for dll in itircl itss jscript mshtml msimtf shdoclc shdocvw shlwapi urlmon
+    do
+        test -f "$WINDIR"/system32/$dll.dll &&
+        mv "$WINDIR"/system32/$dll.dll "$WINDIR"/system32/$dll.dll.bak
+    done
+
+    # See http://bugs.winehq.org/show_bug.cgi?id=16013
+    # Find instructions to create this file in dlls/wintrust/tests/crypt.c
+    download . http://winezeug.googlecode.com/svn/trunk/winetricks_files/winetest.cat ac8f50dd54d011f3bb1dd79240dae9378748449f
+
+    # Put a dummy catalog file in place
+    mkdir -p "$WINDIR"/system32/catroot/\{f750e6c3-38ee-11d1-85e5-00c04fc295ee\}
+    try cp -f "$WINETRICKS_CACHE"/winetest.cat "$WINDIR"/system32/catroot/\{f750e6c3-38ee-11d1-85e5-00c04fc295ee\}/oem0.cat
+
+    # Install
+    download . http://download.microsoft.com/download/3/8/8/38889DC1-848C-4BF2-8335-86C573AD86D9/IE7-WindowsXP-x86-enu.exe d39b89c360fbaa9706b5181ae4718100687a5326
+    if [ $WINETRICKS_QUIET ]
+    then
+        $WINE "$WINETRICKS_CACHE"/IE7-WindowsXP-x86-enu.exe /quiet
+    else
+        $WINE "$WINETRICKS_CACHE"/IE7-WindowsXP-x86-enu.exe
+    fi
+
+    # Work around DLL registration bug until ierunonce/RunOnce/wineboot is fixed
+    # FIXME: whittle down this list
+    cd "$WINDIR"/system32/
+    for i in actxprxy.dll browseui.dll browsewm.dll cdfview.dll ddraw.dll \
+      dispex.dll dsound.dll iedkcs32.dll iepeers.dll iesetup.dll \
+      imgutil.dll inetcomm.dll inseng.dll isetup.dll jscript.dll laprxy.dll \
+      mlang.dll mshtml.dll mshtmled.dll msi.dll msident.dll \
+      msoeacct.dll msrating.dll mstime.dll msxml3.dll occache.dll \
+      ole32.dll oleaut32.dll olepro32.dll pngfilt.dll quartz.dll \
+      rpcrt4.dll rsabase.dll rsaenh.dll scrobj.dll scrrun.dll \
+      shdocvw.dll shell32.dll urlmon.dll vbscript.dll webcheck.dll \
+      wshcon.dll wshext.dll asctrls.ocx hhctrl.ocx mscomct2.ocx \
+      plugin.ocx proctexe.ocx tdc.ocx webcheck.dll wshom.ocx
+    do
+        $WINE regsvr32 /i $i > /dev/null 2>&1
+    done
+
+    # Seeing is believing
+    if [ "$WINETRICKS_QUIET" = "" ]
+    then
+        warn "Starting ie7.  To start it later, use the command $WINE '${programfilesdir_win}\\\\Internet Explorer\\\\iexplore'"
+        $WINE "${programfilesdir_win}\\Internet Explorer\\iexplore" http://www.microsoft.com/windows/internet-explorer/ie7/ > /dev/null 2>&1 &
+    else
+        warn "To start ie7, use the command $WINE '${programfilesdir_win}\\\\Internet Explorer\\\\iexplore'"
+    fi
+}
+
+#----------------------------------------------------------------
+
 load_jet40() {
     # http://support.microsoft.com/kb/239114
     # See also http://bugs.winehq.org/show_bug.cgi?id=6085
@@ -1309,12 +1695,11 @@ load_jet40() {
 #----------------------------------------------------------------
 
 load_kde() {
-    download . http://www.winkde.org/pub/kde/ports/win32/installer/old/kdewin-installer-gui-0.9.5-0.exe c2a95102312ca859fce5190307748da51fae644e
+    download . http://www.winkde.org/pub/kde/ports/win32/installer/kdewin-installer-gui-0.9.6-5.exe f612945e094390d7bc0e4f8840d308ef2b00f86e
     mkdir -p "$programfilesdir_unix/kde"
-    try cp "$WINETRICKS_CACHE"/kdewin-installer-gui-0.9.5-0.exe "$programfilesdir_unix/kde"
+    try cp "$WINETRICKS_CACHE"/kdewin-installer-gui-0.9.6-5.exe "$programfilesdir_unix/kde"
     cd "$programfilesdir_unix/kde"
-    # This reports an errorlevel of 1, even for success. See https://bugs.kde.org/show_bug.cgi?id=194796
-    $WINE "$programfilesdir_win\\kde\\kdewin-installer-gui-0.9.5-0.exe" || true
+    try $WINE "$programfilesdir_win\\kde\\kdewin-installer-gui-0.9.6-5.exe"
     cd "$olddir"
 }
 
@@ -1344,7 +1729,7 @@ load_liberation() {
 set_native_mdac() {
     # Set those overrides globally so user programs get MDAC's odbc
     # instead of wine's unixodbc
-    override_dlls native,builtin odbc32 odbccp32
+    override_dlls native,builtin odbc32 odbccp32 oledb32
 }
 
 #----------------------------------------------------------------
@@ -1405,10 +1790,59 @@ load_mfc40() {
 
 #----------------------------------------------------------------
 
+load_mingw_min() {
+    # If this is just a dependency check, don't re-install
+    if test $PACKAGE != mingw_min && test $PACKAGE != mingw && test $PACKAGE != mingw-min && test -f "$DRIVE_C"/MinGW/bin/gcc.exe
+    then
+        echo "prerequisite mingw_min already installed, skipping"
+        return
+    fi
+
+    # See http://mingw.org/wiki/Getting_Started
+    download . http://sourceforge.net/projects/mingw/files/GNU%20Binutils/binutils-2.19.1-mingw32-bin.tar.gz 1ab72f3af3fe96d08c3c9bff60c47913704d5774
+    download . http://sourceforge.net/projects/mingw/files/GCC%20Version%204/gcc-core-4.4.0-mingw32-bin.tar.gz b88b8f3644ca0cdf2c41cd03f820bf7823a8eabb
+    download . http://sourceforge.net/projects/mingw/files/GCC%20Version%204/gcc-core-4.4.0-mingw32-dll.tar.gz 0372ecf4caf75d0d9fe4a7739ca234f1a3de831b
+    download . http://sourceforge.net/projects/mingw/files/GCC%20Version%204/gmp-4.2.4-mingw32-dll.tar.gz a14dd928382f093f67cb3cd57c140625b1b265bb
+    download . http://sourceforge.net/projects/mingw/files/MinGW%20libiconv/libiconv-1.13.1-1-mingw32-dll-2.tar.lzma 5b60ce4d9ec9cf91aee437915a2469b915e1235f
+    download . http://sourceforge.net/projects/mingw/files/MinGW%20Runtime/mingwrt-3.16-mingw32-dev.tar.gz 770ff5001989d8a9a1ec4f3621d8f264a24e178f
+    download . http://sourceforge.net/projects/mingw/files/MinGW%20Runtime/mingwrt-3.16-mingw32-dll.tar.gz b8032e97c79e16a3c540043f0f39821df1531ae9
+    download . http://sourceforge.net/projects/mingw/files/GCC%20Version%204/mpfr-2.4.1-mingw32-dll.tar.gz 43b7ecb2c0c785c44321ff6c4376f51375713a7b
+    download . http://sourceforge.net/projects/mingw/files/GCC%20Version%204/pthreads-w32-2.8.0-mingw32-dll.tar.gz f922f8c0c42921fd4482a3d2e6f779d6384040c1
+    download . http://sourceforge.net/projects/mingw/files/MinGW%20API%20for%20MS-Windows/w32api-3.13-mingw32-dev.tar.gz 5eb7d8ec0fe032a92bea3a2c8282a78df2f1793c
+
+    mkdir "$DRIVE_C"/MinGW
+    cd "$DRIVE_C"/MinGW
+    gzip -d -c "$WINETRICKS_CACHE"/binutils-2.19.1-mingw32-bin.tar.gz | tar x
+    gzip -d -c "$WINETRICKS_CACHE"/mingwrt-3.16-mingw32-dev.tar.gz | tar x
+    gzip -d -c "$WINETRICKS_CACHE"/mingwrt-3.16-mingw32-dll.tar.gz | tar x
+    gzip -d -c "$WINETRICKS_CACHE"/w32api-3.13-mingw32-dev.tar.gz | tar x
+    gzip -d -c "$WINETRICKS_CACHE"/gmp-4.2.4-mingw32-dll.tar.gz | tar x
+    lzma -d -c "$WINETRICKS_CACHE"/libiconv-1.13.1-1-mingw32-dll-2.tar.lzma | tar x
+    gzip -d -c "$WINETRICKS_CACHE"/mpfr-2.4.1-mingw32-dll.tar.gz | tar x
+    gzip -d -c "$WINETRICKS_CACHE"/pthreads-w32-2.8.0-mingw32-dll.tar.gz | tar x
+    gzip -d -c "$WINETRICKS_CACHE"/gcc-core-4.4.0-mingw32-bin.tar.gz | tar x
+    gzip -d -c "$WINETRICKS_CACHE"/gcc-core-4.4.0-mingw32-dll.tar.gz | tar x
+
+    append_path C:\\MinGW\\bin
+}
+
+#----------------------------------------------------------------
+
+load_mingw_gdb() {
+    # See http://mingw.org/wiki/Getting_Started
+    load_mingw_min
+
+    download . $SOURCEFORGE/mingw/GNU%20Source-Level%20Debugger/GDB-7.0/gdb-7.0-2-mingw32-bin.tar.gz a560cb0e3980d0ed853994c84038260212f58925
+
+    cd "$DRIVE_C"/MinGW
+    gzip -d -c "$WINETRICKS_CACHE"/gdb-7.0-2-mingw32-bin.tar.gz | tar x
+}
+
+#----------------------------------------------------------------
+
 load_mono20() {
     # Load Mono, have it handle all .net requests
     download .  ftp://ftp.novell.com/pub/mono/archive/2.0.1/windows-installer/1/mono-2.0.1-gtksharp-2.10.4-win32-1.exe ccb67ac41b59522846e47d0c423836b9d334c088
-    # Anyone know how to get it to do a silent install?
     try $WINE "$WINETRICKS_CACHE"/mono-2.0.1-gtksharp-2.10.4-win32-1.exe $WINETRICKS_SILENT
 
     cat > "$WINETRICKS_TMP"/mono_2.0.reg <<_EOF_
@@ -1421,7 +1855,7 @@ REGEDIT4
 [HKEY_LOCAL_MACHINE\Software\Microsoft\.NETFramework\policy\v2.0]
 "4322"="3706-4322"
 _EOF_
-    try $WINE regedit "$WINETRICKS_TMP"/mono_2.0.reg
+    try_regedit "$WINETRICKS_TMP"/mono_2.0.reg
     rm -f "$WINETRICKS_TMP"/mono_2.0.reg
 }
 
@@ -1443,7 +1877,7 @@ REGEDIT4
 [HKEY_LOCAL_MACHINE\Software\Microsoft\.NETFramework\policy\v2.0]
 "4322"="3706-4322"
 _EOF_
-    try $WINE regedit "$WINETRICKS_TMP"/mono_2.0.reg
+    try_regedit "$WINETRICKS_TMP"/mono_2.0.reg
     rm -f "$WINETRICKS_TMP"/mono_2.0.reg
 }
 
@@ -1451,7 +1885,7 @@ _EOF_
 
 load_mono24() {
     # Load Mono, have it handle all .net requests
-    download .  http://ftp.novell.com/pub/mono/archive/2.4.2.3/windows-installer/3/mono-2.4.2.3-gtksharp-2.12.9-win32-3.exe
+    download .  http://ftp.novell.com/pub/mono/archive/2.4.2.3/windows-installer/3/mono-2.4.2.3-gtksharp-2.12.9-win32-3.exe 4f0d051bcedd7668e63c12903310be0ea38f9654
     try $WINE "$WINETRICKS_CACHE"/mono-2.4.2.3-gtksharp-2.12.9-win32-3.exe $WINETRICKS_SILENT
 
     # FIXME: what should this be for mono 2.4?
@@ -1465,18 +1899,29 @@ REGEDIT4
 [HKEY_LOCAL_MACHINE\Software\Microsoft\.NETFramework\policy\v2.0]
 "4322"="3706-4322"
 _EOF_
-    try $WINE regedit "$WINETRICKS_TMP"/mono_2.0.reg
+    try_regedit "$WINETRICKS_TMP"/mono_2.0.reg
     rm -f "$WINETRICKS_TMP"/mono_2.0.reg
 }
 
 #----------------------------------------------------------------
 
+load_mozillabuild() {
+    download . http://ftp.mozilla.org/pub/mozilla.org/mozilla/libraries/win32/MozillaBuildSetup-1.4.exe
+    try $WINE "$WINETRICKS_CACHE"/MozillaBuildSetup-1.4.exe $WINETRICKS_S
+}
+
+#----------------------------------------------------------------
+
 load_mpc() {
-    download . $SOURCEFORGE/guliverkli2/mplayerc_20080414.zip bc9f922d7151e7cc7fef429b085cf208ef989bab
-    cd "$WINEPREFIX"/drive_c
-    try unzip "$WINETRICKS_CACHE"/mplayerc_20080414.zip
+    download . $SOURCEFORGE/guliverkli2/Media%20Player%20Classic/6.4.9.1/mplayerc_20090706.zip 9b8e06a3997a786dccfb5739e0cc1a34f17905b6
+    mkdir -p "$programfilesdir_unix/Media Player Classic"
+    cd "$programfilesdir_unix/Media Player Classic"
+    try unzip "$WINETRICKS_CACHE"/mplayerc_20090706.zip
+
+    append_path "$programfilesdir_win\Media Player Classic"
+
     cd "$olddir"
-    echo MPC now available as c:/mplayerc.exe
+    warn "MPC now available as $programfilesdir_win\Media Player Classic\mplayerc.exe"
 }
 
 #----------------------------------------------------------------
@@ -1561,30 +2006,39 @@ load_msxml3() {
 #----------------------------------------------------------------
 
 load_msxml4() {
-    # http://www.microsoft.com/downloads/details.aspx?familyid=24B7D141-6CDF-4FC4-A91B-6F18FE6921D4
-    if test ! -f "$WINETRICKS_CACHE"/msxml4.msi
+    # If this is just a dependency check, don't re-install
+    if test $PACKAGE != msxml4 && test -f "$WINDIR"/system32/msxml4.dll
     then
-       download . http://download.microsoft.com/download/e/2/e/e2e92e52-210b-4774-8cd9-3a7a0130141d/msxml4-KB927978-enu.exe d364f9fe80c3965e79f6f64609fc253dfeb69c25
-       rm -rf "$WINETRICKS_TMP"/*
-
-       try $WINE "$WINETRICKS_CACHE"/msxml4-KB927978-enu.exe "/x:`$WINE winepath -w "$WINETRICKS_TMP"`" $WINETRICKS_QUIET
-       if test ! -f "$WINETRICKS_TMP"/msxml.msi
-       then
-          die msxml.msi not found
-       fi
-       mv "$WINETRICKS_TMP"/msxml.msi "$WINETRICKS_CACHE"/msxml4.msi
+        echo "prerequisite msxml4 already installed, skipping"
+        return
     fi
+    # MS06-071: http://www.microsoft.com/downloads/details.aspx?familyid=24B7D141-6CDF-4FC4-A91B-6F18FE6921D4
+    # download . http://download.microsoft.com/download/e/2/e/e2e92e52-210b-4774-8cd9-3a7a0130141d/msxml4-KB927978-enu.exe d364f9fe80c3965e79f6f64609fc253dfeb69c25
+    # MS07-042: http://www.microsoft.com/downloads/details.aspx?FamilyId=021E12F5-CB46-43DF-A2B8-185639BA2807
+    # download . http://download.microsoft.com/download/9/4/2/9422e6b6-08ee-49cb-9f05-6c6ee755389e/msxml4-KB936181-enu.exe 73d75d7b41f8a3d49f272e74d4f73bb5e82f1acf
+    # SP3 (2009): http://www.microsoft.com/downloads/details.aspx?familyid=7F6C0CB4-7A5E-4790-A7CF-9E139E6819C0
+    download msxml4sp3 http://download.microsoft.com/download/A/2/D/A2D8587D-0027-4217-9DAD-38AFDB0A177E/msxml.msi aa70c5c1a7a069af824947bcda1d9893a895318b
 
-    try $WINE msiexec /i "$WINETRICKS_CACHE"/msxml4.msi $WINETRICKS_QUIET
+    try $WINE msiexec /i "$WINETRICKS_CACHE"/msxml4sp3/msxml.msi $WINETRICKS_QUIET
 }
 
 #----------------------------------------------------------------
 
 load_msxml6() {
-    # http://www.microsoft.com/downloads/details.aspx?FamilyID=993c0bcf-3bcf-4009-be21-27e85e1857b1
-    download . http://download.microsoft.com/download/2/e/0/2e01308a-e17f-4bf9-bf48-161356cf9c81/msxml6.msi 2308743ddb4cb56ae910e461eeb3eab0a9e58058
+    # If this is just a dependency check, don't re-install
+    if test $PACKAGE != msxml6 && test -f "$WINDIR"/system32/msxml6.dll
+    then
+        echo "prerequisite msxml6 already installed, skipping"
+        return
+    fi
 
-    try $WINE msiexec /i "$WINETRICKS_CACHE"/msxml6.msi $WINETRICKS_QUIET
+    # http://www.microsoft.com/downloads/details.aspx?FamilyID=993c0bcf-3bcf-4009-be21-27e85e1857b1
+    # download . http://download.microsoft.com/download/2/e/0/2e01308a-e17f-4bf9-bf48-161356cf9c81/msxml6.msi 2308743ddb4cb56ae910e461eeb3eab0a9e58058
+    # Service Pack 1
+    # http://www.microsoft.com/downloads/details.aspx?familyid=D21C292C-368B-4CE1-9DAB-3E9827B70604
+    download . http://download.microsoft.com/download/e/a/f/eafb8ee7-667d-4e30-bb39-4694b5b3006f/msxml6_x86.msi
+
+    try $WINE msiexec /i "$WINETRICKS_CACHE"/msxml6_x86.msi $WINETRICKS_QUIET
 }
 
 #----------------------------------------------------------------
@@ -1625,9 +2079,26 @@ load_ole2() {
 
 load_openwatcom() {
     # http://www.openwatcom.org
-
     download . "http://ftp.openwatcom.org/ftp/open-watcom-c-win32-1.8.exe" 44afd1fabfdf0374f614f054824e60ac560f9dc0
-    try $WINE "$WINETRICKS_CACHE"/open-watcom-c-win32-1.8.exe $WINETRICKS_SILENT
+    if [ $WINETRICKS_QUIET ]
+    then
+        # Options documented at http://bugzilla.openwatcom.org/show_bug.cgi?id=898
+        # But they don't seem to work on wine, so jam them into setup.inf
+        # Pick smallest installation that supports 16 bit C and C++
+        cd "$WINETRICKS_TMP"
+        cp "$WINETRICKS_CACHE"/open-watcom-c-win32-1.8.exe .
+        unzip open-watcom-c-win32-1.8.exe setup.inf
+        sed -i 's/tools16=.*/tools16=true/' setup.inf
+        zip -f open-watcom-c-win32-1.8.exe
+        try $WINE open-watcom-c-win32-1.8.exe -s
+        cd "$olddir"
+    else
+        try $WINE "$WINETRICKS_CACHE"/open-watcom-c-win32-1.8.exe
+    fi
+    if test ! -f "$DRIVE_C"/WATCOM/binnt/wcc.exe
+    then
+        warn "c:/watcom/binnt/wcc.exe not found; you probably didn't select 16 bit tools, and won't be able to buld win16test"
+    fi
 }
 
 #----------------------------------------------------------------
@@ -1638,6 +2109,97 @@ load_pdh() {
     try cabextract --directory="$WINETRICKS_TMP" "$WINETRICKS_CACHE"/pdhinst.exe
     try unzip -o $WINETRICKS_UNIXQUIET -d "$WINETRICKS_TMP" "$WINETRICKS_TMP"/pdh.exe
     try cp -f "$WINETRICKS_TMP"/x86/Pdh.Dll "$WINDIR"/system32/pdh.dll
+}
+
+#----------------------------------------------------------------
+
+load_physx()
+{
+    # http://www.nvidia.com/object/physx_9.09.0814.html
+    download . http://us.download.nvidia.com/Windows/9.09.0814/PhysX_9.09.0814_SystemSoftware.exe e19f7c3385a4a68e7acb85301bb4d2d0d1eaa1e2
+    try $WINE "$WINETRICKS_CACHE"/PhysX_9.09.0814_SystemSoftware.exe $WINETRICKS_QUIET
+}
+
+#----------------------------------------------------------------
+
+load_psdk2003()
+{
+    load_vcrun6
+
+    # Note: aborts on 64 bit windows with dialog saying "don't run on WoW"
+    # http://www.microsoft.com/downloads/details.aspx?familyid=0baf2b35-c656-4969-ace8-e4c0c0716adb
+    download psdk2003 http://download.microsoft.com/download/f/a/d/fad9efde-8627-4e7a-8812-c351ba099151/PSDK-x86.exe 5c7dc2e1eb902b376d7797cc383fefdfc64ff9c9
+    echo "This can take up to an hour."
+    cd "$WINETRICKS_CACHE"/psdk2003
+    try $WINE PSDK-x86.exe
+    cd "$olddir"
+}
+
+#----------------------------------------------------------------
+
+load_psdkvista()
+{
+    # http://www.microsoft.com/downloads/details.aspx?familyid=0baf2b35-c656-4969-ace8-e4c0c0716adb
+    warn "Vista SDK doesn't work yet as of wine-1.1.28"
+    load_dotnet20
+    download psdkvista download.microsoft.com/download/c/a/1/ca145d10-e254-475c-85f9-1439f4cd2a9e/Setup.exe 756c21a7fc9b831f7200f3f44ae55cc7689e8063
+    #chmod +x "$WINETRICKS_CACHE"/psdkvista/Setup.exe
+    cd "$WINETRICKS_CACHE"/psdkvista
+    try $WINE Setup.exe
+    cd "$olddir"
+}
+
+#----------------------------------------------------------------
+
+load_psdkwin7()
+{
+    # http://www.microsoft.com/downloads/details.aspx?FamilyID=c17ba869-9671-4330-a63e-1fd44e0e2505&displaylang=en
+    warn "When given a choice, select only C++ compilers and headers, the other options don't work yet."
+    load_vcrun6
+    load_vcrun2008
+    load_dotnet20
+
+    # don't have a working unattended recipe.  Maybe we'll have to
+    # do an autohotkey script until msft gets its act together:
+    # http://social.msdn.microsoft.com/Forums/en-US/windowssdk/thread/c053b616-7d5b-405d-9841-ec465a8e21d5
+    download psdkwin7 http://download.microsoft.com/download/7/A/B/7ABD2203-C472-4036-8BA0-E505528CCCB7/winsdk_web.exe a01dcc67a38f461e80ea649edf1353f306582507
+    cd "$WINETRICKS_CACHE"/psdkwin7
+    try $WINE winsdk_web.exe
+    cd "$olddir"
+}
+
+#----------------------------------------------------------------
+
+load_python26() {
+
+    # If this is just a dependency check, don't re-install
+    if test $PACKAGE != python26 && test -f "$WINEPREFIX"/drive_c/Python26/python.exe
+    then
+        echo "prerequisite python26 already installed, skipping"
+        return
+    fi
+
+    download . http://www.python.org/ftp/python/2.6.2/python-2.6.2.msi 2d1503b0e8b7e4c72a276d4d9027cf4856b208b8
+    download . $SOURCEFORGE/project/pywin32/pywin32/Build%20214/pywin32-214.win32-py2.6.exe eca58f29b810d8e3e7951277ebb3e35ac35794a3
+    cd "$WINETRICKS_CACHE"
+    try $WINE msiexec /i python-2.6.2.msi ALLUSERS=1 $WINETRICKS_QUIET
+    # FIXME: unzip this instead of running it if quiet install?
+    try $WINE pywin32-214.win32-py2.6.exe
+    cd "$olddir"
+}
+
+#----------------------------------------------------------------
+
+load_python_comtypes() {
+    
+    load_python26
+    
+    download . $SOURCEFORGE/project/comtypes/comtypes/0.6.1/comtypes-0.6.1-1.zip 814318cdae0ab2471a9cd500847bf12f4df9a57c
+    cd "$WINETRICKS_CACHE"
+    try unzip comtypes-0.6.1-1.zip
+    cd comtypes-0.6.1
+    try $WINE "C:\Python26\python.exe" setup.py install
+    cd "$olddir"
 }
 
 #----------------------------------------------------------------
@@ -1674,6 +2236,12 @@ load_quicktime72() {
 #----------------------------------------------------------------
 
 volnum() {
+    case "$OS" in
+    "Windows_NT")
+      return
+      ;;
+    esac
+
     # Recent Microsoft installers are often based on "windows package manager", see
     # http://support.microsoft.com/kb/262841 and
     # http://www.microsoft.com/technet/prodtechnol/windowsserver2003/deployment/winupdte.mspx
@@ -1725,14 +2293,23 @@ load_riched30() {
 
 #----------------------------------------------------------------
 
+load_richtx32() {
+    download . http://activex.microsoft.com/controls/vb6/richtx32.cab da404b566df3ad74fe687c39404a36c3e7cadc07
+    try cabextract "$WINETRICKS_CACHE"/richtx32.cab -d "$WINDIR"/system32 -F RichTx32.Ocx
+    try $WINE regsvr32 RichTx32.ocx
+}
+
+#----------------------------------------------------------------
+
 load_shockwave() {
     # Not silent enough, use msi instead
     #download . http://fpdownload.macromedia.com/get/shockwave/default/english/win95nt/latest/Shockwave_Installer_Full.exe 840e34e9b067cf247bfa9092665b8966158f38e3
     #try $WINE "$WINETRICKS_CACHE"/Shockwave_Installer_Full.exe $WINETRICKS_S
     # old sha1sum: 6a91a9da4b54c3fdc97130a15e1a173117e5f4ff
     # 2009-07-31 sha1sum: 0bb506ef67a268e8d3fb6c7ce556320ee10b9da5
-
-    download . http://fpdownload.macromedia.com/get/shockwave/default/english/win95nt/latest/sw_lic_full_installer.msi 0bb506ef67a268e8d3fb6c7ce556320ee10b9da5
+    # 2009-12-13 sha1sum: d35649883bf13cb1a86f5650e1050d15533ac0f4
+    
+    download . http://fpdownload.macromedia.com/get/shockwave/default/english/win95nt/latest/sw_lic_full_installer.msi d35649883bf13cb1a86f5650e1050d15533ac0f4
     try $WINE msiexec /i "$WINETRICKS_CACHE"/sw_lic_full_installer.msi $WINETRICKS_QUIET
 }
 
@@ -1803,18 +2380,43 @@ load_vbvm50() {
 #----------------------------------------------------------------
 
 load_vbrun60() {
-    download . http://download.microsoft.com/download/vb60pro/install/6/win98me/en-us/vbrun60.exe 2dc00e5fc701492bcba7ac58f057ee43751e18e5
+    if test ! -f "$WINETRICKS_CACHE"/vbrun60sp6.exe
+    then
+        download . http://download.microsoft.com/download/5/a/d/5ad868a0-8ecd-4bb0-a882-fe53eb7ef348/VB6.0-KB290887-X86.exe 73ef177008005675134d2f02c6f580515ab0d842
+        rm -rf "$WINETRICKS_TMP"/*
+
+        try $WINE "$WINETRICKS_CACHE"/VB6.0-KB290887-X86.exe "/T:$winetricks_tmp_win" /c $WINETRICKS_QUIET
+        if test ! -f "$WINETRICKS_TMP"/vbrun60sp6.exe
+        then
+            die vbrun60sp6.exe not found
+        fi
+        try mv "$WINETRICKS_TMP"/vbrun60sp6.exe "$WINETRICKS_CACHE"
+    fi
+
+    # Delete some fake DLLs to ensure that the installer overwrites them.
+    rm -f "$WINDIR"/system32/comcat.dll
+    rm -f "$WINDIR"/system32/oleaut32.dll
+    rm -f "$WINDIR"/system32/olepro32.dll
+    rm -f "$WINDIR"/system32/stdole2.tlb
     # Exits with status 43 for some reason?
-    $WINE "$WINETRICKS_CACHE"/vbrun60.exe $WINETRICKS_QUIET || true
+    $WINE "$WINETRICKS_CACHE"/vbrun60sp6.exe $WINETRICKS_QUIET
+
+    status=$?
+    case $status in
+    0|43) ;;
+    *) die $PACKAGE installation failed
+    esac
 }
 
 #----------------------------------------------------------------
 
 load_vcrun6() {
     # Load the Visual C++ 6 runtime libraries, including the elusive mfc42u.dll
-    if test -f "$WINDIR"/system32/mfc42u.dll
+
+    # If this is just a dependency check, don't re-install
+    if test $PACKAGE != vcrun6 && test -f "$WINDIR"/system32/mfc42u.dll
     then
-        echo "vcrun6 already installed, skipping"
+        echo "prerequisite vcrun6 already installed, skipping"
         return
     fi
 
@@ -1823,7 +2425,7 @@ load_vcrun6() {
        download . http://download.microsoft.com/download/vc60pro/update/1/w9xnt4/en-us/vc6redistsetup_enu.exe 382c8f5a7f41189af8d4165cf441f274b7e2a457
        rm -rf "$WINETRICKS_TMP"/*
 
-       try $WINE "$WINETRICKS_CACHE"/vc6redistsetup_enu.exe "/T:`$WINE winepath -w "$WINETRICKS_TMP"`" /c $WINETRICKS_QUIET
+       try $WINE "$WINETRICKS_CACHE"/vc6redistsetup_enu.exe "/T:$winetricks_tmp_win" /c $WINETRICKS_QUIET
        if test ! -f "$WINETRICKS_TMP"/vcredist.exe
        then
           die vcredist.exe not found
@@ -1831,22 +2433,62 @@ load_vcrun6() {
        mv "$WINETRICKS_TMP"/vcredist.exe "$WINETRICKS_CACHE"
     fi
     # Delete some fake dlls to avoid vcredist installer warnings
+    rm -f "$WINDIR"/system32/comcat.dll
     rm -f "$WINDIR"/system32/msvcrt.dll
     rm -f "$WINDIR"/system32/oleaut32.dll
     rm -f "$WINDIR"/system32/olepro32.dll
+    rm -f "$WINDIR"/system32/stdole2.tlb
     # vcredist still exits with status 43.  Anyone know why?
-    $WINE "$WINETRICKS_CACHE"/vcredist.exe || true
+    $WINE "$WINETRICKS_CACHE"/vcredist.exe
+
+    status=$?
+    case $status in
+    0|43) ;;
+    *) die $PACKAGE installation failed
+    esac
 
     # And then some apps need mfc42u.dll, dunno what right way
     # is to get it, vcredist doesn't install it by default?
-    cd "$WINETRICKS_TMP"/
-    rm -rf "$WINETRICKS_TMP"/*
-    try cabextract "$WINETRICKS_CACHE"/vcredist.exe
-    mv mfc42u.dll "$WINDIR"/system32/
-    cd "$olddir"
+    try cabextract "$WINETRICKS_CACHE"/vcredist.exe -d "$WINDIR"/system32/ -F mfc42u.dll
 
     override_dlls native,builtin msvcrt
 
+}
+
+#----------------------------------------------------------------
+
+load_vcrun6sp6() {
+    if test ! -f vcredistsp6.exe
+    then
+        download . http://download.microsoft.com/download/1/9/f/19fe4660-5792-4683-99e0-8d48c22eed74/Vs6sp6.exe 2292437a8967349261c810ae8b456592eeb76620
+
+        # No EULA is presented when passing command-line extraction arguments,
+        # so we'll simplify extraction with cabextract. We'll also try to avoid
+        # overwriting the older vcrun6 redist by renaming the extracted file.
+        try cabextract "$WINETRICKS_CACHE"/Vs6sp6.exe -d "$WINETRICKS_TMP" -F vcredist.exe
+        try mv "$WINETRICKS_TMP"/vcredist.exe "$WINETRICKS_CACHE"/vcredistsp6.exe
+    fi
+
+    # Delete some fake dlls to avoid vcredist installer warnings
+    try rm -f "$WINDIR"/system32/comcat.dll
+    try rm -f "$WINDIR"/system32/msvcrt.dll
+    try rm -f "$WINDIR"/system32/oleaut32.dll
+    try rm -f "$WINDIR"/system32/olepro32.dll
+    try rm -f "$WINDIR"/system32/stdole2.tlb
+    # vcredist still exits with status 43.  Anyone know why?
+    $WINE "$WINETRICKS_CACHE"/vcredistsp6.exe
+
+    status=$?
+    case $status in
+    0|43) ;;
+    *) die $PACKAGE installation failed
+    esac
+
+    # And then some apps need mfc42u.dll, dunno what right way
+    # is to get it, vcredist doesn't install it by default?
+    try cabextract "$WINETRICKS_CACHE"/vcredistsp6.exe -d "$WINDIR"/system32/ -F mfc42u.dll
+
+    override_dlls native,builtin msvcrt
 }
 
 #----------------------------------------------------------------
@@ -1863,51 +2505,54 @@ load_vcrun2003() {
 #----------------------------------------------------------------
 
 load_vcrun2005() {
-    # Load the Visual C++ 2005 runtime libraries
-    # See http://www.microsoft.com/downloads/details.aspx?familyid=32BC1BEE-A3F9-4C13-9C99-220B62A191EE
-    download vcrun2005 http://download.microsoft.com/download/d/3/4/d342efa6-3266-4157-a2ec-5174867be706/vcredist_x86.exe 47fba37de95fa0e2328cf2e5c8ebb954c4b7b93c
-    try $WINE "$WINETRICKS_CACHE"/vcrun2005/vcredist_x86.exe $WINETRICKS_QUIET
-}
+    # Load the latest Visual C++ 2005 runtime libraries
+    # If this is just a dependency check, don't re-install
 
-#----------------------------------------------------------------
-
-load_vcrun2005sp1() {
-    # Load the Visual C++ 2005 SP1 runtime libraries
-    # See http://www.microsoft.com/downloads/details.aspx?familyid=200b2fd9-ae1a-4a14-984d-389c36f85647
-    download vcrun2005sp1 http://download.microsoft.com/download/e/1/c/e1c773de-73ba-494a-a5ba-f24906ecf088/vcredist_x86.exe 7dfa98be78249921dd0eedb9a3dd809e7d215c8d
-    try $WINE "$WINETRICKS_CACHE"/vcrun2005sp1/vcredist_x86.exe $WINETRICKS_QUIET
+    # SP1 + ATL security fix build 4053 (MS09-035)
+    # See http://www.microsoft.com/downloads/details.aspx?familyid=766A6AF7-EC73-40FF-B072-9112BAB119C2
+    if test $PACKAGE != vcrun2005 && test -d "$WINDIR"/winsxs/x86_Microsoft.VC80.MFC_1fc8b3b9a1e18e3b_8.0.50727.4053_x-ww_b77cec8e
+    then
+        echo "prerequisite vcrun2005 already installed, skipping"
+        return
+    fi
+    download vcrun2005-ms09-035 http://download.microsoft.com/download/6/B/B/6BB661D6-A8AE-4819-B79F-236472F6070C/vcredist_x86.exe e052789ebad7dc8d6f8505a9295b0576babd125e
+    try $WINE "$WINETRICKS_CACHE"/vcrun2005-ms09-035/vcredist_x86.exe $WINETRICKS_QUIET
 }
 
 #----------------------------------------------------------------
 
 load_vcrun2008() {
+    # For the moment, assume windows already has this.
+    case "$OS" in
+    "Windows_NT")
+      return
+      ;;
+    esac
+
     # Work around bug 5351 (http://bugs.winehq.org/show_bug.cgi?id=5351). In recent
     # wine (>= 1.1.7) the bug is fixed. The workaround doesn't hurt anything, and lets
     # installer work on older Wine (e.g., the stabe 1.0.1).
     volnum
 
-    # Load the Visual C++ 2008 runtime libraries
-    # See http://www.microsoft.com/downloads/details.aspx?familyid=9b2da534-3e03-4391-8a4d-074b9f2bc1bf
-    download vcrun2008 http://download.microsoft.com/download/1/1/1/1116b75a-9ec3-481a-a3c8-1777b5381140/vcredist_x86.exe 56719288ab6514c07ac2088119d8a87056eeb94a
-    try $WINE "$WINETRICKS_CACHE"/vcrun2008/vcredist_x86.exe $WINETRICKS_QUIET
-}
+    # Load the latest Visual C++ 2008 runtime libraries
+    # If this is just a dependency check, don't re-install
+    # SP1 + ATL security fix build 4148 (MS09-035)
+    # See http://www.microsoft.com/downloads/details.aspx?familyid=2051a0c1-c9b5-4b0a-a8f5-770a549fd78c
+    if test $PACKAGE != vcrun2008 && test -d "$WINDIR"/winsxs/x86_Microsoft.VC90.MFC_1fc8b3b9a1e18e3b_9.0.30729.4148_x-ww_a57c1f53
+    then
+        echo "prerequisite vcrun2008 already installed, skipping"
+        return
+    fi
+    download vcrun2008-ms09-035 http://download.microsoft.com/download/9/7/7/977B481A-7BA6-4E30-AC40-ED51EB2028F2/vcredist_x86.exe bd18409cfe75b88c2a9432d36d96f4bf125a3237
+    try $WINE "$WINETRICKS_CACHE"/vcrun2008-ms09-035/vcredist_x86.exe $WINETRICKS_QUIET
 
-#----------------------------------------------------------------
-
-load_vcrun2008sp1() {
-    # This should be fixed in recent Wine, but for those using 1.0.1, fails.
-    volnum
-
-    # Load the Visual C++ 2008 SP1 runtime libraries
-    # See http://www.microsoft.com/downloads/details.aspx?FamilyID=a5c84275-3b97-4ab7-a40d-3802b2af5fc2
-    download vcrun2008sp1 http://download.microsoft.com/download/d/d/9/dd9a82d0-52ef-40db-8dab-795376989c03/vcredist_x86.exe 6939100e397cef26ec22e95e53fcd9fc979b7bc9
-    try $WINE "$WINETRICKS_CACHE"/vcrun2008sp1/vcredist_x86.exe $WINETRICKS_QUIET
 }
 
 #----------------------------------------------------------------
 
 load_vjrun20() {
     load_dotnet20
+    # See http://www.microsoft.com/downloads/details.aspx?FamilyId=E9D87F37-2ADC-4C32-95B3-B5E3A21BAB2C
     download vjrun20 http://download.microsoft.com/download/9/2/3/92338cd0-759f-4815-8981-24b437be74ef/vjredist.exe 80a098e36b90d159da915aebfbfbacf35f302bd8
     if [ $WINETRICKS_QUIET ]
     then
@@ -1915,6 +2560,308 @@ load_vjrun20() {
     else
         try $WINE vjrun20/vjredist.exe
     fi
+}
+
+#----------------------------------------------------------------
+
+load_vc2003toolkit()
+{
+    # http://www.dotnetmonster.com/Uwe/Forum.aspx/dotnet-vc/2679/ANN-Microsoft-Visual-C-Toolkit-2003
+    #download .  http://download.microsoft.com/download/3/9/b/39bac755-0a1e-4d0b-b72c-3a158b7444c4/VCToolkitSetup.exe 956c81c3106b97042c4126b23c81885c4b5211f4
+    # I'm going to link to this for now even though it's not straight from microsoft
+    # because it's a developer tool rather than a runtime, and
+    # I'm in the middle of trying to get lots of open source windows
+    # apps to build on Wine; see http://wiki.winehq.org/UnitTestSuites
+    # (Plus the sha1sum, which I still have from a copy straight from microsoft, 
+    #  protects us somewhat against corrupted copies.)
+    download . http://npg.dl.ac.uk/MIDAS/MIDAS_Release/VCToolkitSetup.exe 956c81c3106b97042c4126b23c81885c4b5211f4
+    cd "$WINETRICKS_CACHE"
+    try $WINE VCToolkitSetup.exe
+    cd "$olddir"
+}
+
+#----------------------------------------------------------------
+
+load_vc2005express()
+{
+    # Thanks to http://blogs.msdn.com/astebner/articles/551674.aspx for the recipe
+    load_dotnet20
+    load_msxml6
+
+    # http://go.microsoft.com/fwlink/?LinkId=51410
+    download vc2005express http://download.microsoft.com/download/8/3/a/83aad8f9-38ba-4503-b3cd-ba28c360c27b/ENU/vcsetup.exe 0292ae1d576edd8ee5350a27113c94c9f9958d5c
+
+    if [ $WINETRICKS_QUIET ]
+    then
+        # Thanks to Aaron Stebner's unattended install recipe
+        # http://blogs.msdn.com/astebner/archive/2006/03/19/555326.aspx
+
+        # "http://go.microsoft.com/fwlink/?LinkId=51417"
+        download vc2005express http://download.microsoft.com/download/0/5/A/05AA45B9-A4BE-4872-8D57-733DF5297284/Ixpvc.exe ce0da62b5649f33c7a150de276d799fb2d68d12a
+
+        cd "$WINETRICKS_TMP"
+        rm -rf vc2005express.tmp || true
+        mkdir vc2005express.tmp
+        cd vc2005express.tmp
+        cabextract "$WINETRICKS_CACHE"/vc2005express/vcsetup.exe
+        cp "$WINETRICKS_CACHE"/vc2005express/Ixpvc.exe .
+        chmod +x Ixpvc.exe
+        # Add /qn after ReallySuppress for a really silent install (but then you won't see any errors)
+
+        try $WINE Ixpvc /t:"$WINETRICKS_TMP_WIN\\\\vc2005express.tmp" /q:a /c:"msiexec /i vcsetup.msi VSEXTUI=1 ADDLOCAL=ALL REBOOT=ReallySuppress"
+
+        cd ..
+        rm -rf vc2005express.tmp || true
+    else
+        warn "Don't forget to install the IDE, or mt.exe won't be installed"
+        cd "$WINETRICKS_CACHE"/vc2005express
+        try $WINE vcsetup.exe
+        # The interactive installer seems to be asynchronous, so wait until its log file directory is created
+        while test ! -d "$programfilesdir_unix/Microsoft Visual Studio 8/Microsoft Visual C++ 2005 Express Edition - ENU/Logs"
+        do
+          echo "Waiting for install to finish..."
+          sleep 10
+        done
+    fi
+    cd "$olddir"
+}
+
+#----------------------------------------------------------------
+
+load_vc2005expresssp1()
+{
+    warn "$PACKAGE does not work yet"
+    if test ! -f "$programfilesdir_unix/Microsoft Visual Studio 8/Common7/Tools/vsvars32.bat"
+    then
+        die "install vc2005express first (this verb will be merged into that once it's debugged)"
+    fi
+
+    # http://www.microsoft.com/downloads/details.aspx?FamilyId=7B0B0339-613A-46E6-AB4D-080D4D4A8C4E
+    download vc2005express download.microsoft.com/download/7/7/3/7737290f-98e8-45bf-9075-85cc6ae34bf1/VS80sp1-KB926748-X86-INTL.exe 8b9a0172efad64774aa122f29e093ad2043b308d
+    try $WINE "$WINETRICKS_CACHE"/vc2005express/VS80sp1-KB926748-X86-INTL.exe
+}
+
+load_vcdmount()
+{
+    if test "$WINE" != ""
+    then
+        return
+    fi
+
+    # Call only on real Windows.
+    # Sets VCDMOUNT and ISO_MOUNT_ROOT
+
+    # The only free mount tool I know for Windows Vista is Virtual CloneDrive,
+    # which can be downloaded at 
+    # http://www.slysoft.com/en/virtual-clonedrive.html
+    # FIXME: actually install it here
+
+    # Locate vcdmount.exe.   FIXME: internationalize this.
+    for PROGRAMFILES in "c:/Program Files (x86)" "c:/Program Files"
+    do
+        test -d "$PROGRAMFILES" && break
+    done
+    VCDMOUNT="$PROGRAMFILES/Elaborate Bytes/VirtualCloneDrive/vcdmount.exe"
+    if test ! -x "$VCDMOUNT" 
+    then
+        warn "Installing Virtual CloneDrive"
+        download . http://static.slysoft.com/SetupVirtualCloneDrive.exe
+        # have to use cmd else vista won't let cygwin run .exe's?
+        chmod +x "$WINETRICKS_CACHE"/SetupVirtualCloneDrive.exe
+        cmd /c "$WINETRICKS_CACHE_WIN"\\SetupVirtualCloneDrive.exe
+    fi
+
+    # FIXME: Use WMI to locate the drive named
+    # "ELBY CLONEDRIVE..." using WMI as described in
+    # http://delphihaven.wordpress.com/2009/07/05/using-wmi-to-get-a-drive-friendly-name/
+    # For now, you just have to hardcode it for your system :-(
+    warn "You probably need to edit the script to tell it which drive VirtualCloneDrive picked"
+    for letter in e f g h
+    do
+        ISO_MOUNT_ROOT=/cygdrive/$letter
+        test -d $ISO_MOUNT_ROOT || break
+    done
+    test -d $ISO_MOUNT_ROOT && die "cannot find the VirtualCloneDrive"
+}
+
+iso_mount()
+{
+    my_img="$1"
+
+    if test "$WINE" = ""
+    then
+        load_vcdmount
+        my_img_win="`$XXXPATH -w $my_img`"
+        try "$VCDMOUNT" /l=$letter "$my_img_win"
+        while ! test -d "$ISO_MOUNT_ROOT"
+        do
+            echo "Waiting for mount to finish"
+            sleep 1
+        done
+    else 
+        # Linux
+        case "$GUI-$DE" in
+        gnome) 
+          1-gksudo "mkdir -p $ISO_MOUNT_ROOT"
+          1-gksudo "mount -o ro,loop $my_img $ISO_MOUNT_ROOT"
+          ;;
+        *)
+          sudo mkdir -p $ISO_MOUNT_ROOT
+          sudo mount -o ro,loop "$my_img" $ISO_MOUNT_ROOT
+          ;;
+        esac
+    fi
+}
+
+iso_umount()
+{
+    if test "$WINE" = ""
+    then
+        # Windows
+        load_vcdmount
+        "$VCDMOUNT" /u
+    else
+        case "$GUI-$DE" in
+        gnome) 
+          1-gksudo "umount $ISO_MOUNT_ROOT"
+          1-gksudo "rm -rf $ISO_MOUNT_ROOT"
+          ;;
+        *)
+          sudo umount $ISO_MOUNT_ROOT
+          sudo rm -rf $ISO_MOUNT_ROOT
+          ;;
+        esac
+    fi
+}
+
+#----------------------------------------------------------------
+
+load_vc2005trial()
+{
+    load_vcrun6
+    load_dotnet20
+    load_msxml6
+    load_vcdmount
+
+    warn "Downloading/checksumming Visual C++ 2005 Trial.  This will take some time!"
+    download vc2005trial http://download.microsoft.com/download/6/f/5/6f5f7a01-50bb-422d-8742-c099c8896969/En_vs_2005_vsts_180_Trial.img f66ae07618d67e693ca0524d3582208c20e07823
+
+    iso_umount
+    iso_mount "$WINETRICKS_CACHE"/vc2005trial/En_vs_2005_vsts_180_Trial.img
+
+    # FIXME: do this right
+    rm -f /cygdrive/c/Users/$USER/AppData/local/temp/dd_vsinstall80.txt
+
+    if false && [ $WINETRICKS_QUIET ]
+    then
+      # Thanks to http://blogs.msdn.com/astebner/archive/2005/05/24/421314.aspx for unattended install method
+      # See also http://support.microsoft.com/?kbid=913445
+      die "not implemented yet"
+    else
+      cd $ISO_MOUNT_ROOT/vs/Setup
+      try $WINE setup.exe
+
+      # FIXME: unify these and make the windows one right
+      if test "$WINE" = ""
+      then
+          while ! tr -d '\000' < /cygdrive/c/Users/$USER/AppData/local/temp/dd_vsinstall80.txt | grep End_Session
+          do
+              sleep 10
+              echo waiting for setup to finish
+          done
+      else
+          while ps $psargs | grep -q setup.exe
+          do
+              sleep 10
+              echo waiting for setup to finish
+          done
+      fi
+      cd "$olddir"
+    fi
+
+    iso_umount
+}
+
+#----------------------------------------------------------------
+
+load_vc2005sp1()
+{
+    if test ! -f "$programfilesdir_unix/Microsoft Visual Studio 8/Common7/Tools/vsvars32.bat"
+    then
+        die "install vc2005trial first (this verb will be merged into that once it's debugged)"
+    fi
+
+    # http://www.microsoft.com/downloads/details.aspx?FamilyID=bb4a75ab-e2d4-4c96-b39d-37baf6b5b1dc
+    download vc2005sp1 http://download.microsoft.com/download/6/3/c/63c69e5d-74c9-48ea-b905-30ac3831f288/VS80sp1-KB926601-X86-ENU.exe d4b5c73253a7a4f5b4b389f41b94fea4a7247b57
+    cd "$WINETRICKS_CACHE"/vc2005sp1
+    try $WINE VS80sp1-KB926601-X86-ENU.exe
+    cd "$olddir"
+}
+
+#----------------------------------------------------------------
+
+load_vc2008trial()
+{
+    load_vcrun6
+    load_dotnet20
+    load_msxml6
+    load_vcdmount
+
+    warn "Visual C++ 2008 Trial does not yet work in Wine, and this recipe isn't quite debugged even in windows yet."
+    warn "Downloading/checksumming Visual C++ 2008 Trial.  This will take some time!"
+    # http://www.microsoft.com/downloads/details.aspx?FamilyID=83c3a1ec-ed72-4a79-8961-25635db0192b
+    download vc2008trial http://download.microsoft.com/download/8/1/d/81d3f35e-fa03-485b-953b-ff952e402520/VS2008ProEdition90dayTrialENUX1435622.iso dfb601096f62fd75af6ad62b277be79793f53b56
+
+    iso_umount
+    iso_mount "$WINETRICKS_CACHE"/vc2008trial/VS2008ProEdition90dayTrialENUX1435622.iso
+
+    # FIXME: do this right
+    rm -f /cygdrive/c/Users/$USER/AppData/local/temp/dd_vsinstall80.txt
+
+    if true
+    then
+      cd $ISO_MOUNT_ROOT/Setup
+      try $WINE setup.exe
+
+      # FIXME: unify these and make the windows one right
+      if test "$WINE" = ""
+      then
+          while ! tr -d '\000' < /cygdrive/c/Users/$USER/AppData/local/temp/dd_vsinstall80.txt | grep End_Session
+          do
+              sleep 10
+              echo waiting for setup to finish
+          done
+      else
+          while ps $psargs | grep -q setup.exe
+          do
+              sleep 10
+              echo waiting for setup to finish
+          done
+      fi
+      cd "$olddir"
+    fi
+
+    iso_umount
+}
+
+#----------------------------------------------------------------
+
+load_vc2008sp1()
+{
+    echo pfdu is ${programfilesdir_unix}
+    echo setting FOO
+    FOO="${programfilesdir_unix}/Microsoft Visual Studio 9.0/Microsoft Visual Studio 2008 Professional Edition - ENU"
+    echo FOO set to $FOO
+    if test ! -d "$FOO"
+    then
+        die "install vc2008trial first (this verb will be merged into that once it's debugged)"
+    fi
+
+    # http://www.microsoft.com/downloads/details.aspx?familyid=FBEE1648-7106-44A7-9649-6D9F6D58056E
+    download vc2008sp1 http://download.microsoft.com/download/f/6/7/f67fdf05-0586-413f-8231-affbe12f80a8/VS90sp1-KB945140-ENU.exe 91c146dffa96c6d8f9ceb2b5235b04349cf93ed9
+    cd "$WINETRICKS_CACHE"/vc2008sp1
+    try $WINE VS90sp1-KB945140-ENU.exe
+    cd "$olddir"
 }
 
 #----------------------------------------------------------------
@@ -1951,6 +2898,8 @@ load_wmp9() {
     # Not really expected to work well yet; see
     # http://appdb.winehq.org/appview.php?versionId=1449
 
+    load_wsh56
+
     set_winver win2k
 
     # See also http://www.microsoft.com/windows/windowsmedia/player/9series/default.aspx
@@ -1966,8 +2915,8 @@ load_wmp9() {
     try $WINE "$WINETRICKS_CACHE"/WM9Codecs9x.exe $WINETRICKS_QUIET
 
     # Disable WMP's services, since they depend on unimplemented stuff, they trigger the GUI debugger several times
-    try $WINE regedit /D "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Cdr4_2K"
-    try $WINE regedit /D "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Cdralw2k"
+    try_regedit /D "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Cdr4_2K"
+    try_regedit /D "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Cdralw2k"
 
     unset_winver
 }
@@ -1977,12 +2926,14 @@ load_wmp9() {
 load_wmp10() {
     # See http://appdb.winehq.org/appview.php?iVersionId=3212
 
+    load_wsh56
+
     # See also http://www.microsoft.com/windows/windowsmedia/player/10
     download . http://download.microsoft.com/download/1/2/A/12A31F29-2FA9-4F50-B95D-E45EF7013F87/MP10Setup.exe 69862273a5d9d97b4a2e5a3bd93898d259e86657
 
     # Crashes on exit, but otherwise ok; see http://bugs.winehq.org/show_bug.cgi?id=12633
     echo Executing $WINE "$WINETRICKS_CACHE"/MP10Setup.exe $WINETRICKS_QUIET
-    $WINE "$WINETRICKS_CACHE"/MP10Setup.exe $WINETRICKS_QUIET || true
+    try $WINE "$WINETRICKS_CACHE"/MP10Setup.exe $WINETRICKS_QUIET
 
     # Also install the codecs
     # See http://www.microsoft.com/downloads/details.aspx?FamilyID=06fcaab7-dcc9-466b-b0c4-04db144bb601
@@ -1991,8 +2942,8 @@ load_wmp10() {
     try $WINE "$WINETRICKS_CACHE"/WM9Codecs9x.exe $WINETRICKS_QUIET
 
     # Disable WMP's services, since they depend on unimplemented stuff, they trigger the GUI debugger several times
-    try $WINE regedit /D "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Cdr4_2K"
-    try $WINE regedit /D "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Cdralw2k"
+    try_regedit /D "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Cdr4_2K"
+    try_regedit /D "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Cdralw2k"
 
     unset_winver
 }
@@ -2013,8 +2964,16 @@ load_wenquanyi() {
 #----------------------------------------------------------------
 
 load_wsh56() {
+    # If this is just a dependency check, don't re-install
+    if test $PACKAGE != wsh56 && test -f "$WINDIR"/system32/wscript.exe
+    then
+        echo "prerequisite wsh56 already installed, skipping"
+        return
+    fi
+
+    load_vcrun6
+
     # See also http://www.microsoft.com/downloads/details.aspx?displaylang=en&FamilyID=C717D943-7E4B-4622-86EB-95A22B832CAA
-    # FIXME: depends on vcrun6, should we install that automatically?
     download . http://download.microsoft.com/download/2/8/a/28a5a346-1be1-4049-b554-3bc5f3174353/WindowsXP-Windows2000-Script56-KB917344-x86-enu.exe f4692766caa3ee9b38d4166845486c6199a33457
 
     try $WINE "$WINETRICKS_CACHE"/WindowsXP-Windows2000-Script56-KB917344-x86-enu.exe $WINETRICKS_QUIET
@@ -2045,16 +3004,17 @@ load_wsh56vb() {
 load_xact() {
     helper_directx_dl ;
 
-    # xactengine?_?.dll and X3DAudio?_?.dll - extract
+    # xactengine?_?.dll, X3DAudio?_?.dll, xaudio?_?.dll, xapofx?_?.dll - extract
     cabextract -d "$WINETRICKS_TMP" -L -F '*_xact_*x86*' "$WINETRICKS_CACHE"/$DIRECTX_NAME
     cabextract -d "$WINETRICKS_TMP" -L -F '*_x3daudio_*x86*' "$WINETRICKS_CACHE"/$DIRECTX_NAME
+    cabextract -d "$WINETRICKS_TMP" -L -F '*_xaudio_*x86*' "$WINETRICKS_CACHE"/$DIRECTX_NAME
     for x in `ls "$WINETRICKS_TMP"/*.cab`
     do
       cabextract -d "$WINDIR"/system32 -L -F '*.dll' "$x"
     done
 
-    # xactengine?_?.dll - register
-    for x in `ls "$WINDIR"/system32/xactengine*`
+    # xactengine?_?.dll, xaudio?_?.dll - register
+    for x in `ls "$WINDIR"/system32/xactengine* "$WINDIR"/system32/xaudio*`
     do
       try $WINE regsvr32 `basename $x`
     done
@@ -2064,7 +3024,7 @@ load_xact() {
 
 load_xvid() {
     # xvid
-    test -f "$WINDIR"/system32/[Mm][Ff][Cc]42.[Dd][Ll][Ll] || load_vcrun6
+    load_vcrun6
     download . http://www.koepi.info/Xvid-1.2.2-07062009.exe 435203e7f713c4484ca4f50f43e847f3dc118962
     try $WINE "$WINETRICKS_CACHE"/Xvid-1.2.2-07062009.exe $WINETRICKS_SILENT
 }
@@ -2098,10 +3058,24 @@ x) GUI=1 ;;
 x-h|x--help|xhelp) usage ; exit 1 ;;
 esac
 
-# Prevent running with wrong user id.
-# It's bad to create files as the wrong user!
-die_if_user_not_dirowner "$WINEPREFIX"
-die_if_user_not_dirowner "$WINETRICKS_CACHE"
+case "$OS" in
+ "Windows_NT")
+  ;;
+ *)
+  # Prevent running with wrong user id.
+  # It's bad to create files as the wrong user!
+  die_if_user_not_dirowner "$WINEPREFIX"
+  die_if_user_not_dirowner "$WINETRICKS_CACHE"
+
+  if [ ! -x "`which "$WINE"`" ]
+  then
+      die "Cannot find wine ($WINE)"
+  fi
+
+  # Create wineprefix if not already there
+  test -d "$WINEPREFIX" || WINEDLLOVERRIDES=mshtml= $WINE cmd /c echo yes > /dev/null 2>&1
+  ;;
+esac
 
 mkdir -p "$WINETRICKS_TMP"
 
@@ -2109,22 +3083,17 @@ case $GUI in
 1) dogui ; set $todo ;;
 esac
 
-if [ ! -x "`which "$WINE"`" ]
-then
-    die "Cannot find wine ($WINE)"
-fi
-
-test -d "$WINEPREFIX" || $WINE cmd /c echo yes > /dev/null 2>&1
 mkdir -p "$WINETRICKS_CACHE"
 olddir=`pwd`
 # Clean up after failed runs, if needed
 rm -rf "$WINETRICKS_TMP"/*
 
 # The folder-name is localized!
-programfilesdir_win="`unset WINEDEBUG; $WINE cmd.exe /c echo "%ProgramFiles%"`"
+programfilesdir_win="`unset WINEDEBUG; WINEDLLOVERRIDES=mshtml= $WINE cmd.exe /c echo "%ProgramFiles%"`"
 test x"$programfilesdir_win" != x || die "$WINE cmd.exe /c echo '%ProgramFiles%' returned empty string"
-programfilesdir_unix="`unset WINEDEBUG; $WINE winepath -u "$programfilesdir_win"`"
+programfilesdir_unix="`unset WINEDEBUG; $XXXPATH -u "$programfilesdir_win" | tr -d '\015' `"
 test x"$programfilesdir_unix" != x || die "winepath -u $programfilesdir_win returned empty string"
+winetricks_tmp_win="`$XXXPATH -w "$WINETRICKS_TMP"`"
 
 # (Fixme: get fonts path from SHGetFolderPath
 # See also http://blogs.msdn.com/oldnewthing/archive/2003/11/03/55532.aspx)
@@ -2171,13 +3140,15 @@ do
         export WINEDEBUG
         ;;
     -v) set -x;;
-    art2kmin) load_art2kmin;;
-    ahk|autohotkey) load_autohotkey;;
-    cc580|comctl32) load_cc580;;
+    art2kmin|art2k7min) load_art2kmin;;
+    atmlib) load_atmlib;;
+    autohotkey|ahk) load_autohotkey;;
+    cmake) load_cmake;;
     comctl32.ocx) load_comctl32ocx;;
+    comctl32|cc580) load_cc580;;
     colorprofile) load_colorprofile;;
-    corefonts) load_corefonts;;
     controlpad|fm20) load_controlpad;;
+    corefonts) load_corefonts;;
     cygwin) load_cygwin;;
     d3dx9) load_d3dx9;;
     dcom98) load_dcom98;;
@@ -2187,23 +3158,30 @@ do
     directx9) load_directx9;;
     divx) load_divx;;
     dotnet1|dotnet11) load_dotnet11; load_fontfix;;
+    dotnet11sdk) load_dotnet11sdk;;
     dotnet2|dotnet20) load_dotnet20; load_fontfix;;
+    dotnet20sdk) load_dotnet20sdk;;
+    dotnet20sp2) load_dotnet20sp2; load_fontfix;;
     dotnet3|dotnet30) load_dotnet30; load_fontfix;;
+    dotnet35) load_dotnet35; load_fontfix;;
     droid) load_droid;;
-    firefox|firefox3) load_firefox;;
     ffdshow) load_ffdshow;;
+    firefox|firefox3) load_firefox;;
     flash) load_flash;;
     fontfix) load_fontfix;;
+    fontsmooth-bgr|fs-bgr) load_fs_bgr;;
     fontsmooth-disable|fs-disable) load_fs_disable;;
     fontsmooth-gray|fontsmooth-grayscale|fontsmooth-enable|fs-enable) load_fs_grayscale;;
     fontsmooth-rgb|fs-rgb|fs-cleartype) load_fs_rgb;;
-    fontsmooth-bgr|fs-bgr) load_fs_bgr;;
     gdiplus) load_gdiplus;;
     gecko) load_gecko;;
     gecko-dbg|geckodbg|gecko_dbg|geckodebug|gecko_debug|gecko-debug) load_gecko_dbg;;
+    glsl-disable) load_glsl_disable;;
+    glsl-enable) load_glsl_enable;;
     hosts) load_hosts;;
     icodecs) load_icodecs;;
     ie6) load_ie6;;
+    ie7) load_ie7;;
     jet40) load_jet40;;
     kde) load_kde;;
     liberation) load_liberation;;
@@ -2211,9 +3189,12 @@ do
     mdac27) load_mdac27;;
     mdac28) load_mdac28;;
     mfc40) load_mfc40;;
+    mingw|mingw-min|mingw_min) load_mingw_min;;
+    mingw-gdb|mingw_gdb) load_mingw_gdb;;
     mono19|mono20) load_mono20;;
     mono22) load_mono22;;
     mono24) load_mono24;;
+    mozillabuild) load_mozillabuild;;
     mpc) load_mpc;;
     msi2) load_msi2;;
     mshflxgd) load_mshflxgd;;
@@ -2227,9 +3208,16 @@ do
     ole2) load_ole2;;
     openwatcom|watcom) load_openwatcom;;
     pdh) load_pdh;;
+    physx) load_physx;;
+    psdk2003) load_psdk2003;;
+    psdkvista) load_psdkvista;;
+    psdkwin7) load_psdkwin7;;
+    python|python26) load_python26;;
+    python-comtypes|pythoncom|python-com|pythoncomtypes) load_python_comtypes;;
     quicktime72) load_quicktime72;;
     riched20) load_riched20;;
     riched30) load_riched30;;
+    richtx32) load_richtx32;;
     shockwave) load_shockwave;;
     tahoma) load_tahoma;;
     urlmon) load_urlmon;;
@@ -2238,38 +3226,57 @@ do
     vbrun400|vb4run) load_vb4run;;
     vbrun500|vbvm50|vb5run) load_vbvm50;;
     vbrun600|vbrun60|vb6run) load_vbrun60;;
-    vcrun600|vcrun6|mfc42) load_vcrun6;;
+    vc2003toolkit) load_vc2003toolkit;;
+    vc2005express) load_vc2005express;;
+    vc2005expresssp1) load_vc2005expresssp1;;
+    vc2005sp1) load_vc2005sp1;;
+    vc2008sp1) load_vc2008sp1;;
+    vc2005trial) load_vc2005trial;;
+    vc2008trial) load_vc2008trial;;
+    vcrun600|vcrun60|vcrun6|mfc42) load_vcrun6;;
+    vcrun60sp6|vcrun6sp6) load_vcrun6sp6;;
     vcrun2003) load_vcrun2003;;
-    vcrun2005) load_vcrun2005;;
-    vcrun2005sp1) load_vcrun2005sp1;;
-    vcrun2008) load_vcrun2008;;
-    vcrun2008sp1) load_vcrun2008sp1;;
+    vcrun2005|vcrun2005sp1) load_vcrun2005;;
+    vcrun2008|vcrun2008sp1) load_vcrun2008;;
     vjrun20) load_vjrun20;;
     vlc) load_vlc;;
+    wenquanyi) load_wenquanyi;;
     wininet) load_wininet;;
     wme9) load_wme9;;
-    wmp9) load_vcrun6; load_wsh56; load_wmp9;;
-    wmp10) load_vcrun6; load_wsh56; load_wmp10;;
-    wenquanyi) load_wenquanyi;;
-    wsh56) load_vcrun6; load_wsh56;;
+    wmp9) load_wmp9;;
+    wmp10) load_wmp10;;
+    wsh56) load_wsh56;;
     wsh56js) load_wsh56js;;
     wsh56vb) load_wsh56vb;;
     xact|xactengine|x3daudio) load_xact;;
     xvid) load_xvid;;
 
-    fakeie6) set_fakeie6;;
+    allcodecs|allvcodecs) load_vcrun6; load_ffdshow; load_xvid; load_icodecs;;
     allfonts) load_corefonts; load_tahoma; load_liberation; load_droid; load_wenquanyi;;
-    allvcodecs|allcodecs) load_vcrun6; load_ffdshow; load_xvid; load_icodecs;;
-    nt40|winver=nt40) set_winver nt40;;
-    win98|winver=win98) set_winver win98;;
-    win2k|winver=win2k) set_winver win2k;;
-    winxp|winver=winxp) set_winver winxp;;
-    vista|winver=vista) set_winver vista;;
-    winver=) unset_winver;;
+    fakeie6) set_fakeie6;;
+    heapcheck) set_heapcheck;;
     native_mdac) set_native_mdac;;
     native_oleaut32) override_dlls native,builtin oleaut32;;
+    nocrashdialog) disable_crashdialog;;
+    orm=backbuffer|backbuffer) set_orm backbuffer;;
+    orm=fbo|fbo) set_orm fbo;;
+    orm=pbuffer|pbuffer) set_orm pbuffer;;
+    sandbox) sandbox;;
+    sound=alsa|alsa) set_sound_driver alsa;;
+    sound=audioio|audioio) set_sound_driver audioio;;
+    sound=coreaudio|coreaudio) set_sound_driver coreaudio;;
+    sound=esound|esound) set_sound_driver esound;;
+    sound=jack|jack) set_sound_driver jack;;
+    sound=nas|nas) set_sound_driver nas;;
+    sound=oss|oss) set_sound_driver oss;;
     version) print_version;;
     volnum) volnum;;
+    winver=nt40|nt40) set_winver nt40;;
+    winver=win98|win98) set_winver win98;;
+    winver=win2k|win2k) set_winver win2k;;
+    winver=winxp|winxp) set_winver winxp;;
+    winver=vista|vista) set_winver vista;;
+    winver=) unset_winver;;
     *) echo Unknown arg $1; usage ; exit 1;;
     esac
     # Provide a bit of feedback
@@ -2282,5 +3289,8 @@ do
     # cleanup
     rm -rf "$WINETRICKS_TMP"/*
 done
+
+    # remove the temp directory
+    rm -rf "$WINETRICKS_TMP"
 
 test "$WINETRICKS_QUIET" = "" && echo winetricks done. || true
