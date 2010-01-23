@@ -101,8 +101,8 @@ as_left_button = Disabled
 as_right_button = Disabled
 as_up_button = Disabled
 as_down_button = Disabled
-as_next_button = Button5
-as_prev_button = Button4
+as_next_button = Disabled
+as_prev_button = Disabled
 as_initiate_button = Button2
 as_init_plugin = rotate
 as_init_action = initiate_button
@@ -154,7 +154,7 @@ s0_auto_rotate = false
 
 [screenshot]
 as_initiate_button = <Super>Button1
-as_directory = Desktop
+as_directory = 
 as_launch_app = 
 
 [showmouse]
@@ -183,38 +183,9 @@ as_mouse_poll_interval = 40
 [fs]
 as_mount_point = compiz
 
-[elements]
-as_next_element_key = Disabled
-as_prev_element_key = Disabled
-as_toggle_selected_key = Disabled
-s0_update_delay = 40
-s0_screen_depth = 1000
-s0_screen_boxing = 1000
-s0_over_windows = false
-s0_element_type = 
-s0_element_iter = 
-s0_element_image = 
-s0_element_cap = 
-s0_element_size = 
-s0_element_speed = 
-s0_element_rotate = 
-s0_snow_sway = 3
-s0_wind_direction = 0
-s0_autumn_sway = 35.000000
-s0_autumn_y_sway = 60
-s0_viscosity = 80.000000
-s0_star_offset_x = 0
-s0_star_offset_y = 0
-s0_title_font_color = #ffffffff
-s0_title_font_size = 16
-s0_title_bold_font = true
-s0_title_back_color = #00000099
-s0_title_display_time = 1000
-s0_title_on_toggle = true
-
 [resizeinfo]
 as_fade_time = 500
-as_always_show = false
+as_always_show = true
 as_text_color = #000000ff
 as_gradient_1 = #cccce6cc
 as_gradient_2 = #f3f3f3cc
@@ -270,10 +241,10 @@ s0_title_text_placement = 2
 
 [snap]
 as_avoid_snap = 
-s0_snap_type = 
+s0_snap_type = 0;1;
 s0_edges_categories = 0;
-s0_resistance_distance = 20
-s0_attraction_distance = 10
+s0_resistance_distance = 10
+s0_attraction_distance = 5
 
 [trailfocus]
 s0_window_match = (type=toolbar | type=utility | type=dialog | type=normal) & !(state=skiptaskbar | state=skippager)
@@ -285,26 +256,6 @@ s0_max_brightness = 100
 s0_min_brightness = 100
 s0_max_saturation = 100
 s0_min_saturation = 100
-
-[cubemodel]
-s0_global_model_scale_factor = 1.000000
-s0_model_filename = 
-s0_model_scale_factor = 
-s0_model_x_offset = 
-s0_model_y_offset = 
-s0_model_z_offset = 
-s0_model_rotation_plane = 
-s0_model_rotation_rate = 
-s0_model_animation = 
-s0_model_fps = 
-s0_rescale_width = true
-s0_render_front_and_back = false
-s0_rotate_lighting = true
-s0_light_inclination = 90.000000
-s0_light_ambient = 0.300000
-s0_light_diffuse = 1.000000
-s0_light_specular = 0.600000
-s0_concurrent_load = true
 
 [resize]
 as_initiate_normal_key = Disabled
@@ -341,8 +292,8 @@ s0_spacing = 10
 s0_speed = 4.000000
 s0_timestep = 1.000000
 s0_darken_back = true
-s0_opacity = 75
-s0_overlay_icon = 0
+s0_opacity = 85
+s0_overlay_icon = 1
 s0_window_match = Toolbar | Utility | Dialog | Normal | Unknown
 s0_hover_time = 750
 s0_multioutput_mode = 0
@@ -445,7 +396,7 @@ as_pan_right_key = Disabled
 as_pan_up_key = Disabled
 as_pan_down_key = Disabled
 as_fit_to_zoom_key = Disabled
-as_fit_to_window_key = <Super>r
+as_fit_to_window_key = Disabled
 s0_zoom_factor = 1.150000
 s0_minimum_zoom = 0.125000
 s0_sync_mouse = true
@@ -474,7 +425,7 @@ as_shadow_x_offset = 1
 as_shadow_y_offset = 1
 as_command = gtk-window-decorator --replace
 as_mipmap = false
-as_decoration_match = !(class=Chromium-browser) & !(class=Pidgin) & !(class=UXTerm) & !(class=Firefox)
+as_decoration_match = (!(class=Chromium-browser) & !(class=Pidgin) & !(class=UXTerm) & !(class=Firefox) & !(class=Gnome-terminal))
 as_shadow_match = any
 
 [gnomecompat]
@@ -486,6 +437,10 @@ as_command_window_screenshot = gnome-screenshot --window
 as_run_command_window_screenshot_key = <Alt>Print
 as_command_terminal = gnome-terminal
 as_run_command_terminal_key = Disabled
+
+[titleinfo]
+s0_show_remote_machine = true
+s0_show_root = true
 
 [wobbly]
 as_snap_key = <Shift>
@@ -512,6 +467,8 @@ s0_position_matches =
 s0_position_x_values = 
 s0_position_y_values = 
 s0_position_constrain_workarea = 
+s0_mode_matches = 
+s0_mode_modes = 
 s0_viewport_matches = 
 s0_viewport_x_values = 
 s0_viewport_y_values = 
@@ -519,10 +476,10 @@ s0_viewport_y_values =
 [wall]
 as_show_switcher = false
 as_miniscreen = false
-as_preview_timeout = 0.400000
+as_preview_timeout = 0.450000
 as_preview_scale = 100
 as_edge_radius = 5
-as_border_width = 10
+as_border_width = 0
 as_outline_color = #333333d9
 as_background_gradient_base_color = #cccce6d9
 as_background_gradient_highlight_color = #f3f3ffd9
@@ -534,7 +491,7 @@ as_thumb_highlight_gradient_shadow_color = #dfdfdfa6
 as_arrow_base_color = #e6e6e6d9
 as_arrow_shadow_color = #dcdcdcd9
 as_allow_wraparound = false
-as_slide_duration = 0.000000
+as_slide_duration = 0.300000
 as_no_slide_match = type=Dock | type=Desktop | state=Sticky
 as_left_key = <Control><Alt>Left
 as_left_button = Disabled
@@ -566,10 +523,6 @@ as_initiate_key = <Control>F12
 s0_mode = 0
 s0_strength = 20.000000
 s0_on_transformed_screen = false
-
-[fakeargb]
-as_window_toggle_key = <Super>f
-as_window_toggle_button = Disabled
 
 [scalefilter]
 s0_timeout = 0
@@ -610,29 +563,14 @@ as_console_update_time = 5
 
 [grid]
 as_put_center_key = <Control><Alt>KP_5
-as_put_left_key = <Control><Alt>KP_4
-as_put_right_key = <Control><Alt>KP_6
+as_put_left_key = <Shift><Super>a
+as_put_right_key = <Shift><Super>s
 as_put_top_key = <Control><Alt>KP_8
 as_put_bottom_key = <Control><Alt>KP_2
 as_put_topleft_key = <Control><Alt>KP_7
 as_put_topright_key = <Control><Alt>KP_9
 as_put_bottomleft_key = <Control><Alt>KP_1
 as_put_bottomright_key = <Control><Alt>KP_3
-
-[snow]
-as_num_snowflakes = 1500
-as_snow_size = 10.000000
-as_snow_speed = 85
-as_snow_update_delay = 40
-as_screen_boxing = 400
-as_screen_depth = 1000
-as_snow_over_windows = false
-as_snow_rotation = true
-as_snow_direction = 0
-as_snow_textures = snowflake.png;
-as_use_blending = true
-as_use_textures = true
-as_toggle_key = <Super>F3
 
 [scaleaddon]
 as_close_key = Disabled
@@ -775,7 +713,7 @@ s0_timestep = 1.000000
 s0_zoom = 0.000000
 
 [core]
-as_active_plugins = core;text;vpswitch;png;session;mousepoll;resize;decoration;gnomecompat;place;wall;extrawm;dbus;obs;put;imgjpeg;regex;video;workarounds;svg;resizeinfo;animation;fade;move;scale;expo;ezoom;scaleaddon;staticswitcher;
+as_active_plugins = core;move;resize;place;decoration;animation;ccp;text;vpswitch;png;session;mousepoll;commands;gnomecompat;wall;grid;extrawm;dbus;imgjpeg;regex;video;workarounds;svg;resizeinfo;snap;fade;scale;expo;ezoom;scaleaddon;staticswitcher;
 as_audible_bell = true
 as_ignore_hints_when_maximized = true
 as_hide_skip_taskbar_windows = true
@@ -802,7 +740,7 @@ as_window_menu_button = Disabled
 as_window_menu_key = Disabled
 as_show_desktop_key = <Super>d
 as_show_desktop_edge = 
-as_toggle_window_maximized_key = <Control>F10
+as_toggle_window_maximized_key = <Shift><Alt>space
 as_toggle_window_maximized_button = Disabled
 as_toggle_window_maximized_horizontally_key = <Alt>F10
 as_toggle_window_maximized_vertically_key = <Shift>F10
@@ -812,49 +750,18 @@ s0_hsize = 2
 s0_vsize = 2
 s0_number_of_desktops = 1
 s0_lighting = true
-s0_detect_refresh_rate = true
+s0_detect_refresh_rate = false
 s0_refresh_rate = 60
 s0_detect_outputs = true
 s0_overlapping_outputs = 0
-s0_outputs = 640x480+0+0;
+s0_outputs = 1680x1050+0+0;
 s0_sync_to_vblank = true
 s0_focus_prevention_level = 1
-s0_focus_prevention_match = any
-s0_unredirect_fullscreen_windows = true
+s0_focus_prevention_match = !(class=Polkit-gnome-authentication-agent-1)
+s0_unredirect_fullscreen_windows = false
 s0_default_icon = icon
 s0_force_independent_output_painting = false
-s0_texture_compression = true
-
-[atlantis]
-s0_speed_factor = 1.000000
-s0_start_crabs_bottom = false
-s0_school_similar_groups = true
-s0_low_poly = false
-s0_creature_type = 0;1;3;4;9;
-s0_creature_color = #ffffffff;#60a0ffff;#ff7000ff;#ffff00ff;#ff0000ff;
-s0_creature_number = 5;5;5;5;5;
-s0_creature_size = 4000;3500;3500;3500;4000;
-s0_plant_type = 0;1;2;
-s0_plant_color = #00d010ff;#00d010ff;#8090ff0c;
-s0_plant_number = 8;8;1;
-s0_plant_size = 5000;5000;800;
-s0_show_water = true
-s0_show_water_wire = false
-s0_show_ground = true
-s0_ground_color = #855e00ff
-s0_water_height = 0.850000
-s0_water_color = #08093008
-s0_grid_quality = 3
-s0_render_waves = true
-s0_wave_ripple = false
-s0_wave_amplitude = 0.020000
-s0_wave_frequency = 20.000000
-s0_small_wave_amplitude = 0.010000
-s0_small_wave_frequency = 40.000000
-s0_rescale_width = true
-s0_rotate_lighting = false
-s0_light_inclination = 90.000000
-s0_light_ambient = 0.300000
+s0_texture_compression = false
 
 [zoom]
 as_initiate_button = <Super>Button3
@@ -879,10 +786,6 @@ s0_bevel_topleft = true
 s0_bevel_topright = true
 s0_bevel_bottomleft = false
 s0_bevel_bottomright = false
-
-[mswitch]
-as_begin_key = <Super>s
-as_begin_button = Disabled
 
 [maximumize]
 as_ignore_sticky = true
@@ -1067,6 +970,9 @@ s0_timestep = 0.500000
 [imgjpeg]
 as_quality = 80
 
+[kdecompat]
+s0_plasma_thumbnails = true
+
 [widget]
 as_toggle_key = F9
 as_toggle_button = Disabled
@@ -1138,21 +1044,6 @@ s0_filters = negative;negative-green;blueish-filter;sepia;grayscale;deuteranopia
 s0_filter_decorations = false
 s0_filter_match = any
 
-[tile]
-as_animate_type = 0
-as_animation_duration = 1000
-as_tile_toggle_type = 1
-as_tile_join = false
-as_tile_delta = 35
-as_tile_left_occupancy = 60
-as_exclude_match = 
-as_tile_vertically_key = <Shift><Super>v
-as_tile_horizontally_key = <Shift><Super>h
-as_tile_tile_key = <Shift><Super>a
-as_tile_cascade_key = <Shift><Super>s
-as_tile_restore_key = <Shift><Super>z
-as_tile_toggle_key = <Shift><Super>x
-
 [shelf]
 as_trigger_key = <Super>l
 as_reset_key = Disabled
@@ -1163,12 +1054,12 @@ as_animtime = 150
 as_interval = 0.900000
 
 [animation]
-s0_open_effects = animation:Glide 1;animation:Fade;animation:Fade;
+s0_open_effects = animation:Glide 2;animation:Fade;animation:Fade;
 s0_open_durations = 200;150;150;
 s0_open_matches = ((type=Normal | Unknown) | name=sun-awt-X11-XFramePeer | name=sun-awt-X11-XDialogPeer) & !(role=toolTipTip | role=qtooltip_label) & !(type=Normal & override_redirect=1) & !(name=gnome-screensaver);(type=Menu | PopupMenu | DropdownMenu | Dialog | ModalDialog | Normal);(type=Tooltip | Notification | Utility) & !(name=compiz) & !(title=notify-osd);
 s0_open_options = ;;;
 s0_open_random_effects = 
-s0_close_effects = animation:Glide 2;animation:Fade;animation:Fade;
+s0_close_effects = animation:Fade;animation:Fade;animation:Fade;
 s0_close_durations = 200;150;150;
 s0_close_matches = ((type=Normal | Unknown) | name=sun-awt-X11-XFramePeer | name=sun-awt-X11-XDialogPeer) & !(role=toolTipTip | role=qtooltip_label) & !(type=Normal & override_redirect=1) & !(name=gnome-screensaver);(type=Menu | PopupMenu | DropdownMenu | Dialog | ModalDialog | Normal);(type=Tooltip | Notification | Utility) & !(name=compiz) & !(title=notify-osd) ;
 s0_close_options = ;;;
@@ -1277,7 +1168,7 @@ as_qt_fix = false
 as_convert_urgency = false
 as_aiglx_fragment_fix = true
 as_fglrx_xgl_fix = false
-as_force_glx_sync = false
+as_force_glx_sync = true
 as_sticky_alldesktops = false
 as_alldesktop_sticky_match = any
 
