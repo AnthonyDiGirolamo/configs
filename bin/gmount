@@ -1,2 +1,2 @@
 #!/bin/sh
-gnome-mount -d /dev/sda3 -m disk
+gnome-mount -d /dev/sda1 -m disk

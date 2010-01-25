@@ -4,7 +4,8 @@ xrdb -load ~/.Xdefaults
 
 # nitrogen --restore
 
-trayer --transparent true --alpha 0 --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype request --height 26 --tint 0x222222 &
+#trayer --transparent true --alpha 0 --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype request --height 26 --tint 0x222222 &
+tint2 &
 
 #/usr/lib/gvfs/gvfsd &
 #/usr/lib/libgconf2-4/gconfd-2 &
