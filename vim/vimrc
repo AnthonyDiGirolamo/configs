@@ -1,13 +1,12 @@
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-"set runtimepath+=~/.vim/ultisnips_rep
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
 set nobackup		" do not keep a backup file (file~), use versions instead
-set history=100	" keep 100 lines of command line history
+set history=1000	" keep 1000 lines of command line history
 set ruler			" show the cursor position all the time
 set laststatus=2	" always show the editing status bar at the bottom
 set showcmd			" display incomplete commands
@@ -17,6 +16,14 @@ set incsearch		" do incremental searching
 set mouse=a
 
 filetype plugin indent on
+
+augroup htmlerb
+au! BufNewFile,BufRead *.html.erb set ft=html.eruby
+au! BufNewFile,BufRead *.html.erb set syntax=eruby
+au! BufNewFile,BufRead *.html.erb set expandtab
+au! BufNewFile,BufRead *.html.erb set shiftwidth=2
+au! BufNewFile,BufRead *.html.erb set tabstop=2
+augroup END
 
 set autoindent		" always set autoindenting on
 
@@ -39,8 +46,9 @@ set textwidth=75	" insert EOL after 75 columns
 " set wrap				" wrap text at the edge of the window
 "
 set t_Co=256 			" set 256 color terminal
+colors wombat256
 "colors beauty256
-colors molokai
+"colors molokai
 "colors lettuce
 "colors gardener
 "colors koehler			" good 16 color scheme
@@ -200,3 +208,10 @@ nmap <silent> ;s :call SubTask()<CR>
 nmap <silent> ;d :call MarkDone()<CR>
 nmap <silent> ;D :call RemoveTask()<CR>
 
+function! SetFileType()
+	:set ft=html.eruby.eruby-rails
+	:set syntax=eruby
+	:set expandtab
+	:set shiftwidth=2
+	:set tabstop=2
+endfunction
