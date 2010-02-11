@@ -23,6 +23,7 @@ au! BufNewFile,BufRead *.html.erb set syntax=eruby
 au! BufNewFile,BufRead *.html.erb set expandtab
 au! BufNewFile,BufRead *.html.erb set shiftwidth=2
 au! BufNewFile,BufRead *.html.erb set tabstop=2
+au! BufNewFile,BufRead *.less set ft=css
 augroup END
 
 set autoindent		" always set autoindenting on
@@ -30,6 +31,7 @@ set autoindent		" always set autoindenting on
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
+  set t_Co=256 " set 256 color terminal
   syntax on
   set hlsearch
 endif
@@ -43,18 +45,16 @@ set shiftwidth=4		"
 
 set linebreak 			" wrap on words rather than characters
 set textwidth=75	" insert EOL after 75 columns
-" set wrap				" wrap text at the edge of the window
-"
-set t_Co=256 			" set 256 color terminal
-colors wombat256
-"colors beauty256
-"colors molokai
-"colors lettuce
-"colors gardener
-"colors koehler			" good 16 color scheme
-set guifont=Inconsolata\ 16
-set visualbell
-set t_vb=
+
+if has('gui_running')
+	colors warm_grey
+	set guifont=Inconsolata\ 16
+	set guioptions=aegimtT
+	set visualbell
+	set vb t_vb=
+else
+	colors molokai
+endif
 
 setlocal spell spelllang=en_us		" set the spellcheck to english
 set mousemodel=popup_setpos			" set the right click in gvim to spellcheck
@@ -86,8 +86,8 @@ map <s-Tab><s-Tab> :tabprevious<cr>
 map <space><space> <c-W>w<c-W>_
 
 " F10 to make and view a latex pdf
-map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
-imap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
+"map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
+"imap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
 
 " Removes trailing spaces
 function! TrimWhiteSpace()
@@ -215,3 +215,7 @@ function! SetFileType()
 	:set shiftwidth=2
 	:set tabstop=2
 endfunction
+
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
