@@ -18,12 +18,12 @@ set mouse=a
 filetype plugin indent on
 
 augroup htmlerb
-au! BufNewFile,BufRead *.html.erb set ft=html.eruby
-au! BufNewFile,BufRead *.html.erb set syntax=eruby
-au! BufNewFile,BufRead *.html.erb set expandtab
-au! BufNewFile,BufRead *.html.erb set shiftwidth=2
-au! BufNewFile,BufRead *.html.erb set tabstop=2
-au! BufNewFile,BufRead *.less set ft=css
+au BufNewFile,BufRead *.html.erb set ft=html.eruby
+au BufNewFile,BufRead *.html.erb set syntax=eruby
+au BufNewFile,BufRead *.html.erb set expandtab
+au BufNewFile,BufRead *.html.erb set shiftwidth=2
+au BufNewFile,BufRead *.html.erb set tabstop=2
+au BufNewFile,BufRead *.less set ft=css
 augroup END
 
 set autoindent		" always set autoindenting on
@@ -74,6 +74,8 @@ highlight clear SpellRare
 highlight SpellRare term=underline cterm=underline
 highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
+
+imap <C-O> <C-X><C-O>
 
 " F9 will turn spell checking on or off in normal and insert mode
 map <F9> :setlocal spell! spelllang=en_us<cr>
@@ -219,3 +221,11 @@ endfunction
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+nnoremap <silent> <C-y> :tabnew<CR>:FufFile **/<CR>
+
+let g:github_user  = "adigiro"
+let g:github_token = "6f706d4fa5ef79c9d09693d2ad047a08"
+
+set diffopt+=iwhite
+
