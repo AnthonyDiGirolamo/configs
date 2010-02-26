@@ -25,4 +25,5 @@ sudo cp -v dwm/dwm_session.desktop /usr/share/xsessions/dwm.desktop
 
 gconftool-2 --type string --set /desktop/gnome/session/required_components/windowmanager dwm
 gconftool-2 --type boolean --set /apps/nautilus/preferences/show_desktop false
+gconftool-2 --type string --set /desktop/gnome/interface/ menus_has_icons
 

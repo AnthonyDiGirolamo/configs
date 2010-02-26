@@ -91,7 +91,7 @@ map <space><space> <c-W>w<c-W>_
 
 " Removes trailing spaces
 function! TrimWhiteSpace()
-: %s/\s\s*$//gc
+: %s/\s\s*$//g
 : ''
 :endfunction
 map <silent> <F3>  :call TrimWhiteSpace()<CR>
