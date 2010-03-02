@@ -1,5 +1,6 @@
 #!/bin/sh
-LD_PRELOAD=/usr/lib/libGL.so MOZ_DISABLE_PANGO=1 firefox &
+#LD_PRELOAD=/usr/lib/libGL.so 
+MOZ_DISABLE_PANGO=1 firefox &
 
 # Change this to match your correct profile
 #PROFILE="cwqjn56n.default"
