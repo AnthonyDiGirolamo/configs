@@ -1,8 +1,11 @@
 #!/bin/sh
-DISPLAY=:0.0 /usr/bin/notify-send -u critical -t 10000 -i mail-send-receive "Syncing Mail" "GMail via offlineimap"
-offlineimap
-COUNT=`ls -1 /home/adigiro/Preferences/Mail/INBOX/new/ | wc -l`
+DISPLAY=:0.0 /usr/bin/notify-send -u critical -t 10000 -i mail-send-receive "Syncing Mail" "offlineimap"
+offlineimap -u Noninteractive.Quiet
+COUNT1=`ls -1 /home/adigiro/Mail/INBOX/new | wc -l`
+COUNT2=`ls -1 /home/adigiro/Mail/Integrum/INBOX/new | wc -l`
+COUNT=`echo "$COUNT1+$COUNT2" | bc`
 if [ "$COUNT" -gt "0" ]; then
-	DISPLAY=:0.0 /usr/bin/notify-send -u critical -t 10000 -i mail-unread "Mutt: New Mail" "$COUNT new message(s)"
+	DISPLAY=:0.0 /usr/bin/notify-send -u critical -t 10000 -i mail-unread \
+	"$COUNT New Message(s)" "GMail: $COUNT1  -  Integrum: $COUNT2"
 fi
 
