@@ -9,26 +9,27 @@ rmln() {
 	$RM ~/.`basename $FILE` ; $LN ~/$PREFS/$FILE ~/.`basename $FILE`
 }
 
-FILE=fonts 		; rmln
-FILE=icons 		; rmln
-FILE=themes 	; rmln
+FILE=fonts                   ; rmln
+FILE=icons                   ; rmln
+FILE=themes                  ; rmln
 
-FILE=dwm 		; rmln
-FILE=dmenu 		; rmln
-FILE=Xdefaults 	; rmln
-FILE=screenrc 	; rmln
-FILE=gitconfig 	; rmln
-FILE=irbrc 		; rmln
+FILE=dwm                     ; rmln
+FILE=dmenu                   ; rmln
+FILE=Xdefaults               ; rmln
+FILE=screenrc                ; rmln
+FILE=gitconfig               ; rmln
+FILE=irbrc                   ; rmln
+FILE=rdebugrc                ; rmln
 
-FILE=vimperator/vimperatorrc 	; rmln
-FILE=vimperator/vimperator 		; rmln
+FILE=vimperator/vimperatorrc ; rmln
+FILE=vimperator/vimperator   ; rmln
 
-FILE=vim/gvimrc 	; rmln
-FILE=vim/vimrc 	; rmln
-FILE=vim/vim 	; rmln
+FILE=vim/gvimrc              ; rmln
+FILE=vim/vimrc               ; rmln
+FILE=vim/vim                 ; rmln
 
-FILE=zsh/zsh 		; rmln
-FILE=zsh/zhistory 	; rmln
-FILE=zsh/zsh_prompt	; rmln
-FILE=zsh/zshrc 		; rmln
+FILE=zsh/zsh                 ; rmln
+FILE=zsh/zhistory            ; rmln
+FILE=zsh/zsh_prompt          ; rmln
+FILE=zsh/zshrc               ; rmln
 
