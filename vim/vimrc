@@ -224,8 +224,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 
 nnoremap <silent> <C-y> :tabnew<CR>:FufFile **/<CR>
 
-let g:github_user  = "adigiro"
-let g:github_token = "6f706d4fa5ef79c9d09693d2ad047a08"
-
 set diffopt+=iwhite
+
+source ~/.vimrc_private
 
