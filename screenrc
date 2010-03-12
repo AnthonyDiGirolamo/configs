@@ -1,31 +1,19 @@
 # Key Bindings
+bind s # Disable freezing terminal command
 bindkey -k k7 prev
 bindkey -k k8 next
 bindkey -k k6 title
 bindkey -k k5 screen
-# bindkey -k k4 detach
 bindkey -k k4 copy
+# bindkey -k k4 detach
 
-#register n "^a^c"					#     | Goes with the F2 definition
-#bindkey -k k2 process n					# F2  | Create new window
-#bindkey -k k3 prev					# F3  | Previous Window
-#bindkey -k k4 next					# F4  | Next Window
-#register r "^a:source $HOME/.byobu/profile^M"		#     | Goes with F5 definition
-#bindkey -k k5 process r					# F5  | Reload profile
-#bindkey -k k6 detach					# F6  | Detach from this session
-#bindkey -k k7 copy					# F7  | Enter copy/scrollback mode
-#register t "^aA^aa^k^h"					#     | Goes with the F8 definition
-#bindkey -k k8 process t 				# F8  | Re-title a window
-#bindkey -k k9 screen -t help 0 byobu-config		# F9  | Configuration
-#							# F10 | 'toolbar' in gnome-terminal
-#							# F11 | 'fullscreen' in gnome-terminal
-#bindkey -k F2 lockscreen				# F12 | Lock this terminal
-#bind $ screen -t status 0 byobu-status-detail 		# ctrl-a $ | show detailed status
-
-#Stuff
-msgwait 3
-sorendition 04 43
-# pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
+# Arrow keys to switch terminals (only works with X)
+# Ctrl + Alt + left/right
+# bindkey ^[[1;7D prev
+# bindkey ^[[1;7C next
+# Ctrl + Shift + left/right
+bindkey ^[[1;3D prev
+bindkey ^[[1;3C next
 
 # Colors in screenrc
 # ------------------
@@ -40,7 +28,7 @@ sorendition 04 43
 #  8 unused/illegal    w    white           s    standout
 #  9 transparent       y    yellow          u    underline
 # note: "dim" is not mentioned in the manual.
-# 
+#
 # STRING ESCAPES
 # --------------
 #  %%      percent sign (the escape character itself)
@@ -69,7 +57,9 @@ sorendition 04 43
 #  %Y      full year number
 
 # Blue Highlight on Black
-# caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM - %c"
+#caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM - %c"
+
+caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM"
 # Red on Green theme
 #caption always "%{= gk}%-Lw%{= rW}%50> %n%f* %t %{-}%+Lw%< %= %{= Gk} %H %{= rW} %l %{= Gk} %0c:%s %d/%m %{-}"
 # White on Blue theme
@@ -82,21 +72,29 @@ sorendition 04 43
 #hardstatus alwayslastline "%{= dd}%-w%{= cy}%{+b} %n*%t %{= dd}%+w %= %{= dR}%{+b}%H %{= dG}%{+b}%0c:%s %{= dB}%{+b}%m/%d/%Y"
 
 #                          background  selected       background
-hardstatus alwayslastline "%{= db}%-w%{= by}%{+b}%n*%t%{= db}%+w %= %{= dR}%{+b} %H %{= dG}%{+b}%0c:%s %{= dB}%{+b}%m/%d/%Y"
+#hardstatus alwayslastline "%{= db}%-w%{= by}%{+b}%n*%t%{= db}%+w %= %{= dR}%{+b} %H %{= dB}%{+b}%m/%d/%Y"
 
-# Time - White on Blue bar 
+# Time - White on Blue bar
 # hardstatus alwayslastline "%{= bw} %{= bc}[%{-}%0c%{= bc}]%{-} [%-Lw%{= bW}%{+b}%50>%n%f* %t%{-b}%{= bw}%+Lw]%<"
 
+sorendition 04 43
 
 shell /usr/bin/zsh
-vbell off
+defutf8 on
+altscreen on # Allow apps like vi to use the alt screen
 defscrollback 16384
 startup_message off
-defutf8 on
+vbell off
 
-# 256 Colors
-attrcolor b ".I"
-termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
-defbce on
-term screen-bce
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' # 256 Colors
+attrcolor b ".I" # Make bold text a bright color
+term screen      # Set the TERM to something else
+defbce on        # Background Color Erase
 
+# Send Scroll History to the terminal buffer
+termcapinfo xterm ti@:te@
+
+# Enable Shift-Page Up/Down to scroll
+bindkey "^[[5;2~" eval "copy" "stuff ^u"
+bindkey -m "^[[5;2~" stuff ^u
+bindkey -m "^[[6;2~" stuff ^d

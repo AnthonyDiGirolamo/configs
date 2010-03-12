@@ -3,21 +3,20 @@
 ! dpi: 110 size 18
 ! dpi: 115 size 15
 
-Xft.antialias: 1
-Xft.hinting: 1
-Xft.hintstyle: hintslight
-Xft.rgba: rgb
+!Xft.dpi: 115
+!Xft.antialias: 1
+!Xft.rgba: rgb
+!Xft.hinting: 1
+!Xft.hintstyle: hintslight
 
-Xft.dpi: 115
 xterm*faceName: Inconsolata
-xterm*faceSize: 15
-!xterm*faceName: Terminus
-!xterm*faceSize: 10
+xterm*faceSize: 14
+!xterm*faceName: Terminus:pixelsize=14
 
 xterm*dynamiccolors: true
 !xterm*scrollTtyOutput: false
 !xterm*scrollKey: true
-xterm*scrollBar: false
+!xterm*scrollBar: true
 xterm*background: black
 xterm*foreground: gray
 xterm*utf8: 1
