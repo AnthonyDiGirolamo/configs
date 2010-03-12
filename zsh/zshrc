@@ -23,6 +23,9 @@ PS1="$PR_WHITE%(!.#.$)$PR_NO_COLOR "
 RPS1="%2c"
 #source ~/.zsh_prompt
 
+autoload -U promptinit
+promptinit
+
 # ls colors
 if [ "$TERM" != "dumb" ]; then
     eval "`dircolors -b`"
