@@ -41,9 +41,12 @@ set textwidth=75      " insert EOL after 75 columns
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-  set t_Co=256 " set 256 color terminal
-  syntax on
-  set hlsearch
+	syntax on
+	set hlsearch
+endif
+
+if $TERM == 'xterm256-color'
+	set t_Co=256 " set 256 color terminal
 endif
 
 if has('gui_running')

@@ -8,10 +8,13 @@ bindkey -k k4 copy
 # bindkey -k k4 detach
 
 # Arrow keys to switch terminals (only works with X)
+# Run cat > /dev/null to get key presses
+
 # Ctrl + Alt + left/right
 # bindkey ^[[1;7D prev
 # bindkey ^[[1;7C next
-# Ctrl + Shift + left/right
+
+# Alt + left/right
 bindkey ^[[1;3D prev
 bindkey ^[[1;3C next
 
@@ -87,9 +90,9 @@ startup_message off
 vbell off
 
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' # 256 Colors
-attrcolor b ".I" # Make bold text a bright color
-term screen      # Set the TERM to something else
-defbce on        # Background Color Erase
+attrcolor b ".I"    # Make bold text a bright color
+defbce on           # Background Color Erase
+term xterm-256color # Set the TERM to something else
 
 # Send Scroll History to the terminal buffer
 termcapinfo xterm ti@:te@
