@@ -29,6 +29,8 @@ RPS1="%2c"
 # Prompt plugin
 autoload -U promptinit
 promptinit
+setopt promptsubst
+
 # Run prompt -h for help
 
 # ls colors
