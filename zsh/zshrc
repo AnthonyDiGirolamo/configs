@@ -5,7 +5,7 @@ preexec () {
 	echo -ne "\ek${1%% *}\e\\"
 }
 
-# Set colors with helpful names
+# Set color variables with helpful names
 autoload colors zsh/terminfo
 if [[ "$terminfo[colors]" -ge 8 ]]; then
 	colors
@@ -18,18 +18,25 @@ done
 PR_NO_COLOR="%{$terminfo[sgr0]%}"
 
 # Prompt
-#PS1="[$PR_BLUE%n$PR_GREEN@%m$PR_NO_COLOR:$PR_RED%2c$PR_NO_COLOR]$PR_WHITE%(!.#.$)$PR_NO_COLOR "
-PS1="$PR_WHITE%(!.#.$)$PR_NO_COLOR "
-# Right Justified Prompt
-#RPS1="$PR_BOLD_YELLOW(%D{%m-%d %H:%M})$PR_NO_COLOR"
-RPS1="%2c"
-# Git-Aware Command prompt:
-#source ~/.zsh_prompt
+# Standard Bash-Like
+# PS1="[$PR_BLUE%n$PR_GREEN@%m$PR_NO_COLOR:$PR_RED%2c$PR_NO_COLOR]$PR_WHITE%(!.#.$)$PR_NO_COLOR "
+# Super Minimalistic
+# PS1="$PR_WHITE%(!.#.$)$PR_NO_COLOR "
 
-# Prompt plugin
+# Right Justified Prompt
+# (Date Time)
+# RPS1="$PR_BOLD_YELLOW(%D{%m-%d %H:%M})$PR_NO_COLOR"
+# Current Directory
+# RPS1="%2c"
+
+# Git-Aware Command prompt:
+# source ~/.zsh_prompt
+
+# Prompt Module/Plugin/Whatever
 autoload -U promptinit
 promptinit
 setopt promptsubst
+prompt wunjo
 
 # Run prompt -h for help
 
