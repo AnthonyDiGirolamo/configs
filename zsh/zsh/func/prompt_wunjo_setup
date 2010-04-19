@@ -117,7 +117,8 @@ prompt_wunjo_setup() {
 
 	PROMPT=
 	if [ $verbose ]; then
-		PROMPT+="$pc[host]%m$pc[reset] "
+		PROMPT+="$pc[reset]"
+		#PROMPT+="$pc[host]%m$pc[reset] "
 	fi
 	PROMPT+="$pc[path]%(2~.%~.%/)$pc[reset]"
 	PROMPT+="\$(prompt_wunjo_scm_status)"
@@ -130,11 +131,11 @@ prompt_wunjo_setup() {
 	PROMPT+=" $pc[#]%#$pc[reset] "
 
 	RPROMPT=
-	if [ $verbose ]; then
-		RPROMPT+="$p_date "
-	fi
-	RPROMPT+="$pc[user]%n$pc[reset]"
-	RPROMPT+=" $p_line"
+	#if [ $verbose ]; then
+		#RPROMPT+="$p_date "
+	#fi
+	#RPROMPT+="$pc[user]%n$pc[reset]"
+	#RPROMPT+=" $p_line"
 
 	export PROMPT RPROMPT
 	precmd_functions+='prompt_wunjo_precmd'

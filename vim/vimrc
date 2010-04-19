@@ -94,8 +94,8 @@ map <s-Tab><s-Tab> :tabprevious<cr>
 map <space><space> <c-W>w<c-W>_
 
 " F10 to make and view a latex pdf
-"map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
-"imap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
+map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
+imap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
 
 " Removes trailing spaces
 function! TrimWhiteSpace()
@@ -159,7 +159,8 @@ autocmd FileType python set smartindent cinwords=if,elif,else,for,while,try,exce
 
 " Syntax coloring for markdown files (.mkd)
 augroup mkd
-autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
+autocmd BufRead *.mkd      set ai formatoptions=tcroqn2 comments=n:>
+autocmd BufRead *.markdown set ai formatoptions=tcroqn2 comments=n:>
 augroup END
 
 " Rails plugin options

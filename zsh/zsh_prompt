@@ -132,10 +132,10 @@ ${PR_BOLD_BLACK}>${VIMODE}\
 %{${reset_color}%} '
 
     # Of course we need a matching continuation prompt
-#     PROMPT2='\
-# ${PR_BOLD_BLACK}>${VIMODE}\
-# ${PR_BOLD_BLACK} %_ ${VIMODE}\
-# %{${reset_color}%} '
+PROMPT2='\
+${PR_BOLD_BLACK}>${VIMODE}\
+${PR_BOLD_BLACK} %_ ${VIMODE}\
+%{${reset_color}%} '
 }
 
 setprompt

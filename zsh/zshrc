@@ -30,7 +30,7 @@ PR_NO_COLOR="%{$terminfo[sgr0]%}"
 # RPS1="%2c"
 
 # Git-Aware Command prompt:
-# source ~/.zsh_prompt
+#source ~/.zsh_prompt
 
 # Prompt Module/Plugin/Whatever
 autoload -U promptinit

@@ -11,7 +11,7 @@
 
 xterm*faceName: Inconsolata
 xterm*faceSize: 13
-!xterm*faceName: Terminus:pixelsize=14
+!xterm*faceName: Terminus:pixelsize=8
 
 xterm*dynamiccolors: true
 !xterm*scrollTtyOutput: false
