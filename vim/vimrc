@@ -5,6 +5,7 @@ set nocompatible
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
+set noswapfile
 set nobackup     " do not keep a backup file (file~), use versions instead
 set history=1000 " keep 1000 lines of command line history
 set ruler        " show the cursor position all the time
@@ -17,7 +18,25 @@ set mouse=a
 
 filetype plugin indent on
 
+augroup markdown
+au BufNewFile,BufRead *.mkd set ft=markdown.liquid
+au BufNewFile,BufRead *.mkd set syntax=markdown.liquid
+au BufNewFile,BufRead *.mkd set expandtab
+au BufNewFile,BufRead *.mkd set shiftwidth=2
+au BufNewFile,BufRead *.mkd set tabstop=2
+au BufNewFile,BufRead *.markdown set ft=markdown.liquid
+au BufNewFile,BufRead *.markdown set syntax=markdown.liquid
+au BufNewFile,BufRead *.markdown set expandtab
+au BufNewFile,BufRead *.markdown set shiftwidth=2
+au BufNewFile,BufRead *.markdown set tabstop=2
+augroup END
+
 augroup htmlerb
+au BufNewFile,BufRead *.html set ft=html.liquid
+au BufNewFile,BufRead *.html set syntax=liquid
+au BufNewFile,BufRead *.html set expandtab
+au BufNewFile,BufRead *.html set shiftwidth=2
+au BufNewFile,BufRead *.html set tabstop=2
 au BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
 au BufNewFile,BufRead *.html.erb set syntax=eruby
 au BufNewFile,BufRead *.html.erb set expandtab
@@ -157,12 +176,6 @@ map <M-v> "+p
 autocmd FileType python set complete+=k~/.vim/syntax/python.vim isk+=.,(
 autocmd FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
-" Syntax coloring for markdown files (.mkd)
-augroup mkd
-autocmd BufRead *.mkd      set ai formatoptions=tcroqn2 comments=n:>
-autocmd BufRead *.markdown set ai formatoptions=tcroqn2 comments=n:>
-augroup END
-
 " Rails plugin options
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_classes_in_global = 1
@@ -228,4 +241,8 @@ nnoremap <silent> <C-y> :tabnew<CR>:FufFile **/<CR>
 set diffopt+=iwhite
 
 source ~/.vimrc_private
+
+let g:jekyll_path = "/home/adigiro/Dev/anthonydigirolamo.github.com"
+"map jn  :JekyllPost<CR>
+"map jl  :JekyllList<CR>
 
