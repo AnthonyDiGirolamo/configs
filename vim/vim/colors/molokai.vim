@@ -122,6 +122,10 @@ else
    hi NonText         guifg=#BCBCBC guibg=#232526
 end
 
+hi TabLine          gui=none       guibg=#303030 guifg=#afafaf
+hi TabLineFill      gui=none       guibg=#303030
+hi TabLineSel       gui=none       guibg=#585858 guifg=#dadada
+
 "
 " Support for 256-color terminal
 "

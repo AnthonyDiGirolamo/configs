@@ -31,19 +31,19 @@ au BufNewFile,BufRead *.markdown set shiftwidth=2
 au BufNewFile,BufRead *.markdown set tabstop=2
 augroup END
 
-augroup htmlerb
-au BufNewFile,BufRead *.html set ft=html.liquid
-au BufNewFile,BufRead *.html set syntax=liquid
-au BufNewFile,BufRead *.html set expandtab
-au BufNewFile,BufRead *.html set shiftwidth=2
-au BufNewFile,BufRead *.html set tabstop=2
-au BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
-au BufNewFile,BufRead *.html.erb set syntax=eruby
-au BufNewFile,BufRead *.html.erb set expandtab
-au BufNewFile,BufRead *.html.erb set shiftwidth=2
-au BufNewFile,BufRead *.html.erb set tabstop=2
-au BufNewFile,BufRead *.less set ft=css
-augroup END
+"augroup htmlerb
+"au BufNewFile,BufRead *.html set ft=html.liquid
+"au BufNewFile,BufRead *.html set syntax=liquid
+"au BufNewFile,BufRead *.html set expandtab
+"au BufNewFile,BufRead *.html set shiftwidth=2
+"au BufNewFile,BufRead *.html set tabstop=2
+"au BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
+"au BufNewFile,BufRead *.html.erb set syntax=eruby
+"au BufNewFile,BufRead *.html.erb set expandtab
+"au BufNewFile,BufRead *.html.erb set shiftwidth=2
+"au BufNewFile,BufRead *.html.erb set tabstop=2
+"au BufNewFile,BufRead *.less set ft=css
+"augroup END
 
 set autoindent        " always set autoindenting on
 
@@ -132,10 +132,10 @@ map <F4> :w<CR>
 imap <F4> <ESC>:w<CR>i
 
 " Netrw settings
-"let g:netrw_winsize=30
-"let g:netrw_liststyle=3
-"let g:netrw_list_hide='.*\.o$'
-"let g:netrw_browse_split=0
+let g:netrw_winsize=80
+let g:netrw_liststyle=3
+let g:netrw_list_hide='.*\.o$'
+let g:netrw_browse_split=0
 
 " Open file browser
 " map  <F2> :Vexplore<CR>
@@ -166,7 +166,8 @@ imap jj <Esc>l
 "nnoremap <C-space> i
 "imap <C-space> <Esc>
 
-map T :tabe .<CR>
+map T :Explore<CR>
+map Y :Texplore<CR>
 
 " Alt-C and V copy and paste to and from the system clipboard
 map <M-c> "+y

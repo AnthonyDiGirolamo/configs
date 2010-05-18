@@ -7,8 +7,8 @@
 	email = anthony.digirolamo@gmail.com
 [giggle]
 	compact-mode = false
-	main-window-maximized = false
-	main-window-geometry = 956x738+0+0
+	main-window-maximized = true
+	main-window-geometry = 0x0+0+0
 	history-view-vpane-position = 358
 	main-window-view = HistoryView
 	file-view-vpane-position = 667

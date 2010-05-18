@@ -299,8 +299,4 @@ delf <SID>grey_level
 delf <SID>grey_number
 " }}}
 
-   hi TabLine         ctermbg=236 ctermfg=145   cterm=none
-   hi TabLineFill     ctermbg=236               cterm=none
-   hi TabLineSel      ctermbg=240 ctermfg=253   cterm=Bold
-
 " vim:set ts=4 sw=4 noet fdm=marker:
