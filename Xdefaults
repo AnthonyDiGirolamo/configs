@@ -30,32 +30,32 @@ xterm*colorULMode:		on
 xterm*highlightSelection:	true
 
 
-!! tango color scheme
-!xterm*customization: -color
-!! Black + DarkGrey
-!xterm*color0:  #2E3436
-!xterm*color8:  #555753
-!! DarkRed + Red
-!xterm*color1:  #CC0000
-!xterm*color9:  #EF2929
-!! DarkGreen + Green
-!xterm*color2:  #4E9A06
-!xterm*color10: #8AE234
-!! DarkYellow + Yellow
-!xterm*color3:  #C4A000
-!xterm*color11: #FCE94F
-!! DarkBlue + Blue
-!xterm*color4:  #3465A4
-!xterm*color12: #729FCF
-!! DarkMangenta + Mangenta
-!xterm*color5:  #75507B
-!xterm*color13: #AD7FA8
-!!DarkCyan + Cyan
-!xterm*color6:  #06989A
-!xterm*color14: #34E2E2
-!! LightGrey + White
-!xterm*color7:  #D3D7CF
-!xterm*color15: #EEEEEC
+! tango color scheme
+xterm*customization: -color
+! Black + DarkGrey
+xterm*color0:  #2E3436
+xterm*color8:  #555753
+! DarkRed + Red
+xterm*color1:  #CC0000
+xterm*color9:  #EF2929
+! DarkGreen + Green
+xterm*color2:  #4E9A06
+xterm*color10: #8AE234
+! DarkYellow + Yellow
+xterm*color3:  #C4A000
+xterm*color11: #FCE94F
+! DarkBlue + Blue
+xterm*color4:  #3465A4
+xterm*color12: #729FCF
+! DarkMangenta + Mangenta
+xterm*color5:  #75507B
+xterm*color13: #AD7FA8
+!DarkCyan + Cyan
+xterm*color6:  #06989A
+xterm*color14: #34E2E2
+! LightGrey + White
+xterm*color7:  #D3D7CF
+xterm*color15: #EEEEEC
 
 ! light tango color scheme
 !xterm*customization: -color
