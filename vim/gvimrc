@@ -1,5 +1,5 @@
 colors warm_grey
-set guifont=Inconsolata\ 17
+set guifont=Inconsolata\ 15
 set guioptions=agm
 "set guioptions=aegimtT
 set visualbell

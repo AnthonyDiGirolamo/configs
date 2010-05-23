@@ -1,0 +1,40 @@
+#!/bin/sh
+PACKAGES="
+tp-smapi-dkms
+gpointing-device-settings
+openssh-server
+gufw
+
+chromium-browser
+python-xlib
+
+ruby build-essential libopenssl-ruby ruby1.8-dev
+sqlite3 libsqlite3-dev
+postgresql postgresql-client libpq-dev
+mysql-server mysql-client libmysql-ruby libmysqlclient-dev
+
+gsl-bin
+
+build-essential autoconf automake libtool
+libimobiledevice-dev libimobiledevice-utils libclutter-1.0-dev libclutter-gtk-0.10-dev libzip-dev intltool
+libsdl-image1.2 libopenal-dev libopenal1
+"
+
+USERPACKAGES="
+ttf-inconsolata
+ttf-droid
+screen
+zsh
+git-core
+vim vim-gnome vim-gtk
+gedit-plugins
+curl exuberant-ctags
+pidgin pidgin-themes pidgin-plugin-pack
+mutt mairix msmtp offlineimap libnotify-bin
+parcellite
+"
+
+sudo apt-get install $PACKAGES $USERPACKAGES
+
+#GEMS=" sqlite3-ruby mysql pg "
+#sudo gem install $GEMS
