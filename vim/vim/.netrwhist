@@ -1,5 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/media/e83e17d1-0406-425e-8532-861cdbfd7a58/adigiro/Dev/bignerve'
-let g:netrw_dirhist_2='/media/e83e17d1-0406-425e-8532-861cdbfd7a58/adigiro/Dev/bignerve/app'
-let g:netrw_dirhist_3='/media/e83e17d1-0406-425e-8532-861cdbfd7a58/adigiro/Dev/bignerve/app/controllers'
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/adigiro/Dev/bignerve'
+let g:netrw_dirhist_2='/home/adigiro/Dev/bignerve/app'
+let g:netrw_dirhist_3='/home/adigiro/Dev/bignerve/app/models'
+let g:netrw_dirhist_4='/home/adigiro/Dev/bignerve/db'
+let g:netrw_dirhist_5='/home/adigiro/Dev/bignerve'
+let g:netrw_dirhist_6='/home/adigiro/Dev/bignerve/app'
+let g:netrw_dirhist_7='/home/adigiro/Dev/bignerve/app/models'

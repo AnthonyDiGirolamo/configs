@@ -166,8 +166,8 @@ imap jj <Esc>l
 "nnoremap <C-space> i
 "imap <C-space> <Esc>
 
-map T :Explore<CR>
-map Y :Texplore<CR>
+map T :Texplore<CR>
+map Y :Explore<CR>
 
 " Alt-C and V copy and paste to and from the system clipboard
 map <M-c> "+y
@@ -247,3 +247,17 @@ let g:jekyll_path = "/home/adigiro/Dev/anthonydigirolamo.github.com"
 "map jn  :JekyllPost<CR>
 "map jl  :JekyllList<CR>
 
+let g:user_zen_settings = { 'erb' : { 'extends' : 'html' } }
+let g:user_zen_expandabbr_key = '<c-e>'
+let g:use_zen_complete_tag = 1
+
+let Tlist_File_Fold_Auto_Close = 1
+"let Tlist_Show_One_File = 1
+let Tlist_Display_Tag_Scope = 0
+let Tlist_Auto_Update = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_Use_SingleClick = 0
+let Tlist_Sort_Type = "name"
+let Tlist_Enable_Fold_Column = 0
+let Tlist_File_Fold_Auto_Close = 1
