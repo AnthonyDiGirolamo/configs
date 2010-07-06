@@ -1,0 +1,32 @@
+#!/bin/sh
+DESTDIR=$HOME/.apps
+
+wget http://mirrors.kernel.org/gnu/screen/screen-4.0.3.tar.gz
+tar xzvf ./screen-4.0.3.tgz
+cd screen-4.0.3
+./configure --enable-locale --enable-telnet --enable-colors256 --enable-rxvt_osc --prefix=$DESTDIR/screen
+make
+make install
+cd ..
+
+wget http://downloads.sourceforge.net/project/zsh/zsh-dev/4.3.10/zsh-4.3.10.tar.bz2?use_mirror=cdnetworks-us-2
+tar xjvf ./zsh-4.3.10.tar.bz2
+cd zsh-4.3.10
+./configure --prefix=$DESTDIR/zsh
+make
+make install
+cd ..
+
+wget http://prdownloads.sourceforge.net/ctags/ctags-5.8.tar.gz
+tar xjvf ./ctags-5.8.tar.gz
+cd ctags-5.8
+./configure --prefix=$DESTDIR/ctags
+make
+make install
+cd ..
+
+rm -rvf zsh-4.3.10 screen-4.0.3 ctags-5.8
+
+sudo mv /usr/bin/ctags /usr/bin/ctags.original
+sudo ln -s $HOME/.apps/ctags/bin/ctags /usr/bin/
+
