@@ -9,6 +9,7 @@ icons/
 original_mac
 themes
 vim/vim/.VimballRecord
+vim/vim/.netrwhist
 vim/viminfo
 vimperator/vimperator/info/
 zsh/zhistory

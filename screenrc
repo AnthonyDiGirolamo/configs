@@ -82,17 +82,18 @@ caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM"
 
 sorendition 04 43
 
-shell /usr/bin/zsh
+#shell /usr/bin/zsh
+shell /opt/local/bin/zsh
 defutf8 on
 altscreen on # Allow apps like vi to use the alt screen
 defscrollback 16384
 startup_message off
 vbell off
 
-termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' # 256 Colors
 attrcolor b ".I"    # Make bold text a bright color
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' # 256 Colors
 defbce on           # Background Color Erase
-term xterm-256color # Set the TERM to something else
+#term xterm-256color # Set the TERM to something else
 
 # Send Scroll History to the terminal buffer
 termcapinfo xterm ti@:te@

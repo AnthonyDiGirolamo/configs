@@ -1,9 +1,9 @@
 #!/usr/bin/zsh
 
 # Sets the screen window title with the name of the command you are running
-preexec () {
-	echo -ne "\ek${1%% *}\e\\"
-}
+# preexec () {
+# 	echo -ne "\ek${1%% *}\e\\"
+# }
 
 # Set color variables with helpful names
 autoload colors zsh/terminfo
@@ -43,18 +43,18 @@ prompt wunjo
 # ls colors
 if [ "$TERM" != "dumb" ]; then
 	# Linux
-    eval "`dircolors -b`"
+    #eval "`dircolors -b`"
     alias ls='ls --color=auto'
 	# MacOS
-    #alias ls='ls -G'
+	alias ls='ls -G'
 fi
 
 # Aliases
 alias randmac="head /dev/urandom | openssl md5 | sed 's/\(..\)/\1:/g' | cut -c1-17"
 
 alias xdef='xrdb -load ~/.Xdefaults'
-alias rm='mv --verbose -i --target-directory ~/.Trash/'
-alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
+#alias rm='mv --verbose -i --target-directory ~/.Trash/'
+#alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
 
 alias lltr='ll -tr'
 alias lla='ls -lhA'
@@ -69,27 +69,27 @@ alias c='clear'
 alias gl='git log --pretty=oneline'
 alias gits='git status'
 
-alias o='gvfs-open'
+alias p='pushd'
+alias o='popd'
 
 alias h='history'
 
 alias du='du -hsc'
 alias df='df -hTP'
 
-alias g=gvim
-alias v=vim
-
+alias g=mvim
+alias v='TERM=xterm+256color /Applications/MacVim.app/Contents/MacOS/Vim'
 alias t='vim ~/Notes/GTD.mkd'
 alias tg='gvim ~/Notes/GTD.mkd'
 alias today='grep `date +%m/%d` ~/Notes/GTD.mkd'
 
 ### Variables
 export EDITOR=vim
-export PATH=/opt/e17/bin:$PATH
 export PATH=$HOME/Preferences/bin:$PATH
+export PATH=/opt/local/bin:$PATH
 
-export GDBASE_PREFIX=/home/adigiro/apps/gdbase
-export PATH=$HOME/apps/gdbase/bin:$PATH
+#export GDBASE_PREFIX=/home/adigiro/apps/gdbase
+#export PATH=$HOME/apps/gdbase/bin:$PATH
 
 ### MVAPICH
 #export PATH=$HOME/apps/mvapich/bin:/home/adigiro/apps/valgrind-mvapich/bin:$PATH
@@ -101,13 +101,17 @@ export PATH=$HOME/apps/gdbase/bin:$PATH
 #export LD_LIBRARY_PATH=$HOME/apps/openmpi126/lib:$LD_LIBRARY_PATH
 
 # OPENMPI 1.3.3
-export PATH=$HOME/apps/openmpi133/bin:$PATH
-export LD_LIBRARY_PATH=$HOME/apps/openmpi133/lib/openmpi:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$HOME/apps/openmpi133/lib:$LD_LIBRARY_PATH
+#export PATH=$HOME/apps/openmpi133/bin:$PATH
+#export LD_LIBRARY_PATH=$HOME/apps/openmpi133/lib/openmpi:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=$HOME/apps/openmpi133/lib:$LD_LIBRARY_PATH
 
 # Auth your sshkey with another server
 function authme {
     ssh $@ 'cat >>.ssh/authorized_keys' <~/.ssh/id_rsa.pub
+}
+
+function setupenv {
+	rsync -avLK --delete --exclude mthesaur-vim.txt .vim .vimrc .zsh .zsh_prompt .zshenv .zshrc .screenrc $@:~/
 }
 
 # Emacs Mode
@@ -167,7 +171,7 @@ bindkey '^H' backward-delete-char
 
 bindkey '^r' history-incremental-search-backward
 
-bindkey ' ' magic-space    # also do history expansion on space
+# bindkey ' ' magic-space    # also do history expansion on space
 bindkey '^I' complete-word # complete on tab, leave expansion to _expand
 
 bindkey '^K' push-line # push current command into a buffer, allows you to do another command then returns to previous command
@@ -237,12 +241,11 @@ zstyle ':completion:*:processes-names' command 'ps axho command'
 # 1. All /etc/hosts hostnames are in autocomplete
 # 2. If you have a comment in /etc/hosts like #%foobar.domain,
 #    then foobar.domain will show up in autocomplete!
-zstyle ':completion:*' hosts $(awk '/^[^#]/ {print $2 $3" "$4" "$5}' /etc/hosts | grep -v ip6- && grep "^#%" /etc/hosts | awk -F% '{print $2}')
+# zstyle ':completion:*' hosts $(awk '/^[^#]/ {print $2 $3" "$4" "$5}' /etc/hosts | grep -v ip6- && grep "^#%" /etc/hosts | awk -F% '{print $2}')
 # Filename suffixes to ignore during completion (except after rm command)
-zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' \
-    '*?.old' '*?.pro'
+# zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' '*?.old' '*?.pro'
 # the same for old style completion
-#fignore=(.o .c~ .old .pro)
+# fignore=(.o .c~ .old .pro)
 
 
 # ignore completion functions (until the _ignored completer)
@@ -264,7 +267,7 @@ zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' \
 #   users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
 #zstyle ':completion:*:ssh:*' group-order \
 #   hosts-domain hosts-host users hosts-ipaddr
-#zstyle '*' single-ignored show
+zstyle '*' single-ignored show
 
 export SSH_ENV=~/.ssh/start_agent
 function start_agent {
@@ -280,9 +283,12 @@ function start_agent {
 if [ -f "${SSH_ENV}" ]; then
   . "${SSH_ENV}" > /dev/null
   #ps ${SSH_AGENT_PID} doesn't work under cywgin
-  ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+  ps -eA | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
     start_agent;
   }
 else
   start_agent;
 fi
+
+# RVM Source
+[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm

@@ -69,9 +69,16 @@ if $TERM == 'xterm256-color'
 endif
 
 if has('gui_running')
-	colors warm_grey
-	set guifont=Inconsolata\ 16
-	set guioptions=aegimtT
+	"colors warm_grey
+	colors molokai
+	set guifont=Inconsolata\ 22
+	if has("gui_gtk2")
+		set guifont=Inconsolata\ 22
+		elseif has("gui_macvim")
+		set guifont=Inconsolata:h22
+	endif
+	set guioptions=agm
+	"set guioptions=aegimtT
 	set visualbell
 	set vb t_vb=
 else
@@ -134,7 +141,7 @@ imap <F4> <ESC>:w<CR>i
 " Netrw settings
 let g:netrw_winsize=80
 let g:netrw_liststyle=3
-let g:netrw_list_hide='.*\.o$'
+"let g:netrw_list_hide='.*\.o$'
 let g:netrw_browse_split=0
 
 " Open file browser
@@ -241,7 +248,7 @@ nnoremap <silent> <C-y> :tabnew<CR>:FufFile **/<CR>
 " Ignore whitespace in vimdiff
 set diffopt+=iwhite
 
-source ~/.vimrc_private
+"source ~/.vimrc_private
 
 let g:jekyll_path = "/home/adigiro/Dev/anthonydigirolamo.github.com"
 "map jn  :JekyllPost<CR>
