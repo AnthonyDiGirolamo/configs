@@ -45,22 +45,23 @@ RPS1="$PR_CYAN%2c$PR_NO_COLOR"
 #setopt promptsubst
 #prompt wunjo
 
-# Colors
-if [ "$TERM" != "dumb" ]; then
-	# MacOS
-	uname -a | grep -qs Darwin
-	if [ $? -eq 0 ]; then
-		alias ls='ls -G'
-		alias gvim=mvim
-		alias vim='TERM=xterm+256color /Applications/MacVim.app/Contents/MacOS/Vim'
-	else
-		# Linux
-		eval "`dircolors -b`"
-		alias ls='ls --color=auto'
-		alias vim='TERM=xterm+256color vim'
-		alias rm='mv --verbose -i --target-directory ~/.Trash/'
-		alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
-	fi
+# MacOS Specific Settings
+uname -a | grep -qs Darwin
+if [ $? -eq 0 ]; then
+	alias ls='ls -G'
+	alias gvim=mvim
+	alias vim='TERM=xterm+256color /Applications/MacVim.app/Contents/MacOS/Vim'
+
+	export PATH=/opt/local/bin:$PATH
+else
+	# Linux
+	eval "`dircolors -b`"
+	alias ls='ls --color=auto'
+
+	alias vim='TERM=xterm+256color vim'
+
+	alias rm='mv --verbose -i --target-directory ~/.Trash/'
+	alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
 fi
 
 # Aliases
@@ -75,8 +76,6 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias mutt='TERM=xterm-256color mutt'
-
-alias c='clear'
 
 alias gl='git log --pretty=oneline'
 alias gits='git status'
@@ -96,7 +95,6 @@ alias today='grep `date +%m/%d` ~/Notes/GTD.mkd'
 ### Variables
 export EDITOR=vim
 export PATH=$HOME/Preferences/bin:$PATH
-export PATH=/opt/local/bin:$PATH
 
 #export GDBASE_PREFIX=/home/adigiro/apps/gdbase
 #export PATH=$HOME/apps/gdbase/bin:$PATH
