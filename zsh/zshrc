@@ -18,43 +18,55 @@ done
 PR_NO_COLOR="%{$terminfo[sgr0]%}"
 
 # Prompt
+# ======
+
 # Standard Bash-Like
 # PS1="[$PR_BLUE%n$PR_GREEN@%m$PR_NO_COLOR:$PR_RED%2c$PR_NO_COLOR]$PR_WHITE%(!.#.$)$PR_NO_COLOR "
+
 # Super Minimalistic
-# PS1="$PR_WHITE%(!.#.$)$PR_NO_COLOR "
+PS1="$PR_GREEN%(!.#.$)$PR_NO_COLOR "
 
 # Right Justified Prompt
-# (Date Time)
+# ======================
+
+# Date Time
 # RPS1="$PR_BOLD_YELLOW(%D{%m-%d %H:%M})$PR_NO_COLOR"
+
 # Current Directory
-# RPS1="%2c"
+RPS1="$PR_CYAN%2c$PR_NO_COLOR"
 
 # Git-Aware Command prompt:
 #source ~/.zsh_prompt
 
 # Prompt Module/Plugin/Whatever
-autoload -U promptinit
-promptinit
-setopt promptsubst
-prompt wunjo
-
+#autoload -U promptinit
 # Run prompt -h for help
+#promptinit
+#setopt promptsubst
+#prompt wunjo
 
-# ls colors
+# Colors
 if [ "$TERM" != "dumb" ]; then
-	# Linux
-    #eval "`dircolors -b`"
-    alias ls='ls --color=auto'
 	# MacOS
-	alias ls='ls -G'
+	uname -a | grep -qs Darwin
+	if [ $? -eq 0 ]; then
+		alias ls='ls -G'
+		alias gvim=mvim
+		alias vim='TERM=xterm+256color /Applications/MacVim.app/Contents/MacOS/Vim'
+	else
+		# Linux
+		eval "`dircolors -b`"
+		alias ls='ls --color=auto'
+		alias vim='TERM=xterm+256color vim'
+		alias rm='mv --verbose -i --target-directory ~/.Trash/'
+		alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
+	fi
 fi
 
 # Aliases
 alias randmac="head /dev/urandom | openssl md5 | sed 's/\(..\)/\1:/g' | cut -c1-17"
 
 alias xdef='xrdb -load ~/.Xdefaults'
-#alias rm='mv --verbose -i --target-directory ~/.Trash/'
-#alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
 
 alias lltr='ll -tr'
 alias lla='ls -lhA'
@@ -77,8 +89,6 @@ alias h='history'
 alias du='du -hsc'
 alias df='df -hTP'
 
-alias g=mvim
-alias v='TERM=xterm+256color /Applications/MacVim.app/Contents/MacOS/Vim'
 alias t='vim ~/Notes/GTD.mkd'
 alias tg='gvim ~/Notes/GTD.mkd'
 alias today='grep `date +%m/%d` ~/Notes/GTD.mkd'
