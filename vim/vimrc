@@ -21,14 +21,12 @@ filetype plugin indent on
 augroup markdown
 au BufNewFile,BufRead *.mkd set ft=markdown.liquid
 au BufNewFile,BufRead *.mkd set syntax=markdown.liquid
-au BufNewFile,BufRead *.mkd set expandtab
-au BufNewFile,BufRead *.mkd set shiftwidth=2
-au BufNewFile,BufRead *.mkd set tabstop=2
+au BufNewFile,BufRead *.mkd set shiftwidth=3
+au BufNewFile,BufRead *.mkd set tabstop=3
 au BufNewFile,BufRead *.markdown set ft=markdown.liquid
 au BufNewFile,BufRead *.markdown set syntax=markdown.liquid
-au BufNewFile,BufRead *.markdown set expandtab
-au BufNewFile,BufRead *.markdown set shiftwidth=2
-au BufNewFile,BufRead *.markdown set tabstop=2
+au BufNewFile,BufRead *.markdown set shiftwidth=3
+au BufNewFile,BufRead *.markdown set tabstop=3
 augroup END
 
 "augroup htmlerb
@@ -51,11 +49,12 @@ set foldmethod=syntax
 set foldlevel=99
 
 set number            " line numbering
-set tabstop=4         " set tabs to 3 spaces
-set shiftwidth=4
+set tabstop=2         " set tabs to 2 spaces
+set shiftwidth=2
+set expandtab
 
 set linebreak         " wrap on words rather than characters
-set textwidth=75      " insert EOL after 75 columns
+set textwidth=80      " insert EOL after 75 columns
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -141,7 +140,7 @@ imap <F4> <ESC>:w<CR>i
 " Netrw settings
 let g:netrw_winsize=80
 let g:netrw_liststyle=3
-"let g:netrw_list_hide='.*\.o$'
+let g:netrw_list_hide='.*\.o$'
 let g:netrw_browse_split=0
 
 " Open file browser
