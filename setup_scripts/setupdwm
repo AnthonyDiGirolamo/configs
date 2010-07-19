@@ -1,5 +1,5 @@
 #!/bin/sh
-cd dmenu/dmenu-3.9/
+cd ../dmenu/dmenu-3.9/
 make
 cd ..
 rm -v dmenu dmenu_path dmenu_run

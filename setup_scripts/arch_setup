@@ -1,0 +1,29 @@
+#!/bin/sh
+uname -a | grep -qs i686
+if [[ $? -eq 0 ]]; then
+  ARCHITECTURE=i686
+else
+  ARCHITECTURE=x68_64
+fi
+
+echo "Server =
+http://mirrors.easynews.com/linux/archlinux/\$repo/os/${ARCHITECTURE}" >> /etc/pacman.d/mirrorlist
+
+pacman --noconfirm --sync --refresh
+pacman --noconfirm --sync screen zsh vim git-core ruby openssh
+pacman --noconfirm --sync gcc make autoconf automake libtool
+pacman --noconfirm --sync --clean
+
+cat >> /etc/ssh/sshd_config <<SSH
+Port 22
+Protocol 2
+RSAAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile	.ssh/authorized_keys
+PasswordAuthentication yes
+SSH
+
+echo 'sshd: ALL' >> /etc/hosts.allow
+sed -i 's/\(DAEMONS=(.*\))/\1 @sshd)/' /etc/rc.conf
+sed -i 's/\(HOSTNAME="\).*/\1Arch1"/' /etc/rc.conf
+

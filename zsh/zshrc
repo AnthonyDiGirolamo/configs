@@ -1,9 +1,9 @@
 #!/usr/bin/zsh
 
 # Sets the screen window title with the name of the command you are running
-# preexec () {
-# 	echo -ne "\ek${1%% *}\e\\"
-# }
+preexec () {
+	echo -ne "\ek${1%% *}\e\\"
+}
 
 # Set color variables with helpful names
 autoload colors zsh/terminfo

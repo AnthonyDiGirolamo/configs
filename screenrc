@@ -1,11 +1,11 @@
 # Key Bindings
 bind s # Disable freezing terminal command
+# bindkey -k k4 detach
+bindkey -k k4 copy
+bindkey -k k5 screen
+bindkey -k k6 title
 bindkey -k k7 prev
 bindkey -k k8 next
-bindkey -k k6 title
-bindkey -k k5 screen
-bindkey -k k4 copy
-# bindkey -k k4 detach
 
 # Arrow keys to switch terminals (only works with X)
 # Run cat > /dev/null to get key presses
@@ -14,9 +14,9 @@ bindkey -k k4 copy
 # bindkey ^[[1;7D prev
 # bindkey ^[[1;7C next
 
-# Alt + left/right
-bindkey ^[[1;3D prev
-bindkey ^[[1;3C next
+# Ctrl + left/right
+#bindkey ^[[D prev
+#bindkey ^[[C next
 
 # Colors in screenrc
 # ------------------
@@ -82,8 +82,8 @@ caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM"
 
 sorendition 04 43
 
-#shell /usr/bin/zsh
-shell /opt/local/bin/zsh
+shell /bin/zsh
+# shell /opt/local/bin/zsh
 defutf8 on
 altscreen on # Allow apps like vi to use the alt screen
 defscrollback 16384
