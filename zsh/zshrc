@@ -58,19 +58,22 @@ RPS1="$PR_CYAN%${PR_PWDLEN}<...<%~%<<$PR_NO_COLOR"
 #setopt promptsubst
 #prompt wunjo
 
+
 # MacOS Specific Settings
 uname -a | grep -qs Darwin
 if [ $? -eq 0 ]; then
-	alias ls='ls -G'
+	export PATH=/opt/local/bin:$PATH
+
+  # Use sudo port install coreutils +with_default_names
+  # to get the following to work in OSX
+  #eval "`/opt/local/bin/dircolors -b`"
+  alias ls='ls --color=auto'
 	alias gvim=mvim
 	alias vim='TERM=xterm+256color /Applications/MacVim.app/Contents/MacOS/Vim'
-
-	export PATH=/opt/local/bin:$PATH
 else
 	# Linux
-	eval "`dircolors -b`"
-	alias ls='ls --color=auto'
-
+  eval "`dircolors -b`"
+  alias ls='ls --color=auto'
 	alias vim='TERM=xterm+256color vim'
 
 	alias rm='mv --verbose -i --target-directory ~/.Trash/'
