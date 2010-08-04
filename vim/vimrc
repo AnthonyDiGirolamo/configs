@@ -23,25 +23,15 @@ au BufNewFile,BufRead *.mkd set ft=markdown.liquid
 au BufNewFile,BufRead *.mkd set syntax=markdown.liquid
 au BufNewFile,BufRead *.mkd set shiftwidth=3
 au BufNewFile,BufRead *.mkd set tabstop=3
-au BufNewFile,BufRead *.markdown set ft=markdown.liquid
-au BufNewFile,BufRead *.markdown set syntax=markdown.liquid
-au BufNewFile,BufRead *.markdown set shiftwidth=3
-au BufNewFile,BufRead *.markdown set tabstop=3
 augroup END
 
-"augroup htmlerb
-"au BufNewFile,BufRead *.html set ft=html.liquid
-"au BufNewFile,BufRead *.html set syntax=liquid
-"au BufNewFile,BufRead *.html set expandtab
-"au BufNewFile,BufRead *.html set shiftwidth=2
-"au BufNewFile,BufRead *.html set tabstop=2
-"au BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
-"au BufNewFile,BufRead *.html.erb set syntax=eruby
-"au BufNewFile,BufRead *.html.erb set expandtab
-"au BufNewFile,BufRead *.html.erb set shiftwidth=2
-"au BufNewFile,BufRead *.html.erb set tabstop=2
-"au BufNewFile,BufRead *.less set ft=css
-"augroup END
+augroup htmlerb
+au BufNewFile,BufRead *.html set ft=html.liquid
+au BufNewFile,BufRead *.html set syntax=liquid
+au BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
+au BufNewFile,BufRead *.html.erb set syntax=eruby
+au BufNewFile,BufRead *.less set ft=css
+augroup END
 
 set autoindent        " always set autoindenting on
 
@@ -70,10 +60,9 @@ endif
 if has('gui_running')
 	"colors warm_grey
 	colors molokai
-	set guifont=Inconsolata\ 22
 	if has("gui_gtk2")
 		set guifont=Inconsolata\ 22
-		elseif has("gui_macvim")
+  elseif has("gui_macvim")
 		set guifont=Inconsolata:h22
 	endif
 	set guioptions=agm
@@ -92,7 +81,7 @@ map <F9> :setlocal spell! spelllang=en_us<cr>
 imap <F9> <ESC>:setlocal spell! spelllang=en_us<cr>i
 
 " Thesaurus
-set thesaurus+=~/.vim/mthesaur-vim.txt.gz
+set thesaurus+=~/.vim/mthesaur-vim.txt
 " This will consider spaces and -'s as part of words in the thesaurus file
 " Really messes up syntax highlighting though
 " set iskeyword+=32,-
@@ -137,12 +126,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 map <F4> :w<CR>
 imap <F4> <ESC>:w<CR>i
 
-" Netrw settings
-let g:netrw_winsize=80
-let g:netrw_liststyle=3
-let g:netrw_list_hide='.*\.o$'
-let g:netrw_browse_split=0
-
 " Open file browser
 " map  <F2> :Vexplore<CR>
 " imap <F2> <ESC>:Vexplore<CR>
@@ -166,7 +149,7 @@ imap <F11> <ESC>gqip
 " map <F11> <ESC>{V}!fmt<CR>}
 " imap <F11> <ESC>{V}!fmt<CR>}
 
-" Map shift space to esc
+" Remap Esc
 imap jj <Esc>l
 "imap <M-Space> <Esc>
 "nnoremap <C-space> i
@@ -188,53 +171,52 @@ let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_classes_in_global = 1
 let g:rubycomplete_rails = 1
 
-
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
 
-" VIM as a GTD to-do list
-function! InsertDate(spaces)
-	let today = strftime("%m/%d")
-	let pattern = "\s*$"
-	let line = getline(".")
-
-	let repl = ""
-	for i in range(80-strlen(line)-strlen(today)-a:spaces)
-		let repl .= " "
-	endfor
-	let repl .= today
-
-	let newline = substitute(line, pattern, repl, "")
-	call setline(".", newline)
-endfunction
-
-function! RemoveTask()
-	:s/^\s*[\*-] \[ \] //
-	:s/\s*\d\d.\d\d$//
-endfunction
-
-function! NewTask()
-	:s/^\s*/\* \[ \] /
-	call InsertDate(0)
-endfunction
-
-function! SubTask()
-	:s/^\s*/\t- \[ \] /
-	call InsertDate(3)
-endfunction
-
-function! MarkDone()
-	try
-		:s/\[ \]/\[x\]/
-	catch
-		:s/\[x\]/\[ \]/
-	endtry
-endfunction
-
-nmap <silent> ;a :call NewTask()<CR>
-nmap <silent> ;s :call SubTask()<CR>
-nmap <silent> ;d :call MarkDone()<CR>
-nmap <silent> ;D :call RemoveTask()<CR>
+"" VIM as a GTD to-do list
+"function! InsertDate(spaces)
+"	let today = strftime("%m/%d")
+"	let pattern = "\s*$"
+"	let line = getline(".")
+"
+"	let repl = ""
+"	for i in range(80-strlen(line)-strlen(today)-a:spaces)
+"		let repl .= " "
+"	endfor
+"	let repl .= today
+"
+"	let newline = substitute(line, pattern, repl, "")
+"	call setline(".", newline)
+"endfunction
+"
+"function! RemoveTask()
+"	:s/^\s*[\*-] \[ \] //
+"	:s/\s*\d\d.\d\d$//
+"endfunction
+"
+"function! NewTask()
+"	:s/^\s*/\* \[ \] /
+"	call InsertDate(0)
+"endfunction
+"
+"function! SubTask()
+"	:s/^\s*/\t- \[ \] /
+"	call InsertDate(3)
+"endfunction
+"
+"function! MarkDone()
+"	try
+"		:s/\[ \]/\[x\]/
+"	catch
+"		:s/\[x\]/\[ \]/
+"	endtry
+"endfunction
+"
+"nmap <silent> ;a :call NewTask()<CR>
+"nmap <silent> ;s :call SubTask()<CR>
+"nmap <silent> ;d :call MarkDone()<CR>
+"nmap <silent> ;D :call RemoveTask()<CR>
 
 " Determine the color scheme name of whatever the cursor is under
 "map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
@@ -257,6 +239,11 @@ let g:user_zen_settings = { 'erb' : { 'extends' : 'html' } }
 let g:user_zen_expandabbr_key = '<c-e>'
 let g:use_zen_complete_tag = 1
 
+" Netrw settings
+let g:netrw_winsize=80
+let g:netrw_liststyle=3
+let g:netrw_list_hide='.*\.o$'
+let g:netrw_browse_split=0
 let Tlist_File_Fold_Auto_Close = 1
 "let Tlist_Show_One_File = 1
 let Tlist_Display_Tag_Scope = 0
@@ -267,3 +254,8 @@ let Tlist_Use_SingleClick = 0
 let Tlist_Sort_Type = "name"
 let Tlist_Enable_Fold_Column = 0
 let Tlist_File_Fold_Auto_Close = 1
+
+" Use :C to run a calculation, needs python support
+:command! -nargs=+ C :py print <args>
+:py from math import *
+

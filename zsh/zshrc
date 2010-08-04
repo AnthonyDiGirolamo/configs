@@ -70,11 +70,13 @@ if [ $? -eq 0 ]; then
   alias ls='ls --color=auto'
 	alias gvim=mvim
 	alias vim='TERM=xterm+256color /Applications/MacVim.app/Contents/MacOS/Vim'
+  export EDITOR='TERM=xterm+256color /Applications/MacVim.app/Contents/MacOS/Vim'
 else
 	# Linux
   eval "`dircolors -b`"
   alias ls='ls --color=auto'
-	alias vim='TERM=xterm+256color vim'
+	alias vim='TERM=xterm-256color vim'
+  export EDITOR=vim
 
 	alias rm='mv --verbose -i --target-directory ~/.Trash/'
 	alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
@@ -115,7 +117,6 @@ alias tg='gvim ~/Notes/GTD.mkd'
 alias today='grep `date +%m/%d` ~/Notes/GTD.mkd'
 
 ### Variables
-export EDITOR='TERM=xterm+256color vim'
 export PATH=$HOME/Preferences/bin:$PATH
 
 # Auth your sshkey with another server
