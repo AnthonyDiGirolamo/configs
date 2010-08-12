@@ -84,8 +84,9 @@ fi
 
 # Aliases
 
-#Rename files, replace space with _
-#zmv -Q "(**/)(* *)(D)" "\$1\${2// /_}"
+# Rename files recursively in the current dir and replace space with _
+autoload -U zmv
+alias space2under='zmv -Q "(**/)(* *)(D)" "\$1\${2// /_}"'
 
 alias grep='grep -i --color=auto'
 alias randmac="head /dev/urandom | openssl md5 | sed 's/\(..\)/\1:/g' | cut -c1-17"
@@ -270,30 +271,46 @@ _use_completion() {
 }
 compctl -K _use_completion use
 
-n() {
+# Completion Notes
+# ----------------
+# Case Insensitive with -M
+#   compctl -M 'm:{a-zA-Z}={A-Za-z}' -K function command
+# Replace tab completion text with results with -U
+#   compctl -U -K function command
+# Function Name begins with '_' use 'read -l'
+#   read -l query
+#   query=${query/gn /} # Delete 'gn ' from the query variable
+# Function Name does NOT begin with '_'
+#   echo $@
+#
+# if [[ -e $HOME/Notes/$@ ]]; then # Check file existence first
+# fi
+
+# Replacing / with \/ in the HOME variable so that sed can search for '/'
+# sed -e "s/${HOME//\//\\/}\/Notes\///"
+
+note_filename_completion() {
   reply=(`find -L $HOME/Notes | sed -e "s/${HOME//\//\\/}\/Notes\///"`)
-  if [[ -e $HOME/Notes/$@ ]]; then
-    vim $HOME/Notes/$@
-  fi
 }
-compctl -M 'm:{a-zA-Z}={A-Za-z}' -K n n
 
-gn() {
-  #read -l query
-  #query=${query/note /}
-  #echo ${query}
-  #echo $@
-  reply=(`grep -Iirl $@ $HOME/Notes | sed -e "s/${HOME//\//\\/}\/Notes\///"`)
-  #--exclude="*\.log" --exclude="*bz2" --exclude="*gz"
-  if [[ -e $HOME/Notes/$@ ]]; then
-    vim $HOME/Notes/$@
-  fi
+note_grep_completion() {
+  query=$@
+  print $((${#query} - 1))
+  reply=(`grep -Iirls --exclude="*\.log" --exclude="*bz2" --exclude="*gz" "$@" $HOME/Notes | sed -e "s/${HOME//\//\\/}\/Notes\///"`)
 }
-compctl -U -K gn gn
 
-copynote() {
+# Edit or Create Note
+n() {
+  vim $HOME/Notes/$@
+}
+
+# Copy Notes
+cn() {
   cat "$HOME/Notes/$@" | pbcopy
 }
+
+compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' n
+compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' cn
 
 # RVM Source
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
