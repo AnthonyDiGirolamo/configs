@@ -272,28 +272,27 @@ compctl -K _use_completion use
 
 n() {
   reply=(`find -L $HOME/Notes | sed -e "s/${HOME//\//\\/}\/Notes\///"`)
-  if [[ -e $@ ]]; then
+  if [[ -e $HOME/Notes/$@ ]]; then
     vim $HOME/Notes/$@
   fi
 }
 compctl -M 'm:{a-zA-Z}={A-Za-z}' -K n n
 
 gn() {
-  cd $HOME/Notes/
   #read -l query
   #query=${query/note /}
   #echo ${query}
   #echo $@
-  reply=(`grep -Iirl $@ .`)
+  reply=(`grep -Iirl $@ $HOME/Notes | sed -e "s/${HOME//\//\\/}\/Notes\///"`)
   #--exclude="*\.log" --exclude="*bz2" --exclude="*gz"
-  if [[ -e $@ ]]; then
+  if [[ -e $HOME/Notes/$@ ]]; then
     vim $HOME/Notes/$@
   fi
 }
 compctl -U -K gn gn
 
 copynote() {
-  cat "$HOME/Notes/$*" | pbcopy
+  cat "$HOME/Notes/$@" | pbcopy
 }
 
 # RVM Source
