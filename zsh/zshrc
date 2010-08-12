@@ -289,25 +289,23 @@ compctl -K _use_completion use
 # Replacing / with \/ in the HOME variable so that sed can search for '/'
 # sed -e "s/${HOME//\//\\/}\/Notes\///"
 
+# Getting the length of a variable and subtracting 1
+# query=$@
+# print $((${#query} - 1))
+
 note_filename_completion() {
   reply=(`find -L $HOME/Notes | sed -e "s/${HOME//\//\\/}\/Notes\///"`)
 }
 
 note_grep_completion() {
-  query=$@
-  print $((${#query} - 1))
   reply=(`grep -Iirls --exclude="*\.log" --exclude="*bz2" --exclude="*gz" "$@" $HOME/Notes | sed -e "s/${HOME//\//\\/}\/Notes\///"`)
 }
 
 # Edit or Create Note
-n() {
-  vim $HOME/Notes/$@
-}
+n() { vim $HOME/Notes/$@ }
 
 # Copy Notes
-cn() {
-  cat "$HOME/Notes/$@" | pbcopy
-}
+cn() { cat "$HOME/Notes/$@" | pbcopy }
 
 compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' n
 compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' cn
