@@ -84,6 +84,10 @@ fi
 
 # Aliases
 
+#Rename files, replace space with _
+#zmv -Q "(**/)(* *)(D)" "\$1\${2// /_}"
+
+alias grep='grep -i --color=auto'
 alias randmac="head /dev/urandom | openssl md5 | sed 's/\(..\)/\1:/g' | cut -c1-17"
 
 alias xdef='xrdb -load ~/.Xdefaults'
@@ -112,9 +116,12 @@ alias h='history 1'
 alias du='du -hsc'
 alias df='df -hTP'
 
-alias t='vim ~/Notes/GTD.mkd'
-alias tg='gvim ~/Notes/GTD.mkd'
-alias today='grep `date +%m/%d` ~/Notes/GTD.mkd'
+# GTD Stuff
+# alias t='vim ~/Notes/GTD.mkd'
+# alias tg='gvim ~/Notes/GTD.mkd'
+# alias today='grep `date +%m/%d` ~/Notes/GTD.mkd'
+
+alias cjob='qsub -l walltime=08:00:00 -l nodes=1:ppn=8 -N compiling -j oe -I'
 
 ### Variables
 export PATH=$HOME/Preferences/bin:$PATH
@@ -231,28 +238,60 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:*:kill:*:processes' command 'ps -A' # 'ps --forest -A -o pid,user,cmd'
 #zstyle ':completion:*:processes-names' command 'ps axho command'
 
+zstyle ':completion:*:*:use:*:packages' command  # 'ps --forest -A -o pid,user,cmd'
+
 zstyle '*' single-ignored show
 
-export SSH_ENV=~/.ssh/start_agent
-function start_agent {
-  echo "Initializing new SSH agent..."
-  /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-  echo succeeded
-  chmod 600 "${SSH_ENV}"
-  . "${SSH_ENV}" > /dev/null
-  /usr/bin/ssh-add;
-}
+# # SSH AGENT
+# export SSH_ENV=~/.ssh/start_agent
+# function start_agent {
+#   echo "Initializing new SSH agent..."
+#   /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+#   echo succeeded
+#   chmod 600 "${SSH_ENV}"
+#   . "${SSH_ENV}" > /dev/null
+#   /usr/bin/ssh-add;
+# }
+# # Source SSH settings, if applicable
+# if [ -f "${SSH_ENV}" ]; then
+#   . "${SSH_ENV}" > /dev/null
+#   #ps ${SSH_AGENT_PID} doesn't work under cywgin
+#   ps -eA | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+#     start_agent;
+#   }
+# else
+#   start_agent;
+# fi
 
-# Source SSH settings, if applicable
-if [ -f "${SSH_ENV}" ]; then
-  . "${SSH_ENV}" > /dev/null
-  #ps ${SSH_AGENT_PID} doesn't work under cywgin
-  ps -eA | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-    start_agent;
-  }
-else
-  start_agent;
-fi
+# Custom Completion Functions
+
+_use_completion() {
+  reply=(`/packages/usepackage-1.8/bin/usepackage -l 2>&1 | sed -e '/^\S/      d' -e '/^$/d' -e 's/^   //g' -e 's/\s-\s.*//g'`)
+}
+compctl -K _use_completion use
+
+n() {
+  reply=(`find -L $HOME/Notes | sed -e "s/${HOME//\//\\/}\/Notes\///"`)
+  if [[ -e $@ ]]; then
+    vim $HOME/Notes/$@
+  fi
+}
+compctl -M 'm:{a-zA-Z}={A-Za-z}' -K n n
+
+gn() {
+  #local query
+  #read -l query
+  #query=${query/note /}
+  #echo ${query}
+  #echo $@
+  reply=(`grep -Iirl $@ $HOME/Notes/`)
+  #--exclude="*\.log" --exclude="*bz2" --exclude="*gz"
+}
+compctl -K gn gn
+
+copynote() {
+  cat "$HOME/Notes/$*" | pbcopy
+}
 
 # RVM Source
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
