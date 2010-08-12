@@ -279,15 +279,18 @@ n() {
 compctl -M 'm:{a-zA-Z}={A-Za-z}' -K n n
 
 gn() {
-  #local query
+  cd $HOME/Notes/
   #read -l query
   #query=${query/note /}
   #echo ${query}
   #echo $@
-  reply=(`grep -Iirl $@ $HOME/Notes/`)
+  reply=(`grep -Iirl $@ .`)
   #--exclude="*\.log" --exclude="*bz2" --exclude="*gz"
+  if [[ -e $@ ]]; then
+    vim $HOME/Notes/$@
+  fi
 }
-compctl -K gn gn
+compctl -U -K gn gn
 
 copynote() {
   cat "$HOME/Notes/$*" | pbcopy
