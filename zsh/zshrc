@@ -1,72 +1,79 @@
 #!/usr/bin/zsh
 
+# Emacs Mode
+bindkey -e
+# VI Mode
+# bindkey -v
+
+setopt auto_pushd
+setopt menucomplete
+setopt inc_append_history append_history share_history
+setopt hist_ignore_dups hist_ignore_all_dups
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zhistory
+
+# Ubuntu Linux LS_COLORS
+MY_LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.svgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:';
+
+# # SSH AGENT
+# export SSH_ENV=~/.ssh/start_agent
+# function start_agent {
+#   echo "Initializing new SSH agent..."
+#   /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+#   echo succeeded
+#   chmod 600 "${SSH_ENV}"
+#   . "${SSH_ENV}" > /dev/null
+#   /usr/bin/ssh-add;
+# }
+# # Source SSH settings, if applicable
+# if [ -f "${SSH_ENV}" ]; then
+#   . "${SSH_ENV}" > /dev/null
+#   #ps ${SSH_AGENT_PID} doesn't work under cywgin
+#   ps -eA | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+#     start_agent;
+#   }
+# else
+#   start_agent;
+# fi
+
 # Sets the screen window title with the name of the command you are running
-preexec () {
-	echo -ne "\ek${1%% *}\e\\"
-}
+preexec () { echo -ne "\ek${1%% *}\e\\" }
 
 # Set color variables with helpful names
-autoload colors zsh/terminfo
-if [[ "$terminfo[colors]" -ge 8 ]]; then
-	colors
-fi
-for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
-	eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
-	eval PR_BOLD_$color='%{$fg[${(L)color}]%}'
-	(( count = $count + 1 ))
-done
-PR_NO_COLOR="%{$terminfo[sgr0]%}"
 
 # Prompt
 # ======
+setopt promptsubst
+autoload -U promptinit && promptinit
+# Run prompt -h for help # prompt wunjo for git aware
 
-# Standard Bash-Like
-# PS1="[$PR_BLUE%n$PR_GREEN@%m$PR_NO_COLOR:$PR_RED%2c$PR_NO_COLOR]$PR_WHITE%(!.#.$)$PR_NO_COLOR "
-
+autoload -U colors zsh/terminfo && colors
 # Super Minimalistic
-PS1="$PR_GREEN%(!.#.$)$PR_NO_COLOR "
+PS1="%{$fg_bold[green]%}%(!.#.$)%{$reset_color%} "
 
 # Right Justified Prompt
 # ======================
-
 # Date Time
-# RPS1="$PR_BOLD_YELLOW(%D{%m-%d %H:%M})$PR_NO_COLOR"
-
+#RPS1="(%D{%m-%d %H:%M})"
 # Current Directory
-
-# The following 9 lines of code comes directly from Phil!'s ZSH prompt
-# http://aperiodic.net/phil/prompt/
 local TERMWIDTH
 (( TERMWIDTH = ${COLUMNS} - 1 ))
-
 local PROMPTSIZE=${#${(%):--- %D{%R.%S %a %b %d %Y}\! }}
 local PWDSIZE=${#${(%):-%~}}
-
 if [[ "$PROMPTSIZE + $PWDSIZE" -gt $TERMWIDTH ]]; then
   (( PR_PWDLEN = $TERMWIDTH - $PROMPTSIZE ))
 fi
-
-RPS1="$PR_CYAN%${PR_PWDLEN}<...<%~%<<$PR_NO_COLOR"
-
-# Git-Aware Command prompt:
-#source ~/.zsh_prompt
-
-# Prompt Module/Plugin/Whatever
-#autoload -U promptinit
-# Run prompt -h for help
-#promptinit
-#setopt promptsubst
-#prompt wunjo
-
+RPS1="%{$fg_bold[cyan]%}%${PR_PWDLEN}<...<%~%<<%{$reset_color%}"
 
 # MacOS Specific Settings
 uname -a | grep -qs Darwin
 if [ $? -eq 0 ]; then
 	export PATH=/opt/local/bin:$PATH
-  # Use sudo port install coreutils +with_default_names
+  # sudo port install coreutils +with_default_names
   # to get the following to work in OSX
-  #eval "`/opt/local/bin/dircolors -b`"
-  export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.svgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:';
+  # eval "`/opt/local/bin/dircolors -b`"
+  export LS_COLORS=$MY_LS_COLORS
   alias ls='ls --color=auto'
 	alias gvim=mvim
 	alias vim='TERM=xterm+256color /Applications/MacVim.app/Contents/MacOS/Vim'
@@ -105,7 +112,7 @@ alias gl='git log'
 alias gll='git log --pretty=oneline'
 alias gs='git status'
 alias gc='git commit'
-alias gca='git commit -a'
+alias gca='git commit -av'
 alias gd='git diff'
 
 alias d='dirs -v'
@@ -135,20 +142,6 @@ function authme {
 function setupenv {
 	rsync -avLK --delete --exclude mthesaur-vim.txt .vim .vimrc .zsh .zsh_prompt .zshenv .zshrc .screenrc $@:~/
 }
-
-# Emacs Mode
-bindkey -e
-# VI Mode
-# bindkey -v
-
-setopt auto_pushd
-setopt MENUCOMPLETE
-
-setopt INC_APPEND_HISTORY APPEND_HISTORY SHARE_HISTORY
-setopt HIST_IGNORE_DUPS HIST_IGNORE_ALL_DUPS
-HISTSIZE=10000
-SAVEHIST=10000
-HISTFILE=~/.zhistory
 
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
@@ -195,79 +188,39 @@ unset k
 # [[ -n ${key[Down]}      ]] && bindkey "${key[Down]}"      down-line-or-search
 # [[ -n ${key[Right]}     ]] && bindkey "${key[Right]}"     forward-char
 
-# Auto Complete Plugin
-autoload -U compinit
+# Completion
+
+# The following lines were added by compinstall
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' insert-unambiguous false
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'l:|=* r:|=*'
+zstyle ':completion:*' menu select=1
+zstyle ':completion:*' original true
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle :compinstall filename '/Users/adigiro/.zshrc'
+
+autoload -Uz compinit
 compinit
+# End of lines added by compinstall
 
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 
-# Ubuntu Linux LS_COLORS
-LINUX_LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.svgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:';
+zstyle ':completion:*' list-colors ${(s.:.)MY_LS_COLORS}
 
-zstyle ':completion:*' list-colors ${(s.:.)LINUX_LS_COLORS}
-zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
-zstyle ':completion:*' menu select=1 _complete _ignored _approximate
-zstyle -e ':completion:*:approximate:*' max-errors \
-    'reply=( $(( ($#PREFIX+$#SUFFIX)/2 )) numeric )'
-zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-
-# list of completers to use
-zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
 # allow one error for every three characters typed in approximate completer
-zstyle -e ':completion:*:approximate:*' max-errors 'reply=( $(( ($#PREFIX+$#SUFFIX)/2 )) numeric )'
-
-# insert all expansions for expand completer
-zstyle ':completion:*:expand:*' tag-order all-expansions
-
-# formatting and messages
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format '%B%d%b'
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format 'No matches for: %d'
-zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
-zstyle ':completion:*' group-name ''
-
-# match uppercase from lowercase
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-# offer indexes before parameters in subscripts
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+zstyle -e ':completion:*' max-errors 'reply=( $(( ($#PREFIX+$#SUFFIX)/2 )) numeric )'
 
 # kill completion
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-#zstyle ':completion:*:processes' command 'ps ax -o pid,s,nice,stime,args | sed "/ps/d"'
 zstyle ':completion:*:*:kill:*:processes' command 'ps -A' # 'ps --forest -A -o pid,user,cmd'
-#zstyle ':completion:*:processes-names' command 'ps axho command'
-
-zstyle ':completion:*:*:use:*:packages' command  # 'ps --forest -A -o pid,user,cmd'
-
-zstyle '*' single-ignored show
-
-# # SSH AGENT
-# export SSH_ENV=~/.ssh/start_agent
-# function start_agent {
-#   echo "Initializing new SSH agent..."
-#   /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-#   echo succeeded
-#   chmod 600 "${SSH_ENV}"
-#   . "${SSH_ENV}" > /dev/null
-#   /usr/bin/ssh-add;
-# }
-# # Source SSH settings, if applicable
-# if [ -f "${SSH_ENV}" ]; then
-#   . "${SSH_ENV}" > /dev/null
-#   #ps ${SSH_AGENT_PID} doesn't work under cywgin
-#   ps -eA | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-#     start_agent;
-#   }
-# else
-#   start_agent;
-# fi
 
 # Custom Completion Functions
 
 _use_completion() {
-  reply=(`/packages/usepackage-1.8/bin/usepackage -l 2>&1 | sed -e '/^\S/      d' -e '/^$/d' -e 's/^   //g' -e 's/\s-\s.*//g'`)
+  if [[ -e /packages/usepackage-1.8/bin/usepackage ]]; then
+    reply=(`/packages/usepackage-1.8/bin/usepackage -l 2>&1 | sed -e '/^\S/      d' -e '/^$/d' -e 's/^   //g' -e 's/\s-\s.*//g'`)
+  fi
 }
 compctl -K _use_completion use
 
@@ -293,19 +246,20 @@ compctl -K _use_completion use
 # query=$@
 # print $((${#query} - 1))
 
-note_filename_completion() {
-  reply=(`find -L $HOME/Notes | sed -e "s/${HOME//\//\\/}\/Notes\///"`)
-}
+note_directory=$HOME/Notes
+note_directory_escaped=${note_directory//\//\\/}\\\/
 
+note_filename_completion() {
+  reply=(`find -L $note_directory | sed -e "s/$note_directory_escaped//"`)
+}
 note_grep_completion() {
-  reply=(`grep -Iirls --exclude="*\.log" --exclude="*bz2" --exclude="*gz" "$@" $HOME/Notes | sed -e "s/${HOME//\//\\/}\/Notes\///"`)
+  reply=(`grep -Iirls --exclude="*\.log" --exclude="*bz2" --exclude="*gz" "$@" $note_directory | sed -e "s/$note_directory_escaped//"`)
 }
 
 # Edit or Create Note
-n() { vim $HOME/Notes/$@ }
-
+n() { vim $note_directory/$@ }
 # Copy Notes
-cn() { cat "$HOME/Notes/$@" | pbcopy }
+cn() { cat "$note_directory/$@" | pbcopy }
 
 compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' n
 compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' cn
