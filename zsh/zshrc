@@ -1,5 +1,14 @@
 #!/usr/bin/zsh
 
+fpath=($HOME/.zsh/func $fpath)
+typeset -U fpath
+
+r() {
+  local f; f=($HOME/.zsh/func/*(.))
+  unfunction $f:t 2> /dev/null
+  autoload -U $f:t
+}
+
 # Emacs Mode
 bindkey -e
 # VI Mode
@@ -202,6 +211,12 @@ zstyle :compinstall filename '/Users/adigiro/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*' group-name ''
 
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
