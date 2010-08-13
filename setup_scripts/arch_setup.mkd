@@ -15,7 +15,7 @@ Packages
 * Uncomment some mirrors in /etc/pacman.d/mirrorlist
 
     pacman --noconfirm --sync --refresh
-    pacman --noconfirm --sync screen zsh gvim git-core ruby openssh gcc gdb make autoconf automake libtool kernel26-headers sudo
+    pacman --noconfirm --sync screen zsh gvim git-core ruby openssh gcc gdb make autoconf automake libtool sudo ctags rsync
 
 * Search: `pacman -Ss search_package`
 * System Upgrade: `pacman -Syu`
@@ -24,7 +24,7 @@ Packages
 Suspend/Resume
 --------------
 
-    pacman -S acpi acpid
+    pacman -S acpi acpid acpitool
     modprobe thinkpad_acpi
     pm-suspend
 
@@ -83,7 +83,20 @@ Gnome
 
 * Add hal and fam to daemons in rc.conf
 
-* `echo "exec gnome-session" >> .xinitrc`
+* `echo "exec ck-launch-session gnome-session" >> .xinitrc`
+
+* Sound and Disks
+
+    sudo pacman -S alsa-utils alsa-oss ntfs-3g
+    gpasswd -a adigiro audio
+    gpasswd -a adigiro optical
+    gpasswd -a adigiro storage
+    gpasswd -a adigiro power
+
+* Themes
+
+    sudo pacman -S gtk-engine-murrine
+    sudo ./packer/packer -S --noedit gnome-colors-icon-theme gtk-theme-murrine-unity gnome-colors-icon-theme-extras gtk-theme-shiki-colors-murrine gtk-theme-shiki-colors-flat
 
 Fonts
 -----
@@ -98,8 +111,16 @@ Fonts
 Xorg
 ----
 
-    pacman -S pacman -S xf86-video-nouveau nouveau-dri
+    pacman -S pacman -S xf86-video-nouveau nouveau-dri gsynaptics
     echo 'Section "Device" \
       Identifier "nvidia" \
       Driver     "nouveau" \
     EndSection' >> /etc/X11/xorg.conf.d/20-nouveau
+
+Wine
+----
+
+    sudo pacman -S wine linux32 lib32-gcc lib32-glibc lib32-libxi lib32-zlib
+    lib32-libsm
+
+
