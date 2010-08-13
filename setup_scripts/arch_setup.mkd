@@ -1,0 +1,105 @@
+Install
+-------
+
+    aif -p interactive
+    aif -p automatic -c /usr/share/aif/examples/generic-install-on-sda
+
+Hardware
+--------
+
+    hwdetect --modules >> /etc/rc.conf
+
+Packages
+--------
+
+* Uncomment some mirrors in /etc/pacman.d/mirrorlist
+
+    pacman --noconfirm --sync --refresh
+    pacman --noconfirm --sync screen zsh gvim git-core ruby openssh gcc gdb make autoconf automake libtool kernel26-headers sudo
+
+* Search: `pacman -Ss search_package`
+* System Upgrade: `pacman -Syu`
+* Clean cache: `pacman --noconfirm --sync --clean`
+
+Suspend/Resume
+--------------
+
+    pacman -S acpi acpid
+    modprobe thinkpad_acpi
+    pm-suspend
+
+Thinkpad Battery
+----------------
+
+    sudo ./packer/packer -S hdapsd tp_smapi
+    modprobe tp_smapi
+
+SSH Server
+----------
+
+    cat >> /etc/ssh/sshd_config <<SSH
+    Port 22
+    Protocol 2
+    RSAAuthentication yes
+    PubkeyAuthentication yes
+    AuthorizedKeysFile	.ssh/authorized_keys
+    PasswordAuthentication yes
+    echo 'sshd: ALL' >> /etc/hosts.allow
+    sed -i 's/\(DAEMONS=(.*\))/\1 @sshd)/' /etc/rc.conf
+    sed -i 's/\(HOSTNAME="\).*/\1Arch1"/' /etc/rc.conf
+
+Wireless
+--------
+
+    depmod
+    modprobe iwl3945
+    ifconfig wlan0 up
+    # iwlist wlan0 scan
+    # wpa_passphrase ssid "password" >> /etc/wpa_supplicant.conf
+    wpa_supplicant -D wext -i wlan0 -c /etc/wpa_supplicant.conf -B
+    dhcpcd wlan0
+
+Example `/etc/wpa_supplicant.conf` file for WPA2-Personal
+
+    ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel
+    network={
+        ssid="ne35bosh"
+        proto=RSN
+        key_mgmt=WPA-PSK
+        pairwise=CCMP TKIP
+        group=CCMP TKIP
+    }
+
+Arch User Repository
+--------------------
+
+    git clone git://github.com/bruenig/packer.git
+    sudo ./packer -S freetype2-infinality
+
+Gnome
+-----
+
+* Install: `pacman -S xorg gnome gnome-extra dbus hal fam`
+
+* Add hal and fam to daemons in rc.conf
+
+* `echo "exec gnome-session" >> .xinitrc`
+
+Fonts
+-----
+
+    sudo pacman -S ttf-ms-fonts ttf-liberation ttf-dejavu terminus-font ttf-inconsolata
+    sudo pacman -S fontconfig freetype2 cairo libxft
+    sudo ./packer -S freetype2-infinality
+    cd /etc/fonts/conf.d
+    sudo ln -s ../conf.avail/10-autohint.conf
+    sudo ln -s ../conf.avail/10-sub-pixel-rgb.conf
+
+Xorg
+----
+
+    pacman -S pacman -S xf86-video-nouveau nouveau-dri
+    echo 'Section "Device" \
+      Identifier "nvidia" \
+      Driver     "nouveau" \
+    EndSection' >> /etc/X11/xorg.conf.d/20-nouveau

@@ -10,7 +10,7 @@
 !Xft.hintstyle: hintslight
 
 xterm*faceName: Inconsolata
-xterm*faceSize: 17
+xterm*faceSize: 15
 
 !xterm*faceName: Terminus:pixelsize=17
 

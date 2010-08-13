@@ -92,7 +92,7 @@ else
   eval "`dircolors -b`"
   alias ls='ls --color=auto'
 	alias vim='TERM=xterm-256color vim'
-  export EDITOR=vim
+  export EDITOR='TERM=xterm-256color vim'
 
 	alias rm='mv --verbose -i --target-directory ~/.Trash/'
 	alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
