@@ -53,6 +53,11 @@ Wireless
 
     depmod
     modprobe iwl3945
+
+Wireless Startup Script
+
+    killall wpa_supplicant
+    killall dhcpcd
     ifconfig wlan0 up
     # iwlist wlan0 scan
     # wpa_passphrase ssid "password" >> /etc/wpa_supplicant.conf
@@ -113,16 +118,37 @@ Fonts
 Xorg
 ----
 
-    pacman -S pacman -S xf86-video-nouveau nouveau-dri gsynaptics
+    sudo pacman -S gsynaptics
+
+Nouveau Enable
+
+    sudo pacman -S xf86-video-nouveau nouveau-dri
     echo 'Section "Device" \
       Identifier "nvidia" \
       Driver     "nouveau" \
     EndSection' >> /etc/X11/xorg.conf.d/20-nouveau
+
+Nouveau Disable
+
+    sudo pacman -R xf86-video-nouveau nouveau-dri
+
+    #!/bin/sh
+    echo 0 > /sys/class/vtconsole/vtcon1/bind
+    rmmod nouveau
+    /etc/init.d/consolefont restart
+    rmmod ttm
+    rmmod drm_kms_helper
+    rmmod drm
+
+    modeset=0 on the kernel boot line in grub menu.lst
+
+Nvidia Driver
+
+    sudo pacman -S nvidia nvidia-utils
 
 Wine
 ----
 
     sudo pacman -S wine linux32 lib32-gcc lib32-glibc lib32-libxi lib32-zlib
     lib32-libsm
-
 
