@@ -15,7 +15,7 @@ Packages
 * Uncomment some mirrors in /etc/pacman.d/mirrorlist
 
     pacman --noconfirm --sync --refresh
-    pacman --noconfirm --sync screen zsh gvim git-core ruby openssh gcc gdb make autoconf automake libtool sudo ctags rsync
+    pacman --noconfirm --sync screen zsh gvim git-core ruby openssh gcc gdb make autoconf automake libtool sudo ctags rsync p7zip unzip truecrypt
 
 * Search: `pacman -Ss search_package`
 * System Upgrade: `pacman -Syu`
@@ -74,7 +74,8 @@ Arch User Repository
 --------------------
 
     git clone git://github.com/bruenig/packer.git
-    sudo ./packer -S freetype2-infinality
+    sudo ./packer -S --noedit freetype2-infinality
+    sudo ./packer -S --noedit nautilus-dropbox
 
 Gnome
 -----
@@ -96,7 +97,8 @@ Gnome
 * Themes
 
     sudo pacman -S gtk-engine-murrine
-    sudo ./packer/packer -S --noedit gnome-colors-icon-theme gtk-theme-murrine-unity gnome-colors-icon-theme-extras gtk-theme-shiki-colors-murrine gtk-theme-shiki-colors-flat
+    sudo ./packer/packer -S --noedit --noconfirm gnome-colors-icon-theme gtk-theme-murrine-unity gnome-colors-icon-theme-extras gtk-theme-shiki-colors-murrine gtk-theme-shiki-colors-flat
+    sudo ./apps/packer/packer -S --noedit --noconfirm ubuntu-mono parcellite-ubuntu-mono-icon gtk-theme-equinox-radiance
 
 Fonts
 -----
