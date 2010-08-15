@@ -149,6 +149,5 @@ Nvidia Driver
 Wine
 ----
 
-    sudo pacman -S wine linux32 lib32-gcc lib32-glibc lib32-libxi lib32-zlib
-    lib32-libsm
+    sudo pacman -S wine linux32 lib32-gcc lib32-glibc lib32-libxi lib32-zlib lib32-libsm lib32-openal lib32-libxml2 lib32-mpg123
 
