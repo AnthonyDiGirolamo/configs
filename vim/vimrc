@@ -235,27 +235,30 @@ let g:jekyll_path = "/home/adigiro/Dev/anthonydigirolamo.github.com"
 "map jn  :JekyllPost<CR>
 "map jl  :JekyllList<CR>
 
-let g:user_zen_settings = { 'erb' : { 'extends' : 'html' } }
+let g:user_zen_settings       = { 'erb' : { 'extends' : 'html' } }
 let g:user_zen_expandabbr_key = '<c-e>'
-let g:use_zen_complete_tag = 1
+let g:use_zen_complete_tag    = 1
 
 " Netrw settings
-let g:netrw_winsize=80
-let g:netrw_liststyle=3
-let g:netrw_list_hide='.*\.o$'
-let g:netrw_browse_split=0
-let Tlist_File_Fold_Auto_Close = 1
-"let Tlist_Show_One_File = 1
-let Tlist_Display_Tag_Scope = 0
-let Tlist_Auto_Update = 1
+let g:netrw_winsize               = 80
+let g:netrw_liststyle             = 3
+let g:netrw_list_hide             = '.*\.o$'
+let g:netrw_browse_split          = 0
+let Tlist_File_Fold_Auto_Close    = 1
+"let Tlist_Show_One_File          = 1
+let Tlist_Display_Tag_Scope       = 0
+let Tlist_Auto_Update             = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_Use_SingleClick = 0
-let Tlist_Sort_Type = "name"
-let Tlist_Enable_Fold_Column = 0
-let Tlist_File_Fold_Auto_Close = 1
+let Tlist_Use_Right_Window        = 1
+let Tlist_Use_SingleClick         = 0
+let Tlist_Sort_Type               = "name"
+let Tlist_Enable_Fold_Column      = 0
+let Tlist_File_Fold_Auto_Close    = 1
 
 " Use :C to run a calculation, needs python support
 :command! -nargs=+ C :py print <args>
 :py from math import *
+
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
