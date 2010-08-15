@@ -24,7 +24,6 @@ FILE=rdebugrc                ; rmln
 FILE=vimperator/vimperatorrc ; rmln
 FILE=vimperator/vimperator   ; rmln
 
-FILE=vim/gvimrc              ; rmln
 FILE=vim/vimrc               ; rmln
 FILE=vim/vim                 ; rmln
 

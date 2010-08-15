@@ -61,7 +61,7 @@ if has('gui_running')
 	"colors warm_grey
 	colors molokai
 	if has("gui_gtk2")
-		set guifont=Inconsolata\ 22
+		set guifont=Inconsolata\ 14
   elseif has("gui_macvim")
 		set guifont=Inconsolata:h22
 	endif
