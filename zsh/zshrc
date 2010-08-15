@@ -277,7 +277,8 @@ n() { vim $note_directory/$@ }
 cn() { cat "$note_directory/$@" | pbcopy }
 
 compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' n
-compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' cn
+compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' gn
 
 # RVM Source
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
