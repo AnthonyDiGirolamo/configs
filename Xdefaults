@@ -3,11 +3,11 @@
 ! dpi: 110 size 18
 ! dpi: 115 size 15
 
-!Xft.dpi: 115
-!Xft.antialias: 1
-!Xft.rgba: rgb
-!Xft.hinting: 1
-!Xft.hintstyle: hintslight
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
 
 xterm*faceName: Inconsolata
 xterm*faceSize: 17
