@@ -1,3 +1,8 @@
+" Load Pathogen
+filetype off
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -262,7 +267,4 @@ let Tlist_File_Fold_Auto_Close    = 1
 " Use :C to run a calculation, needs python support
 :command! -nargs=+ C :py print <args>
 :py from math import *
-
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
 
