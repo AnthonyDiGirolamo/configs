@@ -168,8 +168,9 @@ map T :Texplore<CR>
 map Y :Explore<CR>
 
 " Alt-C and V copy and paste to and from the system clipboard
-map <M-c> "+y
-map <M-v> "+p
+map <M-c> "*y
+map <M-v> "*p
+
 
 " Trying to get better syntax highlighting for python
 autocmd FileType python set complete+=k~/.vim/syntax/python.vim isk+=.,(
