@@ -26,12 +26,12 @@ filetype plugin indent on
 augroup markdown
 au BufNewFile,BufRead *.mkd set ft=markdown.liquid
 au BufNewFile,BufRead *.mkd set syntax=markdown.liquid
-au BufNewFile,BufRead *.mkd set shiftwidth=3
-au BufNewFile,BufRead *.mkd set tabstop=3
+au BufNewFile,BufRead *.mkd set shiftwidth=4
+au BufNewFile,BufRead *.mkd set tabstop=4
 au BufNewFile,BufRead *.markdown set ft=markdown.liquid
 au BufNewFile,BufRead *.markdown set syntax=markdown.liquid
-au BufNewFile,BufRead *.markdown set shiftwidth=3
-au BufNewFile,BufRead *.markdown set tabstop=3
+au BufNewFile,BufRead *.markdown set shiftwidth=4
+au BufNewFile,BufRead *.markdown set tabstop=4
 augroup END
 
 augroup htmlerb
