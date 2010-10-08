@@ -128,6 +128,10 @@ function! TrimWhiteSpace()
 map <silent> <F3>  :call TrimWhiteSpace()<CR>
 imap <silent> <F3> <ESC>:call TrimWhiteSpace()<CR>i
 
+function! SUpload()
+:!rsync -av % saguaro2.fulton.asu.edu:~/downloads/
+:endfunction
+
 " Clear trailing whitespace before a save
 autocmd BufWritePre * :%s/\s\+$//e
 
