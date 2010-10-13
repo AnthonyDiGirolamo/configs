@@ -28,12 +28,6 @@ Suspend/Resume
     modprobe thinkpad_acpi
     pm-suspend
 
-Thinkpad Battery
-----------------
-
-    sudo ./packer/packer -S hdapsd tp_smapi
-    modprobe tp_smapi
-
 SSH Server
 ----------
 
@@ -81,6 +75,13 @@ Arch User Repository
     git clone git://github.com/bruenig/packer.git
     sudo ./packer -S --noedit freetype2-infinality
     sudo ./packer -S --noedit nautilus-dropbox
+    sudo ~/apps/packer/packer -S chromium-browser-ppa chromium-browser-inspector-ppa chromium-browser-l10n-ppa chromium-codecs-ffmpeg-extra-ppa --noconfirm --noedit
+
+Thinkpad Battery
+----------------
+
+    sudo ./packer/packer -S hdapsd tp_smapi
+    modprobe tp_smapi
 
 Gnome
 -----

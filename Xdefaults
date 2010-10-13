@@ -22,12 +22,12 @@ xterm*background: black
 xterm*foreground: gray
 xterm*utf8: 1
 
-xterm*colorMode:		on
-xterm*colorBD:			lightyellow
-xterm*colorBDMode:		on
-xterm*colorUL:			yellow
-xterm*colorULMode:		on
-xterm*highlightSelection:	true
+xterm*colorMode:          on
+xterm*colorBD:            lightyellow
+xterm*colorBDMode:        on
+xterm*colorUL:            yellow
+xterm*colorULMode:        on
+xterm*highlightSelection: true
 
 
 !! tango color scheme
