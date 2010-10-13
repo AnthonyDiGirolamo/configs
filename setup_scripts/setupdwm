@@ -20,10 +20,10 @@ sudo ln -v -s $HOME/Preferences/dmenu/dmenu_path /usr/bin/
 sudo ln -v -s $HOME/Preferences/dmenu/dmenu_run /usr/bin/
 sudo rm -v /usr/bin/dwm
 sudo ln -v -s $HOME/Preferences/dwm/dwm /usr/bin/
-sudo cp -v dwm/dwm_applications.desktop /usr/share/applications/dwm.desktop
-sudo cp -v dwm/dwm_session.desktop /usr/share/xsessions/dwm.desktop
+#sudo cp -v dwm/dwm_applications.desktop /usr/share/applications/dwm.desktop
+#sudo cp -v dwm/dwm_session.desktop /usr/share/xsessions/dwm.desktop
 
-gconftool-2 --type string --set /desktop/gnome/session/required_components/windowmanager dwm
-gconftool-2 --type boolean --set /apps/nautilus/preferences/show_desktop false
-gconftool-2 --type string --set /desktop/gnome/interface/ menus_has_icons
+#gconftool-2 --type string --set /desktop/gnome/session/required_components/windowmanager dwm
+#gconftool-2 --type boolean --set /apps/nautilus/preferences/show_desktop false
+#gconftool-2 --type string --set /desktop/gnome/interface/ menus_has_icons
 

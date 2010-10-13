@@ -26,12 +26,12 @@ filetype plugin indent on
 augroup markdown
 au BufNewFile,BufRead *.mkd set ft=markdown.liquid
 au BufNewFile,BufRead *.mkd set syntax=markdown.liquid
-au BufNewFile,BufRead *.mkd set shiftwidth=3
-au BufNewFile,BufRead *.mkd set tabstop=3
+au BufNewFile,BufRead *.mkd set shiftwidth=4
+au BufNewFile,BufRead *.mkd set tabstop=4
 au BufNewFile,BufRead *.markdown set ft=markdown.liquid
 au BufNewFile,BufRead *.markdown set syntax=markdown.liquid
-au BufNewFile,BufRead *.markdown set shiftwidth=3
-au BufNewFile,BufRead *.markdown set tabstop=3
+au BufNewFile,BufRead *.markdown set shiftwidth=4
+au BufNewFile,BufRead *.markdown set tabstop=4
 augroup END
 
 augroup htmlerb
@@ -66,9 +66,11 @@ if $TERM == 'xterm256-color'
 	set t_Co=256 " set 256 color terminal
 endif
 
+"colors warm_grey
+colors molokai
+"colors fine_blue
+
 if has('gui_running')
-	"colors warm_grey
-	colors molokai
 	if has("gui_gtk2")
 		set guifont=Inconsolata\ 14
   elseif has("gui_macvim")
@@ -78,8 +80,6 @@ if has('gui_running')
 	"set guioptions=aegimtT
 	set visualbell
 	set vb t_vb=
-else
-	colors molokai
 endif
 
 setlocal spell spelllang=en_us		" set the spellcheck to english
@@ -127,6 +127,10 @@ function! TrimWhiteSpace()
 :endfunction
 map <silent> <F3>  :call TrimWhiteSpace()<CR>
 imap <silent> <F3> <ESC>:call TrimWhiteSpace()<CR>i
+
+function! SUpload()
+:!rsync -av % saguaro2.fulton.asu.edu:~/downloads/
+:endfunction
 
 " Clear trailing whitespace before a save
 autocmd BufWritePre * :%s/\s\+$//e

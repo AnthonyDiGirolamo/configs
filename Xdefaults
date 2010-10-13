@@ -5,22 +5,22 @@
 
 Xft.dpi:        96
 Xft.antialias:  true
-Xft.rgba:       rgb
+Xft.rgba:       rgba
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
 
 xterm*faceName: Inconsolata
 xterm*faceSize: 17
-
 !xterm*faceName: Terminus:pixelsize=17
 
-xterm*dynamiccolors: true
-!xterm*scrollTtyOutput: false
-!xterm*scrollKey: true
-!xterm*scrollBar: true
-xterm*background: black
-xterm*foreground: gray
-xterm*utf8: 1
+xterm*dynamiccolors:      true
+!xterm*scrollTtyOutput:   false
+!xterm*scrollKey:         true
+!xterm*scrollBar:         true
+xterm*background:         black
+xterm*foreground:         gray
+xterm*utf8:               true
+xterm*geometry:           84x50
 
 xterm*colorMode:          on
 xterm*colorBD:            lightyellow
@@ -28,7 +28,6 @@ xterm*colorBDMode:        on
 xterm*colorUL:            yellow
 xterm*colorULMode:        on
 xterm*highlightSelection: true
-
 
 !! tango color scheme
 !xterm*customization: -color

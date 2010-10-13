@@ -47,7 +47,7 @@ MY_LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;
 # fi
 
 # Sets the screen window title with the name of the command you are running
-preexec () { echo -ne "\ek${1%% *}\e\\" }
+#preexec () { echo -ne "\ek${1%% *}\e\\" }
 
 # Set color variables with helpful names
 
@@ -104,6 +104,8 @@ fi
 autoload -U zmv
 alias space2under='zmv -Q "(**/)(* *)(D)" "\$1\${2// /_}"'
 
+alias w="w|sed -e '/^USER.*$/d'|sort|less"
+
 alias grep='grep -i --color=auto'
 alias randmac="head /dev/urandom | openssl md5 | sed 's/\(..\)/\1:/g' | cut -c1-17"
 
@@ -138,10 +140,13 @@ alias df='df -hTP'
 # alias tg='gvim ~/Notes/GTD.mkd'
 # alias today='grep `date +%m/%d` ~/Notes/GTD.mkd'
 
-alias cjob='qsub -l walltime=08:00:00 -l nodes=1:ppn=8 -N compiling -j oe -I'
+alias cjob='qsub -l walltime=02:00:00 -l nodes=1:ppn=8 -N compiling -j oe -I'
 
 ### Variables
 export PATH=$HOME/Preferences/bin:$PATH
+export PATH=$HOME/apps/ctags/bin:$PATH
+export PATH=$HOME/apps/git/bin:$PATH
+export PATH=$HOME/apps/vim/bin:$PATH
 
 # Auth your sshkey with another server
 function authme {
@@ -149,7 +154,9 @@ function authme {
 }
 
 function setupenv {
-	rsync -avLK --delete --exclude mthesaur-vim.txt .vim .vimrc .zsh .zsh_prompt .zshenv .zshrc .screenrc $@:~/
+  pushd ~
+	rsync -avLK --delete --exclude mthesaur-vim.txt .gitconfig .vim .vimrc .zsh .zshrc .screenrc $@:~/
+  popd
 }
 
 bindkey '^[[1;5D' backward-word
