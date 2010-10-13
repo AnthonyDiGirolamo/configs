@@ -31,6 +31,17 @@ hi StatusLineNC gui=NONE guifg=#b8b8c0 guibg=#404054
 hi VertSplit    gui=NONE guifg=#f8f8f8 guibg=#404054
 hi WildMenu     gui=BOLD guifg=#f8f8f8 guibg=#00aacc
 
+" Tab Bar
+hi TabLine      gui=none guibg=#404054 guifg=#f8f8f8
+hi TabLineSel   gui=none guibg=#00aacc guifg=#f8f8f8
+hi TabLineFill  gui=none guibg=#303030
+
+" complete menu
+hi Pmenu        gui=none guifg=#66D9EF guibg=#000000
+hi PmenuSel     gui=none               guibg=#808080
+hi PmenuSbar    gui=none               guibg=#080808
+hi PmenuThumb   gui=none guifg=#66D9EF
+
 " Diff
 hi DiffText     gui=NONE guifg=#4040ff guibg=#c0c0ff
 hi DiffChange   gui=NONE guifg=#5050ff guibg=#e0e0ff

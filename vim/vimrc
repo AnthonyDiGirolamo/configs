@@ -66,9 +66,11 @@ if $TERM == 'xterm256-color'
 	set t_Co=256 " set 256 color terminal
 endif
 
+"colors warm_grey
+colors molokai
+"colors fine_blue
+
 if has('gui_running')
-	"colors warm_grey
-	colors molokai
 	if has("gui_gtk2")
 		set guifont=Inconsolata\ 14
   elseif has("gui_macvim")
@@ -78,8 +80,6 @@ if has('gui_running')
 	"set guioptions=aegimtT
 	set visualbell
 	set vb t_vb=
-else
-	colors molokai
 endif
 
 setlocal spell spelllang=en_us		" set the spellcheck to english
