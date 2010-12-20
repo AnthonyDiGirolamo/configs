@@ -13,7 +13,7 @@ static const char font[]            = "-*-terminus-bold-r-normal-*-16-*-*-*-*-*-
 // Dark 204a87 Light 3465a4
 
 static const char normbordercolor[] = "#2e3436";
-static const char selbordercolor[]  = "#fce94f";
+static const char selbordercolor[]  = "#fce94f"; // yellow
 //static const char selbordercolor[]  = "#3465a4"; // blue
 
 static const char normbgcolor[]     = "#222222"; // darker
@@ -44,13 +44,10 @@ static Rule rules[] = {
   { NULL,       NULL,       "Bottom Expanded Edge Panel", ~0,       True },
 };
 
-/* layout(s) */
 static float mfact      = 0.70; /* factor of master area size [0.05..0.95] */
 static Bool resizehints = False; /* False means respect size hints in tiled resizals */
 
 #include "gaplessgrid.c"
-#include "bstack.c"
-#include "bstackhoriz.c"
 #include "fibonacci.c"
 
 static Layout layouts[] = {
@@ -59,10 +56,10 @@ static Layout layouts[] = {
   { "><>",      NULL },    /* no layout function means floating behavior */
   { "[M]",      monocle },
   { "###",      gaplessgrid },
-  { "TTT",      bstack },
-  { "===",      bstackhoriz },
   { "[@]",      spiral },
   { "[\\]",     dwindle },
+  //{ "TTT",      bstack },
+  //{ "===",      bstackhoriz },
 };
 
 /* key definitions */
@@ -77,7 +74,7 @@ static Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-xs", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-i", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "/usr/local/bin/term", NULL };
 static const char *rebootcmd[]  = { "gksudo", "reboot", NULL };
 static const char *shutdowncmd[]  = { "gksudo", "halt", NULL };
@@ -92,7 +89,7 @@ static Key keys[] = {
   { Mod4Mask,                     XK_f,      spawn,          {.v = filemanager } },
   { Mod4Mask,                     XK_r,      spawn,          {.v = rebootcmd } },
   { Mod4Mask,                     XK_h,      spawn,          {.v = shutdowncmd } },
-  { MODKEY,                     XK_space,  spawn,          {.v = dmenucmd } },
+  { MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
   { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
   { MODKEY,                       XK_b,      togglebar,      {0} },
   { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -106,10 +103,10 @@ static Key keys[] = {
   { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
   { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
   { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
-  { MODKEY,                       XK_y,      setlayout,      {.v = &layouts[4]} },
-  { MODKEY,                       XK_u,      setlayout,      {.v = &layouts[5]} },
-  { MODKEY,                       XK_s,      setlayout,      {.v = &layouts[6]} },
-  { MODKEY,                       XK_d,      setlayout,      {.v = &layouts[7]} },
+  { MODKEY,                       XK_s,      setlayout,      {.v = &layouts[4]} },
+  { MODKEY,                       XK_d,      setlayout,      {.v = &layouts[5]} },
+  //{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[6]} },
+  //{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[7]} },
   { MODKEY,                       XK_p,      setlayout,      {0} },
   { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
   { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
