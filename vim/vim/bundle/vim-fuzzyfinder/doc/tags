@@ -174,3 +174,12 @@ g:fuf_taggedfile_prompt	fuf.txt	/*g:fuf_taggedfile_prompt*
 g:fuf_taggedfile_switchOrder	fuf.txt	/*g:fuf_taggedfile_switchOrder*
 g:fuf_timeFormat	fuf.txt	/*g:fuf_timeFormat*
 g:fuf_useMigemo	fuf.txt	/*g:fuf_useMigemo*
+l9	l9.txt	/*l9*
+l9-about	l9.txt	/*l9-about*
+l9-author	l9.txt	/*l9-author*
+l9-changelog	l9.txt	/*l9-changelog*
+l9-contact	l9.txt	/*l9-contact*
+l9-installation	l9.txt	/*l9-installation*
+l9-introduction	l9.txt	/*l9-introduction*
+l9-usage	l9.txt	/*l9-usage*
+l9.txt	l9.txt	/*l9.txt*
