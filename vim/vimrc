@@ -124,8 +124,6 @@ imap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .
 " Clear trailing whitespace before a save
 autocmd BufWritePre * :%s/\s\+$//e
 
-map <F2> :NERDTreeToggle<CR>
-
 " Symbol listing - requires ctags
 map  <F12> :TlistToggle<CR>
 imap <F12> <ESC>:TlistToggle<CR>
