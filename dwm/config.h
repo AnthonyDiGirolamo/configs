@@ -13,8 +13,10 @@ static const char font[]            = "-*-terminus-bold-r-normal-*-16-*-*-*-*-*-
 // Dark 204a87 Light 3465a4
 
 static const char normbordercolor[] = "#2e3436";
-static const char selbordercolor[]  = "#fce94f"; // yellow
+//static const char selbordercolor[]  = "#fce94f"; // yellow
 //static const char selbordercolor[]  = "#3465a4"; // blue
+static const char selbordercolor[] = "#a7cc5c"; // green
+
 
 static const char normbgcolor[]     = "#222222"; // darker
 static const char normfgcolor[]     = "#EEEEEC";
@@ -27,7 +29,7 @@ static Bool showbar                 = True;     /* False means no bar */
 static Bool topbar                  = True;     /* False means bottom bar */
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4" /*, "5", "6", "7", "8", "9"*/ };
 
 static Rule rules[] = {
   /* class      instance    title       tags mask     isfloating */

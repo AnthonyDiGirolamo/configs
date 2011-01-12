@@ -19,19 +19,15 @@ set showcmd      " display incomplete commands
 set incsearch    " do incremental searching
 
 " In many terminal emulators the mouse works just fine, thus enable it.
-set mouse=a
+" set mouse=a
 
 filetype plugin indent on
 
 augroup markdown
 au BufNewFile,BufRead *.mkd set ft=markdown.liquid
 au BufNewFile,BufRead *.mkd set syntax=markdown.liquid
-au BufNewFile,BufRead *.mkd set shiftwidth=4
-au BufNewFile,BufRead *.mkd set tabstop=4
-au BufNewFile,BufRead *.markdown set ft=markdown.liquid
-au BufNewFile,BufRead *.markdown set syntax=markdown.liquid
-au BufNewFile,BufRead *.markdown set shiftwidth=4
-au BufNewFile,BufRead *.markdown set tabstop=4
+au BufNewFile,BufRead *.mkd set shiftwidth=3
+au BufNewFile,BufRead *.mkd set tabstop=3
 augroup END
 
 augroup htmlerb
@@ -41,6 +37,10 @@ au BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
 au BufNewFile,BufRead *.html.erb set syntax=eruby
 au BufNewFile,BufRead *.less set ft=css
 augroup END
+
+" Better syntax highlighting for python
+autocmd FileType python set complete+=k~/.vim/bundle/python_syntax/syntax/python.vim isk+=.,(
+autocmd FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 set autoindent        " always set autoindenting on
 
@@ -108,6 +108,7 @@ highlight SpellRare term=underline cterm=underline
 highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
 
+" MacVim is flaky with c-x c-*, set c-o to omnicomplete
 imap <C-O> <C-X><C-O>
 
 " pressing tab twice will move to the next tab
@@ -120,53 +121,17 @@ map <space><space> <c-W>w<c-W>_
 map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
 imap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
 
-" Removes trailing spaces
-function! TrimWhiteSpace()
-: %s/\s\s*$//g
-: ''
-:endfunction
-map <silent> <F3>  :call TrimWhiteSpace()<CR>
-imap <silent> <F3> <ESC>:call TrimWhiteSpace()<CR>i
-
-function! SUpload()
-:!rsync -av % saguaro2.fulton.asu.edu:~/downloads/
-:endfunction
-
 " Clear trailing whitespace before a save
 autocmd BufWritePre * :%s/\s\+$//e
 
-" Save key
-map <F4> :w<CR>
-imap <F4> <ESC>:w<CR>i
-
-" Open file browser
-" map  <F2> :Vexplore<CR>
-" imap <F2> <ESC>:Vexplore<CR>
-" Edit a file, close the old one
-" map  <F3> <CR><c-W><c-W>:wq<CR>
-
-" Edit a file, close the old, and reopen browser
-"map  <F4> <CR><c-W><c-W>:q!<CR>:Vexplore<CR><c-W><c-W>
-
-" Above netrw settings replaced by using nerdtree
 map <F2> :NERDTreeToggle<CR>
 
 " Symbol listing - requires ctags
 map  <F12> :TlistToggle<CR>
 imap <F12> <ESC>:TlistToggle<CR>
 
-" Format a paragraph nicely
-map <F11> gqip
-imap <F11> <ESC>gqip
-" Same as above using fmt
-" map <F11> <ESC>{V}!fmt<CR>}
-" imap <F11> <ESC>{V}!fmt<CR>}
-
-" Remap Esc
 imap jj <Esc>l
-"imap <M-Space> <Esc>
-"nnoremap <C-space> i
-"imap <C-space> <Esc>
+" Remap Esc
 
 map T :Texplore<CR>
 map Y :Explore<CR>
@@ -175,11 +140,6 @@ map Y :Explore<CR>
 map <M-c> "*y
 map <M-v> "*p
 
-
-" Trying to get better syntax highlighting for python
-autocmd FileType python set complete+=k~/.vim/syntax/python.vim isk+=.,(
-autocmd FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-
 " Rails plugin options
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_classes_in_global = 1
@@ -187,6 +147,42 @@ let g:rubycomplete_rails = 1
 
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
+
+" Fuzzy Find Shortcut
+nnoremap <silent> <C-y> :tabnew<CR>:FufFile **/<CR>
+
+" Ignore whitespace in vimdiff
+set diffopt+=iwhite
+
+let g:jekyll_path = "/home/adigiro/Dev/anthonydigirolamo.github.com"
+"map jn  :JekyllPost<CR>
+"map jl  :JekyllList<CR>
+
+let g:user_zen_settings       = { 'erb' : { 'extends' : 'html' } }
+let g:user_zen_expandabbr_key = '<c-e>'
+let g:use_zen_complete_tag    = 1
+
+" Netrw settings
+let g:netrw_winsize               = 80
+let g:netrw_liststyle             = 3
+"let g:netrw_list_hide             = '.*\.o$'
+let g:netrw_browse_split          = 0
+let Tlist_File_Fold_Auto_Close    = 1
+"let Tlist_Show_One_File          = 1
+let Tlist_Display_Tag_Scope       = 0
+let Tlist_Auto_Update             = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Use_Right_Window        = 1
+let Tlist_Use_SingleClick         = 0
+let Tlist_Sort_Type               = "name"
+let Tlist_Enable_Fold_Column      = 0
+let Tlist_File_Fold_Auto_Close    = 1
+
+" Use :C to run a calculation, needs python support
+:command! -nargs=+ C :py print <args>
+:py from math import *
+
+" Old and unused stuff below, kept for reference
 
 "" VIM as a GTD to-do list
 "function! InsertDate(spaces)
@@ -237,39 +233,20 @@ nnoremap <C-L> :nohl<CR><C-L>
 "\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 "\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" Fuzzy Find Shortcut
-nnoremap <silent> <C-y> :tabnew<CR>:FufFile **/<CR>
+" Removes trailing spaces
+" function! TrimWhiteSpace()
+" : %s/\s\s*$//g
+" : ''
+" :endfunction
+" map <silent> <F3>  :call TrimWhiteSpace()<CR>
+" imap <silent> <F3> <ESC>:call TrimWhiteSpace()<CR>i
 
-" Ignore whitespace in vimdiff
-set diffopt+=iwhite
+" Open file browser
+" map  <F2> :Vexplore<CR>
+" imap <F2> <ESC>:Vexplore<CR>
+" Edit a file, close the old one
+" map  <F3> <CR><c-W><c-W>:wq<CR>
 
-"source ~/.vimrc_private
-
-let g:jekyll_path = "/home/adigiro/Dev/anthonydigirolamo.github.com"
-"map jn  :JekyllPost<CR>
-"map jl  :JekyllList<CR>
-
-let g:user_zen_settings       = { 'erb' : { 'extends' : 'html' } }
-let g:user_zen_expandabbr_key = '<c-e>'
-let g:use_zen_complete_tag    = 1
-
-" Netrw settings
-let g:netrw_winsize               = 80
-let g:netrw_liststyle             = 3
-let g:netrw_list_hide             = '.*\.o$'
-let g:netrw_browse_split          = 0
-let Tlist_File_Fold_Auto_Close    = 1
-"let Tlist_Show_One_File          = 1
-let Tlist_Display_Tag_Scope       = 0
-let Tlist_Auto_Update             = 1
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Use_Right_Window        = 1
-let Tlist_Use_SingleClick         = 0
-let Tlist_Sort_Type               = "name"
-let Tlist_Enable_Fold_Column      = 0
-let Tlist_File_Fold_Auto_Close    = 1
-
-" Use :C to run a calculation, needs python support
-:command! -nargs=+ C :py print <args>
-:py from math import *
+" Edit a file, close the old, and reopen browser
+"map  <F4> <CR><c-W><c-W>:q!<CR>:Vexplore<CR><c-W><c-W>
 
