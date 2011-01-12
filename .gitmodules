@@ -1,0 +1,30 @@
+[submodule "vim/vim/bundle/zencoding-vim.git"]
+	path = vim/vim/bundle/zencoding-vim.git
+	url = git://github.com/mattn/zencoding-vim.git
+[submodule "vim/vim/bundle/vim-surround.git"]
+	path = vim/vim/bundle/vim-surround.git
+	url = git://github.com/tpope/vim-surround.git
+[submodule "vim/vim/bundle/vim-rails.git"]
+	path = vim/vim/bundle/vim-rails.git
+	url = https://github.com/tpope/vim-rails.git
+[submodule "vim/vim/bundle/vim-liquid.git"]
+	path = vim/vim/bundle/vim-liquid.git
+	url = https://github.com/tpope/vim-liquid.git
+[submodule "vim/vim/bundle/snipmate-snippets.git"]
+	path = vim/vim/bundle/snipmate-snippets.git
+	url = https://github.com/scrooloose/snipmate-snippets.git
+[submodule "vim/vim/bundle/snipmate.vim.git"]
+	path = vim/vim/bundle/snipmate.vim.git
+	url = https://github.com/msanders/snipmate.vim.git
+[submodule "vim/vim/bundle/tcalc_vim.git"]
+	path = vim/vim/bundle/tcalc_vim.git
+	url = https://github.com/tomtom/tcalc_vim.git
+[submodule "vim/vim/bundle/vim-cucumber.git"]
+	path = vim/vim/bundle/vim-cucumber.git
+	url = https://github.com/tpope/vim-cucumber.git
+[submodule "vim/vim/bundle/vim-fugitive.git"]
+	path = vim/vim/bundle/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/vim/bundle/taglist.vim.git"]
+	path = vim/vim/bundle/taglist.vim.git
+	url = https://github.com/vim-scripts/taglist.vim.git
