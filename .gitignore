@@ -5,6 +5,7 @@ fonts/*.TTF
 Sounds/
 bin/dmenu
 bin/dwm
+dmenu/dmenu
 fonts/
 icons/
 original_mac
