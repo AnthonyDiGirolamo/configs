@@ -38,6 +38,9 @@ au BufNewFile,BufRead *.html.erb set syntax=eruby
 au BufNewFile,BufRead *.less set ft=css
 augroup END
 
+autocmd FileType eruby let g:surround_45 = "<% \r %>"
+autocmd FileType eruby let g:surround_61 = "<%= \r %>"
+
 " Better syntax highlighting for python
 autocmd FileType python set complete+=k~/.vim/bundle/python_syntax/syntax/python.vim isk+=.,(
 autocmd FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
@@ -67,8 +70,9 @@ if $TERM == 'xterm256-color'
 endif
 
 "colors warm_grey
-colors molokai
+"colors molokai
 "colors fine_blue
+colors mac_classic
 
 if has('gui_running')
 	if has("gui_gtk2")
@@ -99,14 +103,14 @@ set ignorecase
 set wildmenu
 
 " make misspelled words appear underlined and yellow
-highlight clear SpellBad
-highlight SpellBad term=standout ctermfg=11 term=underline cterm=underline
-highlight clear SpellCap
-highlight SpellCap term=underline cterm=underline
-highlight clear SpellRare
-highlight SpellRare term=underline cterm=underline
-highlight clear SpellLocal
-highlight SpellLocal term=underline cterm=underline
+"highlight clear SpellBad
+"highlight SpellBad term=standout ctermfg=11 term=underline cterm=underline
+"highlight clear SpellCap
+"highlight SpellCap term=underline cterm=underline
+"highlight clear SpellRare
+"highlight SpellRare term=underline cterm=underline
+"highlight clear SpellLocal
+"highlight SpellLocal term=underline cterm=underline
 
 " MacVim is flaky with c-x c-*, set c-o to omnicomplete
 imap <C-O> <C-X><C-O>
@@ -162,7 +166,7 @@ let g:use_zen_complete_tag    = 1
 
 " Netrw settings
 let g:netrw_winsize               = 80
-let g:netrw_liststyle             = 3
+"let g:netrw_liststyle             = 3
 "let g:netrw_list_hide             = '.*\.o$'
 let g:netrw_browse_split          = 0
 let Tlist_File_Fold_Auto_Close    = 1
@@ -179,6 +183,8 @@ let Tlist_File_Fold_Auto_Close    = 1
 " Use :C to run a calculation, needs python support
 :command! -nargs=+ C :py print <args>
 :py from math import *
+
+
 
 " Old and unused stuff below, kept for reference
 
