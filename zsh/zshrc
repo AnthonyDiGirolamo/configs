@@ -66,14 +66,14 @@ PS1="%{$fg_bold[green]%}%(!.#.$)%{$reset_color%} "
 # Date Time
 #RPS1="(%D{%m-%d %H:%M})"
 # Current Directory
-local TERMWIDTH
-(( TERMWIDTH = ${COLUMNS} - 1 ))
-local PROMPTSIZE=${#${(%):--- %D{%R.%S %a %b %d %Y}\! }}
-local PWDSIZE=${#${(%):-%~}}
-if [[ "$PROMPTSIZE + $PWDSIZE" -gt $TERMWIDTH ]]; then
-  (( PR_PWDLEN = $TERMWIDTH - $PROMPTSIZE ))
-fi
-RPS1="%{$fg_bold[cyan]%}%${PR_PWDLEN}<...<%~%<<%{$reset_color%}"
+#local TERMWIDTH
+#(( TERMWIDTH = ${COLUMNS} - 1 ))
+#local PROMPTSIZE=${#${(%):--- %D{%R.%S %a %b %d %Y}\! }}
+#local PWDSIZE=${#${(%):-%~}}
+#if [[ "$PROMPTSIZE + $PWDSIZE" -gt $TERMWIDTH ]]; then
+#  (( PR_PWDLEN = $TERMWIDTH - $PROMPTSIZE ))
+#fi
+#RPS1="%{$fg_bold[cyan]%}%${PR_PWDLEN}<...<%~%<<%{$reset_color%}"
 
 # MacOS Specific Settings
 uname -a | grep -qs Darwin
