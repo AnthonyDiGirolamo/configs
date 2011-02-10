@@ -31,3 +31,6 @@
 [submodule "vim/vim/bundle/vim_mac_classic_theme.git"]
 	path = vim/vim/bundle/vim_mac_classic_theme.git
 	url = git@github.com:AnthonyDiGirolamo/vim-mac-classic-theme.git
+[submodule "vim/vim/bundle/command-t"]
+	path = vim/vim/bundle/command-t
+	url = git://git.wincent.com/command-t.git

@@ -7,6 +7,8 @@ call pathogen#helptags()
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+let $PATH= $PATH . ":/opt/local/bin"
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -14,9 +16,12 @@ set noswapfile
 set nobackup     " do not keep a backup file (file~), use versions instead
 set history=1000 " keep 1000 lines of command line history
 set ruler        " show the cursor position all the time
+
 set laststatus=2 " always show the editing status bar at the bottom
 set showcmd      " display incomplete commands
 set incsearch    " do incremental searching
+
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 " set mouse=a
@@ -86,7 +91,7 @@ if has('gui_running')
 	set vb t_vb=
 endif
 
-setlocal spell spelllang=en_us		" set the spellcheck to english
+"setlocal spell spelllang=en_us		" set the spellcheck to english
 set mousemodel=popup_setpos			" set the right click in gvim to spellcheck
 
 " F9 will turn spell checking on or off in normal and insert mode
