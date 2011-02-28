@@ -66,33 +66,33 @@ set textwidth=80      " insert EOL after 75 columns
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-	syntax on
-	set hlsearch
+  syntax on
+  set hlsearch
 endif
 
 if $TERM == 'xterm256-color'
-	set t_Co=256 " set 256 color terminal
+  set t_Co=256 " set 256 color terminal
 endif
 
 "colors warm_grey
-"colors molokai
+colors molokai
 "colors fine_blue
-colors mac_classic
+"colors mac_classic
 
 if has('gui_running')
-	if has("gui_gtk2")
-		set guifont=Inconsolata\ 14
+  if has("gui_gtk2")
+    set guifont=Inconsolata\ 14
   elseif has("gui_macvim")
-		set guifont=Inconsolata:h22
-	endif
-	set guioptions=agm
-	"set guioptions=aegimtT
-	set visualbell
-	set vb t_vb=
+    set guifont=Inconsolata:h22
+  endif
+  set guioptions=agm
+  "set guioptions=aegimtT
+  set visualbell
+  set vb t_vb=
 endif
 
-"setlocal spell spelllang=en_us		" set the spellcheck to english
-set mousemodel=popup_setpos			" set the right click in gvim to spellcheck
+"setlocal spell spelllang=en_us    " set the spellcheck to english
+set mousemodel=popup_setpos      " set the right click in gvim to spellcheck
 
 " F9 will turn spell checking on or off in normal and insert mode
 map <F9> :setlocal spell! spelllang=en_us<cr>
@@ -189,47 +189,48 @@ let Tlist_File_Fold_Auto_Close    = 1
 :command! -nargs=+ C :py print <args>
 :py from math import *
 
+nmap <silent> <M-t> :CommandT<CR>
 
 
 " Old and unused stuff below, kept for reference
 
 "" VIM as a GTD to-do list
 "function! InsertDate(spaces)
-"	let today = strftime("%m/%d")
-"	let pattern = "\s*$"
-"	let line = getline(".")
+"  let today = strftime("%m/%d")
+"  let pattern = "\s*$"
+"  let line = getline(".")
 "
-"	let repl = ""
-"	for i in range(80-strlen(line)-strlen(today)-a:spaces)
-"		let repl .= " "
-"	endfor
-"	let repl .= today
+"  let repl = ""
+"  for i in range(80-strlen(line)-strlen(today)-a:spaces)
+"    let repl .= " "
+"  endfor
+"  let repl .= today
 "
-"	let newline = substitute(line, pattern, repl, "")
-"	call setline(".", newline)
+"  let newline = substitute(line, pattern, repl, "")
+"  call setline(".", newline)
 "endfunction
 "
 "function! RemoveTask()
-"	:s/^\s*[\*-] \[ \] //
-"	:s/\s*\d\d.\d\d$//
+"  :s/^\s*[\*-] \[ \] //
+"  :s/\s*\d\d.\d\d$//
 "endfunction
 "
 "function! NewTask()
-"	:s/^\s*/\* \[ \] /
-"	call InsertDate(0)
+"  :s/^\s*/\* \[ \] /
+"  call InsertDate(0)
 "endfunction
 "
 "function! SubTask()
-"	:s/^\s*/\t- \[ \] /
-"	call InsertDate(3)
+"  :s/^\s*/\t- \[ \] /
+"  call InsertDate(3)
 "endfunction
 "
 "function! MarkDone()
-"	try
-"		:s/\[ \]/\[x\]/
-"	catch
-"		:s/\[x\]/\[ \]/
-"	endtry
+"  try
+"    :s/\[ \]/\[x\]/
+"  catch
+"    :s/\[x\]/\[ \]/
+"  endtry
 "endfunction
 "
 "nmap <silent> ;a :call NewTask()<CR>

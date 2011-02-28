@@ -1,3 +1,5 @@
+ignorecase on
+
 # Key Bindings
 bind s # Disable freezing terminal command
 # bindkey -k k4 detach
