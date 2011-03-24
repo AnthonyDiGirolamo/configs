@@ -83,7 +83,7 @@ if [ $? -eq 0 ]; then
   # to get the following to work in OSX
   # eval "`/opt/local/bin/dircolors -b`"
   export LS_COLORS=$MY_LS_COLORS
-  alias ls='ls --color=auto'
+  alias ls='gls --color=auto'
 	alias gvim=mvim
 	alias vim='TERM=xterm+256color /Applications/MacVim.app/Contents/MacOS/Vim'
   export EDITOR='TERM=xterm+256color /Applications/MacVim.app/Contents/MacOS/Vim'
@@ -99,6 +99,12 @@ else
 fi
 
 # Aliases
+
+alias b="bundle"
+alias bi="b install --path vendor"
+alias bu="b update"
+alias be="b exec"
+alias binit="bi && b package && echo 'vendor/ruby' >> .gitignore"
 
 # Rename files recursively in the current dir and replace space with _
 autoload -U zmv
@@ -123,8 +129,11 @@ alias gl='git log'
 alias gll='git log --pretty=oneline'
 alias gs='git status'
 alias gc='git commit'
-alias gca='git commit -av'
+alias gca='git commit -a'
 alias gd='git diff'
+alias gdc='git diff --cached'
+alias gp='git pull'
+alias gpp='git push'
 
 alias d='dirs -v'
 alias p='pushd'

@@ -14,8 +14,8 @@ static const char font[]            = "-*-terminus-bold-r-normal-*-16-*-*-*-*-*-
 
 static const char normbordercolor[] = "#2e3436";
 //static const char selbordercolor[]  = "#fce94f"; // yellow
-//static const char selbordercolor[]  = "#3465a4"; // blue
-static const char selbordercolor[] = "#a7cc5c"; // green
+static const char selbordercolor[]  = "#3465a4"; // blue
+//static const char selbordercolor[] = "#a7cc5c"; // green
 
 
 static const char normbgcolor[]     = "#222222"; // darker

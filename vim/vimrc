@@ -38,8 +38,8 @@ augroup END
 augroup htmlerb
 au BufNewFile,BufRead *.html set ft=html.liquid
 au BufNewFile,BufRead *.html set syntax=liquid
-au BufNewFile,BufRead *.html.erb set ft=html.eruby.eruby-rails
-au BufNewFile,BufRead *.html.erb set syntax=eruby
+au BufNewFile,BufRead *.erb set ft=html.eruby.eruby-rails
+au BufNewFile,BufRead *.erb set syntax=eruby
 au BufNewFile,BufRead *.less set ft=css
 augroup END
 
@@ -190,7 +190,6 @@ let Tlist_File_Fold_Auto_Close    = 1
 :py from math import *
 
 nmap <silent> <M-t> :CommandT<CR>
-
 
 " Old and unused stuff below, kept for reference
 
