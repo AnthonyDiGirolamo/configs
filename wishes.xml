@@ -60,11 +60,6 @@
         <!--<key modifier1="Alt_L">F10</key>-->
       <!--</action>-->
     <!--</wish>-->
-    <wish gesture="Drag" fingers="3">
-      <action name="three_finger_drag" when="finish">
-        <button modifier1="Alt_L">1</button>
-      </action>
-    </wish>
 
     <!--<wish gesture="Drag" fingers="3">-->
       <!--<action name="ringswitcher" when="finish">-->
@@ -114,6 +109,20 @@
         <!--<button modifier1="Super_L">4</button>-->
       <!--</action>-->
     <!--</wish>-->
+    <wish gesture="Drag" fingers="3">
+      <action name="three_finger_drag" when="finish">
+        <trigger prop="delta y" min="-600" max="-10"/>
+        <key modifier1="Alt_L">F8</key>
+      </action>
+    </wish>
+
+    <wish gesture="Drag" fingers="3">
+      <action name="three_finger_drag" when="finish">
+        <trigger prop="delta y" min="60" max="600"/>
+        <key modifier1="Alt_L">F7</key>
+      </action>
+    </wish>
+
     <wish gesture="Drag" fingers="4">
       <action name="scale" when="finish">
         <trigger prop="delta y" min="60" max="600"/>
