@@ -1,11 +1,6 @@
 #!/bin/sh
-cd ../dmenu/dmenu-3.9/
+cd ../dmenu
 make
-cd ..
-rm -v dmenu dmenu_path dmenu_run
-ln -v -s dmenu-3.9/dmenu ./
-ln -v -s dmenu-3.9/dmenu_path ./
-ln -v -s dmenu-3.9/dmenu_run ./
 
 cd ../dwm
 make
@@ -15,11 +10,11 @@ cd ..
 sudo rm -v /usr/bin/dmenu
 sudo rm -v /usr/bin/dmenu_path
 sudo rm -v /usr/bin/dmenu_run
-sudo ln -v -s $HOME/Preferences/dmenu/dmenu /usr/bin/
-sudo ln -v -s $HOME/Preferences/dmenu/dmenu_path /usr/bin/
-sudo ln -v -s $HOME/Preferences/dmenu/dmenu_run /usr/bin/
+sudo ln -v -s $HOME/Preferences/dmenu/dmenu /usr/bin
+sudo ln -v -s $HOME/Preferences/dmenu/dmenu_path /usr/bin
+sudo ln -v -s $HOME/Preferences/dmenu/dmenu_run /usr/bin
 sudo rm -v /usr/bin/dwm
-sudo ln -v -s $HOME/Preferences/dwm/dwm /usr/bin/
+sudo ln -v -s $HOME/Preferences/dwm/dwm /usr/bin
 #sudo cp -v dwm/dwm_applications.desktop /usr/share/applications/dwm.desktop
 #sudo cp -v dwm/dwm_session.desktop /usr/share/xsessions/dwm.desktop
 
