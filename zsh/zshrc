@@ -1,6 +1,7 @@
 #!/usr/bin/zsh
 
-export FPATH=/usr/share/zsh/4.2.6/functions
+#export FPATH=/usr/share/zsh/4.2.6/functions
+#export FPATH=/usr/share/zsh/4.3.9/functions
 fpath=($HOME/.zsh/func $fpath)
 typeset -U fpath
 
