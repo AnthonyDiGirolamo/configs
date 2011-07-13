@@ -1,5 +1,8 @@
 #!/usr/bin/zsh
+stty stop undef
+stty start undef
 
+export FPATH=/usr/share/zsh/`zsh --version | awk '{print $2}'`/functions
 #export FPATH=/usr/share/zsh/4.2.6/functions
 #export FPATH=/usr/share/zsh/4.3.9/functions
 fpath=($HOME/.zsh/func $fpath)
@@ -167,6 +170,7 @@ export PATH=$HOME/Preferences/bin:$PATH
 export PATH=$HOME/apps/ctags/bin:$PATH
 export PATH=$HOME/apps/git/bin:$PATH
 export PATH=$HOME/apps/vim/bin:$PATH
+export PATH=$HOME/apps/tree/bin:$PATH
 
 # Auth your sshkey with another server
 function authme {
