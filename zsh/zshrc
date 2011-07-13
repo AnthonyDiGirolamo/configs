@@ -1,5 +1,6 @@
 #!/usr/bin/zsh
 
+export FPATH=/usr/share/zsh/4.2.6/functions
 fpath=($HOME/.zsh/func $fpath)
 typeset -U fpath
 
@@ -66,14 +67,14 @@ PS1="%{$fg_bold[green]%}%(!.#.$)%{$reset_color%} "
 # Date Time
 #RPS1="(%D{%m-%d %H:%M})"
 # Current Directory
-#local TERMWIDTH
-#(( TERMWIDTH = ${COLUMNS} - 1 ))
-#local PROMPTSIZE=${#${(%):--- %D{%R.%S %a %b %d %Y}\! }}
-#local PWDSIZE=${#${(%):-%~}}
-#if [[ "$PROMPTSIZE + $PWDSIZE" -gt $TERMWIDTH ]]; then
-#  (( PR_PWDLEN = $TERMWIDTH - $PROMPTSIZE ))
-#fi
-#RPS1="%{$fg_bold[cyan]%}%${PR_PWDLEN}<...<%~%<<%{$reset_color%}"
+local TERMWIDTH
+(( TERMWIDTH = ${COLUMNS} - 1 ))
+local PROMPTSIZE=${#${(%):--- %D{%R.%S %a %b %d %Y}\! }}
+local PWDSIZE=${#${(%):-%~}}
+if [[ "$PROMPTSIZE + $PWDSIZE" -gt $TERMWIDTH ]]; then
+ (( PR_PWDLEN = $TERMWIDTH - $PROMPTSIZE ))
+fi
+RPS1="%{$fg_bold[cyan]%}%${PR_PWDLEN}<...<%~%<<%{$reset_color%}"
 
 # MacOS Specific Settings
 uname -a | grep -qs Darwin
@@ -85,8 +86,8 @@ if [ $? -eq 0 ]; then
   export LS_COLORS=$MY_LS_COLORS
   alias ls='gls --color=auto'
 	alias gvim=mvim
-	alias vim='TERM=xterm+256color /Applications/MacVim.app/Contents/MacOS/Vim'
-  export EDITOR='TERM=xterm+256color /Applications/MacVim.app/Contents/MacOS/Vim'
+	alias vim='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
+  export EDITOR='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
 else
 	# Linux
   eval "`dircolors -b`"
@@ -149,8 +150,16 @@ alias df='df -hTP'
 # alias tg='gvim ~/Notes/GTD.mkd'
 # alias today='grep `date +%m/%d` ~/Notes/GTD.mkd'
 
-alias cjob='qsub -l walltime=02:00:00 -l nodes=1:ppn=8 -N compiling -j oe -I'
+alias cjob='qsub -l walltime=02:00:00 -l size=12 -N compiling -j oe -I -A STF007'
 alias cj='checkjob -v'
+
+alias m=module
+alias ml='m load'
+alias mr='m unload'
+alias md='m display'
+alias ma='m avail'
+alias mk='m keyword'
+alias mll='m list'
 
 ### Variables
 export PATH=$HOME/Preferences/bin:$PATH
