@@ -190,6 +190,7 @@ let Tlist_File_Fold_Auto_Close    = 1
 :py from math import *
 
 nmap <silent> <M-t> :CommandT<CR>
+nmap <silent> _t :CommandT<CR>
 
 " Old and unused stuff below, kept for reference
 
