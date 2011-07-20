@@ -33,3 +33,5 @@ FILE=zsh/zhistory            ; rmln
 FILE=zsh/zsh_prompt          ; rmln
 FILE=zsh/zshrc               ; rmln
 
+FILE=tmux.conf               ; rmln
+
