@@ -8,11 +8,11 @@ make
 cd ..
 
 sudo rm -v /usr/bin/dmenu
-sudo rm -v /usr/bin/dmenu_path
 sudo rm -v /usr/bin/dmenu_run
+sudo rm -v /usr/bin/lsx
 sudo ln -v -s $HOME/Preferences/dmenu/dmenu /usr/bin
-sudo ln -v -s $HOME/Preferences/dmenu/dmenu_path /usr/bin
 sudo ln -v -s $HOME/Preferences/dmenu/dmenu_run /usr/bin
+sudo ln -v -s $HOME/Preferences/dmenu/lsx /usr/bin
 sudo rm -v /usr/bin/dwm
 sudo ln -v -s $HOME/Preferences/dwm/dwm /usr/bin
 #sudo cp -v dwm/dwm_applications.desktop /usr/share/applications/dwm.desktop

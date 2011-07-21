@@ -1,7 +1,5 @@
 # dmenu version
-VERSION = 4.2.1
-
-# Customize below to fit your system
+VERSION = 4.4
 
 # paths
 PREFIX = /usr/local
@@ -20,7 +18,7 @@ LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS}
 
 # flags
 CPPFLAGS = -D_BSD_SOURCE -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
-CFLAGS   = -std=c99 -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
+CFLAGS   = -ansi -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
 LDFLAGS  = -s ${LIBS}
 
 # compiler and linker

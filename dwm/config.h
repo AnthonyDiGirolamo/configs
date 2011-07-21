@@ -13,10 +13,9 @@ static const char font[]            = "-*-terminus-bold-r-normal-*-16-*-*-*-*-*-
 // Dark 204a87 Light 3465a4
 
 static const char normbordercolor[] = "#2e3436";
-//static const char selbordercolor[]  = "#fce94f"; // yellow
-static const char selbordercolor[]  = "#3465a4"; // blue
+static const char selbordercolor[]  = "#fce94f"; // yellow
+//static const char selbordercolor[]  = "#3465a4"; // blue
 //static const char selbordercolor[] = "#a7cc5c"; // green
-
 
 static const char normbgcolor[]     = "#222222"; // darker
 static const char normfgcolor[]     = "#EEEEEC";
@@ -46,20 +45,20 @@ static Rule rules[] = {
   { NULL,       NULL,       "Bottom Expanded Edge Panel", ~0,       True },
 };
 
-static float mfact      = 0.70; /* factor of master area size [0.05..0.95] */
+static float mfact      = 0.50; /* factor of master area size [0.05..0.95] */
 static Bool resizehints = False; /* False means respect size hints in tiled resizals */
 
-#include "gaplessgrid.c"
-#include "fibonacci.c"
+//#include "gaplessgrid.c"
+//#include "fibonacci.c"
 
 static Layout layouts[] = {
   /* symbol     arrange function */
   { "[]=",      tile },    /* first entry is default */
   { "><>",      NULL },    /* no layout function means floating behavior */
   { "[M]",      monocle },
-  { "###",      gaplessgrid },
-  { "[@]",      spiral },
-  { "[\\]",     dwindle },
+  //{ "###",      gaplessgrid },
+  //{ "[@]",      spiral },
+  //{ "[\\]",     dwindle },
   //{ "TTT",      bstack },
   //{ "===",      bstackhoriz },
 };
@@ -76,8 +75,8 @@ static Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-i", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "/usr/local/bin/term", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-l", "2", "-i", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *termcmd[]  = { "uxterm", "-e", "zsh", NULL };
 static const char *rebootcmd[]  = { "gksudo", "reboot", NULL };
 static const char *shutdowncmd[]  = { "gksudo", "halt", NULL };
 static const char *filemanager[]  = { "/usr/bin/nautilus", NULL };
@@ -88,6 +87,7 @@ static Key keys[] = {
   /* modifier                     key        function        argument */
   { Mod4Mask,                     XK_p,      spawn,          {.v = powercmd } },
   { Mod4Mask,                     XK_l,      spawn,          {.v = logoutcmd } },
+  { MODKEY|ShiftMask,             XK_l,      spawn,          {.v = dmenucmd } },
   { Mod4Mask,                     XK_f,      spawn,          {.v = filemanager } },
   { Mod4Mask,                     XK_r,      spawn,          {.v = rebootcmd } },
   { Mod4Mask,                     XK_h,      spawn,          {.v = shutdowncmd } },
