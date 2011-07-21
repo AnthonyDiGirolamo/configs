@@ -13,8 +13,8 @@
 #include <X11/Xlib.h>
 
 char *tzutc = "UTC";
-char *tzest = "America/New_York";
-char *tzarizona = "America/Phoenix";
+char *tzest = "US/Eastern";
+char *tzarizona = "US/Arizona";
 
 static Display *dpy;
 
@@ -162,9 +162,9 @@ main(void)
 	char *status;
 	char *avgs;
 	/*char *bat;*/
-	char *tmest;
-	char *tmutc;
-	char *tmaz;
+	/*char *tmest;*/
+	/*char *tmutc;*/
+	/*char *tmaz;*/
 
 	if (!(dpy = XOpenDisplay(NULL))) {
 		fprintf(stderr, "dwmstatus: cannot open display.\n");
@@ -174,18 +174,18 @@ main(void)
 	for (;;sleep(90)) {
 		avgs = loadavg();
 		/*bat = getbattery("/proc/acpi/battery/BAT0");*/
-		tmest = mktimes("%H:%M", tzest);
-		tmutc = mktimes("%H:%M", tzutc);
-		tmaz = mktimes("%H:%M", tzarizona);
+		/*tmest = mktimes("%H:%M", tzest);*/
+		/*tmutc = mktimes("%H:%M", tzutc);*/
+		/*tmaz = mktimes("%H:%M", tzarizona);*/
 
-		status = smprintf(" Load: %s | EST: %s | AZ: %s | U: %s ",
-				avgs, tmest, tmutc, tmaz);
+		/*status = smprintf(" Load: %s | EST: %s | AZ: %s | U: %s ", avgs, tmest, tmutc, tmaz);*/
+		status = smprintf(" Load: %s ", avgs);
 		setstatus(status);
 		free(avgs);
 		/*free(bat);*/
-		free(tmest);
-		free(tmutc);
-		free(tmaz);
+		/*free(tmest);*/
+		/*free(tmutc);*/
+		/*free(tmaz);*/
 		free(status);
 	}
 

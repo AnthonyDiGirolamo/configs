@@ -20,8 +20,9 @@ zsh/zsh/cache
 *.zip
 *.bz2
 *.tar.gz
-dmenu/dmenu-3.9/dmenu
-dmenu/dmenu_path
+dmenu/dmenu
+dmenu/lsx
 dmenu/dmenu_run
 dwm/dwm
+dwm/dwmstatus-1.0/dwmstatus
 *.swp
