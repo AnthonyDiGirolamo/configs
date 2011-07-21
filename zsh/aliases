@@ -1,0 +1,83 @@
+# MacOS Specific Settings
+uname -a | grep -qs Darwin
+if [ $? -eq 0 ]; then
+	export PATH=/opt/local/bin:$PATH
+  # sudo port install coreutils
+  # to get the following to work in OSX
+  alias ls='gls --color=auto'
+	alias gvim=mvim
+	alias vim='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
+  export EDITOR='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
+else
+# Linux
+  eval "`dircolors -b`"
+  alias ls='ls --color=auto'
+	alias vim='TERM=xterm-256color vim'
+  export EDITOR='TERM=xterm-256color vim'
+
+	alias rm='mv --verbose -i --target-directory ~/.Trash/'
+	alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
+fi
+
+alias b="bundle"
+alias bi="b install --path vendor"
+alias bu="b update"
+alias be="b exec"
+alias binit="bi && b package && echo 'vendor/ruby' >> .gitignore"
+
+# Rename files recursively in the current dir and replace space with _
+autoload -U zmv
+alias space2under='zmv -Q "(**/)(* *)(D)" "\$1\${2// /_}"'
+
+alias w="w|sed -e '/^USER.*$/d'|sort|less"
+
+alias grep='grep -i --color=auto'
+alias randmac="head /dev/urandom | openssl md5 | sed 's/\(..\)/\1:/g' | cut -c1-17"
+
+alias xdef='xrdb -load ~/.Xdefaults'
+
+alias lltr='ll -tr'
+alias lla='ls -lhA'
+alias ll='ls -lh'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias mutt='TERM=xterm-256color mutt'
+
+alias gl='git log'
+alias gll='git log --pretty=oneline'
+alias gs='git status'
+alias gc='git commit'
+alias gca='git commit -a'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gp='git pull'
+alias gpp='git push'
+
+alias d='dirs -v'
+alias p='pushd'
+alias o='popd'
+
+alias h='history 1'
+
+alias du='du -hsc'
+alias df='df -hTP'
+
+# GTD Stuff
+# alias t='vim ~/Notes/GTD.mkd'
+# alias tg='gvim ~/Notes/GTD.mkd'
+# alias today='grep `date +%m/%d` ~/Notes/GTD.mkd'
+
+alias cjob='qsub -l walltime=02:00:00 -l size=12 -N compiling -j oe -I -A STF007'
+alias cj='checkjob -v'
+
+alias m=module
+alias ml='m load'
+alias mr='m unload'
+alias md='m display'
+alias ma='m avail'
+alias mk='m keyword'
+alias mll='m list'
+
+alias tree='tree -C'
+alias tmux='tmux -2'
