@@ -8,6 +8,9 @@ export FPATH=/usr/share/zsh/`zsh --version | awk '{print $2}'`/functions
 fpath=($HOME/.zsh/func $fpath)
 typeset -U fpath
 
+autoload -U zmv
+
+
 r() {
   local f; f=($HOME/.zsh/func/*(.))
   unfunction $f:t 2> /dev/null
@@ -102,7 +105,7 @@ function authme {
 
 function setupenv {
   pushd ~
-	rsync -avLK --delete --exclude mthesaur-vim.txt .gitconfig .vim .vimrc .zsh .zshrc .screenrc $@:~/
+	rsync -avLK --delete --exclude mthesaur-vim.txt .gitconfig .vim .vimrc .zsh .zshrc .screenrc .tmux.conf .aliases .irbrc $@:~/
   popd
 }
 

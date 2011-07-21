@@ -26,7 +26,6 @@ alias be="b exec"
 alias binit="bi && b package && echo 'vendor/ruby' >> .gitignore"
 
 # Rename files recursively in the current dir and replace space with _
-autoload -U zmv
 alias space2under='zmv -Q "(**/)(* *)(D)" "\$1\${2// /_}"'
 
 alias w="w|sed -e '/^USER.*$/d'|sort|less"
