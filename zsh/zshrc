@@ -91,13 +91,6 @@ fi
 
 source ~/.aliases
 
-### Variables
-export PATH=$HOME/Preferences/bin:$PATH
-export PATH=$HOME/apps/ctags/bin:$PATH
-export PATH=$HOME/apps/git/bin:$PATH
-export PATH=$HOME/apps/vim/bin:$PATH
-export PATH=$HOME/apps/tree/bin:$PATH
-
 # Auth your sshkey with another server
 function authme {
     ssh $@ 'cat >>.ssh/authorized_keys' <~/.ssh/id_rsa.pub

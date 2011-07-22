@@ -80,3 +80,12 @@ alias mll='m list'
 
 alias tree='tree -C'
 alias tmux='tmux -2'
+
+export PATH=$HOME/Preferences/bin:$PATH
+export PATH=$HOME/apps/ctags/bin:$PATH
+export PATH=$HOME/apps/git/bin:$PATH
+export PATH=$HOME/apps/vim/bin:$PATH
+export PATH=$HOME/apps/tree/bin:$PATH
+export PATH=$HOME/apps/zsh/bin:$PATH
+export PATH=$HOME/apps/tmux/bin:$PATH
+
