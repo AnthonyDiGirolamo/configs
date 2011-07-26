@@ -43,6 +43,7 @@ alias l='ls -CF'
 
 alias mutt='TERM=xterm-256color mutt'
 
+alias ga='git add'
 alias gl='git log'
 alias gll='git log --pretty=oneline'
 alias gs='git status'
