@@ -1,15 +1,15 @@
 #!/usr/bin/zsh
 stty stop undef
 stty start undef
+source ~/.aliases
 
-export FPATH=/usr/share/zsh/`zsh --version | awk '{print $2}'`/functions
-#export FPATH=/usr/share/zsh/4.2.6/functions
-#export FPATH=/usr/share/zsh/4.3.9/functions
+ZSHLOC=`dirname \`which zsh\``
+ZSHVER=`zsh --version | awk '{print $2}'`
+export FPATH=$ZSHLOC/../share/zsh/$ZSHVER/functions
 fpath=($HOME/.zsh/func $fpath)
 typeset -U fpath
 
 autoload -U zmv
-
 
 r() {
   local f; f=($HOME/.zsh/func/*(.))
