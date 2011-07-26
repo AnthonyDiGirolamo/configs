@@ -75,9 +75,12 @@ if $TERM == 'xterm256-color'
 endif
 
 "colors warm_grey
-colors molokai
+"colors molokai
 "colors fine_blue
 "colors mac_classic
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
 
 if has('gui_running')
   if has("gui_gtk2")
