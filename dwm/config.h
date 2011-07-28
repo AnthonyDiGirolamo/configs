@@ -12,8 +12,10 @@ static const char font[]            = "-*-terminus-bold-r-normal-*-16-*-*-*-*-*-
 // Blues:
 // Dark 204a87 Light 3465a4
 
-static const char normbordercolor[] = "#2e3436";
-static const char selbordercolor[]  = "#fce94f"; // yellow
+//static const char normbordercolor[] = "#2e3436";
+static const char normbordercolor[] = "#002b36"; // brblack SOLARIZED
+static const char selbordercolor[]  = "#268bd2"; // blue    SOLARIZED
+//static const char selbordercolor[]  = "#fce94f"; // yellow
 //static const char selbordercolor[]  = "#3465a4"; // blue
 //static const char selbordercolor[] = "#a7cc5c"; // green
 
@@ -104,9 +106,9 @@ static Key keys[] = {
   { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
   { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
   { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-  { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
-  { MODKEY,                       XK_s,      setlayout,      {.v = &layouts[4]} },
-  { MODKEY,                       XK_d,      setlayout,      {.v = &layouts[5]} },
+  //{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
+  //{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[4]} },
+  //{ MODKEY,                       XK_d,      setlayout,      {.v = &layouts[5]} },
   //{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[6]} },
   //{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[7]} },
   { MODKEY,                       XK_p,      setlayout,      {0} },
