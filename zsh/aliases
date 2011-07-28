@@ -21,6 +21,12 @@ else
 	alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
 fi
 
+hostname -s | grep -qs 'cave'
+if [ $? -eq 0 ]; then
+	alias vim='TERM=xterm-256color /usr/bin/vim'
+  export EDITOR='TERM=xterm-256color /usr/bin/vim'
+fi
+
 alias b="bundle"
 alias bi="b install --path vendor"
 alias bu="b update"

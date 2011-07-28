@@ -3,16 +3,16 @@ stty stop undef
 stty start undef
 source ~/.aliases
 
-ZSHLOC=`dirname \`which zsh\``
-ZSHVER=`zsh --version | awk '{print $2}'`
-export FPATH=$ZSHLOC/../share/zsh/$ZSHVER/functions
-fpath=($HOME/.zsh/func $fpath)
+#ZSHLOC=`dirname \`which zsh\``
+#ZSHVER=`zsh --version | awk '{print $2}'`
+#export FPATH=$ZSHLOC/../share/zsh/$ZSHVER/functions:/usr/share/zsh/$ZSHVER/functions
+fpath=(~/.zsh/func $fpath)
 typeset -U fpath
 
 autoload -U zmv
 
 r() {
-  local f; f=($HOME/.zsh/func/*(.))
+  local f; f=(~/.zsh/func/*(.))
   unfunction $f:t 2> /dev/null
   autoload -U $f:t
 }
