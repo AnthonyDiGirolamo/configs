@@ -19,10 +19,10 @@ static const char selbordercolor[]  = "#268bd2"; // blue    SOLARIZED
 //static const char selbordercolor[]  = "#3465a4"; // blue
 //static const char selbordercolor[] = "#a7cc5c"; // green
 
-static const char normbgcolor[]     = "#222222"; // darker
-static const char normfgcolor[]     = "#EEEEEC";
-static const char selbgcolor[]      = "#585858"; // lighter
-static const char selfgcolor[]      = "#EEEEEC";
+static const char normbgcolor[]     = "#002b36"; // darker
+static const char normfgcolor[]     = "#657b83";
+static const char selbgcolor[]      = "#073642"; // lighter
+static const char selfgcolor[]      = "#fdf6e3";
 
 static unsigned int borderpx        = 2;        /* border pixel of windows */
 static unsigned int snap            = 32;       /* snap pixel */
