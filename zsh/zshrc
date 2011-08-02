@@ -8,6 +8,7 @@ source ~/.aliases
 #export FPATH=$ZSHLOC/../share/zsh/$ZSHVER/functions:/usr/share/zsh/$ZSHVER/functions
 fpath=(~/.zsh/func $fpath)
 typeset -U fpath
+export FPATH=`echo $fpath | sed 's/ /:/g'`
 
 autoload -U zmv
 
