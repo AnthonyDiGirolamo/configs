@@ -70,18 +70,18 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
-if $TERM == 'xterm256-color'
+"if $TERM == 'xterm-256color'
   set t_Co=256 " set 256 color terminal
-  let g:solarized_termcolors=256
-endif
+  "let g:solarized_termcolors=256
+"endif
 
-set background=light
-"set background=dark
+"set background=light
+set background=dark
 "colors warm_grey
-"colors molokai
+colors molokai
 "colors fine_blue
 "colors mac_classic
-colorscheme solarized
+"colors solarized
 
 if has('gui_running')
   if has("gui_gtk2")

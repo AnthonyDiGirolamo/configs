@@ -102,23 +102,23 @@ xterm*highlightSelection: true
 
 ! Dark Background
 
-!xterm*background:             #002b36
-!xterm*foreground:             #657b83
-!xterm*fading:                 40
-!xterm*fadeColor:              #002b36
-!xterm*cursorColor:            #93a1a1
-!xterm*pointerColorBackground: #586e75
-!xterm*pointerColorForeground: #93a1a1
+xterm*background:             #002b36
+xterm*foreground:             #657b83
+xterm*fading:                 40
+xterm*fadeColor:              #002b36
+xterm*cursorColor:            #93a1a1
+xterm*pointerColorBackground: #586e75
+xterm*pointerColorForeground: #93a1a1
 
 ! Light Background
 
-xterm*background:             #fdf6e3
-xterm*foreground:             #657b83
-xterm*fading:                 40
-xterm*fadeColor:              #fdf6e3
-xterm*cursorColor:            #586e75
-xterm*pointerColorBackground: #93a1a1
-xterm*pointerColorForeground: #586e75
+!xterm*background:             #fdf6e3
+!xterm*foreground:             #657b83
+!xterm*fading:                 40
+!xterm*fadeColor:              #fdf6e3
+!xterm*cursorColor:            #586e75
+!xterm*pointerColorBackground: #93a1a1
+!xterm*pointerColorForeground: #586e75
 
 !! black dark/light
 xterm*color0:                #073642

@@ -10,22 +10,22 @@ if [ $? -eq 0 ]; then
 	alias gvim=mvim
 	alias vim='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
   export EDITOR='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
-  alias f12insert='xmodmap -e "keycode 119 = Insert"'
 else
 # Linux
   #eval "`dircolors -b`"
   alias ls='ls --color=auto'
-	alias vim='TERM=xterm-256color vim'
-  export EDITOR='TERM=xterm-256color vim'
+  #alias vim='vim'
+  export EDITOR='vim'
 
+	alias rrm='/bin/rm'
 	alias rm='mv --verbose -i --target-directory ~/.Trash/'
 	alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
 fi
 
 hostname -s | grep -qs 'cave'
 if [ $? -eq 0 ]; then
-	alias vim='TERM=xterm-256color /usr/bin/vim'
-  export EDITOR='TERM=xterm-256color /usr/bin/vim'
+	alias vim='/usr/bin/vim'
+  export EDITOR='/usr/bin/vim'
 fi
 
 alias b="bundle"
@@ -50,7 +50,7 @@ alias ll='ls -lh'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias mutt='TERM=xterm-256color mutt'
+alias mutt='mutt'
 
 alias ga='git add'
 alias gl='git log'
