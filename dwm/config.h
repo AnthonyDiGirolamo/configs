@@ -50,7 +50,7 @@ static Rule rules[] = {
 static float mfact      = 0.50; /* factor of master area size [0.05..0.95] */
 static Bool resizehints = False; /* False means respect size hints in tiled resizals */
 
-//#include "gaplessgrid.c"
+#include "gaplessgrid.c"
 //#include "fibonacci.c"
 
 static Layout layouts[] = {
@@ -58,7 +58,7 @@ static Layout layouts[] = {
   { "[]=",      tile },    /* first entry is default */
   { "><>",      NULL },    /* no layout function means floating behavior */
   { "[M]",      monocle },
-  //{ "###",      gaplessgrid },
+  { "###",      gaplessgrid },
   //{ "[@]",      spiral },
   //{ "[\\]",     dwindle },
   //{ "TTT",      bstack },
@@ -106,7 +106,7 @@ static Key keys[] = {
   { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
   { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
   { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-  //{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
+  { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
   //{ MODKEY,                       XK_s,      setlayout,      {.v = &layouts[4]} },
   //{ MODKEY,                       XK_d,      setlayout,      {.v = &layouts[5]} },
   //{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[6]} },
