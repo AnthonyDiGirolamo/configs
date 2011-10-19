@@ -1,0 +1,15 @@
+***************
+*** 34,38 ****
+  };
+  
+  /* key definitions */
+  #define MODKEY Mod1Mask
+  #define TAGKEYS(KEY,TAG) \
+--- 36,42 ----
++ 	{ "TTT",      bstack },
++ 	{ "===",      bstackhoriz },
+  };
+  
+  /* key definitions */
+  #define MODKEY Mod1Mask
+  #define TAGKEYS(KEY,TAG) \
