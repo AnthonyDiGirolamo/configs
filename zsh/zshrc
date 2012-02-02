@@ -79,7 +79,7 @@ local PWDSIZE=${#${(%):-%~}}
 if [[ "$PROMPTSIZE + $PWDSIZE" -gt $TERMWIDTH ]]; then
  (( PR_PWDLEN = $TERMWIDTH - $PROMPTSIZE ))
 fi
-RPS1="%{$fg[cyan]%}%${PR_PWDLEN}<...<%~%<<%{$reset_color%}"
+RPS1="%{$fg[blue]%}%${PR_PWDLEN}<...<%~%<<%{$reset_color%}"
 
 source ~/.aliases
 
