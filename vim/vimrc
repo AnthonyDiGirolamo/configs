@@ -127,7 +127,7 @@ imap <C-O> <C-X><C-O>
 map <tab><tab> :tabn<cr>
 map <s-Tab><s-Tab> :tabprevious<cr>
 " pressing space twice will move to the next split and maximize
-map <space><space> <c-W>w<c-W>_
+"map <space><space> <c-W>w<c-W>_
 
 " F10 to make and view a latex pdf
 map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
@@ -158,8 +158,9 @@ let g:rubycomplete_rails = 1
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
 
-" Fuzzy Find Shortcut
-nnoremap <silent> <C-y> :tabnew<CR>:FufFile **/<CR>
+" CommandT Shortcut
+nnoremap <silent> <C-y> :CommandT<CR>
+set wildignore=.git,vendor,pkg
 
 " Ignore whitespace in vimdiff
 set diffopt+=iwhite
@@ -189,8 +190,8 @@ let Tlist_Enable_Fold_Column      = 0
 let Tlist_File_Fold_Auto_Close    = 1
 
 " Use :C to run a calculation, needs python support
-:command! -nargs=+ C :py print <args>
-:py from math import *
+":command! -nargs=+ C :py print <args>
+":py from math import *
 
 nmap <silent> <M-t> :CommandT<CR>
 nmap <silent> _t :CommandT<CR>

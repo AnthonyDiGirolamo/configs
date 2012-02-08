@@ -1,6 +1,6 @@
 #!/bin/sh
 PREFS='Preferences'
-RM='/bin/rm -v'
+RM='/bin/rm -rvf'
 LN='ln -sv'
 
 cd ~/$PREFS
