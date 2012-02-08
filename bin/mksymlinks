@@ -29,7 +29,6 @@ FILE=vim/vimrc               ; rmln
 FILE=vim/vim                 ; rmln
 
 FILE=zsh/zsh                 ; rmln
-FILE=zsh/zhistory            ; rmln
 FILE=zsh/zsh_prompt          ; rmln
 FILE=zsh/zshrc               ; rmln
 FILE=zsh/aliases             ; rmln
