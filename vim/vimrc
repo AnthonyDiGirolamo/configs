@@ -1,7 +1,6 @@
 " Load Pathogen
 filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+call pathogen#infect()
 
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -75,13 +74,13 @@ endif
   "let g:solarized_termcolors=256
 "endif
 
-"set background=light
-set background=dark
+set background=light
+"set background=dark
 "colors warm_grey
-colors molokai
+"colors molokai
 "colors fine_blue
 "colors mac_classic
-"colors solarized
+colors solarized
 
 if has('gui_running')
   if has("gui_gtk2")
