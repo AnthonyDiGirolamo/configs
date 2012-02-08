@@ -1,2 +1,0 @@
-#!/bin/sh
-xterm -fg lightgray -bg black -fa Terminus -fs 11 -e screen -R &
