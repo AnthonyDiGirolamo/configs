@@ -127,7 +127,7 @@ imap <C-O> <C-X><C-O>
 map <tab><tab> :tabn<cr>
 map <s-Tab><s-Tab> :tabprevious<cr>
 " pressing space twice will move to the next split and maximize
-"map <space><space> <c-W>w<c-W>_
+map <space><space> <c-W>w
 
 " F10 to make and view a latex pdf
 map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
@@ -143,9 +143,6 @@ imap <F12> <ESC>:TlistToggle<CR>
 imap jj <Esc>l
 " Remap Esc
 
-map T :Texplore<CR>
-map Y :Explore<CR>
-
 " Alt-C and V copy and paste to and from the system clipboard
 map <M-c> "*y
 map <M-v> "*p
@@ -158,8 +155,11 @@ let g:rubycomplete_rails = 1
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
 
+map T :tabe<CR>
+map Y :CommandT<CR>
+
 " CommandT Shortcut
-nnoremap <silent> <C-y> :CommandT<CR>
+nnoremap <silent> <C-y> :Explore<CR>
 set wildignore=.git,vendor,pkg
 
 " Ignore whitespace in vimdiff
