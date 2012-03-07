@@ -112,5 +112,3 @@ export PATH=$HOME/apps/tree/bin:$PATH
 export PATH=$HOME/apps/zsh/bin:$PATH
 export PATH=$HOME/apps/tmux/bin:$PATH
 
-declare -f module &> /dev/null && module load git ruby
-

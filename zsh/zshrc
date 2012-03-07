@@ -1,7 +1,6 @@
 #!/usr/bin/zsh
 stty stop undef
 stty start undef
-source ~/.aliases
 
 #ZSHLOC=`dirname \`which zsh\``
 #ZSHVER=`zsh --version | awk '{print $2}'`
@@ -223,4 +222,8 @@ compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile
 
 # RVM Source
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+source ~/.aliases
+
+declare -f module &> /dev/null && module load git ruby
 
