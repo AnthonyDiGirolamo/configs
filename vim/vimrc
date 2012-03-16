@@ -76,11 +76,11 @@ endif
 
 set background=light
 "set background=dark
+colors solarized
 "colors warm_grey
 "colors molokai
 "colors fine_blue
 "colors mac_classic
-colors solarized
 
 if has('gui_running')
   if has("gui_gtk2")
