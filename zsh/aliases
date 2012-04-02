@@ -65,12 +65,17 @@ alias l='ls -CF'
 alias mutt='mutt'
 
 alias ga='git add'
-alias gl='git log'
+function gl {
+  git log $@ | vim +'set bt=nowrite' -
+}
 alias gll='git log --pretty=oneline'
 alias gs='git status'
 alias gc='git commit'
 alias gca='git commit -a'
-alias gd='git diff'
+#alias gd='git diff --no-color | vim -'
+function gd {
+  git diff --no-color $@ | vim +'set bt=nowrite' -
+}
 alias gdc='git diff --cached'
 alias gp='git pull'
 alias gpp='git push'

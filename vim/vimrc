@@ -57,7 +57,7 @@ set foldlevel=99
 set number            " line numbering
 set tabstop=2         " set tabs to 2 spaces
 set shiftwidth=2
-set expandtab
+set expandtab!
 
 set linebreak         " wrap on words rather than characters
 set textwidth=80      " insert EOL after 75 columns
@@ -156,10 +156,10 @@ let g:rubycomplete_rails = 1
 nnoremap <C-L> :nohl<CR><C-L>
 
 map T :tabe<CR>
-map Y :CommandT<CR>
+map Y :Explore<CR>
 
 " CommandT Shortcut
-nnoremap <silent> <C-y> :Explore<CR>
+nnoremap <silent> <C-y> :CommandT<CR>
 set wildignore=.git,vendor,pkg
 
 " Ignore whitespace in vimdiff
@@ -193,8 +193,8 @@ let Tlist_File_Fold_Auto_Close    = 1
 ":command! -nargs=+ C :py print <args>
 ":py from math import *
 
-nmap <silent> <M-t> :CommandT<CR>
-nmap <silent> _t :CommandT<CR>
+"nmap <silent> <M-t> :CommandT<CR>
+"nmap <silent> _t :CommandT<CR>
 
 " Old and unused stuff below, kept for reference
 
