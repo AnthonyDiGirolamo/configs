@@ -1,7 +1,6 @@
 " Load Pathogen
 filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+call pathogen#infect()
 
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -58,7 +57,7 @@ set foldlevel=99
 set number            " line numbering
 set tabstop=2         " set tabs to 2 spaces
 set shiftwidth=2
-set expandtab
+set expandtab!
 
 set linebreak         " wrap on words rather than characters
 set textwidth=80      " insert EOL after 75 columns
@@ -75,13 +74,13 @@ endif
   "let g:solarized_termcolors=256
 "endif
 
-"set background=light
-set background=dark
+set background=light
+"set background=dark
+colors solarized
 "colors warm_grey
-colors molokai
+"colors molokai
 "colors fine_blue
 "colors mac_classic
-"colors solarized
 
 if has('gui_running')
   if has("gui_gtk2")
@@ -128,7 +127,7 @@ imap <C-O> <C-X><C-O>
 map <tab><tab> :tabn<cr>
 map <s-Tab><s-Tab> :tabprevious<cr>
 " pressing space twice will move to the next split and maximize
-map <space><space> <c-W>w<c-W>_
+map <space><space> <c-W>w
 
 " F10 to make and view a latex pdf
 map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
@@ -144,9 +143,6 @@ imap <F12> <ESC>:TlistToggle<CR>
 imap jj <Esc>l
 " Remap Esc
 
-map T :Texplore<CR>
-map Y :Explore<CR>
-
 " Alt-C and V copy and paste to and from the system clipboard
 map <M-c> "*y
 map <M-v> "*p
@@ -159,8 +155,12 @@ let g:rubycomplete_rails = 1
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
 
-" Fuzzy Find Shortcut
-nnoremap <silent> <C-y> :tabnew<CR>:FufFile **/<CR>
+map T :tabe<CR>
+map Y :Explore<CR>
+
+" CommandT Shortcut
+nnoremap <silent> <C-y> :CommandT<CR>
+set wildignore=.git,vendor,pkg
 
 " Ignore whitespace in vimdiff
 set diffopt+=iwhite
@@ -190,11 +190,11 @@ let Tlist_Enable_Fold_Column      = 0
 let Tlist_File_Fold_Auto_Close    = 1
 
 " Use :C to run a calculation, needs python support
-:command! -nargs=+ C :py print <args>
-:py from math import *
+":command! -nargs=+ C :py print <args>
+":py from math import *
 
-nmap <silent> <M-t> :CommandT<CR>
-nmap <silent> _t :CommandT<CR>
+"nmap <silent> <M-t> :CommandT<CR>
+"nmap <silent> _t :CommandT<CR>
 
 " Old and unused stuff below, kept for reference
 

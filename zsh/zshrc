@@ -1,7 +1,6 @@
 #!/usr/bin/zsh
 stty stop undef
 stty start undef
-source ~/.aliases
 
 #ZSHLOC=`dirname \`which zsh\``
 #ZSHVER=`zsh --version | awk '{print $2}'`
@@ -64,8 +63,6 @@ autoload -U promptinit && promptinit
 # Run prompt -h for help # prompt wunjo for git aware
 
 autoload -U colors zsh/terminfo && colors
-# Super Minimalistic
-PS1="%{$fg[green]%}%(!.#.$)%{$reset_color%} "
 
 # Right Justified Prompt
 # ======================
@@ -79,7 +76,11 @@ local PWDSIZE=${#${(%):-%~}}
 if [[ "$PROMPTSIZE + $PWDSIZE" -gt $TERMWIDTH ]]; then
  (( PR_PWDLEN = $TERMWIDTH - $PROMPTSIZE ))
 fi
-RPS1="%{$fg[cyan]%}%${PR_PWDLEN}<...<%~%<<%{$reset_color%}"
+#RPS1="%{$fg[blue]%}%${PR_PWDLEN}<...<%~%<<%{$reset_color%}"
+
+# Super Minimalistic
+#PS1="%{$fg[green]%}%(!.#.$)%{$reset_color%} "
+PS1="%{$fg[blue]%}%${PR_PWDLEN}<...<%~%<<%{$reset_color%} %{$fg[green]%}%(!.#.$)%{$reset_color%} "
 
 source ~/.aliases
 
@@ -224,3 +225,9 @@ compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile
 # RVM Source
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
+source ~/.aliases
+
+declare -f module &> /dev/null && module load git ruby
+
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
