@@ -1,0 +1,3 @@
+find /lib/modules -iname "*_gfx*"
+sudo sed -i 's/MODULES=.*/MODULES="psb_gfx"/' /etc/mkinitcpio.conf
+sudo mkinitcpio -p linux
