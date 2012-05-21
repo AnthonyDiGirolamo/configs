@@ -189,6 +189,8 @@ let Tlist_Sort_Type               = "name"
 let Tlist_Enable_Fold_Column      = 0
 let Tlist_File_Fold_Auto_Close    = 1
 
+let NERDTreeMinimalUI=1
+
 " Use :C to run a calculation, needs python support
 ":command! -nargs=+ C :py print <args>
 ":py from math import *
