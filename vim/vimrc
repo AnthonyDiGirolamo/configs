@@ -86,7 +86,7 @@ if has('gui_running')
   if has("gui_gtk2")
     set guifont=Inconsolata\ 14
   elseif has("gui_macvim")
-    set guifont=Inconsolata:h22
+    set guifont=Inconsolata:h26
   endif
   set guioptions=agm
   "set guioptions=aegimtT
