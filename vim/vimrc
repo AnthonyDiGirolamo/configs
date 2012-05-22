@@ -20,7 +20,7 @@ set laststatus=2 " always show the editing status bar at the bottom
 set showcmd      " display incomplete commands
 set incsearch    " do incremental searching
 
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+"set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 " set mouse=a
@@ -191,12 +191,12 @@ let Tlist_File_Fold_Auto_Close    = 1
 
 let NERDTreeMinimalUI=1
 
+" Open file browser
+nnoremap <silent> <F2> :NERDTreeToggle<CR>
+
 " Use :C to run a calculation, needs python support
 ":command! -nargs=+ C :py print <args>
 ":py from math import *
-
-"nmap <silent> <M-t> :CommandT<CR>
-"nmap <silent> _t :CommandT<CR>
 
 " Old and unused stuff below, kept for reference
 
