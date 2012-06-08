@@ -14,3 +14,7 @@
 	file-view-vpane-position = 667
 [push]
 	default = current
+
+[alias]
+  ribbon = tag --force _ribbon origin/master
+  catchup = log --patch --reverse --topo-order _ribbon..origin/master

@@ -20,7 +20,7 @@ set laststatus=2 " always show the editing status bar at the bottom
 set showcmd      " display incomplete commands
 set incsearch    " do incremental searching
 
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+"set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 " set mouse=a
@@ -57,7 +57,7 @@ set foldlevel=99
 set number            " line numbering
 set tabstop=2         " set tabs to 2 spaces
 set shiftwidth=2
-set expandtab!
+set expandtab
 
 set linebreak         " wrap on words rather than characters
 set textwidth=80      " insert EOL after 75 columns
@@ -94,7 +94,7 @@ if has('gui_running')
   set vb t_vb=
 endif
 
-"setlocal spell spelllang=en_us    " set the spellcheck to english
+setlocal spell spelllang=en_us   " set the spellcheck to english
 set mousemodel=popup_setpos      " set the right click in gvim to spellcheck
 
 " F9 will turn spell checking on or off in normal and insert mode
@@ -189,12 +189,14 @@ let Tlist_Sort_Type               = "name"
 let Tlist_Enable_Fold_Column      = 0
 let Tlist_File_Fold_Auto_Close    = 1
 
+let NERDTreeMinimalUI=1
+
+" Open file browser
+nnoremap <silent> <F2> :NERDTreeToggle<CR>
+
 " Use :C to run a calculation, needs python support
 ":command! -nargs=+ C :py print <args>
 ":py from math import *
-
-"nmap <silent> <M-t> :CommandT<CR>
-"nmap <silent> _t :CommandT<CR>
 
 " Old and unused stuff below, kept for reference
 
