@@ -57,7 +57,7 @@ set foldlevel=99
 set number            " line numbering
 set tabstop=2         " set tabs to 2 spaces
 set shiftwidth=2
-set expandtab!
+set expandtab
 
 set linebreak         " wrap on words rather than characters
 set textwidth=80      " insert EOL after 75 columns
@@ -94,7 +94,7 @@ if has('gui_running')
   set vb t_vb=
 endif
 
-"setlocal spell spelllang=en_us    " set the spellcheck to english
+setlocal spell spelllang=en_us   " set the spellcheck to english
 set mousemodel=popup_setpos      " set the right click in gvim to spellcheck
 
 " F9 will turn spell checking on or off in normal and insert mode
