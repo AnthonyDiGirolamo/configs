@@ -83,6 +83,7 @@ alias gpp='git push'
 alias d='dirs -v'
 alias p='pushd'
 alias o='popd'
+alias u='cd ..'
 
 alias h='history 1'
 
@@ -99,12 +100,13 @@ alias cj='checkjob -v'
 
 alias m=module
 alias ml='m load'
+alias mh='m help'
 alias ms='m swap'
 alias mr='m unload'
 alias md='m display'
 alias ma='m avail'
 alias mk='m keyword'
-alias mll='m list'
+alias mll="module list -l 2>&1 | ruby -e 'STDIN.readlines.tap{|s|s.delete_at(1)}.sort.each{|l| puts l}'"
 
 alias tree='tree -C'
 alias tmux='tmux -2'
