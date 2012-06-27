@@ -232,5 +232,5 @@ declare -f module &> /dev/null && module load git ruby
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-source /sw/tools/smithy/environment.sh
+#source /sw/tools/smithy/environment.sh
 
