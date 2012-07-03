@@ -208,19 +208,23 @@ note_directory=$HOME/Notes
 note_directory_escaped=${note_directory//\//\\/}\\\/
 
 note_filename_completion() {
-  reply=(`find -L $note_directory | sed -e "s/$note_directory_escaped//"`)
+  filenames=` find -L $note_directory | sed -e "s/$note_directory_escaped\(.*\)/\1/" | tr '\n' ',' `
+  reply=(${(ps:,:)filenames})
 }
 note_grep_completion() {
-  reply=(`grep -Iirls --exclude="*\.log" --exclude="*bz2" --exclude="*gz" "$@" $note_directory | sed -e "s/$note_directory_escaped//"`)
+  files=` grep -Iirls --exclude="*\.log" --exclude="*bz2" --exclude="*gz" "$@" $note_directory | sed -e "s/$note_directory_escaped//" | tr '\n' ','`
+  reply=(${(ps:,:)files})
 }
 
 # Edit or Create Note
-n() { vim $note_directory/$@ }
+n() { vim "$note_directory/$@" }
 # Copy Notes
 cn() { cat "$note_directory/$@" | pbcopy }
 
-compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' n
-compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' cn
+#compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' n
+#compctl -M 'm:{a-zA-Z}={A-Za-z}' -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' cn
+compctl -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' n
+compctl -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' cn
 
 # RVM Source
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
