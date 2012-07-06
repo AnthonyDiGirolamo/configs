@@ -37,3 +37,6 @@
 [submodule "vim/vim/bundle/ri.vim.git"]
 	path = vim/vim/bundle/ri.vim.git
 	url = https://github.com/danchoi/ri.vim.git
+[submodule "vim/vim/bundle/vim-repeat.git"]
+	path = vim/vim/bundle/vim-repeat.git
+	url = https://github.com/tpope/vim-repeat.git
