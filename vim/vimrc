@@ -27,6 +27,8 @@ set incsearch    " do incremental searching
 
 filetype plugin indent on
 
+autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
+
 augroup markdown
 au BufNewFile,BufRead *.mkd set ft=markdown.liquid
 au BufNewFile,BufRead *.mkd set syntax=markdown.liquid

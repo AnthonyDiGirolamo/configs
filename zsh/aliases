@@ -118,4 +118,5 @@ export PATH=$HOME/apps/vim/bin:$PATH
 export PATH=$HOME/apps/tree/bin:$PATH
 export PATH=$HOME/apps/zsh/bin:$PATH
 export PATH=$HOME/apps/tmux/bin:$PATH
+export PATH=/usr/local/bin:$PATH
 
