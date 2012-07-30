@@ -106,6 +106,8 @@ endif
 setlocal spell spelllang=en_us   " set the spellcheck to english
 set mousemodel=popup_setpos      " set the right click in gvim to spellcheck
 
+let mapleader = ","
+
 " F9 will turn spell checking on or off in normal and insert mode
 map <F9> :setlocal spell! spelllang=en_us<cr>
 imap <F9> <ESC>:setlocal spell! spelllang=en_us<cr>i
@@ -168,15 +170,11 @@ map T :tabe<CR>
 map Y :Explore<CR>
 
 " CommandT Shortcut
-nnoremap <silent> <C-y> :CommandT<CR>
+"nnoremap <silent> <C-y> :CommandT<CR>
 set wildignore=.git,vendor,pkg
 
 " Ignore whitespace in vimdiff
 set diffopt+=iwhite
-
-let g:jekyll_path = "/home/adigiro/Dev/anthonydigirolamo.github.com"
-"map jn  :JekyllPost<CR>
-"map jl  :JekyllList<CR>
 
 let g:user_zen_settings       = { 'erb' : { 'extends' : 'html' } }
 let g:user_zen_expandabbr_key = '<c-e>'
