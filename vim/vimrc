@@ -6,8 +6,6 @@ call pathogen#infect()
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-let $PATH= $PATH . ":/opt/local/bin"
-
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -169,8 +167,16 @@ nnoremap <C-L> :nohl<CR><C-L>
 map T :tabe<CR>
 map Y :Explore<CR>
 
+" Bubble single lines
+nmap <C-k> [e
+nmap <C-j> ]e
+" " Bubble multiple lines
+vmap <C-k> [egv
+vmap <C-j> ]egv
+
 " CommandT Shortcut
 "nnoremap <silent> <C-y> :CommandT<CR>
+let g:CommandTMaxFiles=20000
 set wildignore=.git,vendor,pkg
 
 " Ignore whitespace in vimdiff
