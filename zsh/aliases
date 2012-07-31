@@ -120,3 +120,9 @@ export PATH=$HOME/apps/zsh/bin:$PATH
 export PATH=$HOME/apps/tmux/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 
+alias sshfoxy1='ssh lmd@login1.ornl.gov -L2222:uac2.ornl.gov:22'
+alias sshfoxy2='ssh -p 2222 lmd@localhost -D localhost:8888 -L9993:mail.ornl.gov:993 -L2525:smtp.ornl.gov:25'
+
+alias sshhome='ssh home.ccs.ornl.gov -Y'
+alias sshcave='ssh cave -Y'
+
