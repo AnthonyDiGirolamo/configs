@@ -55,3 +55,6 @@
 [submodule "vim/vim/bundle/snipmate-snippets.git"]
 	path = vim/vim/bundle/snipmate-snippets.git
 	url = https://github.com/honza/snipmate-snippets.git
+[submodule "vim/vim/bundle/neocomplcache.git"]
+	path = vim/vim/bundle/neocomplcache.git
+	url = https://github.com/Shougo/neocomplcache.git
