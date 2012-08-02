@@ -25,8 +25,6 @@ set incsearch    " do incremental searching
 
 filetype plugin indent on
 
-" autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
-
 augroup arduino
 au BufNewFile,BufRead *.ino set ft=cpp
 au BufNewFile,BufRead *.ino set syntax=cpp
