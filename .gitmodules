@@ -10,9 +10,6 @@
 [submodule "vim/vim/bundle/vim-liquid.git"]
 	path = vim/vim/bundle/vim-liquid.git
 	url = https://github.com/tpope/vim-liquid.git
-[submodule "vim/vim/bundle/snipmate.vim.git"]
-	path = vim/vim/bundle/snipmate.vim.git
-	url = https://github.com/msanders/snipmate.vim.git
 [submodule "vim/vim/bundle/tcalc_vim.git"]
 	path = vim/vim/bundle/tcalc_vim.git
 	url = https://github.com/tomtom/tcalc_vim.git
