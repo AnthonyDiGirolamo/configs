@@ -128,3 +128,5 @@ alias sshcave='ssh cave -Y'
 
 alias loadsmithy='source /sw/tools/smithy/environment.sh'
 
+alias gem_uninstall_all='gem list | cut -d" " -f1 | xargs gem uninstall -aIx'
+
