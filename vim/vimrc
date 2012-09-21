@@ -83,8 +83,8 @@ endif
   "let g:solarized_termcolors=256
 "endif
 
-set background=light
-"set background=dark
+"set background=light
+set background=dark
 colors solarized
 "colors warm_grey
 "colors molokai
