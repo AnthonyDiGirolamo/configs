@@ -1,6 +1,7 @@
 " Load Pathogen
 filetype off
 call pathogen#infect()
+call pathogen#helptags()
 
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -18,7 +19,7 @@ set laststatus=2 " always show the editing status bar at the bottom
 set showcmd      " display incomplete commands
 set incsearch    " do incremental searching
 
-"set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 " set mouse=a
@@ -26,37 +27,42 @@ set incsearch    " do incremental searching
 filetype plugin indent on
 
 augroup arduino
-au BufNewFile,BufRead *.ino set ft=cpp
-au BufNewFile,BufRead *.ino set syntax=cpp
-au BufNewFile,BufRead *.ino set shiftwidth=2
-au BufNewFile,BufRead *.ino set tabstop=2
+au BufNewFile,BufRead *.ino set ft=cpp syntax=cpp shiftwidth=2 tabstop=2
 augroup END
 
 augroup markdown
-au BufNewFile,BufRead *.mkd set ft=markdown.liquid
-au BufNewFile,BufRead *.mkd set syntax=markdown.liquid
-au BufNewFile,BufRead *.mkd set shiftwidth=3
-au BufNewFile,BufRead *.mkd set tabstop=3
+au BufNewFile,BufRead *.mkd set ft=markdown.liquid syntax=markdown.liquid shiftwidth=3 tabstop=3
 augroup END
 
 augroup htmlerb
-au BufNewFile,BufRead *.html set ft=html.liquid
-au BufNewFile,BufRead *.html set syntax=liquid
-au BufNewFile,BufRead *.erb set ft=html.eruby.eruby-rails
-au BufNewFile,BufRead *.erb set syntax=eruby
+au BufNewFile,BufRead *.html set ft=html.liquid syntax=liquid
+au BufNewFile,BufRead *.erb set ft=html.eruby.eruby-rails syntax=eruby
 au BufNewFile,BufRead *.less set ft=css
 augroup END
 
-autocmd FileType eruby let g:surround_45 = "<% \r %>"
-autocmd FileType eruby let g:surround_61 = "<%= \r %>"
+au FileType *eruby* let g:surround_45 = "<% \r %>"
+au FileType *eruby* let g:surround_61 = "<%= \r %>"
+
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+
+" Source the vimrc file after saving it
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
+endif
+
+let mapleader = ","
+nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " Better syntax highlighting for python
-autocmd FileType python set complete+=k~/.vim/bundle/python_syntax/syntax/python.vim isk+=.,(
-autocmd FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+au FileType python set complete+=k~/.vim/bundle/python_syntax/syntax/python.vim isk+=.,(
+au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
-set autoindent        " always set autoindenting on
+set autoindent
 
-set foldmethod=manual
+
+set foldmethod=syntax
 set foldlevel=99
 " Don't screw up folds when inserting text that might affect them, until
 " leaving insert mode. Foldmethod is local to the window.
@@ -106,8 +112,6 @@ endif
 setlocal spell spelllang=en_us   " set the spellcheck to english
 set mousemodel=popup_setpos      " set the right click in gvim to spellcheck
 
-let mapleader = ","
-
 " F9 will turn spell checking on or off in normal and insert mode
 map <F9> :setlocal spell! spelllang=en_us<cr>
 imap <F9> <ESC>:setlocal spell! spelllang=en_us<cr>i
@@ -119,17 +123,17 @@ set thesaurus+=~/.vim/mthesaur-vim.txt
 " set iskeyword+=32,-
 
 set ignorecase
-set wildmenu
 
-" make misspelled words appear underlined and yellow
-"highlight clear SpellBad
-"highlight SpellBad term=standout ctermfg=11 term=underline cterm=underline
-"highlight clear SpellCap
-"highlight SpellCap term=underline cterm=underline
-"highlight clear SpellRare
-"highlight SpellRare term=underline cterm=underline
-"highlight clear SpellLocal
-"highlight SpellLocal term=underline cterm=underline
+" Allow access to the gvim Menu by hitting F4 in vim
+source $VIMRUNTIME/menu.vim
+set wildmenu
+set cpo-=<
+set wcm=<C-Z>
+map <F4> :emenu <C-Z>
+
+" Scrolling
+map <C-E> jzz
+map <C-Y> kzz
 
 " MacVim is flaky with c-x c-*, set c-o to omnicomplete
 imap <C-O> <C-X><C-O>
@@ -137,7 +141,7 @@ imap <C-O> <C-X><C-O>
 " pressing tab twice will move to the next tab
 map <tab><tab> :tabn<cr>
 map <s-Tab><s-Tab> :tabprevious<cr>
-" pressing space twice will move to the next split and maximize
+" pressing space twice will move to the next split
 map <space><space> <c-W>w
 
 " F10 to make and view a latex pdf
@@ -158,11 +162,6 @@ imap jj <Esc>l
 map <M-c> "*y
 map <M-v> "*p
 
-" Rails plugin options
-let g:rubycomplete_buffer_loading = 1
-let g:rubycomplete_classes_in_global = 1
-let g:rubycomplete_rails = 1
-
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
 
@@ -177,16 +176,12 @@ vmap <C-k> [egv
 vmap <C-j> ]egv
 
 " CommandT Shortcut
-"nnoremap <silent> <C-y> :CommandT<CR>
-let g:CommandTMaxFiles=20000
-set wildignore=.git,vendor,pkg
+let g:CommandTMaxFiles=2000
+set wildignore+=.git,vendor/rails/**,vendor/ruby/**,pkg
 
-" Ignore whitespace in vimdiff
-set diffopt+=iwhite
-
-let g:user_zen_settings       = { 'erb' : { 'extends' : 'html' } }
-let g:user_zen_expandabbr_key = '<c-e>'
-let g:use_zen_complete_tag    = 1
+"let g:user_zen_settings       = { 'erb' : { 'extends' : 'html' } }
+"let g:user_zen_expandabbr_key = '<c-e>'
+"let g:use_zen_complete_tag    = 1
 
 " Netrw settings
 let g:netrw_winsize               = 80
@@ -209,11 +204,8 @@ let NERDTreeMinimalUI=1
 " Open file browser
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
 
-" Use :C to run a calculation, needs python support
-":command! -nargs=+ C :py print <args>
-":py from math import *
-
-" Old and unused stuff below, kept for reference
+" Use :C to run a calculation, needs ruby support
+:command! -nargs=+ C :ruby puts <args>
 
 "" VIM as a GTD to-do list
 "function! InsertDate(spaces)
@@ -259,25 +251,23 @@ nnoremap <silent> <F2> :NERDTreeToggle<CR>
 "nmap <silent> ;d :call MarkDone()<CR>
 "nmap <silent> ;D :call RemoveTask()<CR>
 
-" Determine the color scheme name of whatever the cursor is under
-"map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-"\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-"\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" Removes trailing spaces
-" function! TrimWhiteSpace()
-" : %s/\s\s*$//g
-" : ''
-" :endfunction
-" map <silent> <F3>  :call TrimWhiteSpace()<CR>
-" imap <silent> <F3> <ESC>:call TrimWhiteSpace()<CR>i
+" Diff Settings
+" Ignore whitespace in vimdiff
+set diffopt+=iwhite
+"nnoremap <silent> <F3> :%diffget 1<CR>:diffupdate<CR>
+"nnoremap <silent> <F4> :%diffget 3<CR>:diffupdate<CR>
 
-" Open file browser
-" map  <F2> :Vexplore<CR>
-" imap <F2> <ESC>:Vexplore<CR>
-" Edit a file, close the old one
-" map  <F3> <CR><c-W><c-W>:wq<CR>
+" Vim and Grep Helpers
+":noautocmd vimgrep /{pattern}/[flags] {file(s)}
+command! -nargs=+ MyGrep execute 'silent grep! <args>' | copen 33
 
-" Edit a file, close the old, and reopen browser
-"map  <F4> <CR><c-W><c-W>:q!<CR>:Vexplore<CR><c-W><c-W>
-
+" Color Scheme Helpers
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc

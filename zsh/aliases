@@ -34,7 +34,7 @@ else
 	alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
 fi
 
-hostname -s | grep -qs 'cave'
+hostname -s | grep -qs -E 'cave|yona'
 if [ $? -eq 0 ]; then
 	alias vim='/usr/bin/vim'
   export EDITOR='/usr/bin/vim'
