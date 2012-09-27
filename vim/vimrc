@@ -259,7 +259,8 @@ set diffopt+=iwhite
 
 " Vim and Grep Helpers
 ":noautocmd vimgrep /{pattern}/[flags] {file(s)}
-command! -nargs=+ MyGrep execute 'silent grep! <args>' | copen 33
+"command! -nargs=+ MyGrep execute 'silent grep! <args>' | copen 33
+nmap <leader>g :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e " . expand("<cword>") . " " <bar> cwindow<CR>
 
 " Color Scheme Helpers
 " Show syntax highlighting groups for word under cursor
@@ -270,3 +271,19 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 3
+
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+
+" If the above crashes vim, this forces neocomp to call omnicomplete directly
+" if !exists('g:neocomplcache_force_omni_patterns')
+"   let g:neocomplcache_force_omni_patterns = {}
+" endif
+" let g:neocomplcache_force_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+
