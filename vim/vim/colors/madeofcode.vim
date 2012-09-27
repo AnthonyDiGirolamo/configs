@@ -1,343 +1,103 @@
 " Vim color file
-" Maintainer: Henry So, Jr. <henryso@panix.com>
-
-" These are the colors of the "desert" theme by Hans Fugal with a few small
-" modifications (namely that I lowered the intensity of the normal white and
-" made the normal and nontext backgrounds black), modified to work with 88-
-" and 256-color xterms.
-"
-" The original "desert" theme is available as part of the vim distribution or
-" at http://hans.fugal.net/vim/colors/.
-"
-" The real feature of this color scheme, with a wink to the "inkpot" theme, is
-" the programmatic approximation of the gui colors to the palettes of 88- and
-" 256- color xterms.  The functions that do this (folded away, for
-" readability) are calibrated to the colors used for Thomas E. Dickey's xterm
-" (version 200), which is available at http://dickey.his.com/xterm/xterm.html.
-"
-" I struggled with trying to parse the rgb.txt file to avoid the necessity of
-" converting color names to #rrggbb form, but decided it was just not worth
-" the effort.  Maybe someone seeing this may decide otherwise...
+" Converted from Textmate theme Made of Code using Coloration v0.3.2 (http://github.com/sickill/coloration)
 
 set background=dark
-if version > 580
-    " no guarantees for version 5.8 and below, but this makes it stop
-    " complaining
-    hi clear
-    if exists("syntax_on")
-        syntax reset
-    endif
-endif
-let g:colors_name="madeofcode"
+highlight clear
 
-if has("gui_running") || &t_Co == 88 || &t_Co == 256
-    " functions {{{
-    " returns an approximate grey index for the given grey level
-    fun <SID>grey_number(x)
-        if &t_Co == 88
-            if a:x < 23
-                return 0
-            elseif a:x < 69
-                return 1
-            elseif a:x < 103
-                return 2
-            elseif a:x < 127
-                return 3
-            elseif a:x < 150
-                return 4
-            elseif a:x < 173
-                return 5
-            elseif a:x < 196
-                return 6
-            elseif a:x < 219
-                return 7
-            elseif a:x < 243
-                return 8
-            else
-                return 9
-            endif
-        else
-            if a:x < 14
-                return 0
-            else
-                let l:n = (a:x - 8) / 10
-                let l:m = (a:x - 8) % 10
-                if l:m < 5
-                    return l:n
-                else
-                    return l:n + 1
-                endif
-            endif
-        endif
-    endfun
-
-    " returns the actual grey level represented by the grey index
-    fun <SID>grey_level(n)
-        if &t_Co == 88
-            if a:n == 0
-                return 0
-            elseif a:n == 1
-                return 46
-            elseif a:n == 2
-                return 92
-            elseif a:n == 3
-                return 115
-            elseif a:n == 4
-                return 139
-            elseif a:n == 5
-                return 162
-            elseif a:n == 6
-                return 185
-            elseif a:n == 7
-                return 208
-            elseif a:n == 8
-                return 231
-            else
-                return 255
-            endif
-        else
-            if a:n == 0
-                return 0
-            else
-                return 8 + (a:n * 10)
-            endif
-        endif
-    endfun
-
-    " returns the palette index for the given grey index
-    fun <SID>grey_color(n)
-        if &t_Co == 88
-            if a:n == 0
-                return 16
-            elseif a:n == 9
-                return 79
-            else
-                return 79 + a:n
-            endif
-        else
-            if a:n == 0
-                return 16
-            elseif a:n == 25
-                return 231
-            else
-                return 231 + a:n
-            endif
-        endif
-    endfun
-
-    " returns an approximate color index for the given color level
-    fun <SID>rgb_number(x)
-        if &t_Co == 88
-            if a:x < 69
-                return 0
-            elseif a:x < 172
-                return 1
-            elseif a:x < 230
-                return 2
-            else
-                return 3
-            endif
-        else
-            if a:x < 75
-                return 0
-            else
-                let l:n = (a:x - 55) / 40
-                let l:m = (a:x - 55) % 40
-                if l:m < 20
-                    return l:n
-                else
-                    return l:n + 1
-                endif
-            endif
-        endif
-    endfun
-
-    " returns the actual color level for the given color index
-    fun <SID>rgb_level(n)
-        if &t_Co == 88
-            if a:n == 0
-                return 0
-            elseif a:n == 1
-                return 139
-            elseif a:n == 2
-                return 205
-            else
-                return 255
-            endif
-        else
-            if a:n == 0
-                return 0
-            else
-                return 55 + (a:n * 40)
-            endif
-        endif
-    endfun
-
-    " returns the palette index for the given R/G/B color indices
-    fun <SID>rgb_color(x, y, z)
-        if &t_Co == 88
-            return 16 + (a:x * 16) + (a:y * 4) + a:z
-        else
-            return 16 + (a:x * 36) + (a:y * 6) + a:z
-        endif
-    endfun
-
-    " returns the palette index to approximate the given R/G/B color levels
-    fun <SID>color(r, g, b)
-        " get the closest grey
-        let l:gx = <SID>grey_number(a:r)
-        let l:gy = <SID>grey_number(a:g)
-        let l:gz = <SID>grey_number(a:b)
-
-        " get the closest color
-        let l:x = <SID>rgb_number(a:r)
-        let l:y = <SID>rgb_number(a:g)
-        let l:z = <SID>rgb_number(a:b)
-
-        if l:gx == l:gy && l:gy == l:gz
-            " there are two possibilities
-            let l:dgr = <SID>grey_level(l:gx) - a:r
-            let l:dgg = <SID>grey_level(l:gy) - a:g
-            let l:dgb = <SID>grey_level(l:gz) - a:b
-            let l:dgrey = (l:dgr * l:dgr) + (l:dgg * l:dgg) + (l:dgb * l:dgb)
-            let l:dr = <SID>rgb_level(l:gx) - a:r
-            let l:dg = <SID>rgb_level(l:gy) - a:g
-            let l:db = <SID>rgb_level(l:gz) - a:b
-            let l:drgb = (l:dr * l:dr) + (l:dg * l:dg) + (l:db * l:db)
-            if l:dgrey < l:drgb
-                " use the grey
-                return <SID>grey_color(l:gx)
-            else
-                " use the color
-                return <SID>rgb_color(l:x, l:y, l:z)
-            endif
-        else
-            " only one possibility
-            return <SID>rgb_color(l:x, l:y, l:z)
-        endif
-    endfun
-
-    " returns the palette index to approximate the 'rrggbb' hex string
-    fun <SID>rgb(rgb)
-        let l:r = ("0x" . strpart(a:rgb, 0, 2)) + 0
-        let l:g = ("0x" . strpart(a:rgb, 2, 2)) + 0
-        let l:b = ("0x" . strpart(a:rgb, 4, 2)) + 0
-
-        return <SID>color(l:r, l:g, l:b)
-    endfun
-
-    " sets the highlighting for the given group
-    fun <SID>X(group, fg, bg, attr)
-        if a:fg != ""
-            exec "hi " . a:group . " guifg=#" . a:fg . " ctermfg=" . <SID>rgb(a:fg)
-        endif
-        if a:bg != ""
-            exec "hi " . a:group . " guibg=#" . a:bg . " ctermbg=" . <SID>rgb(a:bg)
-        endif
-        if a:attr != ""
-            exec "hi " . a:group . " gui=" . a:attr . " cterm=" . a:attr
-        endif
-    endfun
-    " }}}
-
-	call <SID>X("Normal", "F8F8F8", "090A1B", "")
-
-    " highlight groups
-	call <SID>X("Cursor", "708090", "f0e68c", "")
-	call <SID>X("LineNr", "F8F8F8", "000000", "")
-    "CursorIM
-    "Directory
-    "DiffAdd
-    "DiffChange
-    "DiffDelete
-    "DiffText
-    "ErrorMsg
-    "call <SID>X("VertSplit", "c2bfa5", "7f7f7f", "reverse")
-    "call <SID>X("Folded", "ffd700", "4d4d4d", "")
-    "call <SID>X("FoldColumn", "d2b48c", "4d4d4d", "")
-    "call <SID>X("IncSearch", "708090", "f0e68c", "")
-    "LineNr
-    "call <SID>X("ModeMsg", "daa520", "", "")
-    "call <SID>X("MoreMsg", "2e8b57", "", "")
-    "call <SID>X("NonText", "addbe7", "000000", "bold")
-    "call <SID>X("Question", "00ff7f", "", "")
-    "call <SID>X("Search", "f5deb3", "cd853f", "")
-    "call <SID>X("SpecialKey", "9acd32", "", "")
-    "call <SID>X("StatusLine", "c2bfa5", "000000", "reverse")
-    "call <SID>X("StatusLineNC", "c2bfa5", "7f7f7f", "reverse")
-    "call <SID>X("Title", "cd5c5c", "", "")
-	call <SID>X("Visual", "007DFF", "f0e68c", "reverse")
-    "VisualNOS
-    "call <SID>X("WarningMsg", "fa8072", "", "")
-    "WildMenu
-    "Menu
-    "Scrollbar
-    "Tooltip
-
-    " syntax highlighting groups
-	call <SID>X("Keyword", "FF3854", "", "")
-    call <SID>X("Comment", "C050C2", "000000", "italic")
-    call <SID>X("Constant", "0A9CFF", "", "")
-	call <SID>X("Identifier", "588AFF", "", "none")
-	call <SID>X("Conditional", "FF3854", "", "bold")
-    call <SID>X("PreProc", "AFC4DB", "", "")
-	call <SID>X("Type", "FF9749", "", "bold")
-    "call <SID>X("Special", "ffdead", "", "")
-    "Underlined
-    "call <SID>X("Ignore", "666666", "", "")
-    "Error
-    "call <SID>X("Todo", "ff4500", "eeee00", "")
-	call <SID>X("String", "8FFF58", "102622", "bold")
-	call <SID>X("Define", "FF3854", "", "bold")
-
-
-    " delete functions {{{
-    delf <SID>X
-    delf <SID>rgb
-    delf <SID>color
-    delf <SID>rgb_color
-    delf <SID>rgb_level
-    delf <SID>rgb_number
-    delf <SID>grey_color
-    delf <SID>grey_level
-    delf <SID>grey_number
-    " }}}
-"else
-    " color terminal definitions
-    "hi SpecialKey    ctermfg=darkgreen
-    "hi NonText       cterm=bold ctermfg=darkblue
-    "hi Directory     ctermfg=darkcyan
-    "hi ErrorMsg      cterm=bold ctermfg=7 ctermbg=1
-    "hi IncSearch     cterm=NONE ctermfg=yellow ctermbg=green
-    "hi Search        cterm=NONE ctermfg=grey ctermbg=blue
-    "hi MoreMsg       ctermfg=darkgreen
-    "hi ModeMsg       cterm=NONE ctermfg=brown
-    "hi LineNr        ctermfg=3
-    "hi Question      ctermfg=green
-    "hi StatusLine    cterm=bold,reverse
-    "hi StatusLineNC  cterm=reverse
-    "hi VertSplit     cterm=reverse
-    "hi Title         ctermfg=5
-    "hi Visual        cterm=reverse
-    "hi VisualNOS     cterm=bold,underline
-    "hi WarningMsg    ctermfg=1
-    "hi WildMenu      ctermfg=0 ctermbg=3
-    "hi Folded        ctermfg=darkgrey ctermbg=NONE
-    "hi FoldColumn    ctermfg=darkgrey ctermbg=NONE
-    "hi DiffAdd       ctermbg=4
-    "hi DiffChange    ctermbg=5
-    "hi DiffDelete    cterm=bold ctermfg=4 ctermbg=6
-    "hi DiffText      cterm=bold ctermbg=1
-    "hi Comment       ctermfg=darkcyan
-    "hi Constant      ctermfg=brown
-    "hi Special       ctermfg=5
-    "hi Identifier    ctermfg=6
-    "hi Statement     ctermfg=3
-    "hi PreProc       ctermfg=5
-    "hi Type          ctermfg=2
-    "hi Underlined    cterm=underline ctermfg=5
-    "hi Ignore        ctermfg=darkgrey
-    "hi Error         cterm=bold ctermfg=7 ctermbg=1
+if exists("syntax_on")
+  syntax reset
 endif
 
-" vim: set fdl=0 fdm=marker:
+let g:colors_name = "Made of Code"
+
+hi Cursor ctermfg=NONE ctermbg=51 cterm=NONE guifg=NONE guibg=#00ffff gui=NONE
+hi Visual ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#05448d gui=NONE
+hi CursorLine ctermfg=NONE ctermbg=17 cterm=NONE guifg=NONE guibg=#212231 gui=NONE
+hi CursorColumn ctermfg=NONE ctermbg=17 cterm=NONE guifg=NONE guibg=#212231 gui=NONE
+hi ColorColumn ctermfg=NONE ctermbg=17 cterm=NONE guifg=NONE guibg=#212231 gui=NONE
+hi LineNr ctermfg=102 ctermbg=234 cterm=NONE guifg=#81818a guibg=#212231 gui=NONE
+hi VertSplit ctermfg=59 ctermbg=59 cterm=NONE guifg=#4e4f5b guibg=#4e4f5b gui=NONE
+hi MatchParen ctermfg=203 ctermbg=NONE cterm=NONE guifg=#ff3854 guibg=NONE gui=NONE
+hi StatusLine ctermfg=231 ctermbg=59 cterm=bold guifg=#f8f8f8 guibg=#4e4f5b gui=bold
+hi StatusLineNC ctermfg=231 ctermbg=59 cterm=NONE guifg=#f8f8f8 guibg=#4e4f5b gui=NONE
+hi Pmenu ctermfg=81 ctermbg=NONE cterm=NONE guifg=#6fd3ff guibg=NONE gui=NONE
+hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#05448d gui=NONE
+hi IncSearch ctermfg=NONE ctermbg=23 cterm=NONE guifg=NONE guibg=#233466 gui=NONE
+hi Search ctermfg=NONE ctermbg=23 cterm=NONE guifg=NONE guibg=#233466 gui=NONE
+hi Directory ctermfg=39 ctermbg=NONE cterm=NONE guifg=#0a9cff guibg=NONE gui=NONE
+hi Folded ctermfg=133 ctermbg=16 cterm=NONE guifg=#c050c2 guibg=#090a1b gui=NONE
+
+hi Normal ctermfg=231 ctermbg=233 cterm=NONE guifg=#f8f8f8 guibg=#090a1b gui=NONE
+hi Boolean ctermfg=39 ctermbg=NONE cterm=NONE guifg=#0a9cff guibg=NONE gui=NONE
+hi Character ctermfg=39 ctermbg=NONE cterm=NONE guifg=#0a9cff guibg=NONE gui=NONE
+hi Comment ctermfg=133 ctermbg=0 cterm=NONE guifg=#c050c2 guibg=#000000 gui=italic
+hi Conditional ctermfg=203 ctermbg=NONE cterm=NONE guifg=#ff3854 guibg=NONE gui=NONE
+hi Constant ctermfg=39 ctermbg=NONE cterm=NONE guifg=#0a9cff guibg=NONE gui=NONE
+hi Define ctermfg=203 ctermbg=NONE cterm=NONE guifg=#ff3854 guibg=NONE gui=NONE
+hi ErrorMsg ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi WarningMsg ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi Float ctermfg=39 ctermbg=NONE cterm=NONE guifg=#0a9cff guibg=NONE gui=NONE
+hi Function ctermfg=81 ctermbg=NONE cterm=NONE guifg=#6fd3ff guibg=NONE gui=NONE
+hi Identifier ctermfg=113 ctermbg=NONE cterm=NONE guifg=#99cf50 guibg=NONE gui=NONE
+hi Keyword ctermfg=203 ctermbg=NONE cterm=NONE guifg=#ff3854 guibg=NONE gui=NONE
+hi Label ctermfg=119 ctermbg=16 cterm=NONE guifg=#8fff58 guibg=#102522 gui=NONE
+hi NonText ctermfg=59 ctermbg=16 cterm=NONE guifg=#353c4f guibg=#151626 gui=NONE
+hi Number ctermfg=39 ctermbg=NONE cterm=NONE guifg=#0a9cff guibg=NONE gui=NONE
+hi Operator ctermfg=203 ctermbg=NONE cterm=NONE guifg=#ff3854 guibg=NONE gui=NONE
+hi PreProc ctermfg=203 ctermbg=NONE cterm=NONE guifg=#ff3854 guibg=NONE gui=NONE
+hi Special ctermfg=231 ctermbg=NONE cterm=NONE guifg=#f8f8f8 guibg=NONE gui=NONE
+hi SpecialKey ctermfg=59 ctermbg=17 cterm=NONE guifg=#353c4f guibg=#212231 gui=NONE
+hi Statement ctermfg=203 ctermbg=NONE cterm=NONE guifg=#ff3854 guibg=NONE gui=NONE
+hi StorageClass ctermfg=113 ctermbg=NONE cterm=NONE guifg=#99cf50 guibg=NONE gui=NONE
+hi String ctermfg=119 ctermbg=16 cterm=NONE guifg=#8fff58 guibg=#102522 gui=NONE
+hi Tag ctermfg=81 ctermbg=NONE cterm=NONE guifg=#6fd3ff guibg=NONE gui=NONE
+hi Title ctermfg=231 ctermbg=NONE cterm=bold guifg=#f8f8f8 guibg=NONE gui=bold
+hi Todo ctermfg=133 ctermbg=0 cterm=inverse,bold guifg=#c050c2 guibg=#000000 gui=inverse,bold,italic
+hi Type ctermfg=81 ctermbg=NONE cterm=NONE guifg=#6fd3ff guibg=NONE gui=NONE
+hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline
+hi rubyClass ctermfg=203 ctermbg=NONE cterm=NONE guifg=#ff3854 guibg=NONE gui=NONE
+hi rubyFunction ctermfg=81 ctermbg=NONE cterm=NONE guifg=#6fd3ff guibg=NONE gui=NONE
+hi rubyInterpolationDelimiter ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi rubySymbol ctermfg=39 ctermbg=NONE cterm=NONE guifg=#0a9cff guibg=NONE gui=NONE
+hi rubyConstant ctermfg=49 ctermbg=NONE cterm=NONE guifg=#00ffbc guibg=NONE gui=NONE
+hi rubyStringDelimiter ctermfg=119 ctermbg=16 cterm=NONE guifg=#8fff58 guibg=#102522 gui=NONE
+hi rubyBlockParameter ctermfg=69 ctermbg=NONE cterm=NONE guifg=#588aff guibg=NONE gui=NONE
+hi rubyInstanceVariable ctermfg=69 ctermbg=NONE cterm=NONE guifg=#588aff guibg=NONE gui=NONE
+hi rubyInclude ctermfg=203 ctermbg=NONE cterm=NONE guifg=#ff3854 guibg=NONE gui=NONE
+hi rubyGlobalVariable ctermfg=69 ctermbg=NONE cterm=NONE guifg=#588aff guibg=NONE gui=NONE
+hi rubyRegexp ctermfg=179 ctermbg=NONE cterm=NONE guifg=#e9c062 guibg=NONE gui=NONE
+hi rubyRegexpDelimiter ctermfg=179 ctermbg=NONE cterm=NONE guifg=#e9c062 guibg=NONE gui=NONE
+hi rubyEscape ctermfg=39 ctermbg=NONE cterm=NONE guifg=#0a9cff guibg=NONE gui=NONE
+hi rubyControl ctermfg=203 ctermbg=NONE cterm=NONE guifg=#ff3854 guibg=NONE gui=NONE
+hi rubyClassVariable ctermfg=69 ctermbg=NONE cterm=NONE guifg=#588aff guibg=NONE gui=NONE
+hi rubyOperator ctermfg=203 ctermbg=NONE cterm=NONE guifg=#ff3854 guibg=NONE gui=NONE
+hi rubyException ctermfg=203 ctermbg=NONE cterm=NONE guifg=#ff3854 guibg=NONE gui=NONE
+hi rubyPseudoVariable ctermfg=69 ctermbg=NONE cterm=NONE guifg=#588aff guibg=NONE gui=NONE
+hi rubyRailsUserClass ctermfg=49 ctermbg=NONE cterm=NONE guifg=#00ffbc guibg=NONE gui=NONE
+hi rubyRailsARAssociationMethod ctermfg=221 ctermbg=NONE cterm=NONE guifg=#f1d950 guibg=NONE gui=NONE
+hi rubyRailsARMethod ctermfg=221 ctermbg=NONE cterm=NONE guifg=#f1d950 guibg=NONE gui=NONE
+hi rubyRailsRenderMethod ctermfg=221 ctermbg=NONE cterm=NONE guifg=#f1d950 guibg=NONE gui=NONE
+hi rubyRailsMethod ctermfg=221 ctermbg=NONE cterm=NONE guifg=#f1d950 guibg=NONE gui=NONE
+hi erubyDelimiter ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi erubyComment ctermfg=133 ctermbg=0 cterm=NONE guifg=#c050c2 guibg=#000000 gui=italic
+hi erubyRailsMethod ctermfg=221 ctermbg=NONE cterm=NONE guifg=#f1d950 guibg=NONE gui=NONE
+hi htmlTag ctermfg=74 ctermbg=NONE cterm=NONE guifg=#45c1ea guibg=NONE gui=NONE
+hi htmlEndTag ctermfg=74 ctermbg=NONE cterm=NONE guifg=#45c1ea guibg=NONE gui=NONE
+hi htmlTagName ctermfg=74 ctermbg=NONE cterm=NONE guifg=#45c1ea guibg=NONE gui=NONE
+hi htmlArg ctermfg=74 ctermbg=NONE cterm=NONE guifg=#45c1ea guibg=NONE gui=NONE
+hi htmlSpecialChar ctermfg=39 ctermbg=NONE cterm=NONE guifg=#0a9cff guibg=NONE gui=NONE
+hi javaScriptFunction ctermfg=113 ctermbg=NONE cterm=NONE guifg=#99cf50 guibg=NONE gui=NONE
+hi javaScriptRailsFunction ctermfg=221 ctermbg=NONE cterm=NONE guifg=#f1d950 guibg=NONE gui=NONE
+hi javaScriptBraces ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi yamlKey ctermfg=81 ctermbg=NONE cterm=NONE guifg=#6fd3ff guibg=NONE gui=NONE
+hi yamlAnchor ctermfg=69 ctermbg=NONE cterm=NONE guifg=#588aff guibg=NONE gui=NONE
+hi yamlAlias ctermfg=69 ctermbg=NONE cterm=NONE guifg=#588aff guibg=NONE gui=NONE
+hi yamlDocumentHeader ctermfg=119 ctermbg=16 cterm=NONE guifg=#8fff58 guibg=#102522 gui=NONE
+hi cssURL ctermfg=69 ctermbg=NONE cterm=NONE guifg=#588aff guibg=NONE gui=NONE
+hi cssFunctionName ctermfg=221 ctermbg=NONE cterm=NONE guifg=#f1d950 guibg=NONE gui=NONE
+hi cssColor ctermfg=39 ctermbg=NONE cterm=NONE guifg=#0a9cff guibg=NONE gui=NONE
+hi cssPseudoClassId ctermfg=81 ctermbg=NONE cterm=NONE guifg=#6fd3ff guibg=NONE gui=NONE
+hi cssClassName ctermfg=81 ctermbg=NONE cterm=NONE guifg=#6fd3ff guibg=NONE gui=NONE
+hi cssValueLength ctermfg=39 ctermbg=NONE cterm=NONE guifg=#0a9cff guibg=NONE gui=NONE
+hi cssCommonAttr ctermfg=167 ctermbg=NONE cterm=NONE guifg=#cf6a4c guibg=NONE gui=NONE
+hi cssBraces ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
