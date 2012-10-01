@@ -62,8 +62,6 @@ alias ll='ls -lh'
 alias la='ls -a'
 alias l='ls -CF'
 
-alias mutt='mutt'
-
 alias ga='git add'
 function gl {
   git log $@ | vim +'set bt=nowrite' -
@@ -118,6 +116,9 @@ export PATH=$HOME/apps/vim/bin:$PATH
 export PATH=$HOME/apps/tree/bin:$PATH
 export PATH=$HOME/apps/zsh/bin:$PATH
 export PATH=$HOME/apps/tmux/bin:$PATH
+
+alias mutt='LD_LIBRARY_PATH=$HOME/apps/gdbm/lib:$HOME/apps/w3m/lib PATH=$HOME/apps/w3m/bin:$HOME/apps/mutt/bin:$HOME/apps/gdbm/bin:$HOME/apps/msmtp/bin:$HOME/apps/imapfilter/bin:$PATH $HOME/apps/mutt/bin/mutt'
+
 export PATH=/usr/local/bin:$PATH
 
 alias ssfoxy1='ssh lmd@login1.ornl.gov -L2222:uac2.ornl.gov:22'
