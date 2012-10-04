@@ -61,7 +61,7 @@ au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,fi
 set autoindent
 
 
-set foldmethod=syntax
+set foldmethod=manual
 set foldlevel=99
 " Don't screw up folds when inserting text that might affect them, until
 " leaving insert mode. Foldmethod is local to the window.
@@ -271,8 +271,12 @@ function! <SID>SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
+nmap <leader>b :NeoComplCacheToggle
 " NeoComplCache Settings
-let g:neocomplcache_enable_at_startup = 1
+" imap <C-k> <Plug>(neocomplcache_snippets_expand)
+" smap <C-k> <Plug>(neocomplcache_snippets_expand)
+
+"let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
 
@@ -280,9 +284,6 @@ if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-
-imap <C-k> <Plug>(neocomplcache_snippets_expand)
-smap <C-k> <Plug>(neocomplcache_snippets_expand)
 
 " If the above crashes vim, this forces neocomp to call omnicomplete directly
 " if !exists('g:neocomplcache_force_omni_patterns')
