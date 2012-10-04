@@ -131,8 +131,8 @@ set wcm=<C-Z>
 map <F4> :emenu <C-Z>
 
 " Scrolling
-map <C-E> jzz
-map <C-Y> kzz
+nmap <C-E> jzz
+nmap <C-Y> kzz
 
 " MacVim is flaky with c-x c-*, set c-o to omnicomplete
 imap <C-O> <C-X><C-O>
@@ -178,9 +178,9 @@ vmap <C-j> ]egv
 let g:CommandTMaxFiles=2000
 set wildignore+=.git,vendor/rails/**,vendor/ruby/**,pkg
 
-"let g:user_zen_settings       = { 'erb' : { 'extends' : 'html' } }
-"let g:user_zen_expandabbr_key = '<c-e>'
-"let g:use_zen_complete_tag    = 1
+let g:user_zen_settings       = { 'erb' : { 'extends' : 'html' } }
+let g:user_zen_expandabbr_key = '<c-e>'
+let g:use_zen_complete_tag    = 1
 
 " Netrw settings
 let g:netrw_winsize               = 80
