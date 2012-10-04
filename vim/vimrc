@@ -61,12 +61,12 @@ au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,fi
 set autoindent
 
 
-set foldmethod=manual
-set foldlevel=99
+set foldmethod=marker
+set foldlevel=0
 " Don't screw up folds when inserting text that might affect them, until
 " leaving insert mode. Foldmethod is local to the window.
-autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
-autocmd InsertLeave * let &l:foldmethod=w:last_fdm
+" autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
+" autocmd InsertLeave * let &l:foldmethod=w:last_fdm
 
 set number            " line numbering
 set tabstop=2         " set tabs to 2 spaces
