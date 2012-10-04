@@ -61,3 +61,6 @@
 [submodule "vim/vim/bundle/vim-ruby.git"]
 	path = vim/vim/bundle/vim-ruby.git
 	url = https://github.com/vim-ruby/vim-ruby.git
+[submodule "vim/vim/bundle/neocomplcache-snippets-complete.git"]
+	path = vim/vim/bundle/neocomplcache-snippets-complete.git
+	url = https://github.com/Shougo/neocomplcache-snippets-complete.git
