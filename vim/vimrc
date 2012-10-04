@@ -173,9 +173,9 @@ nmap <C-j> ]e
 vmap <C-k> [egv
 vmap <C-j> ]egv
 
-" CommandT Shortcut
-let g:CommandTMaxFiles=2000
-set wildignore+=.git,vendor/rails/**,vendor/ruby/**,pkg
+" CommandT Settings
+" let g:CommandTMaxFiles=2000
+set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tmp/*
 
 let g:user_zen_settings       = { 'erb' : { 'extends' : 'html' } }
 let g:user_zen_expandabbr_key = '<c-e>'
@@ -263,7 +263,7 @@ nmap <leader>g :execute " grep -srnw --binary-files=without-match --exclude=tags
 
 " Color Scheme Helpers
 " Show syntax highlighting groups for word under cursor
-nmap <C-S-P> :call <SID>SynStack()<CR>
+nmap <leader>b :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
@@ -271,6 +271,7 @@ function! <SID>SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
+" NeoComplCache Settings
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
@@ -279,6 +280,9 @@ if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+
+imap <C-k> <Plug>(neocomplcache_snippets_expand)
+smap <C-k> <Plug>(neocomplcache_snippets_expand)
 
 " If the above crashes vim, this forces neocomp to call omnicomplete directly
 " if !exists('g:neocomplcache_force_omni_patterns')
