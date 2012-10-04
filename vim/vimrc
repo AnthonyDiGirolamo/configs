@@ -151,8 +151,7 @@ imap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .
 autocmd BufWritePre * :%s/\s\+$//e
 
 " Symbol listing - requires ctags
-map  <F12> :TlistToggle<CR>
-imap <F12> <ESC>:TlistToggle<CR>
+nmap  <F12> :TagbarToggle<CR>
 
 imap jj <Esc>l
 " Remap Esc

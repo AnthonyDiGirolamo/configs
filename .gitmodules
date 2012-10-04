@@ -19,15 +19,9 @@
 [submodule "vim/vim/bundle/vim-fugitive.git"]
 	path = vim/vim/bundle/vim-fugitive.git
 	url = https://github.com/tpope/vim-fugitive.git
-[submodule "vim/vim/bundle/taglist.vim.git"]
-	path = vim/vim/bundle/taglist.vim.git
-	url = https://github.com/vim-scripts/taglist.vim.git
 [submodule "vim/vim/bundle/vim-markdown.git"]
 	path = vim/vim/bundle/vim-markdown.git
 	url = https://github.com/tpope/vim-markdown.git
-[submodule "vim/vim/bundle/command-t"]
-	path = vim/vim/bundle/command-t
-	url = https://github.com/wincent/Command-T.git
 [submodule "vim/vim/bundle/vim-unimpaired.git"]
 	path = vim/vim/bundle/vim-unimpaired.git
 	url = https://github.com/tpope/vim-unimpaired.git
@@ -64,3 +58,9 @@
 [submodule "vim/vim/bundle/neocomplcache-snippets-complete.git"]
 	path = vim/vim/bundle/neocomplcache-snippets-complete.git
 	url = https://github.com/Shougo/neocomplcache-snippets-complete.git
+[submodule "vim/vim/bundle/ctrlp.vim.git"]
+	path = vim/vim/bundle/ctrlp.vim.git
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vim/vim/bundle/tagbar.git"]
+	path = vim/vim/bundle/tagbar.git
+	url = https://github.com/majutsushi/tagbar.git
