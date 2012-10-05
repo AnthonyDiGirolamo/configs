@@ -137,15 +137,12 @@ nmap <C-Y> kzz
 " MacVim is flaky with c-x c-*, set c-o to omnicomplete
 imap <C-O> <C-X><C-O>
 
-" pressing tab twice will move to the next tab
-map <tab><tab> :tabn<cr>
-map <s-Tab><s-Tab> :tabprevious<cr>
 " pressing space twice will move to the next split
-map <space><space> <c-W>w
+" map <space><space> <c-W>w
 
 " F10 to make and view a latex pdf
-map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
-imap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
+" map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
+" imap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
 
 " Clear trailing whitespace before a save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -260,6 +257,7 @@ set diffopt+=iwhite
 ":noautocmd vimgrep /{pattern}/[flags] {file(s)}
 "command! -nargs=+ MyGrep execute 'silent grep! <args>' | copen 33
 nmap <leader>g :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e " . expand("<cword>") . " " <bar> cwindow<CR>
+nmap <leader>x :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e XXX " <bar> cwindow<CR>
 
 " Color Scheme Helpers
 " Show syntax highlighting groups for word under cursor
@@ -271,23 +269,22 @@ function! <SID>SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
-nmap <leader>b :NeoComplCacheToggle
 " NeoComplCache Settings
 " imap <C-k> <Plug>(neocomplcache_snippets_expand)
 " smap <C-k> <Plug>(neocomplcache_snippets_expand)
+" nmap <leader>b :NeoComplCacheToggle<CR>
 
-"let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_min_syntax_length = 3
+" let g:neocomplcache_enable_at_startup = 1
+" let g:neocomplcache_enable_underbar_completion = 1
+" let g:neocomplcache_min_syntax_length = 3
 
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+" if !exists('g:neocomplcache_omni_patterns')
+"   let g:neocomplcache_omni_patterns = {}
+" endif
+" let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
 " If the above crashes vim, this forces neocomp to call omnicomplete directly
 " if !exists('g:neocomplcache_force_omni_patterns')
 "   let g:neocomplcache_force_omni_patterns = {}
 " endif
 " let g:neocomplcache_force_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-
