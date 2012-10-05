@@ -160,7 +160,7 @@ map <M-v> "*p
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
 
-map T :tabe<CR>
+nmap T :tabe<CR><C-P>
 map Y :Explore<CR>
 
 " Bubble single lines
