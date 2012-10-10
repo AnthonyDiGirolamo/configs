@@ -124,8 +124,9 @@ export PATH=/usr/local/bin:$PATH
 alias ssfoxy1='ssh lmd@login1.ornl.gov -L2222:uac2.ornl.gov:22'
 alias ssfoxy2='ssh -p 2222 lmd@localhost -D localhost:8888 -L9993:mail.ornl.gov:993 -L2525:smtp.ornl.gov:25'
 
-alias sshome='ssh home.ccs.ornl.gov -Y'
-alias sscave='ssh cave -Y'
+alias sshome='ssh lmd@home.ccs.ornl.gov -Y'
+alias sscave='ssh lmd@cave -Y'
+alias sshfsh='sshfs lmd@home.ccs.ornl.gov: $HOME/OLCF'
 
 alias sschester="tmux rename-window chester ; ssh -Y chester"
 alias ssjag="tmux rename-window jaguar ; ssh -Y jaguarpf"
