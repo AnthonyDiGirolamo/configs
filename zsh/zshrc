@@ -5,6 +5,7 @@ stty start undef
 #ZSHLOC=`dirname \`which zsh\``
 #ZSHVER=`zsh --version | awk '{print $2}'`
 #export FPATH=$ZSHLOC/../share/zsh/$ZSHVER/functions:/usr/share/zsh/$ZSHVER/functions
+
 fpath=(~/.zsh/func $fpath)
 typeset -U fpath
 export FPATH=`echo $fpath | sed 's/ /:/g'`
@@ -18,16 +19,18 @@ r() {
 }
 
 # Emacs Mode
-bindkey -e
-# VI Mode
-# bindkey -v
+# bindkey -e
+# VI Insert Mode
+bindkey -v
+# VI Command Mode
+# bindkey -a
 
-setopt auto_pushd
-setopt menucomplete
-setopt inc_append_history append_history share_history
-setopt hist_ignore_dups hist_ignore_all_dups
-HISTSIZE=10000
-SAVEHIST=10000
+setopt AUTO_PUSHD
+setopt MENUCOMPLETE
+setopt INC_APPEND_HISTORY APPEND_HISTORY SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+HISTSIZE=15000
+SAVEHIST=15000
 HISTFILE=~/.zhistory
 
 # # SSH AGENT
@@ -175,12 +178,12 @@ zstyle ':completion:*:*:kill:*:processes' command 'ps -A' # 'ps --forest -A -o p
 
 # Custom Completion Functions
 
-_use_completion() {
-  if [[ -e /packages/usepackage-1.8/bin/usepackage ]]; then
-    reply=(`/packages/usepackage-1.8/bin/usepackage -l 2>&1 | sed -e '/^\S/      d' -e '/^$/d' -e 's/^   //g' -e 's/\s-\s.*//g'`)
-  fi
-}
-compctl -K _use_completion use
+# _use_completion() {
+#   if [[ -e /packages/usepackage-1.8/bin/usepackage ]]; then
+#     reply=(`/packages/usepackage-1.8/bin/usepackage -l 2>&1 | sed -e '/^\S/      d' -e '/^$/d' -e 's/^   //g' -e 's/\s-\s.*//g'`)
+#   fi
+# }
+# compctl -K _use_completion use
 
 # Completion Notes
 # ----------------
@@ -233,8 +236,5 @@ source ~/.aliases
 
 declare -f module &> /dev/null && module load git ruby
 
-
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-#source /sw/tools/smithy/environment.sh
 
