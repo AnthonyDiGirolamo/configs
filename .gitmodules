@@ -49,15 +49,9 @@
 [submodule "vim/vim/bundle/snipmate-snippets.git"]
 	path = vim/vim/bundle/snipmate-snippets.git
 	url = https://github.com/honza/snipmate-snippets.git
-[submodule "vim/vim/bundle/neocomplcache.git"]
-	path = vim/vim/bundle/neocomplcache.git
-	url = https://github.com/Shougo/neocomplcache.git
 [submodule "vim/vim/bundle/vim-ruby.git"]
 	path = vim/vim/bundle/vim-ruby.git
 	url = https://github.com/vim-ruby/vim-ruby.git
-[submodule "vim/vim/bundle/neocomplcache-snippets-complete.git"]
-	path = vim/vim/bundle/neocomplcache-snippets-complete.git
-	url = https://github.com/Shougo/neocomplcache-snippets-complete.git
 [submodule "vim/vim/bundle/ctrlp.vim.git"]
 	path = vim/vim/bundle/ctrlp.vim.git
 	url = https://github.com/kien/ctrlp.vim.git
