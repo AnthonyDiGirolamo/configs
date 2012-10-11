@@ -29,9 +29,9 @@ FILE=vim/vimrc               ; rmln
 FILE=vim/vim                 ; rmln
 
 FILE=zsh/zsh                 ; rmln
-FILE=zsh/zsh_prompt          ; rmln
 FILE=zsh/zshrc               ; rmln
 FILE=zsh/aliases             ; rmln
 
 FILE=tmux.conf               ; rmln
+FILE=oh-my-zsh               ; rmln
 
