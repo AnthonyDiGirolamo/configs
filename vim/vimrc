@@ -18,7 +18,8 @@ set laststatus=2 " always show the editing status bar at the bottom
 set showcmd      " display incomplete commands
 set incsearch    " do incremental searching
 
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+" set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+let g:Powerline_symbols = 'fancy'
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 " set mouse=a

@@ -34,11 +34,11 @@ else
 	alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
 fi
 
-hostname -s | grep -qs -E 'cave|yona'
-if [ $? -eq 0 ]; then
-	alias vim='/usr/bin/vim'
-  export EDITOR='/usr/bin/vim'
-fi
+# hostname -s | grep -qs -E 'cave|yona'
+# if [ $? -eq 0 ]; then
+# 	alias vim='/usr/bin/vim'
+#   export EDITOR='/usr/bin/vim'
+# fi
 
 alias b="bundle"
 alias bi="b install --path vendor"
@@ -89,7 +89,7 @@ alias p='pushd'
 alias o='popd'
 alias u='cd ..'
 
-alias h='history 1'
+# alias h='history 1'
 
 alias du='du -hsc'
 alias df='df -hTP'
