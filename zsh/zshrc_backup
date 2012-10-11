@@ -229,12 +229,7 @@ cn() { cat "$note_directory/$@" | pbcopy }
 compctl -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' n
 compctl -K note_filename_completion -J names -X '%BFile Names' -t+ + -U -K note_grep_completion -J grep -X '%BGrep Notes' cn
 
-# RVM Source
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
 source ~/.aliases
-
-declare -f module &> /dev/null && module load git ruby
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
