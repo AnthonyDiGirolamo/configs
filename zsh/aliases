@@ -142,3 +142,8 @@ alias loadsmithy='source /sw/tools/smithy/environment.sh'
 
 alias gem_uninstall_all='gem list | cut -d" " -f1 | xargs gem uninstall -aIx'
 
+# RVM Source
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+declare -f module &> /dev/null && module load git ruby
+
