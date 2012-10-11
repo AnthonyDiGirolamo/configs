@@ -78,6 +78,12 @@ alias gdc='git diff --cached'
 alias gp='git pull'
 alias gpp='git push'
 
+function git_submodule_rm {
+  git rm --cached $@
+  git config -f .git/config --remove-section submodule.$@
+  git config -f .gitmodules --remove-section submodule.$@
+}
+
 alias d='dirs -v'
 alias p='pushd'
 alias o='popd'
