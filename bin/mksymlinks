@@ -9,7 +9,7 @@ remove_and_link() {
 	$RM ~/.`basename $FILE` ; $LN ~/$PREFS/$FILE ~/.`basename $FILE`
 }
 
-# FILE=fonts                   ; remove_and_link
+FILE=fonts                   ; remove_and_link
 # FILE=icons                   ; remove_and_link
 # FILE=themes                  ; remove_and_link
 

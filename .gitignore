@@ -1,12 +1,8 @@
 .DS_Store
-fonts/*.ttf
-fonts/*.otf
-fonts/*.TTF
 Sounds/
 bin/dmenu
 bin/dwm
 dmenu/dmenu
-fonts/
 icons/
 original_mac
 themes
