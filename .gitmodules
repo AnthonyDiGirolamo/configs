@@ -67,3 +67,6 @@
 [submodule "tmux/tmux-colors-solarized.git"]
 	path = tmux/tmux-colors-solarized.git
 	url = https://github.com/seebi/tmux-colors-solarized.git
+[submodule "vim/vim/bundle/vim-powerline.git"]
+	path = vim/vim/bundle/vim-powerline.git
+	url = https://github.com/Lokaltog/vim-powerline.git
