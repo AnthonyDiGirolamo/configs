@@ -87,17 +87,6 @@ PS1="%{$fg[blue]%}%${PR_PWDLEN}<...<%~%<<%{$reset_color%} %{$fg[green]%}%(!.#.$)
 
 source ~/.aliases
 
-# Auth your sshkey with another server
-function authme {
-    ssh $@ 'cat >>.ssh/authorized_keys' <~/.ssh/id_rsa.pub
-}
-
-function setupenv {
-  pushd ~
-	rsync -avLK --delete --exclude mthesaur-vim.txt .gitconfig .vim .vimrc .zsh .zshrc .screenrc .tmux.conf .aliases .irbrc $@:~/
-  popd
-}
-
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 
