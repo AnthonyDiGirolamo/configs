@@ -1,1 +1,2 @@
+#!/bin/sh
 FPATH=$HOME/apps/zsh/zsh/functions $HOME/apps/zsh/bin/zsh $@
