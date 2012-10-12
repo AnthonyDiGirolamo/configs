@@ -152,6 +152,12 @@ function setupenv {
   popd
 }
 
+function setupenv_full {
+  pushd ~
+	rsync -avLK --delete --exclude mthesaur-vim.txt Preferences
+  popd
+}
+
 # RVM Source
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
