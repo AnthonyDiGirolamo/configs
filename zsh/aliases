@@ -127,7 +127,7 @@ function setupenv {
 
 function setupenv_full {
   pushd ~
-	rsync -avLK --delete --exclude mthesaur-vim.txt Preferences
+	rsync -avLK --delete --exclude mthesaur-vim.txt Preferences $@:~/
   popd
 }
 
