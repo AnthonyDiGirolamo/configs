@@ -1,0 +1,9 @@
+#!/bin/bash
+wget 'http://code.google.com/p/git-core/downloads/detail?name=git-1.7.12.2.tar.gz&can=2&q='
+
+tar xvf git-1.7.12.2.tar.gz
+cd git-1.7.12.2
+
+./configure --prefix=$HOME/apps/git
+make
+make install

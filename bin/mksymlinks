@@ -5,34 +5,37 @@ LN='ln -sv'
 
 cd ~/$PREFS
 
-rmln() {
+remove_and_link() {
 	$RM ~/.`basename $FILE` ; $LN ~/$PREFS/$FILE ~/.`basename $FILE`
 }
 
-# FILE=fonts                   ; rmln
-# FILE=icons                   ; rmln
-# FILE=themes                  ; rmln
+# FILE=fonts                   ; remove_and_link
+# FILE=icons                   ; remove_and_link
+# FILE=themes                  ; remove_and_link
 
-FILE=dwm                     ; rmln
-FILE=dmenu                   ; rmln
-FILE=Xdefaults               ; rmln
-FILE=screenrc                ; rmln
-FILE=gitconfig               ; rmln
-FILE=irbrc                   ; rmln
-FILE=rdebugrc                ; rmln
+FILE=dwm                     ; remove_and_link
+FILE=dmenu                   ; remove_and_link
+FILE=Xdefaults               ; remove_and_link
+FILE=screenrc                ; remove_and_link
+FILE=gitconfig               ; remove_and_link
+FILE=irbrc                   ; remove_and_link
+FILE=rdebugrc                ; remove_and_link
 
-# FILE=vimperator/vimperatorrc ; rmln
-# FILE=vimperator/vimperator   ; rmln
+# FILE=vimperator/vimperatorrc ; remove_and_link
+# FILE=vimperator/vimperator   ; remove_and_link
 
-# FILE=vim/gvimrc              ; rmln
-FILE=vim/vimrc               ; rmln
-FILE=vim/vim                 ; rmln
+# FILE=vim/gvimrc              ; remove_and_link
+FILE=vim/vimrc               ; remove_and_link
+FILE=vim/vim                 ; remove_and_link
 
-FILE=zsh/zshenv              ; rmln
-FILE=zsh/zsh                 ; rmln
-FILE=zsh/zshrc               ; rmln
-FILE=zsh/aliases             ; rmln
+FILE=zsh/zshenv              ; remove_and_link
+FILE=zsh/zsh                 ; remove_and_link
+FILE=zsh/zshrc               ; remove_and_link
+FILE=zsh/aliases             ; remove_and_link
 
-FILE=tmux.conf               ; rmln
-FILE=oh-my-zsh               ; rmln
+FILE=tmux.conf               ; remove_and_link
+FILE=oh-my-zsh               ; remove_and_link
+
+$RM $HOME/apps/bin
+$LN ../$PREFS/bin ~/apps/
 

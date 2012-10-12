@@ -114,17 +114,16 @@ alias mll="module list -l 2>&1 | ruby -e 'STDIN.readlines.tap{|s|s.delete_at(1)}
 
 alias tree='tree -C'
 
+export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/Preferences/bin:$PATH
 export PATH=$HOME/apps/ctags/bin:$PATH
-export PATH=$HOME/apps/git/bin:$PATH
 export PATH=$HOME/apps/vim/bin:$PATH
 export PATH=$HOME/apps/tree/bin:$PATH
 export PATH=$HOME/apps/zsh/bin:$PATH
 export PATH=$HOME/apps/tmux/bin:$PATH
+export PATH=$HOME/apps/git/bin:$PATH
 
 alias mutt='LD_LIBRARY_PATH=$HOME/apps/gdbm/lib:$HOME/apps/w3m/lib PATH=$HOME/apps/w3m/bin:$HOME/apps/mutt/bin:$HOME/apps/gdbm/bin:$HOME/apps/msmtp/bin:$HOME/apps/imapfilter/bin:$PATH $HOME/apps/mutt/bin/mutt'
-
-export PATH=/usr/local/bin:$PATH
 
 alias ssfoxy1='ssh lmd@login1.ornl.gov -L2222:uac2.ornl.gov:22'
 alias ssfoxy2='ssh -p 2222 lmd@localhost -D localhost:8888 -L9993:mail.ornl.gov:993 -L2525:smtp.ornl.gov:25'
