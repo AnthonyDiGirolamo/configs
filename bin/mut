@@ -1,2 +1,0 @@
-#!/bin/sh
-xterm -title Mutt -bg lightgray -fg black -e "TERM=xterm-256color mutt" & 

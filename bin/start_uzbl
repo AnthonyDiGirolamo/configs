@@ -1,1 +1,0 @@
-XDG_DATA_HOME=$HOME/Preferences/uzbl/data XDG_CONFIG_HOME=$HOME/Preferences/uzbl/config $HOME/apps/uzbl/uzbl http://delicious.com/anthonysavatar &

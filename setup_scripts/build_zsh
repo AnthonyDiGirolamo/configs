@@ -1,0 +1,29 @@
+#!/bin/bash
+wget "http://downloads.sourceforge.net/project/zsh/zsh/5.0.0/zsh-5.0.0.tar.bz2?r=http%3A%2F%2Fzsh.sourceforge.net%2FArc%2Fsource.html&ts=1350053206&use_mirror=voxel"
+
+tar xvf zsh-5.0.0.tar.bz2
+cd zsh-5.0.0
+
+PREFIX=$HOME/apps/zsh-5.0.0
+./configure \
+ --prefix=$PREFIX \
+ --enable-fndir=$PREFIX/zsh/functions \
+ --enable-scriptdir=$PREFIX/zsh/scripts \
+ --enable-site-fndir=$PREFIX/share/zsh/site-functions \
+ --enable-site-scriptdir=$PREFIX/share/zsh/site-scripts \
+ --enable-cap \
+ --enable-maildir-support \
+ --enable-multibyte \
+ --enable-pcre \
+ --enable-zsh-secure-free \
+ --with-tcsetpgrp \
+ --disable-etcdir
+
+sed -i -e 's/link=dynamic/link=static/g' config.modules
+
+make
+rm -rf $PREFIX
+make install
+
+rm -rvf ~/.zcompdump
+

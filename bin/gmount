@@ -1,2 +1,0 @@
-#!/bin/sh
-gnome-mount -d /dev/sda1 -m disk

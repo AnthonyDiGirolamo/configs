@@ -1,3 +1,0 @@
-#!/bin/sh
-#env WINEPREFIX="/home/adigiro/WineFolders/office" wine "C:\\Program Files\\Microsoft Office\\Office12\\POWERPNT.EXE" &
-exec "/opt/cxoffice/bin/wine" --bottle "office2007" --check --wait-children --start "C:/users/crossover/Start Menu/Programs/Microsoft Office/Microsoft Office PowerPoint 2007.lnk" "$@"

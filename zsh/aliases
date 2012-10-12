@@ -113,7 +113,6 @@ alias mk='m keyword'
 alias mll="module list -l 2>&1 | ruby -e 'STDIN.readlines.tap{|s|s.delete_at(1)}.sort.each{|l| puts l}'"
 
 alias tree='tree -C'
-alias tmux='tmux -2'
 
 export PATH=$HOME/Preferences/bin:$PATH
 export PATH=$HOME/apps/ctags/bin:$PATH
@@ -149,7 +148,7 @@ function authme {
 
 function setupenv {
   pushd ~
-	rsync -avLK --delete --exclude mthesaur-vim.txt .oh-my-zsh .gitconfig .vim .vimrc .zsh .zshrc .screenrc .tmux.conf .aliases .irbrc $@:~/
+	rsync -avLK --delete --exclude mthesaur-vim.txt apps/bin .oh-my-zsh .gitconfig .vim .vimrc .zsh .zshrc .zshenv .screenrc .tmux.conf .aliases .irbrc $@:~/
   popd
 }
 

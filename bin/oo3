@@ -1,2 +1,0 @@
-#!/bin/sh
-OOO_FORCE_DESKTOP=gnome openoffice.org3
