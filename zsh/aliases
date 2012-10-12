@@ -11,35 +11,6 @@ function fixp_noaa {
   chgrp -Rv ncrcstaff $@
 }
 
-# MacOS Specific Settings
-uname -a | grep -qs Darwin
-if [ $? -eq 0 ]; then
-	export PATH=/opt/local/bin:$PATH
-  # sudo port install coreutils # to get the following to work in OSX
-  #eval "`gdircolors -b`"
-  alias ls='gls --color=auto'
-	alias gvim=mvim
-	alias vim='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
-  export EDITOR='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
-  alias f12insert='xmodmap -e "keycode 119 = Insert"'
-else
-# Linux
-  #eval "`dircolors -b`"
-  alias ls='ls --color=auto'
-  #alias vim='vim'
-  export EDITOR='vim'
-
-	alias rrm='/bin/rm'
-	alias rm='mv --verbose -i --target-directory ~/.Trash/'
-	alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
-fi
-
-# hostname -s | grep -qs -E 'cave|yona'
-# if [ $? -eq 0 ]; then
-# 	alias vim='/usr/bin/vim'
-#   export EDITOR='/usr/bin/vim'
-# fi
-
 alias b="bundle"
 alias bi="b install --path vendor"
 alias bu="b update"
@@ -159,6 +130,36 @@ function setupenv_full {
 	rsync -avLK --delete --exclude mthesaur-vim.txt Preferences
   popd
 }
+
+# MacOS Specific Settings
+uname -a | grep -qs Darwin
+if [ $? -eq 0 ]; then
+	export PATH=/opt/local/bin:$PATH
+  # sudo port install coreutils # to get the following to work in OSX
+  #eval "`gdircolors -b`"
+  alias ls='gls --color=auto'
+	alias gvim=mvim
+	alias vim='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
+  export EDITOR='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
+  alias f12insert='xmodmap -e "keycode 119 = Insert"'
+else
+# Linux
+  #eval "`dircolors -b`"
+  alias ls='ls --color=auto'
+  #alias vim='vim'
+  export EDITOR=`which vim`
+
+	alias rrm='/bin/rm'
+	alias rm='mv --verbose -i --target-directory ~/.Trash/'
+	alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
+fi
+
+# hostname -s | grep -qs -E 'cave|yona'
+# if [ $? -eq 0 ]; then
+# 	alias vim='/usr/bin/vim'
+#   export EDITOR='/usr/bin/vim'
+# fi
+
 
 # RVM Source
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
