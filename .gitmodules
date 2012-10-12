@@ -64,3 +64,6 @@
 [submodule "vim/vim/bundle/vim-powerline.git"]
 	path = vim/vim/bundle/vim-powerline.git
 	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule "tmux-powerline"]
+	path = tmux-powerline
+	url = https://github.com/AnthonyDiGirolamo/tmux-powerline.git
