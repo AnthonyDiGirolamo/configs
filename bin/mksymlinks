@@ -29,7 +29,6 @@ FILE=vim/vimrc               ; remove_and_link
 FILE=vim/vim                 ; remove_and_link
 
 FILE=zsh/zshenv              ; remove_and_link
-FILE=zsh/zsh                 ; remove_and_link
 FILE=zsh/zshrc               ; remove_and_link
 FILE=zsh/aliases             ; remove_and_link
 
