@@ -1,2 +1,7 @@
 #!/bin/sh
-FPATH=$HOME/apps/zsh/zsh/functions $HOME/apps/zsh/bin/zsh $@
+if [ -e $HOME/apps/zsh/bin/zsh ]; then
+  FPATH=$HOME/apps/zsh/zsh/functions $HOME/apps/zsh/bin/zsh $@
+else
+  zsh $@
+fi
+
