@@ -164,5 +164,15 @@ fi
 # RVM Source
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
+
+if [[ -n $MODULESHOME ]]; then
+  if [[ -n ${ZSH_VERSION-} ]]; then
+    source $MODULESHOME/init/zsh
+  fi
+  if [[ -n ${BASH_VERSION-} ]]; then
+    source $MODULESHOME/init/zsh
+  fi
+fi
+
 declare -f module &> /dev/null && module load git ruby
 
