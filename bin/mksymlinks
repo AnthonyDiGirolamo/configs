@@ -32,9 +32,8 @@ FILE=zsh/zshenv              ; remove_and_link
 FILE=zsh/zshrc               ; remove_and_link
 FILE=zsh/aliases             ; remove_and_link
 
-FILE=tmux.conf               ; remove_and_link
+FILE=tmux/tmux.conf          ; remove_and_link
 FILE=oh-my-zsh               ; remove_and_link
 
-$RM $HOME/apps/bin
-$LN ../$PREFS/bin ~/apps/
+ln -svnf $HOME/$PREFS/oh-my-zsh-custom/* $HOME/.oh-my-zsh/custom
 
