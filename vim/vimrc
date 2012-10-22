@@ -21,7 +21,7 @@ set showcmd      " display incomplete commands
 set incsearch    " do incremental searching
 
 " set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-let g:Powerline_symbols = 'fancy'
+" let g:Powerline_symbols = 'fancy'
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 " set mouse=a
@@ -50,9 +50,9 @@ autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
 " Source the vimrc file after saving it
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
+" if has("autocmd")
+"   autocmd bufwritepost .vimrc source $MYVIMRC
+" endif
 
 let mapleader = ","
 nmap <leader>v :tabedit $MYVIMRC<CR>
@@ -101,9 +101,10 @@ colors solarized
 
 if has('gui_running')
   if has("gui_gtk2")
-    set guifont=Inconsolata\ 14
+    set guifont=Anonymous\ Pro\ for\ PowerLine\ 14
   elseif has("gui_macvim")
-    set guifont=Inconsolata:h26
+    " set guifont=Anonymous\ Pro\ for\ PowerLine:h27
+    set guifont=Inconsolata\ for\ Powerline:h23
   endif
   set guioptions=agm
   "set guioptions=aegimtT
@@ -111,7 +112,7 @@ if has('gui_running')
   set vb t_vb=
 endif
 
-setlocal spell spelllang=en_us   " set the spellcheck to english
+" setlocal spell spelllang=en_us   " set the spellcheck to english
 set mousemodel=popup_setpos      " set the right click in gvim to spellcheck
 
 " F9 will turn spell checking on or off in normal and insert mode
@@ -134,8 +135,8 @@ set wcm=<C-Z>
 map <F4> :emenu <C-Z>
 
 " Scrolling
-nmap <C-E> jzz
-nmap <C-Y> kzz
+" nmap <C-E> jzz
+" nmap <C-Y> kzz
 
 " MacVim is flaky with c-x c-*, set c-o to omnicomplete
 imap <C-O> <C-X><C-O>
@@ -291,3 +292,9 @@ endfunc
 "   let g:neocomplcache_force_omni_patterns = {}
 " endif
 " let g:neocomplcache_force_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+
+
+function! AlignDokuTable()
+  let @p = '{V}:s/\v\^|\| | \|/COL/g{V}:Align COLjV:s/COL/^/gjV}:s/COL/|/g{V}<'
+endfunction
+map <leader>k :call AlignDokuTable()<CR>@p
