@@ -292,9 +292,12 @@ endfunc
 "   let g:neocomplcache_force_omni_patterns = {}
 " endif
 " let g:neocomplcache_force_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-
-
+function! DokuLink()
+  let @l = 'BysW]ysW]EbbywPa|$'
+endfunction
 function! AlignDokuTable()
   let @p = '{V}:s/\v\^|\| | \|/COL/g{V}:Align COLjV:s/COL/^/gjV}:s/COL/|/g{V}<'
 endfunction
+
 map <leader>k :call AlignDokuTable()<CR>@p
+map <leader>l :call DokuLink()<CR>@l
