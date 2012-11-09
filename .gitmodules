@@ -70,3 +70,6 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = https://github.com/AnthonyDiGirolamo/oh-my-zsh.git
+[submodule "vim/vim/bundle/gundo.git"]
+	path = vim/vim/bundle/gundo.git
+	url = https://github.com/sjl/gundo.vim.git
