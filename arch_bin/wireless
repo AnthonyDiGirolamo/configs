@@ -1,11 +1,11 @@
 #!/bin/sh -x
 killall dhcpcd
-ip link set wlan0 down
+/sbin/ip link set wlan0 down
 sleep 1
-ip link set wlan0 up
+/sbin/ip link set wlan0 up
 sleep 1
 #ifconfig wlan0 up
-wpa_supplicant -D wext -i wlan0 -c /etc/wpa_supplicant.conf -B
+/usr/sbin/wpa_supplicant -D wext -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf.anthony -B
 #iwconfig wlan0 essid "ornl-visitor"
 sleep 1
-dhcpcd wlan0
+/sbin/dhcpcd wlan0
