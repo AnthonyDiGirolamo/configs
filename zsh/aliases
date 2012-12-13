@@ -37,7 +37,7 @@ alias ga='git add'
 function gl {
   git log $@ | vim +'set bt=nowrite' -
 }
-alias gll='git log --pretty=oneline'
+alias gll='git hist'
 alias gs='git status'
 alias gc='git commit'
 alias gca='git commit -a'
