@@ -73,3 +73,6 @@
 [submodule "vim/vim/bundle/gundo.git"]
 	path = vim/vim/bundle/gundo.git
 	url = https://github.com/sjl/gundo.vim.git
+[submodule "prezto"]
+	path = prezto
+	url = https://github.com/AnthonyDiGirolamo/prezto.git
