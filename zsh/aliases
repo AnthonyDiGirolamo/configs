@@ -171,7 +171,7 @@ if [[ -n $MODULESHOME ]]; then
     source $MODULESHOME/init/zsh
   fi
   if [[ -n ${BASH_VERSION-} ]]; then
-    source $MODULESHOME/init/zsh
+    source $MODULESHOME/init/bash
   fi
 fi
 

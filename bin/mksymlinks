@@ -28,12 +28,17 @@ FILE=rdebugrc                ; remove_and_link
 FILE=vim/vimrc               ; remove_and_link
 FILE=vim/vim                 ; remove_and_link
 
-FILE=zsh/zshenv              ; remove_and_link
-FILE=zsh/zshrc               ; remove_and_link
+# FILE=zsh/zshenv              ; remove_and_link
+# FILE=zsh/zshrc               ; remove_and_link
 FILE=zsh/aliases             ; remove_and_link
 
 FILE=tmux/tmux.conf          ; remove_and_link
-FILE=oh-my-zsh               ; remove_and_link
 
-ln -svnf $HOME/$PREFS/oh-my-zsh-custom/* $HOME/.oh-my-zsh/custom
+# FILE=oh-my-zsh               ; remove_and_link
+# ln -svnf $HOME/$PREFS/oh-my-zsh-custom/* $HOME/.oh-my-zsh/custom
+
+ln -svnf $HOME/$PREFS/prezto $HOME/.zprezto
+for file in $HOME/.zprezto/runcoms/z* ; do
+  ln -svf $file $HOME/.`basename $file`
+done
 
