@@ -34,9 +34,6 @@ alias la='ls -a'
 alias l='ls -CF'
 
 alias ga='git add'
-function gl {
-  git log $@ | vim +'set bt=nowrite' -
-}
 alias gll='git hist'
 alias gs='git status'
 alias gc='git commit'
