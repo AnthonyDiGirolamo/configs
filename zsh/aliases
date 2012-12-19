@@ -81,12 +81,20 @@ alias mk='m keyword'
 alias mll="module list -l 2>&1 | ruby -e 'STDIN.readlines.tap{|s|s.delete_at(1)}.sort.each{|l| puts l}'"
 
 alias tree='tree -C'
+alias tls='tree -L 1'
+alias tll='treetable -L 1'
+alias tlla='treetable -a -L 1'
+alias tls2='tree -L 2'
+alias tll2='treetable -L 2'
+alias tlla2='treetable -a -L 2'
+alias tls3='tree -L 3'
+alias tll3='treetable -L 3'
+alias tlla3='treetable -a -L 3'
 
 export PATH=$HOME/apps/ctags/bin:$PATH
 export PATH=$HOME/apps/git/bin:$PATH
 export PATH=$HOME/apps/tmux/bin:$PATH
 export PATH=$HOME/apps/tree/bin:$PATH
-export PATH=$HOME/apps/vim/bin:$PATH
 export PATH=$HOME/apps/zsh/bin:$PATH
 export PATH=$HOME/apps/bash/bin:$PATH
 
@@ -143,8 +151,13 @@ else
 # Linux
   #eval "`dircolors -b`"
   alias ls='ls --color=auto'
-  #alias vim='vim'
-  export EDITOR=`which vim`
+
+  if [ -f /etc/redhat-release ]; then
+    alias vim=$HOME/apps/vim-7.3_rhel6/bin/vim
+  else
+    alias vim=$HOME/apps/vim/bin/vim
+  fi
+  export EDITOR=vim
 
 	alias rrm='/bin/rm'
 	alias rm='mv --verbose -i --target-directory ~/.Trash/'
