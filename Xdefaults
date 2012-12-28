@@ -3,29 +3,32 @@
 ! dpi: 110 size 18
 ! dpi: 115 size 15
 
-Xft.dpi:        96
-Xft.antialias:  true
-Xft.rgba:       rgba
-Xft.hinting:    true
-Xft.hintstyle:  hintslight
+xft.dpi:       96
+xft.antialias: true
+xft.rgba:      rgba
+xft.hinting:   true
+xft.hintstyle: hintslight
 
-xterm*faceName: Anonymous Pro for Powerline
-xterm*faceSize: 17
-!xterm*faceName: Terminus:pixelsize=15
+!xterm*faceName: Anonymous Pro for Powerline
+!xterm*faceSize: 17
+!xterm*faceName:  xft:Anonymous Pro for Powerline:pixelsize=28:encoding=16
+!xterm*faceName:  xft:Letter Gothic:pixelsize=28:encoding=iso10646-1
+!xterm*faceName:  xft:Consolas:pixelsize=28:encoding=iso10646-1
+!xterm*font:     -misc-anonymous pro for powerline-medium-r-normal--0-0-0-0-m-0-iso10646-1
 
-xterm*dynamiccolors:      true
-!xterm*background:             lightblack
-!xterm*foreground:             lightblue
-!xterm*colorMode:              on
-!xterm*colorBD:                lightcyan
-!xterm*colorBDMode:            on
-!xterm*colorUL:                white
-!xterm*colorULMode:            on
-!xterm*scrollTtyOutput:   false
-!xterm*scrollKey:         true
-!xterm*scrollBar:         true
-xterm*utf8:               true
-xterm*geometry:           84x50
+xterm*dynamiccolors:    true
+!xterm*background:      lightblack
+!xterm*foreground:      lightblue
+!xterm*colorMode:       on
+!xterm*colorBD:         lightcyan
+!xterm*colorBDMode:     on
+!xterm*colorUL:         white
+!xterm*colorULMode:     on
+!xterm*scrollTtyOutput: false
+!xterm*scrollKey:       true
+!xterm*scrollBar:       true
+xterm*utf8:             2
+xterm*geometry:         84x50
 
 xterm*highlightSelection: true
 
