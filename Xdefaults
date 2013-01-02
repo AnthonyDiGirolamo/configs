@@ -4,16 +4,20 @@
 ! dpi: 115 size 15
 
 xft.dpi:       96
+! xft-dpi = Resolution for Xft in dots per inch (e.g. 96)
 xft.antialias: true
+! xft-antialias = Whether to antialias Xft fonts (true or false)
 xft.rgba:      rgba
+! xft-rgba = Type of subpixel antialiasing (none, rgb, bgr, vrgb or vbgr)
 xft.hinting:   true
 xft.hintstyle: hintslight
+! xft-hintstyle = What degree of hinting to use (hintnone, hintslight, hintmedium, or hintfull)
 
 !xterm*faceName: Anonymous Pro for Powerline
 !xterm*faceSize: 17
-!xterm*faceName:  xft:Anonymous Pro for Powerline:pixelsize=28:encoding=16
-!xterm*faceName:  xft:Letter Gothic:pixelsize=28:encoding=iso10646-1
-!xterm*faceName:  xft:Consolas:pixelsize=28:encoding=iso10646-1
+!xterm*faceName:  xft:Anonymous Pro for Powerline:pixelsize=26:encoding=16
+!xterm*faceName:  xft:Letter Gothic:pixelsize=26:encoding=iso10646-1
+xterm*faceName:  xft:Consolas:pixelsize=28:encoding=iso10646-1
 !xterm*font:     -misc-anonymous pro for powerline-medium-r-normal--0-0-0-0-m-0-iso10646-1
 
 xterm*dynamiccolors:    true
@@ -29,6 +33,7 @@ xterm*dynamiccolors:    true
 !xterm*scrollBar:       true
 xterm*utf8:             2
 xterm*geometry:         84x50
+xterm*visualBell: off
 
 xterm*highlightSelection: true
 
