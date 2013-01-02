@@ -17,7 +17,7 @@ xft.hintstyle: hintslight
 !xterm*faceSize: 17
 !xterm*faceName:  xft:Anonymous Pro for Powerline:pixelsize=26:encoding=16
 !xterm*faceName:  xft:Letter Gothic:pixelsize=26:encoding=iso10646-1
-xterm*faceName:  xft:Consolas:pixelsize=28:encoding=iso10646-1
+xterm*faceName:  xft:Inconsolata for Powerline:pixelsize=17:encoding=iso10646-1
 !xterm*font:     -misc-anonymous pro for powerline-medium-r-normal--0-0-0-0-m-0-iso10646-1
 
 xterm*dynamiccolors:    true
