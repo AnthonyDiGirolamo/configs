@@ -10,14 +10,14 @@ xft.antialias: true
 xft.rgba:      rgba
 ! xft-rgba = Type of subpixel antialiasing (none, rgb, bgr, vrgb or vbgr)
 xft.hinting:   true
-xft.hintstyle: hintslight
+xft.hintstyle: hintfull
 ! xft-hintstyle = What degree of hinting to use (hintnone, hintslight, hintmedium, or hintfull)
 
 !xterm*faceName: Anonymous Pro for Powerline
 !xterm*faceSize: 17
-!xterm*faceName:  xft:Anonymous Pro for Powerline:pixelsize=26:encoding=16
+xterm*faceName:  xft:Anonymous Pro for Powerline:pixelsize=19:encoding=iso10646-1
 !xterm*faceName:  xft:Letter Gothic:pixelsize=26:encoding=iso10646-1
-xterm*faceName:  xft:Inconsolata for Powerline:pixelsize=17:encoding=iso10646-1
+!xterm*faceName:  xft:Inconsolata for Powerline:pixelsize=19:encoding=iso10646-1
 !xterm*font:     -misc-anonymous pro for powerline-medium-r-normal--0-0-0-0-m-0-iso10646-1
 
 xterm*dynamiccolors:    true
