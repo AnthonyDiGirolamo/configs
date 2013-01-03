@@ -91,7 +91,7 @@ endif
   "let g:solarized_termcolors=256
 "endif
 
-"set background=light
+" set background=light
 set background=dark
 colors solarized
 "colors warm_grey
@@ -104,7 +104,7 @@ if has('gui_running')
     set guifont=Anonymous\ Pro\ for\ PowerLine\ 14
   elseif has("gui_macvim")
     " set guifont=Anonymous\ Pro\ for\ PowerLine:h27
-    set guifont=Inconsolata\ for\ Powerline:h23
+    set guifont=LettrGoth12\ BT:h23
   endif
   set guioptions=agm
   "set guioptions=aegimtT

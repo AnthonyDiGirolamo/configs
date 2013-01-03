@@ -3,29 +3,37 @@
 ! dpi: 110 size 18
 ! dpi: 115 size 15
 
-Xft.dpi:        96
-Xft.antialias:  true
-Xft.rgba:       rgba
-Xft.hinting:    true
-Xft.hintstyle:  hintslight
+xft.dpi:       96
+! xft-dpi = Resolution for Xft in dots per inch (e.g. 96)
+xft.antialias: true
+! xft-antialias = Whether to antialias Xft fonts (true or false)
+xft.rgba:      rgba
+! xft-rgba = Type of subpixel antialiasing (none, rgb, bgr, vrgb or vbgr)
+xft.hinting:   true
+xft.hintstyle: hintfull
+! xft-hintstyle = What degree of hinting to use (hintnone, hintslight, hintmedium, or hintfull)
 
-xterm*faceName: Anonymous Pro for Powerline
-xterm*faceSize: 17
-!xterm*faceName: Terminus:pixelsize=15
+!xterm*faceName: Anonymous Pro for Powerline
+!xterm*faceSize: 17
+xterm*faceName:  xft:Anonymous Pro for Powerline:pixelsize=19:encoding=iso10646-1
+!xterm*faceName:  xft:Letter Gothic:pixelsize=26:encoding=iso10646-1
+!xterm*faceName:  xft:Inconsolata for Powerline:pixelsize=19:encoding=iso10646-1
+!xterm*font:     -misc-anonymous pro for powerline-medium-r-normal--0-0-0-0-m-0-iso10646-1
 
-xterm*dynamiccolors:      true
-!xterm*background:             lightblack
-!xterm*foreground:             lightblue
-!xterm*colorMode:              on
-!xterm*colorBD:                lightcyan
-!xterm*colorBDMode:            on
-!xterm*colorUL:                white
-!xterm*colorULMode:            on
-!xterm*scrollTtyOutput:   false
-!xterm*scrollKey:         true
-!xterm*scrollBar:         true
-xterm*utf8:               true
-xterm*geometry:           84x50
+xterm*dynamiccolors:    true
+!xterm*background:      lightblack
+!xterm*foreground:      lightblue
+!xterm*colorMode:       on
+!xterm*colorBD:         lightcyan
+!xterm*colorBDMode:     on
+!xterm*colorUL:         white
+!xterm*colorULMode:     on
+!xterm*scrollTtyOutput: false
+!xterm*scrollKey:       true
+!xterm*scrollBar:       true
+xterm*utf8:             2
+xterm*geometry:         84x50
+xterm*visualBell: off
 
 xterm*highlightSelection: true
 
