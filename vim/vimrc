@@ -20,13 +20,13 @@ set laststatus=2 " always show the editing status bar at the bottom
 set showcmd      " display incomplete commands
 set incsearch    " do incremental searching
 
+filetype plugin indent on
+
 " set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " let g:Powerline_symbols = 'fancy'
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 " set mouse=a
-
-filetype plugin indent on
 
 augroup arduino
 au BufNewFile,BufRead *.ino set ft=cpp syntax=cpp shiftwidth=2 tabstop=2
@@ -117,7 +117,6 @@ set mousemodel=popup_setpos      " set the right click in gvim to spellcheck
 
 " F9 will turn spell checking on or off in normal and insert mode
 map <F9> :setlocal spell! spelllang=en_us<cr>
-imap <F9> <ESC>:setlocal spell! spelllang=en_us<cr>i
 
 " Thesaurus
 set thesaurus+=~/.vim/mthesaur-vim.txt
@@ -292,6 +291,50 @@ endfunc
 "   let g:neocomplcache_force_omni_patterns = {}
 " endif
 " let g:neocomplcache_force_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+
+" neocomplcache
+" A beter autocomplete system!
+
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_enable_smart_case = 1
+
+" default # of completions is 100, that's crazy
+let g:neocomplcache_max_list = 5
+
+" words less than 3 letters long aren't worth completing
+let g:neocomplcache_auto_completion_start_length = 3
+
+" Map standard Ctrl-N completion to Cmd-Space
+inoremap <D-Space> <C-n>
+
+" This makes sure we use neocomplcache completefunc instead of
+" the one in rails.vim, otherwise this plugin will crap out
+let g:neocomplcache_force_overwrite_completefunc = 1
+
+" Define keyword.
+if !exists('g:neocomplcache_keyword_patterns')
+  let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+" Enable heavy omni completion.
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+
+" Prevent hanging with python: https://github.com/skwp/dotfiles/issues/163
+let g:neocomplcache_omni_patterns['python'] = ''
+
 function! DokuLink()
   let @l = 'BysW]ysW]EbbywPa|$'
 endfunction
