@@ -261,7 +261,7 @@ set diffopt+=iwhite
 ":noautocmd vimgrep /{pattern}/[flags] {file(s)}
 "command! -nargs=+ MyGrep execute 'silent grep! <args>' | copen 33
 nmap <leader>g :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e " . expand("<cword>") . " " <bar> cwindow<CR>
-nmap <leader>x :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e XXX " <bar> cwindow<CR>
+nmap <leader>G :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e \"" . expand("<cWORD>") . "\" " <bar> cwindow<CR>
 
 " Color Scheme Helpers
 " Show syntax highlighting groups for word under cursor

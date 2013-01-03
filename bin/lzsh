@@ -1,7 +1,7 @@
 #!/bin/sh
 if [ -e $HOME/apps/zsh/bin/zsh ]; then
-  FPATH=$HOME/apps/zsh/zsh/functions $HOME/apps/zsh/bin/zsh $@
+  FPATH=$HOME/apps/zsh/zsh/functions exec $HOME/apps/zsh/bin/zsh $@
 else
-  zsh $@
+  exec zsh $@
 fi
 

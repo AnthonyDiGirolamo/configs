@@ -154,8 +154,10 @@ else
 
   if [ -f /etc/redhat-release ]; then
     alias vim=$HOME/apps/vim-7.3_rhel6/bin/vim
+    export PATH=$HOME/apps/vim-7.3_rhel6/bin:$PATH
   else
     alias vim=$HOME/apps/vim/bin/vim
+    export PATH=$HOME/apps/vim/bin:$PATH
   fi
   export EDITOR=vim
 
