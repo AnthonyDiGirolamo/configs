@@ -1,5 +1,5 @@
 #!/bin/bash
-wget "http://downloads.sourceforge.net/project/zsh/zsh/5.0.0/zsh-5.0.0.tar.bz2?r=http%3A%2F%2Fzsh.sourceforge.net%2FArc%2Fsource.html&ts=1350053206&use_mirror=voxel"
+wget "http://downloads.sourceforge.net/project/zsh/zsh/5.0.0/zsh-5.0.0.tar.bz2"
 
 tar xvf zsh-5.0.0.tar.bz2
 cd zsh-5.0.0
@@ -24,6 +24,7 @@ sed -i -e 's/link=dynamic/link=static/g' config.modules
 make
 rm -rf $PREFIX
 make install
+ln -svnf $HOME/apps/zsh-5.0.0 $HOME/apps/zsh
 
 rm -rvf ~/.zcompdump
 

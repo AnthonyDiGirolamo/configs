@@ -1,7 +1,5 @@
 #!/bin/bash
-if [[ ! -e bash-4.2.tar.gz ]]; then
-  wget 'http://ftpmirror.gnu.org/bash/bash-4.2.tar.gz'
-fi
+wget 'http://ftpmirror.gnu.org/bash/bash-4.2.tar.gz'
 rm -rf bash-4.2
 tar xvf bash-4.2.tar.gz
 cd bash-4.2
@@ -9,4 +7,5 @@ cd bash-4.2
 ./configure --prefix=$HOME/apps/bash-4.2
 make
 make install
+ln -snvf $HOME/apps/bash-4.2 $HOME/apps/bash
 
