@@ -126,7 +126,7 @@ function authme {
 
 function setupenv {
   pushd ~
-	rsync -avLK --delete --exclude mthesaur-vim.txt apps/bin .oh-my-zsh .gitconfig .vim .vimrc .zsh .zshrc .zshenv .screenrc .tmux.conf .aliases .irbrc $@:~/
+	rsync -avLK --delete --exclude mthesaur-vim.txt apps/bin .gitconfig .vim .vimrc .zprezto .zlogin  .zlogout  .zpreztorc  .zprofile  .zshenv  .zshrc .screenrc .tmux.conf .aliases .irbrc $@:~/
   popd
 }
 
