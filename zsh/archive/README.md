@@ -1,1 +1,0 @@
-old zsh configs

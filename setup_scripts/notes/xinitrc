@@ -1,8 +1,0 @@
-export PATH=/opt/local/bin:$PATH
-xset b off
-xmodmap -e "keycode 119 = Insert"
-dwmstatus &
-while [ 1 ]
-do
-  dwm
-done
