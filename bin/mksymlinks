@@ -1,44 +1,16 @@
 #!/bin/sh
 PREFS='Preferences'
-RM='/bin/rm -rvf'
-LN='ln -sv'
 
 cd ~/$PREFS
 
-remove_and_link() {
-	$RM ~/.`basename $FILE` ; $LN ~/$PREFS/$FILE ~/.`basename $FILE`
-}
-
-FILE=fonts                   ; remove_and_link
-# FILE=icons                   ; remove_and_link
-# FILE=themes                  ; remove_and_link
-
-FILE=dwm                     ; remove_and_link
-FILE=dmenu                   ; remove_and_link
-FILE=Xdefaults               ; remove_and_link
-FILE=screenrc                ; remove_and_link
-FILE=gitconfig               ; remove_and_link
-FILE=irbrc                   ; remove_and_link
-FILE=rdebugrc                ; remove_and_link
-
-# FILE=vimperator/vimperatorrc ; remove_and_link
-# FILE=vimperator/vimperator   ; remove_and_link
-
-# FILE=vim/gvimrc              ; remove_and_link
-FILE=vim/vimrc               ; remove_and_link
-FILE=vim/vim                 ; remove_and_link
-
-# FILE=zsh/zshenv              ; remove_and_link
-# FILE=zsh/zshrc               ; remove_and_link
-FILE=zsh/aliases             ; remove_and_link
-
-FILE=tmux/tmux.conf          ; remove_and_link
-
-# FILE=oh-my-zsh               ; remove_and_link
-# ln -svnf $HOME/$PREFS/oh-my-zsh-custom/* $HOME/.oh-my-zsh/custom
+for FILE in fonts Xdefaults gitconfig irbrc rdebugrc vim/vimrc vim/vim aliases tmux/tmux.conf
+do
+	ln -svnf ~/$PREFS/$FILE ~/.`basename $FILE`
+done
 
 ln -svnf $HOME/$PREFS/prezto $HOME/.zprezto
+
 for file in $HOME/.zprezto/runcoms/z* ; do
-  ln -svf $file $HOME/.`basename $file`
+  ln -svnf $file $HOME/.`basename $file`
 done
 
