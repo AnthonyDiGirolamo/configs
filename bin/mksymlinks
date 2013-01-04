@@ -3,7 +3,7 @@ PREFS='Preferences'
 
 cd ~/$PREFS
 
-for FILE in fonts Xdefaults gitconfig irbrc rdebugrc vim/vimrc vim/vim aliases tmux/tmux.conf
+for FILE in fonts Xdefaults gitconfig irbrc rdebugrc vim/gvimrc vim/vimrc vim/vim aliases tmux/tmux.conf
 do
 	ln -svnf ~/$PREFS/$FILE ~/.`basename $FILE`
 done

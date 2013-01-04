@@ -1,7 +1,12 @@
 " Load Pathogen
+" =============
+"
 filetype off
 call pathogen#infect()
 
+" set options
+" ===========
+"
 set shell=sh
 
 " Use Vim settings, rather then Vi settings (much better!).
@@ -22,12 +27,55 @@ set incsearch    " do incremental searching
 
 filetype plugin indent on
 
-" set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " let g:Powerline_symbols = 'fancy'
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 " set mouse=a
 
+set autoindent
+
+set foldmethod=marker " or: syntax manual
+set foldlevel=0
+" Don't screw up folds when inserting text that might affect them, until
+" leaving insert mode. Foldmethod is local to the window.
+" autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
+" autocmd InsertLeave * let &l:foldmethod=w:last_fdm
+
+set number            " line numbering
+set tabstop=2         " set tabs to 2 spaces
+set shiftwidth=2
+set expandtab
+
+set linebreak         " wrap on words rather than characters
+set textwidth=80      " insert EOL after 75 columns
+
+set ignorecase        " ignore case in search patterns
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+" setlocal spell spelllang=en_us   " set the spellcheck to english
+set mousemodel=popup_setpos      " set the right click in gvim to spellcheck
+
+set thesaurus+=~/.vim/mthesaur-vim.txt " Thesaurus
+" This will consider spaces and -'s as part of words in the thesaurus file
+" Really messes up syntax highlighting though, must be a better way
+" set iskeyword+=32,-
+
+" Diff Settings
+set diffopt+=iwhite " Ignore whitespace in vimdiff
+
+" Autocommands
+" ============
+"
+" Clear trailing whitespace before a save
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Set filetype options based on extensions
 augroup arduino
 au BufNewFile,BufRead *.ino set ft=cpp syntax=cpp shiftwidth=2 tabstop=2
 augroup END
@@ -54,38 +102,13 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 "   autocmd bufwritepost .vimrc source $MYVIMRC
 " endif
 
-let mapleader = ","
-nmap <leader>v :tabedit $MYVIMRC<CR>
-
 " Better syntax highlighting for python
 au FileType python set complete+=k~/.vim/bundle/python_syntax/syntax/python.vim isk+=.,(
 au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
-set autoindent
-
-
-set foldmethod=marker
-set foldlevel=0
-" Don't screw up folds when inserting text that might affect them, until
-" leaving insert mode. Foldmethod is local to the window.
-" autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
-" autocmd InsertLeave * let &l:foldmethod=w:last_fdm
-
-set number            " line numbering
-set tabstop=2         " set tabs to 2 spaces
-set shiftwidth=2
-set expandtab
-
-set linebreak         " wrap on words rather than characters
-set textwidth=80      " insert EOL after 75 columns
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
-
+" Color options
+" =============
+"
 "if $TERM == 'xterm-256color'
   set t_Co=256 " set 256 color terminal
   "let g:solarized_termcolors=256
@@ -94,11 +117,15 @@ endif
 " set background=light
 set background=dark
 colors solarized
+
 "colors warm_grey
 "colors molokai
 "colors fine_blue
 "colors mac_classic
 
+" GUI vim (gvim) settings
+" =======================
+"
 if has('gui_running')
   if has("gui_gtk2")
     set guifont=Anonymous\ Pro\ for\ PowerLine\ 14
@@ -112,20 +139,9 @@ if has('gui_running')
   set vb t_vb=
 endif
 
-" setlocal spell spelllang=en_us   " set the spellcheck to english
-set mousemodel=popup_setpos      " set the right click in gvim to spellcheck
-
-" F9 will turn spell checking on or off in normal and insert mode
-map <F9> :setlocal spell! spelllang=en_us<cr>
-
-" Thesaurus
-set thesaurus+=~/.vim/mthesaur-vim.txt
-" This will consider spaces and -'s as part of words in the thesaurus file
-" Really messes up syntax highlighting though
-" set iskeyword+=32,-
-
-set ignorecase
-
+" Key Mappings
+" ============
+"
 " Allow access to the gvim Menu by hitting F4 in vim
 source $VIMRUNTIME/menu.vim
 set wildmenu
@@ -133,6 +149,11 @@ set cpo-=<
 set wcm=<C-Z>
 map <F4> :emenu <C-Z>
 
+" F9 will turn spell checking on or off in normal and insert mode
+map <F9> :setlocal spell! spelllang=en_us<cr>
+
+let mapleader = ","
+nmap <leader>v :tabedit $MYVIMRC<CR>
 " Scrolling
 " nmap <C-E> jzz
 " nmap <C-Y> kzz
@@ -147,14 +168,11 @@ imap <C-O> <C-X><C-O>
 " map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
 " imap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
 
-" Clear trailing whitespace before a save
-autocmd BufWritePre * :%s/\s\+$//e
-
 " Symbol listing - requires ctags
 nmap  <F12> :TagbarToggle<CR>
 
-imap jj <Esc>l
 " Remap Esc
+imap jj <Esc>l
 
 " Alt-C and V copy and paste to and from the system clipboard
 map <M-c> "*y
@@ -173,15 +191,23 @@ nmap <C-j> ]e
 vmap <C-k> [egv
 vmap <C-j> ]egv
 
-" CommandT Settings
-" let g:CommandTMaxFiles=2000
-set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tmp/*
+" Open file browser
+nnoremap <silent> <F2> :NERDTreeToggle<CR>
+
+" Plugin Options
+" ==============
+"
+" Use :C to run a calculation, needs ruby support
+" :command! -nargs=+ C :ruby puts <args>
 
 let g:user_zen_settings       = { 'erb' : { 'extends' : 'html' } }
 let g:user_zen_expandabbr_key = '<c-e>'
 let g:use_zen_complete_tag    = 1
 
 " Netrw settings
+" ==============
+"
+set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tmp/*
 let g:netrw_winsize               = 80
 "let g:netrw_liststyle             = 3
 "let g:netrw_list_hide             = '.*\.o$'
@@ -196,83 +222,15 @@ let Tlist_Use_SingleClick         = 0
 let Tlist_Sort_Type               = "name"
 let Tlist_Enable_Fold_Column      = 0
 let Tlist_File_Fold_Auto_Close    = 1
-
 let NERDTreeMinimalUI=1
 
-" Open file browser
-nnoremap <silent> <F2> :NERDTreeToggle<CR>
-
-" Use :C to run a calculation, needs ruby support
-:command! -nargs=+ C :ruby puts <args>
-
-"" VIM as a GTD to-do list
-"function! InsertDate(spaces)
-"  let today = strftime("%m/%d")
-"  let pattern = "\s*$"
-"  let line = getline(".")
-"
-"  let repl = ""
-"  for i in range(80-strlen(line)-strlen(today)-a:spaces)
-"    let repl .= " "
-"  endfor
-"  let repl .= today
-"
-"  let newline = substitute(line, pattern, repl, "")
-"  call setline(".", newline)
-"endfunction
-"
-"function! RemoveTask()
-"  :s/^\s*[\*-] \[ \] //
-"  :s/\s*\d\d.\d\d$//
-"endfunction
-"
-"function! NewTask()
-"  :s/^\s*/\* \[ \] /
-"  call InsertDate(0)
-"endfunction
-"
-"function! SubTask()
-"  :s/^\s*/\t- \[ \] /
-"  call InsertDate(3)
-"endfunction
-"
-"function! MarkDone()
-"  try
-"    :s/\[ \]/\[x\]/
-"  catch
-"    :s/\[x\]/\[ \]/
-"  endtry
-"endfunction
-"
-"nmap <silent> ;a :call NewTask()<CR>
-"nmap <silent> ;s :call SubTask()<CR>
-"nmap <silent> ;d :call MarkDone()<CR>
-"nmap <silent> ;D :call RemoveTask()<CR>
-
-
-" Diff Settings
-" Ignore whitespace in vimdiff
-set diffopt+=iwhite
-"nnoremap <silent> <F3> :%diffget 1<CR>:diffupdate<CR>
-"nnoremap <silent> <F4> :%diffget 3<CR>:diffupdate<CR>
-
 " Vim and Grep Helpers
-":noautocmd vimgrep /{pattern}/[flags] {file(s)}
-"command! -nargs=+ MyGrep execute 'silent grep! <args>' | copen 33
 nmap <leader>g :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e " . expand("<cword>") . " " <bar> cwindow<CR>
 nmap <leader>G :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e \"" . expand("<cWORD>") . "\" " <bar> cwindow<CR>
 
-" Color Scheme Helpers
-" Show syntax highlighting groups for word under cursor
-nmap <leader>b :call <SID>SynStack()<CR>
-function! <SID>SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-
 " NeoComplCache Settings
+" ======================
+"
 " imap <C-k> <Plug>(neocomplcache_snippets_expand)
 " smap <C-k> <Plug>(neocomplcache_snippets_expand)
 " nmap <leader>b :NeoComplCacheToggle<CR>
@@ -335,12 +293,25 @@ let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 " Prevent hanging with python: https://github.com/skwp/dotfiles/issues/163
 let g:neocomplcache_omni_patterns['python'] = ''
 
-function! DokuLink()
-  let @l = 'BysW]ysW]EbbywPa|$'
-endfunction
-function! AlignDokuTable()
-  let @p = '{V}:s/\v\^|\| | \|/COL/g{V}:Align COLjV:s/COL/^/gjV}:s/COL/|/g{V}<'
-endfunction
+" Custom Functions
+" ================
+"
+" Color Scheme Helpers
+" Show syntax highlighting groups for word under cursor
+" nmap <leader>b :call <SID>SynStack()<CR>
+" function! <SID>SynStack()
+"   if !exists("*synstack")
+"     return
+"   endif
+"   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+" endfunc
 
-map <leader>k :call AlignDokuTable()<CR>@p
-map <leader>l :call DokuLink()<CR>@l
+" function! DokuLink()
+"   let @l = 'BysW]ysW]EbbywPa|$'
+" endfunction
+" function! AlignDokuTable()
+"   let @p = '{V}:s/\v\^|\| | \|/COL/g{V}:Align COLjV:s/COL/^/gjV}:s/COL/|/g{V}<'
+" endfunction
+
+" map <leader>k :call AlignDokuTable()<CR>@p
+" map <leader>l :call DokuLink()<CR>@l
