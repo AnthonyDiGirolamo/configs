@@ -4,7 +4,7 @@ wget "http://downloads.sourceforge.net/project/zsh/zsh/5.0.0/zsh-5.0.0.tar.bz2"
 tar xvf zsh-5.0.0.tar.bz2
 cd zsh-5.0.0
 
-PREFIX=$HOME/apps/zsh-5.0.0
+PREFIX=/sw/cave/zsh/5.0.0/centos5.8_gnu4.1.2
 ./configure \
  --prefix=$PREFIX \
  --enable-fndir=$PREFIX/zsh/functions \
@@ -24,7 +24,6 @@ sed -i -e 's/link=dynamic/link=static/g' config.modules
 make
 rm -rf $PREFIX
 make install
-ln -svnf $HOME/apps/zsh-5.0.0 $HOME/apps/zsh
 
 rm -rvf ~/.zcompdump
 

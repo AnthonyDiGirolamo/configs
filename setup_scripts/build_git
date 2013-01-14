@@ -1,9 +1,11 @@
 #!/bin/bash
-wget 'http://code.google.com/p/git-core/downloads/detail?name=git-1.7.12.2.tar.gz&can=2&q='
+wget 'https://git-core.googlecode.com/files/git-1.8.1.tar.gz'
+wget 'https://git-core.googlecode.com/files/git-manpages-1.8.1.tar.gz'
 
-tar xvf git-1.7.12.2.tar.gz
-cd git-1.7.12.2
+tar xvf git-1.8.1.tar.gz
+cd git-1.8.1
 
-./configure --prefix=$HOME/apps/git
+./configure --prefix=/sw/cave/git/1.8.1/centos5.8_gnu4.1.2
 make
 make install
+

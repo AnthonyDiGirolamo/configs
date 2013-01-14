@@ -1,5 +1,5 @@
 #!/bin/sh
-PREFIX=$HOME/apps/tmux
+PREFIX=/sw/cave/tmux/1.7/centos5.8_gnu4.1.2
 
 export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 
