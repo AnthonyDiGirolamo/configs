@@ -96,6 +96,14 @@ alias tls3='tree -L 3'
 alias tll3='treetable -L 3'
 alias tlla3='treetable -a -L 3'
 
+function unzip_list {
+  unzip -l $@ | ruby -e 'STDIN.readlines.tap{|f| f.shift(3); f.pop(2) }.each{|l| puts l.sub(/^\s+\S+\s+\S+\s+\S+\s+/,"")}'
+}
+
+function unzip_list_trim {
+  unzip -l $@ | ruby -e 'STDIN.readlines.tap{|f| f.shift(3); f.pop(2) }.each{|l| puts l.sub(/^\s+\S+\s+\S+\s+\S+\s+[^\/]+\//,"")}'
+}
+
 export PATH=$HOME/apps/git/bin:$PATH
 export PATH=$HOME/apps/ctags/bin:$PATH
 export PATH=$HOME/apps/tree/bin:$PATH
