@@ -158,7 +158,11 @@ else
   #   alias vim=$HOME/apps/vim-7.3_rhel6/bin/vim
   #   export PATH=$HOME/apps/vim-7.3_rhel6/bin:$PATH
   # else
-    alias vim=$HOME/apps/vim/bin/vim
+    # alias vim=$HOME/apps/vim/bin/vim
+    export PATH=/sw/cave/vim/7.3/centos5.8_gnu4.1.2/bin:$PATH
+    export PATH=/sw/cave/zsh/5.0.0/centos5.8_gnu4.1.2/bin:$PATH
+    export PATH=/sw/cave/bash/4.2/centos5.8_gnu4.1.2/bin:$PATH
+    export PATH=/sw/cave/tmux/1.7/centos5.8_gnu4.1.2/bin:$PATH
     export PATH=$HOME/apps/vim/bin:$PATH
   # fi
   export EDITOR=vim
