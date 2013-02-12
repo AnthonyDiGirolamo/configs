@@ -1,17 +1,16 @@
+set shell=sh
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
 " Load Pathogen
 " =============
 "
 filetype off
 call pathogen#infect()
 
-" set options
-" ===========
-"
-set shell=sh
-
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
+set autochdir
+set wildmode=list:longest
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -53,10 +52,8 @@ set ignorecase        " ignore case in search patterns
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
+syntax on
+set hlsearch
 
 " setlocal spell spelllang=en_us   " set the spellcheck to english
 set mousemodel=popup_setpos      " set the right click in gvim to spellcheck
@@ -141,7 +138,20 @@ endif
 
 " Key Mappings
 " ============
-"
+let mapleader = ","
+nmap <leader>v :tabedit $MYVIMRC<CR>
+
+" Tab mappings.
+" map <leader>TT :tabnew<cr>
+map <leader>te :tabedit
+map <leader>tc :tabclose<cr>
+map <leader>to :tabonly<cr>
+map <leader>tn :tabnext<cr>
+map <leader>tp :tabprevious<cr>
+map <leader>tf :tabfirst<cr>
+map <leader>tl :tablast<cr>
+map <leader>tm :tabmove
+
 " Allow access to the gvim Menu by hitting F4 in vim
 source $VIMRUNTIME/menu.vim
 set wildmenu
@@ -152,8 +162,6 @@ map <F4> :emenu <C-Z>
 " F9 will turn spell checking on or off in normal and insert mode
 map <F9> :setlocal spell! spelllang=en_us<cr>
 
-let mapleader = ","
-nmap <leader>v :tabedit $MYVIMRC<CR>
 " Scrolling
 " nmap <C-E> jzz
 " nmap <C-Y> kzz
