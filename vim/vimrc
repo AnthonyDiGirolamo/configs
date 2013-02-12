@@ -11,6 +11,7 @@ call pathogen#infect()
 
 set autochdir
 set wildmode=list:longest
+runtime macros/matchit.vim        " Load the matchit plugin.
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -33,12 +34,13 @@ filetype plugin indent on
 
 set autoindent
 
-set foldmethod=marker " or: syntax manual
-set foldlevel=0
+set foldmethod=syntax " or: syntax manual indent
 " Don't screw up folds when inserting text that might affect them, until
+set foldlevel=1
 " leaving insert mode. Foldmethod is local to the window.
-" autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
-" autocmd InsertLeave * let &l:foldmethod=w:last_fdm
+autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
+autocmd InsertLeave * let &l:foldmethod=w:last_fdm
+set foldcolumn=3
 
 set number            " line numbering
 set tabstop=2         " set tabs to 2 spaces
@@ -49,6 +51,7 @@ set linebreak         " wrap on words rather than characters
 set textwidth=80      " insert EOL after 75 columns
 
 set ignorecase        " ignore case in search patterns
+set smartcase
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -87,8 +90,8 @@ au BufNewFile,BufRead *.erb set ft=html.eruby.eruby-rails syntax=eruby
 au BufNewFile,BufRead *.less set ft=css
 augroup END
 
-au FileType *eruby* let g:surround_45 = "<% \r %>"
-au FileType *eruby* let g:surround_61 = "<%= \r %>"
+au FileType *eruby* let g:surround_{char2nr("-")} = "<% \r %>"
+au FileType *eruby* let g:surround_{char2nr("=")} = "<%= \r %>"
 
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
@@ -123,7 +126,7 @@ colors solarized
 " GUI vim (gvim) settings
 " =======================
 "
-if has('gui_running')
+if has("gui_running")
   if has("gui_gtk2")
     set guifont=Anonymous\ Pro\ for\ PowerLine\ 14
   elseif has("gui_macvim")
@@ -165,6 +168,9 @@ map <F9> :setlocal spell! spelllang=en_us<cr>
 " Scrolling
 " nmap <C-E> jzz
 " nmap <C-Y> kzz
+
+vmap < <gv
+vmap > >gv
 
 " MacVim is flaky with c-x c-*, set c-o to omnicomplete
 imap <C-O> <C-X><C-O>
@@ -230,11 +236,15 @@ let Tlist_Use_SingleClick         = 0
 let Tlist_Sort_Type               = "name"
 let Tlist_Enable_Fold_Column      = 0
 let Tlist_File_Fold_Auto_Close    = 1
+
 let NERDTreeMinimalUI=1
+let NERDTreeHijackNetrw=1
 
 " Vim and Grep Helpers
 nmap <leader>g :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e " . expand("<cword>") . " " <bar> cwindow<CR>
 nmap <leader>G :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e \"" . expand("<cWORD>") . "\" " <bar> cwindow<CR>
+
+cabbrev ack grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e "
 
 " NeoComplCache Settings
 " ======================

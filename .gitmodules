@@ -73,3 +73,9 @@
 [submodule "vim/vim/bundle/neocomplcache.git"]
 	path = vim/vim/bundle/neocomplcache.git
 	url = https://github.com/Shougo/neocomplcache.git
+[submodule "vim/vim/bundle/vim-ragtag.git"]
+	path = vim/vim/bundle/vim-ragtag.git
+	url = https://github.com/tpope/vim-ragtag.git
+[submodule "vim/vim/bundle/vim-endwise.git"]
+	path = vim/vim/bundle/vim-endwise.git
+	url = https://github.com/tpope/vim-endwise.git
