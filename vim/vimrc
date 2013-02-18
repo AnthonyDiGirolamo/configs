@@ -214,6 +214,11 @@ let g:use_zen_complete_tag    = 1
 " ==============
 "
 set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tmp/*
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](html|\.git|\.hg|\.svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 let g:netrw_winsize               = 80
 "let g:netrw_liststyle             = 3
 "let g:netrw_list_hide             = '.*\.o$'
@@ -320,7 +325,7 @@ endfunction
 map <leader>n :call RenameFile()<cr>
 
 " RUNNING TESTS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
