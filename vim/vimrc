@@ -1,73 +1,56 @@
-set shell=sh
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" Load Pathogen
-" =============
-"
 filetype off
-call pathogen#runtime_append_all_bundles()
+call pathogen#runtime_append_all_bundles() " Load Pathogen
 
-set autochdir
-set wildmode=list:longest
-runtime macros/matchit.vim        " Load the matchit plugin.
-
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
+runtime macros/matchit.vim     " Load the matchit plugin.
+set shell=sh
+set autochdir                  " autochdir	change to directory of file in buffer
+set wildmode=list:longest      " specifies how command line completion works
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set noswapfile
-set nobackup     " do not keep a backup file (file~), use versions instead
-set history=1000 " keep 1000 lines of command line history
-set ruler        " show the cursor position all the time
-
-set laststatus=2 " always show the editing status bar at the bottom
-set showcmd      " display incomplete commands
-set incsearch    " do incremental searching
+set nobackup                   " do not keep a backup file (file~), use versions instead
+set history=1000               " keep 1000 lines of command line history
+set ruler                      " show the cursor position all the time
+set laststatus=2               " always show the editing status bar at the bottom
+set showcmd                    " display incomplete commands
+set incsearch                  " do incremental searching
+set autoindent
+set number                     " line numbering
+set tabstop=2                  " set tabs to 2 spaces
+set shiftwidth=2
+set expandtab
+set linebreak                  " wrap on words rather than characters
+set textwidth=80               " insert EOL after 75 columns
+set ignorecase                 " ignore case in search patterns
+set smartcase
+set diffopt+=iwhite            " Ignore whitespace in vimdiff
 
 filetype plugin indent on
 
 " let g:Powerline_symbols = 'fancy'
+" set mouse=a " In many terminal emulators the mouse works just fine, thus enable it.
 
-" In many terminal emulators the mouse works just fine, thus enable it.
-" set mouse=a
-
-set autoindent
-
-set foldmethod=syntax " or: syntax manual indent
-" Don't screw up folds when inserting text that might affect them, until
+set foldcolumn=3
 set foldlevel=1
+set foldmethod=syntax " syntax manual indent
+" Don't screw up folds when inserting text that might affect them, until
 " leaving insert mode. Foldmethod is local to the window.
 autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
 autocmd InsertLeave * let &l:foldmethod=w:last_fdm
-set foldcolumn=3
 
-set number            " line numbering
-set tabstop=2         " set tabs to 2 spaces
-set shiftwidth=2
-set expandtab
+syntax on    " Switch syntax highlighting on, when the terminal has colors
+set hlsearch " Also switch on highlighting the last used search pattern.
 
-set linebreak         " wrap on words rather than characters
-set textwidth=80      " insert EOL after 75 columns
-
-set ignorecase        " ignore case in search patterns
-set smartcase
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-syntax on
-set hlsearch
-
-" setlocal spell spelllang=en_us   " set the spellcheck to english
+setlocal spell spelllang=en_us   " set the spellcheck to english
 set mousemodel=popup_setpos      " set the right click in gvim to spellcheck
 
 set thesaurus+=~/.vim/mthesaur-vim.txt " Thesaurus
 " This will consider spaces and -'s as part of words in the thesaurus file
 " Really messes up syntax highlighting though, must be a better way
 " set iskeyword+=32,-
-
-" Diff Settings
-set diffopt+=iwhite " Ignore whitespace in vimdiff
 
 " Autocommands
 " ============
@@ -120,7 +103,6 @@ au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,fi
 " set background=light
 set background=dark
 colors solarized
-
 "colors warm_grey
 "colors molokai
 "colors fine_blue
@@ -128,7 +110,6 @@ colors solarized
 
 " GUI vim (gvim) settings
 " =======================
-"
 if has("gui_running")
   if has("gui_gtk2")
     set guifont=Anonymous\ Pro\ for\ PowerLine\ 14
@@ -147,16 +128,7 @@ endif
 let mapleader = ","
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
-" Tab mappings.
-" map <leader>TT :tabnew<cr>
-map <leader>te :tabedit
-map <leader>tc :tabclose<cr>
-map <leader>to :tabonly<cr>
-map <leader>tn :tabnext<cr>
-map <leader>tp :tabprevious<cr>
-map <leader>tf :tabfirst<cr>
-map <leader>tl :tablast<cr>
-map <leader>tm :tabmove
+map <leader>p :set paste!<cr>
 
 " Allow access to the gvim Menu by hitting F4 in vim
 source $VIMRUNTIME/menu.vim
@@ -176,7 +148,16 @@ vmap < <gv
 vmap > >gv
 
 " MacVim is flaky with c-x c-*, set c-o to omnicomplete
-imap <C-O> <C-X><C-O>
+" imap <C-O> <C-X><C-O>
+
+" Insert a hash rocket with <c-l>
+imap <c-l> <space>=><space>
+
+" Can't be bothered to understand ESC vs <c-c> in insert mode
+imap <c-c> <esc>
+
+" Remap Esc
+imap jj <Esc>l
 
 " pressing space twice will move to the next split
 " map <space><space> <c-W>w
@@ -188,12 +169,9 @@ imap <C-O> <C-X><C-O>
 " Symbol listing - requires ctags
 nmap  <F12> :TagbarToggle<CR>
 
-" Remap Esc
-imap jj <Esc>l
-
 " Alt-C and V copy and paste to and from the system clipboard
-map <M-c> "*y
-map <M-v> "*p
+" map <M-c> "*y
+" map <M-v> "*p
 
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
@@ -208,13 +186,24 @@ nmap <C-j> ]e
 vmap <C-k> [egv
 vmap <C-j> ]egv
 
-" Open file browser
-" nnoremap <silent> <F2> :NERDTreeToggle<CR>
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+" ================================================================
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
 
 " Plugin Options
 " ==============
 "
-" Use :C to run a calculation, needs ruby support
+" Use :C to run some ruby code
 " :command! -nargs=+ C :ruby puts <args>
 
 let g:user_zen_settings       = { 'erb' : { 'extends' : 'html' } }
@@ -240,8 +229,8 @@ let Tlist_Sort_Type               = "name"
 let Tlist_Enable_Fold_Column      = 0
 let Tlist_File_Fold_Auto_Close    = 1
 
-let NERDTreeMinimalUI=1
-let NERDTreeHijackNetrw=1
+" let NERDTreeMinimalUI=1
+" let NERDTreeHijackNetrw=1
 
 " Vim and Grep Helpers
 nmap <leader>g :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e " . expand("<cword>") . " " <bar> cwindow<CR>
@@ -251,30 +240,10 @@ cabbrev ack grep -srnw --binary-files=without-match --exclude=tags --exclude-dir
 
 " NeoComplCache Settings
 " ======================
-"
-" imap <C-k> <Plug>(neocomplcache_snippets_expand)
-" smap <C-k> <Plug>(neocomplcache_snippets_expand)
-" nmap <leader>b :NeoComplCacheToggle<CR>
-
-" let g:neocomplcache_enable_at_startup = 1
-" let g:neocomplcache_enable_underbar_completion = 1
-" let g:neocomplcache_min_syntax_length = 3
-
-" if !exists('g:neocomplcache_omni_patterns')
-"   let g:neocomplcache_omni_patterns = {}
-" endif
-" let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-
-" If the above crashes vim, this forces neocomp to call omnicomplete directly
-" if !exists('g:neocomplcache_force_omni_patterns')
-"   let g:neocomplcache_force_omni_patterns = {}
-" endif
-" let g:neocomplcache_force_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-
 " neocomplcache
 " A beter autocomplete system!
 
-let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_at_startup = 0
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_smart_case = 1
@@ -336,3 +305,74 @@ let g:neocomplcache_omni_patterns['python'] = ''
 
 " map <leader>k :call AlignDokuTable()<CR>@p
 " map <leader>l :call DokuLink()<CR>@l
+
+" RENAME CURRENT FILE
+" ===================
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <leader>n :call RenameFile()<cr>
+
+" RUNNING TESTS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>t :call RunTestFile()<cr>
+map <leader>T :call RunNearestTest()<cr>
+map <leader>a :call RunTests('')<cr>
+map <leader>c :w\|:!script/features<cr>
+map <leader>w :w\|:!script/features --profile wip<cr>
+
+function! RunTestFile(...)
+  if a:0
+    let command_suffix = a:1
+  else
+    let command_suffix = ""
+  endif
+
+  " Run the tests for the previously-marked file.
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+  if in_test_file
+    call SetTestFile()
+  elseif !exists("t:grb_test_file")
+    return
+  end
+  call RunTests(t:grb_test_file . command_suffix)
+endfunction
+
+function! RunNearestTest()
+  let spec_line_number = line('.')
+  call RunTestFile(":" . spec_line_number . " -b")
+endfunction
+
+function! SetTestFile()
+  " Set the spec file that tests will be run for.
+  let t:grb_test_file=@%
+endfunction
+
+function! RunTests(filename)
+  " Write the file and run tests for the given filename
+  :w
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  if match(a:filename, '\.feature$') != -1
+    exec ":!script/features " . a:filename
+  else
+    if filereadable("script/test")
+      exec ":!script/test " . a:filename
+    elseif filereadable("Gemfile")
+      exec ":!bundle exec rspec --color " . a:filename
+    else
+      exec ":!rspec --color " . a:filename
+    end
+  end
+endfunction
+
