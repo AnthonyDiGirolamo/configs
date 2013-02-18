@@ -1,0 +1,9 @@
+version: "0.13"
+  - help command (not really useful yet)
+  - help (not really useful yet)
+  - ruby 1.8 compatibility
+  - FIX: help command
+  - Interpret .[0-9]+ as float (suggested by John Orr)
+  - .gitignore
+  MD5 checksum: b2f2bf21e1fe9cb0bdc612a7cb973621
+
