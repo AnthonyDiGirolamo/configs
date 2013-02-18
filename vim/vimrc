@@ -7,7 +7,7 @@ set nocompatible
 " =============
 "
 filetype off
-call pathogen#infect()
+call pathogen#runtime_append_all_bundles()
 
 set autochdir
 set wildmode=list:longest
@@ -71,7 +71,10 @@ set diffopt+=iwhite " Ignore whitespace in vimdiff
 
 " Autocommands
 " ============
-"
+
+" Jump to last position in a file
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
 " Clear trailing whitespace before a save
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -206,7 +209,7 @@ vmap <C-k> [egv
 vmap <C-j> ]egv
 
 " Open file browser
-nnoremap <silent> <F2> :NERDTreeToggle<CR>
+" nnoremap <silent> <F2> :NERDTreeToggle<CR>
 
 " Plugin Options
 " ==============
@@ -296,12 +299,12 @@ endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
 " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python        setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby          setlocal omnifunc=rubycomplete#Complete
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
