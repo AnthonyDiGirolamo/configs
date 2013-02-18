@@ -34,7 +34,7 @@ filetype plugin indent on
 " set mouse=a " In many terminal emulators the mouse works just fine, thus enable it.
 
 set foldcolumn=3
-set foldlevel=1
+" set foldlevel=1
 set foldmethod=syntax " syntax manual indent
 " Don't screw up folds when inserting text that might affect them, until
 " leaving insert mode. Foldmethod is local to the window.
