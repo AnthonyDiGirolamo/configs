@@ -1,0 +1,21 @@
+[submodule "vim/vim/bundle/tlib.git"]
+	path = vim/vim/bundle/disabled/tlib.git
+	url = https://github.com/tomtom/tlib_vim.git
+[submodule "vim/vim/bundle/vim-addon-mw-utils.git"]
+	path = vim/vim/bundle/disabled/vim-addon-mw-utils.git
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule "vim/vim/bundle/vim-abolish.git"]
+	path = vim/vim/bundle/vim-abolish.git
+	url = https://github.com/tpope/vim-abolish.git
+[submodule "vim/vim/bundle/tcalc_vim.git"]
+	path = vim/vim/bundle/tcalc_vim.git
+	url = https://github.com/tomtom/tcalc_vim.git
+[submodule "vim/vim/bundle/snipmate.git"]
+	path = vim/vim/bundle/snipmate.git
+	url = https://github.com/garbas/vim-snipmate.git
+[submodule "vim/vim/bundle/snipmate-snippets.git"]
+	path = vim/vim/bundle/snipmate-snippets.git
+	url = https://github.com/honza/snipmate-snippets.git
+[submodule "vim/vim/bundle/gundo.git"]
+	path = vim/vim/bundle/gundo.git
+	url = https://github.com/sjl/gundo.vim.git

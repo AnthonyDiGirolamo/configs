@@ -1,0 +1,45 @@
+It turns out that ruby is pretty good at maths and deals well with 
+complex or rational numbers etc. Anyway, in certain occasions a postfix 
+syntax and a stack are better suited for calculations than ruby's infix 
+syntax. So, here comes ...
+
+:TCalc[!]
+    A small ruby-based[*] RPN-calculator, a simple ASCII function 
+    plotter, and stack-based playground :-).
+
+The tcalc.rb script can also be used as a stand-alone calculator (with 
+optional support for curses and readline). Run "tcalc --help" for 
+information on the command-line options.
+
+Input:
+    - Numbers (anything that starts with "-" or a decimal)
+    - Strings (anything that matches /^"(.*?)"$/)
+        - Be aware that the strings and numbers get evaluated by ruby. 
+          You can thus execute ruby code by input like: -1;p'foo'
+    - Methods & constants of the following classes are available:
+        Float    :: http://www.ruby-doc.org/core/classes/Float.html
+        Complex  :: http://www.ruby-doc.org/core/classes/Complex.html
+        Rational :: http://www.ruby-doc.org/core/classes/Rational.html
+        Integer  :: http://www.ruby-doc.org/core/classes/Integer.html
+        Matrix   :: http://www.ruby-doc.org/core/classes/Matrix.html
+        Vector   :: http://www.ruby-doc.org/core/classes/Vector.html
+        Math     :: http://www.ruby-doc.org/core/classes/Math.html
+    - #N (pull the item at position N to the top)
+    - Call words: WORD[COUNT][@ARRITY][,ARGUMENT]
+        - If COUNT is "#", the top element will be used.
+    - Enter, escape => exit
+
+Tokens are separated by blanks (à la forth). The blanks between the 
+words thus are significant.
+
+
+[*] For use with VIM, built-in ruby support (:echo has('ruby')) is 
+required.
+
+
+-----------------------------------------------------------------------
+
+Status:  Works for me (there may be some minor quirks)
+Install: See http://github.com/tomtom/vimtlib/blob/master/INSTALL.TXT
+See http://github.com/tomtom for related plugins.
+

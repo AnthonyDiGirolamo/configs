@@ -57,6 +57,17 @@ function git_submodule_rm {
   git config -f .gitmodules --remove-section submodule.$@
 }
 
+function git_isolate_directory_history {
+  git filter-branch --subdirectory-filter $@ HEAD
+  git reset --hard
+  git remote rm origin
+  rm -rf .git/refs/original/
+  git reflog expire --expire=now --all
+  git gc --aggressive
+  git prune
+}
+
+
 alias d='dirs -v'
 alias p='pushd'
 alias o='popd'
