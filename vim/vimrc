@@ -8,7 +8,7 @@ call pathogen#runtime_append_all_bundles() " Load Pathogen
 runtime macros/matchit.vim     " Load the matchit plugin.
 set shell=sh
 set cursorline
-set autochdir                  " autochdir	change to directory of file in buffer
+" set autochdir                  " autochdir	change to directory of file in buffer
 set wildmode=list:longest      " specifies how command line completion works
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set noswapfile
@@ -35,7 +35,7 @@ filetype plugin indent on
 " set mouse=a " In many terminal emulators the mouse works just fine, thus enable it.
 
 set foldcolumn=3
-set foldlevel=1
+set foldlevel=999
 set foldmethod=syntax " syntax manual indent
 " Don't screw up folds when inserting text that might affect them, until
 " leaving insert mode. Foldmethod is local to the window.
@@ -132,11 +132,11 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 map <leader>p :set paste!<cr>
 
 " Allow access to the gvim Menu by hitting F4 in vim
-source $VIMRUNTIME/menu.vim
-set wildmenu
-set cpo-=<
-set wcm=<C-Z>
-map <F4> :emenu <C-Z>
+" source $VIMRUNTIME/menu.vim
+" set wildmenu
+" set cpo-=<
+" set wcm=<C-Z>
+" map <F4> :emenu <C-Z>
 
 " F9 will turn spell checking on or off in normal and insert mode
 map <F9> :setlocal spell! spelllang=en_us<cr>
@@ -145,8 +145,13 @@ map <F9> :setlocal spell! spelllang=en_us<cr>
 " nmap <C-E> jzz
 " nmap <C-Y> kzz
 
+" Indent and unindent without leaving visual mode
 vmap < <gv
 vmap > >gv
+
+" Make :W same as :w
+command! W :w
+command! Q :q
 
 " MacVim is flaky with c-x c-*, set c-o to omnicomplete
 " imap <C-O> <C-X><C-O>
