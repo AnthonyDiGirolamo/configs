@@ -163,7 +163,7 @@ imap <c-l> <space>=><space>
 imap <c-c> <esc>
 
 " Remap Esc
-imap jj <Esc>l
+" imap jj <Esc>l
 
 " pressing space twice will move to the next split
 " map <space><space> <c-W>w
@@ -182,8 +182,9 @@ nmap  <F12> :TagbarToggle<CR>
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
 
-nmap T :tabe<CR><C-P>
-map Y :Explore<CR>
+nmap <leader>; :tabe<CR><C-P>
+nmap <leader>l :vs<CR><C-P>
+nmap <space><space> :set foldcolumn=0\|:set nonumber<cr><c-w>50\|<c-w><c-w>:set foldcolumn=3\|:set number<cr>
 
 " Bubble single lines
 nmap <C-k> [e
