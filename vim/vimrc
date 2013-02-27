@@ -19,7 +19,7 @@ set laststatus=2               " always show the editing status bar at the botto
 set showcmd                    " display incomplete commands
 set incsearch                  " do incremental searching
 set autoindent
-set number                     " line numbering
+" set number                     " line numbering
 set tabstop=2                  " set tabs to 2 spaces
 set shiftwidth=2
 set expandtab
@@ -34,7 +34,7 @@ filetype plugin indent on
 " let g:Powerline_symbols = 'fancy'
 " set mouse=a " In many terminal emulators the mouse works just fine, thus enable it.
 
-set foldcolumn=3
+" set foldcolumn=3
 set foldlevel=999
 set foldmethod=syntax " syntax manual indent
 " Don't screw up folds when inserting text that might affect them, until
@@ -184,7 +184,8 @@ nnoremap <C-L> :nohl<CR><C-L>
 
 nmap <leader>; :tabe<CR><C-P>
 nmap <leader>l :vs<CR><C-P>
-nmap <space><space> :set foldcolumn=0\|:set nonumber<cr><c-w>50\|<c-w><c-w>:set foldcolumn=3\|:set number<cr>
+" nmap <leader>k <cr><c-w>50\|<c-w><c-w>
+nmap <leader>k :set foldcolumn=0\|:set nonumber<cr><c-w>50\|<c-w><c-w>:set foldcolumn=3\|:set number<cr>
 
 " Bubble single lines
 nmap <C-k> [e
@@ -336,8 +337,8 @@ map <leader>n :call RenameFile()<cr>
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
-map <leader>c :w\|:!script/features<cr>
-map <leader>w :w\|:!script/features --profile wip<cr>
+map <leader>c :w\|:!bundle exec cucumber<cr>
+map <leader>w :w\|:!script/features --profile @wip<cr>
 
 function! RunTestFile(...)
   if a:0
