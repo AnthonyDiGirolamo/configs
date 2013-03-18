@@ -101,13 +101,14 @@ au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,fi
   "let g:solarized_termcolors=256
 "endif
 
-" set background=light
-set background=dark
+set background=light
+" set background=dark
 colors solarized
-"colors warm_grey
-"colors molokai
-"colors fine_blue
-"colors mac_classic
+" colors irblack
+" colors warm_grey
+" colors molokai
+" colors fine_blue
+" colors mac_classic
 
 " GUI vim (gvim) settings
 " =======================
