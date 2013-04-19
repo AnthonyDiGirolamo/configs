@@ -58,3 +58,6 @@
 [submodule "vim/vim/bundle/vim-endwise.git"]
 	path = vim/vim/bundle/vim-endwise.git
 	url = https://github.com/tpope/vim-endwise.git
+[submodule "vim/vim/bundle/ack.vim.git"]
+	path = vim/vim/bundle/ack.vim.git
+	url = https://github.com/mileszs/ack.vim.git
