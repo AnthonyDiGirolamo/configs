@@ -134,7 +134,7 @@ alias sshfsh='sshfs lmd@home.ccs.ornl.gov: $HOME/OLCF'
 
 alias sschester=" ssh -Y chester"
 alias ssjag="ssh -Y jaguarpf"
-alias sscavern="ssh -Y Anthony.DiGirolamo@cavern.ncrc.gov"
+alias sscavern="ssh -Y cavern.ncrc.gov -l Anthony.DiGirolamo "
 
 alias loadsmithy='source /sw/tools/smithy/environment.sh'
 
@@ -213,4 +213,6 @@ if [[ -n $MODULESHOME ]]; then
 fi
 
 declare -f module &> /dev/null && module load git ruby
+
+stty -ixon
 

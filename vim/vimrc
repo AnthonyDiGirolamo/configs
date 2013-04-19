@@ -19,7 +19,7 @@ set laststatus=2               " always show the editing status bar at the botto
 set showcmd                    " display incomplete commands
 set incsearch                  " do incremental searching
 set autoindent
-" set number                     " line numbering
+set number                     " line numbering
 set tabstop=2                  " set tabs to 2 spaces
 set shiftwidth=2
 set expandtab
@@ -185,7 +185,7 @@ nnoremap <C-L> :nohl<CR><C-L>
 
 nmap <leader>; :tabe<CR><C-P>
 nmap <leader>l :vs<CR><C-P>
-" nmap <leader>k <cr><c-w>50\|<c-w><c-w>
+" nmap <leader>l <cr><c-w>50\|<c-w><c-w>
 nmap <leader>k :set foldcolumn=0\|:set nonumber<cr><c-w>50\|<c-w><c-w>:set foldcolumn=3\|:set number<cr>
 
 " Bubble single lines
