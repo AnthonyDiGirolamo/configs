@@ -15,5 +15,5 @@ for file in $HOME/.zprezto/runcoms/z* ; do
 done
 
 mkdir -p ~/apps/ack/bin/
-ln -svnf ack ~/apps/ack/bin/ack
+ln -svnf ~/$PREFS/ack ~/apps/ack/bin/ack
 
