@@ -338,7 +338,7 @@ map <leader>n :call RenameFile()<cr>
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
-map <leader>c :w\|:!bundle exec cucumber<cr>
+map <leader>c :w\|:!bundle exec cucumber %<cr>
 map <leader>w :w\|:!script/features --profile @wip<cr>
 
 function! RunTestFile(...)
