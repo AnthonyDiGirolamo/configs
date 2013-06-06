@@ -141,6 +141,10 @@ alias loadsmithy='source /sw/tools/smithy/environment.sh'
 
 alias gem_uninstall_all='gem list | cut -d" " -f1 | xargs gem uninstall -aIx'
 
+function ackvim {
+  vim -f $(ack -l $@)
+}
+
 # Auth your sshkey with another server
 function authme {
     ssh $@ 'cat >>.ssh/authorized_keys' <~/.ssh/id_rsa.pub
@@ -198,11 +202,7 @@ fi
 #   export EDITOR='/usr/bin/vim'
 # fi
 
-
-# RVM Source
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 which rbenv &> /dev/null && eval "$(rbenv init -)"
-
 
 if [[ -n $MODULESHOME ]]; then
   if [[ -n ${ZSH_VERSION-} ]]; then
