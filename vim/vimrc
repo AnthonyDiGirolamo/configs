@@ -31,7 +31,7 @@ set diffopt+=iwhite            " Ignore whitespace in vimdiff
 
 filetype plugin indent on
 
-" let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols = 'fancy'
 " set mouse=a " In many terminal emulators the mouse works just fine, thus enable it.
 
 " set foldcolumn=3
@@ -101,8 +101,8 @@ au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,fi
   "let g:solarized_termcolors=256
 "endif
 
-set background=light
-" set background=dark
+" set background=light
+set background=dark
 colors solarized
 " colors irblack
 " colors warm_grey
