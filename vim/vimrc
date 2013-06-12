@@ -53,6 +53,7 @@ set thesaurus+=~/.vim/mthesaur-vim.txt " Thesaurus
 " Really messes up syntax highlighting though, must be a better way
 " set iskeyword+=32,-
 
+
 " Autocommands
 " ============
 
@@ -114,10 +115,12 @@ colors solarized
 " =======================
 if has("gui_running")
   if has("gui_gtk2")
-    set guifont=Anonymous\ Pro\ for\ PowerLine\ 14
+    " set guifont=Anonymous\ Pro\ for\ PowerLine\ 14
+    set guifont=PragmataPro\ 26
   elseif has("gui_macvim")
     " set guifont=Anonymous\ Pro\ for\ PowerLine:h27
-    set guifont=LettrGoth12\ BT:h23
+    " set guifont=LettrGoth12\ BT:h23
+    set guifont=PragmataPro:h26
   endif
   set guioptions=agm
   "set guioptions=aegimtT
@@ -128,6 +131,10 @@ endif
 " Key Mappings
 " ============
 let mapleader = ","
+
+" Macro Keybinding
+nmap <leader>d f"wdi"<esc>o<esc>p==kf"dW$bido <esc>o<i class="color-icon-"></i><esc>jo<% end %><esc>
+
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
 map <leader>p :set paste!<cr>
