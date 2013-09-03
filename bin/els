@@ -21,29 +21,29 @@ def clear_formatting
   "\e[m"
 end
 
-# @using_color = true if ARGV.include?("--color=auto") || ARGV.include?("-G")
+@using_color = true if ARGV.include?("--color=auto") || ARGV.include?("-G")
 
 output = `ls -F #{ARGV.join(' ')}`
 
 exit $?.exitstatus if $?.exitstatus != 0
 
-# if @using_color
-#   lscolors = 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36:'
-#   lscolors = ENV['LS_COLORS'] if ENV['LS_COLORS']
-#   @file_colors = Hash[ lscolors.split(':').collect{|e| e.gsub(/\*/,'')}.collect{|e| e.split('=')} ]
-# end
+if @using_color
+  lscolors = 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36:'
+  # lscolors = ENV['LS_COLORS'] if ENV['LS_COLORS']
+  @file_colors = Hash[ lscolors.split(':').collect{|e| e.gsub(/\*/,'')}.collect{|e| e.split('=')} ]
+end
 
 def colored_file_name(name, extension = false)
-  # if @using_color
-  #   ext_color = @file_colors[File.extname(name)]
-  #   ext_color = @file_colors[extension] if extension
+  if @using_color
+    ext_color = @file_colors[File.extname(name)]
+    ext_color = @file_colors[extension] if extension
 
-  #   if ext_color
-  #     return color(ext_color) + name + clear_formatting
-  #   else
-  #     return name
-  #   end
-  # end
+    if ext_color
+      return color(ext_color) + name + clear_formatting
+    else
+      return name
+    end
+  end
 
   return name # if no color
 end
@@ -111,103 +111,59 @@ output.lines.each do |line|
     final_output            << line
     final_output_with_color << line
   end
-  max_length = final_output.last.size if final_output.last.size > max_length
+  max_length = final_output.last.size+2 if final_output.last.size+2 > max_length
 end
 
-# # LS column calculations attempted translation from c
-# MIN_COLUMN_WIDTH = 3
+# Strip Color Escapes
+# final_output_nocolor = final_output.collect{|name| name.gsub(/\e\[[\d;]+m/,'')}
+# max_length = final_output.collect{|l| l.size}.max + 2
 
-# max_columns = [[1, @screen_width / MIN_COLUMN_WIDTH ].max, final_output.size].min
-
-# column_info = []
-# for i in 0..max_columns-1 do
-#   column_info << {:valid_len => true, :line_len => (i+1)*MIN_COLUMN_WIDTH, :col_arr => []}
-#   for j in 0..i do
-#     column_info.last[:col_arr] << MIN_COLUMN_WIDTH
-#   end
+# for i in 0..final_output.last.size-1 do
+#   STDOUT.write final_output.last[i]+'-'
 # end
-
-# final_output.each_with_index do |name,filesno|
-#   for i in 0..max_columns-1 do
-#     if column_info[i][:valid_len]
-#       idx = filesno / ((final_output.size + i) / (i + 1))
-#       real_length = name.size + (idx == i ? 0 : 2)
-
-#       if column_info[i][:col_arr][idx] < real_length
-#         column_info[i][:line_len] += (real_length - column_info[i][:col_arr][idx])
-#         column_info[i][:col_arr][idx] = real_length
-#         column_info[i][:valid_len] = (column_info[i][:line_len] < @screen_width)
-#       end
-#     end
-#   end
+# STDOUT.write "\n"
+# for i in 0..final_output_nocolor.last.size-1 do
+#   STDOUT.write final_output_nocolor.last[i]+'-'
 # end
+# STDOUT.write "\n"
 
-# for cols in (2..max_columns).to_a.reverse do
-#   if column_info[cols-1][:valid_len]
-#     columns = cols
-#     break
-#   end
-# end
+if ARGV.include?("-l")
+  puts final_output_with_color
+else
 
-# ap column_info
-# puts columns
+  columns = @screen_width / max_length
+  columns = 1 if columns < 1
+  puts "screen:    #{@screen_width}"
+  puts "max size:  #{max_length}"
+  puts "columns:   #{columns}"
+  rows = final_output.size / columns + (final_output.size % columns > 0 ? 1 : 0)
+  remainder = final_output.size % columns
+  grid = rows * columns
 
-# rows = final_output.size / columns + (final_output.size % (columns != 0 ? 1 : 0))
-# puts rows
+  puts "rows:      #{rows}"
+  puts "remainder: #{remainder}"
+  puts "grid:      #{grid}"
+  puts "fileno :   #{final_output.size}"
 
-# for row in 0..rows-1 do
-#   col = 0
-#   filesno = row
-#   pos = 0
-
-#   while true do
-#     name_length = final_output[filesno].size
-#     max_name_length = column_info[columns-1][:col_arr][col]
-#     col = col + 1
-#     STDOUT.write final_output_with_color[filesno]
-
-#     filesno += rows;
-#     if (filesno >= final_output.size)
-#       break
-#     end
-
-#     spaces = ((pos + max_name_length)-(pos + name_length))
-#     STDOUT.write " " * spaces if spaces > 0
-#     pos += max_name_length
-#   end
-#   STDOUT.write "\n"
-# end
-
-# puts final_output
-# puts final_output_with_color
-
-columns = @screen_width / max_length
-rows = final_output.size / columns + (final_output.size % columns > 0 ? 1 : 0)
-remainder = final_output.size % columns
-grid = rows * columns
-
-# puts "screen:    #{@screen_width}"
-# puts "max size:  #{max_length}"
-# puts "columns:   #{columns}"
-# puts "rows:      #{rows}"
-# puts "remainder: #{remainder}"
-# puts "grid:      #{grid}"
-# puts "fileno :   #{final_output.size}"
-
-column_indexes = []
-column_widths = []
-for c in 0..columns-1 do
-  column_indexes << [c*rows..c*rows+rows-1]
-  column_widths << final_output.values_at(*column_indexes.last).collect{|l|l.size if l}.compact.max
-end
-
-for r in 0..rows-1 do
-  row_indexes = []
+  column_indexes = []
+  column_widths  = []
   for c in 0..columns-1 do
-    row_indexes <<  r + (0+c*rows)
+    column_indexes << [c*rows..c*rows+rows-1]
+    column_widths  << final_output.values_at(*column_indexes.last).collect{|l|l.size+2 if l}.compact.max
   end
-  final_output.values_at(*row_indexes).each_with_index.collect do |l,c|
-    STDOUT.write l.ljust(column_widths[c]+1) if l
+
+  for r in 0..rows-1 do
+    row_indexes = []
+    spaces      = []
+    for c in 0..columns-1 do
+      row_indexes <<  r + (0+c*rows)
+      if final_output[row_indexes.last]
+        spaces << column_widths[c] - final_output[row_indexes.last].size
+        STDOUT.write final_output_with_color[row_indexes.last]
+        STDOUT.write " " * spaces.last
+      end
+    end
+    STDOUT.write "\n"
   end
-  STDOUT.write "\n"
+
 end
