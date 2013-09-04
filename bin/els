@@ -25,18 +25,10 @@ if @using_color
   @file_colors = Hash[ lscolors.split(':').collect{|e| e.gsub(/\*\./,'')}.collect{|e| e.split('=')} ]
 end
 
-def color(s)
-  "\e[#{s}m"
-end
-
-def clear_formatting
-  "\e[m"
-end
-
 def colored_file_name(name, extension = false)
   if @using_color
-    ext_color = @file_colors[extension] if extension
-    return color(ext_color) + name + clear_formatting if ext_color
+    ext_color = @file_colors[extension]       if extension
+    return "\e[#{ext_color}m" + name + "\e[m" if ext_color
   end
   return name # if no color
 end
