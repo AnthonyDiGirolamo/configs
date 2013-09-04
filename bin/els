@@ -4,7 +4,11 @@
 # require 'debugger'
 # require 'awesome_print'
 
-output = `ls -F #{ARGV.join(' ')}`
+# possible long formatting
+# /bin/ls -lFnT
+# /usr/local/bin/gls -laFn --time-style=?
+
+output = `/bin/ls -F #{ARGV.join(' ')}`
 exit $?.exitstatus if $?.exitstatus != 0
 
 @screen_width = `tput cols`.chomp.to_i
