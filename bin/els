@@ -116,7 +116,7 @@ def calculate_column_widths(final_output, rows, columns)
   return column_widths
 end
 
-if ARGV.include?("-l")
+if !ARGV.select{|a| a =~ /-.*l/}.empty?
   # no special printing for long format
   puts final_output_with_color
 else
