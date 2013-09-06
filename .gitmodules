@@ -64,3 +64,6 @@
 [submodule "bin/els"]
 	path = bin/els
 	url = https://github.com/AnthonyDiGirolamo/els.git
+[submodule "vim/vim/bundle/vim-fish.git"]
+	path = vim/vim/bundle/vim-fish.git
+	url = https://github.com/aliva/vim-fish
