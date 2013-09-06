@@ -16,4 +16,6 @@ done
 
 mkdir -p ~/apps/ack/bin/
 ln -svnf ~/$PREFS/ack ~/apps/ack/bin/ack
+mkdir -p ~/.config/fish/
+ln -svnf ~/$PREFS/fish/config.fish ~/.config/fish/
 
