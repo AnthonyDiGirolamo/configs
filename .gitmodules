@@ -61,3 +61,6 @@
 [submodule "vim/vim/bundle/ack.vim.git"]
 	path = vim/vim/bundle/ack.vim.git
 	url = https://github.com/mileszs/ack.vim.git
+[submodule "bin/els"]
+	path = bin/els
+	url = https://github.com/AnthonyDiGirolamo/els.git
