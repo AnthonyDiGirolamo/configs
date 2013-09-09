@@ -7,7 +7,15 @@ require 'rubygems'
 require 'irb/completion'
 require 'irb/ext/save-history'
 
-IRB.conf[:PROMPT_MODE] = :SIMPLE
+# IRB.conf[:PROMPT_MODE] = :SIMPLE
+IRB.conf[:PROMPT][:CUSTOM] = {
+  :PROMPT_I => "\e[00;34m>>\e[m ",
+  :PROMPT_S => "\e[00;34m>>\e[m ",
+  :PROMPT_N => "  ",
+  :PROMPT_C => "  ",
+  :RETURN   => "=> %s\n"
+}
+IRB.conf[:PROMPT_MODE] = :CUSTOM
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
 
