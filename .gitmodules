@@ -40,9 +40,6 @@
 [submodule "vim/vim/bundle/tagbar.git"]
 	path = vim/vim/bundle/tagbar.git
 	url = https://github.com/majutsushi/tagbar.git
-[submodule "vim/vim/bundle/vim-powerline.git"]
-	path = vim/vim/bundle/vim-powerline.git
-	url = https://github.com/Lokaltog/vim-powerline.git
 [submodule "prezto"]
 	path = prezto
 	url = https://github.com/AnthonyDiGirolamo/prezto.git
@@ -70,3 +67,6 @@
 [submodule "vim/vim/bundle/vim-dispatch.git"]
 	path = vim/vim/bundle/vim-dispatch.git
 	url = https://github.com/tpope/vim-dispatch.git
+[submodule "vim/vim/bundle/vim-ariline.git"]
+	path = vim/vim/bundle/vim-ariline.git
+	url = https://github.com/bling/vim-airline.git

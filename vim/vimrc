@@ -31,7 +31,10 @@ set diffopt+=iwhite            " Ignore whitespace in vimdiff
 
 filetype plugin indent on
 
-let g:Powerline_symbols = 'fancy'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+" let g:airline_theme='dark'
+
 " set mouse=a " In many terminal emulators the mouse works just fine, thus enable it.
 
 " set foldcolumn=3
