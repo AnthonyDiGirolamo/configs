@@ -67,3 +67,6 @@
 [submodule "vim/vim/bundle/vim-fish.git"]
 	path = vim/vim/bundle/vim-fish.git
 	url = https://github.com/aliva/vim-fish
+[submodule "vim/vim/bundle/vim-dispatch.git"]
+	path = vim/vim/bundle/vim-dispatch.git
+	url = https://github.com/tpope/vim-dispatch.git

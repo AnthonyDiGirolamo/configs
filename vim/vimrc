@@ -3,7 +3,7 @@
 set nocompatible
 
 filetype off
-call pathogen#runtime_append_all_bundles() " Load Pathogen
+call pathogen#incubate() " Load Pathogen
 
 runtime macros/matchit.vim     " Load the matchit plugin.
 set shell=sh
