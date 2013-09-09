@@ -18,6 +18,7 @@ rescue LoadError => err
   warn "Couldn't load interactive_editor: #{err}"
 end
 
+require 'pp'
 # awesome print
 # begin
 #   require 'awesome_print'
