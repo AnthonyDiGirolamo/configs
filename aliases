@@ -214,14 +214,13 @@ which rbenv &> /dev/null && eval "$(rbenv init -)"
 
 if [[ -n $MODULESHOME ]]; then
   if [[ -n ${ZSH_VERSION-} ]]; then
-    source $MODULESHOME/init/zsh
+    . $MODULESHOME/init/zsh
   fi
   if [[ -n ${BASH_VERSION-} ]]; then
-    source $MODULESHOME/init/bash
+    . $MODULESHOME/init/bash
   fi
+  declare -f module &> /dev/null && module load git ruby
 fi
-
-declare -f module &> /dev/null && module load git ruby
 
 stty -ixon
 
