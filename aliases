@@ -125,7 +125,7 @@ export PATH=/usr/local/bin:$PATH
 export PATH=$HOME/Preferences/bin:$PATH
 export PATH=$HOME/Preferences/bin/els:$PATH
 
-alias els='els --els-icons=fontawesome'
+# alias els='els --els-icons=fontawesome'
 
 alias mutt='LD_LIBRARY_PATH=$HOME/apps/gdbm/lib:$HOME/apps/w3m/lib PATH=$HOME/apps/w3m/bin:$HOME/apps/mutt/bin:$HOME/apps/gdbm/bin:$HOME/apps/msmtp/bin:$HOME/apps/imapfilter/bin:$PATH $HOME/apps/mutt/bin/mutt'
 
