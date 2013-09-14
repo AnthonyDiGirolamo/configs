@@ -9,8 +9,10 @@ require 'irb/ext/save-history'
 
 # IRB.conf[:PROMPT_MODE] = :SIMPLE
 IRB.conf[:PROMPT][:CUSTOM] = {
-  :PROMPT_I => "\e[00;34m>>\e[m ",
-  :PROMPT_S => "\e[00;34m>>\e[m ",
+  # :PROMPT_I => "\001\e[00;34m>>\e[0m\002 ",
+  # :PROMPT_S => "\001\e[00;34m>>\e[0m\002 ",
+  :PROMPT_I => ">> ",
+  :PROMPT_S => "%l>> ",
   :PROMPT_N => "  ",
   :PROMPT_C => "  ",
   :RETURN   => "=> %s\n"
