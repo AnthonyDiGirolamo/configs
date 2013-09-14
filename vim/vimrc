@@ -79,7 +79,7 @@ set thesaurus+=~/.vim/mthesaur-vim.txt " Thesaurus
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 " Clear trailing whitespace before a save
-autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e | retab
 
 " Set filetype options based on extensions
 augroup arduino

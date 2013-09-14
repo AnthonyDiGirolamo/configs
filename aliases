@@ -160,26 +160,27 @@ function authme {
 
 function setupenv {
   pushd ~
-	rsync -avLK --delete --exclude mthesaur-vim.txt apps/bin .gitconfig .vim .vimrc .zprezto .zlogin  .zlogout  .zpreztorc  .zprofile  .zshenv  .zshrc .screenrc .tmux.conf .aliases .irbrc $@:~/
+  rsync -avLK --delete --exclude mthesaur-vim.txt apps/bin .gitconfig .vim .vimrc .zprezto .zlogin  .zlogout  .zpreztorc  .zprofile  .zshenv  .zshrc .screenrc .tmux.conf .aliases .irbrc $@:~/
   popd
 }
 
 function setupenv_full {
   pushd ~
-	rsync -avLK --delete --exclude mthesaur-vim.txt Preferences $@:~/
+  rsync -avLK --delete --exclude mthesaur-vim.txt Preferences $@:~/
   popd
 }
 
 # MacOS Specific Settings
 uname -a | grep -qs Darwin
 if [ $? -eq 0 ]; then
-	export PATH=/opt/local/bin:$PATH
-  # sudo port install coreutils # to get the following to work in OSX
-  #eval "`gdircolors -b`"
+  export PATH=/opt/local/bin:$PATH
+  # brew install coreutils
+  # eval "`gdircolors -b`"
   alias ls='/usr/local/bin/gls --color=auto'
-	alias gvim=mvim
-	alias vim='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
+  alias gvim=mvim
+  alias vim='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
   export EDITOR='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
+  xmodmap -e "keycode 119 = Insert"
   alias f12insert='xmodmap -e "keycode 119 = Insert"'
 else
 # Linux
@@ -199,14 +200,14 @@ else
   # fi
   export EDITOR=vim
 
-	alias rrm='/bin/rm'
-	alias rm='mv --verbose -i --target-directory ~/.Trash/'
-	alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
+  alias rrm='/bin/rm'
+  alias rm='mv --verbose -i --target-directory ~/.Trash/'
+  alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
 fi
 
 # hostname -s | grep -qs -E 'cave|yona'
 # if [ $? -eq 0 ]; then
-# 	alias vim='/usr/bin/vim'
+#   alias vim='/usr/bin/vim'
 #   export EDITOR='/usr/bin/vim'
 # fi
 
