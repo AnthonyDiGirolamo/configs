@@ -98,80 +98,66 @@ xterm*highlightSelection: true
 ! green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 ! Dark Background
-
 xterm*background:             #002b36
-xterm*foreground:             #657b83
-xterm*fading:                 40
+xterm*foreground:             #839496
+xterm*fading:                 0
 xterm*fadeColor:              #002b36
 xterm*cursorColor:            #93a1a1
 xterm*pointerColorBackground: #586e75
 xterm*pointerColorForeground: #93a1a1
-
 ! Light Background
-
 !xterm*background:             #fdf6e3
 !xterm*foreground:             #657b83
-!xterm*fading:                 40
+!xterm*fading:                 0
 !xterm*fadeColor:              #fdf6e3
 !xterm*cursorColor:            #586e75
 !xterm*pointerColorBackground: #93a1a1
-!xterm*pointerColorForeground: #586e75
-
 !! black dark/light
 xterm*color0:                #073642
 xterm*color8:                #002b36
-
 !! red dark/light
 xterm*color1:                #dc322f
 xterm*color9:                #cb4b16
-
 !! green dark/light
 xterm*color2:                #859900
 xterm*color10:               #586e75
-
 !! yellow dark/light
 xterm*color3:                #b58900
 xterm*color11:               #657b83
-
 !! blue dark/light
 xterm*color4:                #268bd2
 xterm*color12:               #839496
-
 !! magenta dark/light
 xterm*color5:                #d33682
 xterm*color13:               #6c71c4
-
 !! cyan dark/light
 xterm*color6:                #2aa198
 xterm*color14:               #93a1a1
-
 !! white dark/light
 xterm*color7:                #eee8d5
 xterm*color15:               #fdf6e3
 
 ! URXVT
-
 URxvt.borderless: false
-URxvt.cursorBlink: true
-URxvt.depth: 24
-URxvt.letterSpace: -1
-URxvt.shading: 100
+! URxvt.cursorBlink: true
+! URxvt.depth: 24
+! URxvt.letterSpace: -1
+! URxvt.shading: 100
 URxvt*dynamicColors: on
-URxvt.fading: 0
 URxvt*font: xft:PragmataPro:pixelsize=27:antialias=true:hintstyle=hintslight
 URxvt.geometry: 90x30
 URxvt.imLocale: en_US.UTF-8
-URxvt.internalBorder: 3
+! URxvt.internalBorder: 3
 URxvt.lineSpace: 0
 URxvt.loginShell: true
 URxvt.saveLines: 5000
-URxvt.scrollBar: false
+URxvt.scrollBar: true
+URxvt.scrollstyle: plain
 URxvt*termName: rxvt-unicode-256color
 URxvt.transparent: false
 !URxvt.urgentOnBell: true
-URxvt.urlLauncher: chrome
+! URxvt.urlLauncher: chrome
 URxvt.visualBell: false
-
 URxvt.perl-ext-common:  default,tabbed
 URxvt.tabbed.tabbar-fg: 4
 URxvt.tabbed.tabbar-bg: 0
@@ -179,45 +165,36 @@ URxvt.tabbed.tab-fg:    9
 URxvt.tabbed.tab-bg:    0
 
 ! Dark Background
-
 urxvt*background:             #002b36
-urxvt*foreground:             #657b83
-urxvt*fading:                 40
+urxvt*foreground:             #839496
+urxvt*fading:                 0
 urxvt*fadeColor:              #002b36
 urxvt*cursorColor:            #93a1a1
 urxvt*pointerColorBackground: #586e75
 urxvt*pointerColorForeground: #93a1a1
-
 ! Light Background
-
 !urxvt*background:             #fdf6e3
 !urxvt*foreground:             #657b83
-!urxvt*fading:                 40
+!urxvt*fading:                 0
 !urxvt*fadeColor:              #fdf6e3
 !urxvt*cursorColor:            #586e75
 !urxvt*pointerColorBackground: #93a1a1
 !urxvt*pointerColorForeground: #586e75
-
 !! black dark/light
 urxvt*color0:                #073642
 urxvt*color8:                #002b36
-
 !! red dark/light
 urxvt*color1:                #dc322f
 urxvt*color9:                #cb4b16
-
 !! green dark/light
 urxvt*color2:                #859900
 urxvt*color10:               #586e75
-
 !! yellow dark/light
 urxvt*color3:                #b58900
 urxvt*color11:               #657b83
-
 !! blue dark/light
 urxvt*color4:                #268bd2
 urxvt*color12:               #839496
-
 !! magenta dark/light
 urxvt*color5:                #d33682
 urxvt*color13:               #6c71c4
