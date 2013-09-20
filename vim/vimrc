@@ -8,7 +8,7 @@ call pathogen#incubate() " Load Pathogen
 runtime macros/matchit.vim     " Load the matchit plugin.
 set shell=sh
 set cursorline
-" set autochdir                  " autochdir	change to directory of file in buffer
+" set autochdir                  " autochdir  change to directory of file in buffer
 set wildmode=list:longest      " specifies how command line completion works
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set noswapfile
@@ -28,6 +28,8 @@ set textwidth=80               " insert EOL after 75 columns
 set ignorecase                 " ignore case in search patterns
 set smartcase
 set diffopt+=iwhite            " Ignore whitespace in vimdiff
+set hidden
+set shortmess=at
 
 filetype plugin indent on
 
