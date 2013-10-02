@@ -124,7 +124,8 @@ au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,fi
 
 " set background=light
 set background=dark
-colors solarized
+" colors solarized
+colors base16-ocean
 " colors irblack
 " colors warm_grey
 " colors molokai
