@@ -179,7 +179,7 @@ if [ $? -eq 0 ]; then
   alias gvim=mvim
   alias vim='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
   export EDITOR='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
-  xmodmap -e "keycode 119 = Insert"
+  # xmodmap -e "keycode 119 = Insert"
   alias f12insert='xmodmap -e "keycode 119 = Insert"'
 else
 # Linux
