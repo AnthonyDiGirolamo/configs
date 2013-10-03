@@ -210,7 +210,10 @@ fi
 #   export EDITOR='/usr/bin/vim'
 # fi
 
-which rbenv &> /dev/null && eval "$(rbenv init -)"
+if [ -e /usr/local/var/rbenv ] ; then
+  export RBENV_ROOT=/usr/local/var/rbenv
+fi
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 if [[ -n $MODULESHOME ]]; then
   if [[ -n ${ZSH_VERSION-} ]]; then
