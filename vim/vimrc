@@ -47,8 +47,9 @@ let g:airline_symbols.linenr = '⭡'
 
 " let g:airline_theme='powerlineish'
 " let g:airline_theme='dark'
-let g:airline_theme='base16'
-" let g:airline_theme='badwolf'
+" let g:airline_theme='base16'
+let g:airline_theme='badwolf'
+" let g:airline_theme='molokai'
 " let g:airline_theme='light'
 " let g:airline_theme='solarized'
 " let g:airline_theme='simple'
@@ -126,10 +127,10 @@ au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,fi
 " set background=light
 set background=dark
 " colors solarized
-colors base16-ocean
+" colors base16-ocean
 " colors irblack
 " colors warm_grey
-" colors molokai
+colors molokai
 " colors fine_blue
 " colors mac_classic
 
