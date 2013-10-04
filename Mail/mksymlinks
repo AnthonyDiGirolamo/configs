@@ -1,0 +1,12 @@
+#!/bin/sh
+PREFS=$HOME/Preferences/Mail
+RM='/bin/rm -v'
+LN='ln -sv'
+
+remove_link() {
+  $RM ~/.`basename $FILE` ; $LN $PREFS/$FILE ~/.`basename $FILE`
+}
+
+FILE=mutt ; remove_link
+FILE=imapfilter ; remove_link
+

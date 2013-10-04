@@ -1,0 +1,3 @@
+#!/bin/sh
+LD_LIBRARY_PATH=$HOME/apps/gdbm/lib:$HOME/apps/w3m/lib PATH=$HOME/apps/w3m/bin:$HOME/apps/mutt/bin:$HOME/apps/gdbm/bin:$HOME/apps/msmtp/bin:$PATH $HOME/apps/mutt/bin/mutt $@
+

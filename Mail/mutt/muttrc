@@ -1,0 +1,185 @@
+# ~/.mutt/muttrc
+
+# goobook, gmail contact autocompletion
+#set query_command = "/home/adigiro/.mutt/goobook.py '%s' | sort -f -k 2"
+#bind editor <Tab> complete-query
+#bind editor ^T complete
+
+alternates '(anthony.digirolamo|anthony.d|anthonyd|digirolamoam|lmd)([-+].*)?@.*'
+
+set markers = no
+set index_format="%4C %Z %{%m/%d/%Y} %-20.20L (%?l?%4l&%4c?) %s"
+hdr_order From: Date: User-Agent: X-Mailer To: Cc: Reply-To: Subject:
+my_hdr Reply-To:
+
+# ignore all message headers by default
+ignore *
+# unignore header lines you want to see/edit
+unignore From: Date: User-Agent: X-Mailer To: Cc: Reply-To: Subject:
+
+# account settings
+#
+# set sendmail="msmtp"
+# set envelope_from=yes
+#
+# imap[s]://[user:pass@]hostname[:port]/mailbox
+# set folder="imaps://mail.ornl.gov:993/"
+# set imap_user=
+# set imap_pass=
+# set spoolfile="=INBOX"
+# set record="=Sent Items"
+# set postponed="=Drafts"
+# mailboxes =INBOX =Archive =rt-accounts =rt-ccs =rt-log =rt-ncrc =rt-sw =uag =uag-notifications =Drafts "=Sent Items" "=Deleted Items" =titan
+
+source ~/.muttrc_accounts
+
+set mailcap_path = ~/.mutt/mailcap
+auto_view text/html
+
+set abort_nosubject=yes
+set certificate_file=~/.mutt/certificates
+
+set delete=yes
+set edit_hdrs=yes
+set include
+set move=no
+set reply_to
+set mail_check=60
+
+set realname="Anthony DiGirolamo"
+set reverse_name=yes
+set reverse_realname=no
+
+set header_cache="~/.mutt/cache/headers"
+set message_cachedir="~/.mutt/cache/bodies"
+
+set editor="vim"
+set alias_file=~/.mutt/mail_aliases
+source ~/.mutt/mail_aliases
+
+send-hook . 'set realname="Anthony DiGirolamo"'
+## hack to make  $reverse_name and 'my_hdr From:' work ok (eg mlists)
+send-hook . 'set from=anthonyd@ornl.gov'
+send-hook . 'unmy_hdr From:'
+send-hook . 'set signature=~/.signature'
+
+#send-hook lug-list 'set record=+sent-lug-list'
+#send-hook lug-.+@lugmen.org.ar 'my_hdr From: Anthony DiGirolamo <anthony.digirolamo+mlist@gmail.com>
+#subscribe lug-.+@lugmen.org.ar
+
+set menu_scroll
+#set status_on_top # swap status bars
+set pager_context=1
+set pager_index_lines=10
+
+set sort=threads # default sort messages by thread
+#set sort_browser=reverse-date # showing mbox list default to newest first
+set sort_browser=alpha
+set sort_aux=last-date-received # showing threads with youngest message last
+# set sort_aux=reverse-last-date-received # newest on top?
+
+# Nice Bright Colors
+#     Element    FG             BG
+#color status     brightcolor254 color240
+#color indicator  brightwhite    color235
+
+#color attachment brightcolor63  color251
+#color quoted     color27        color251
+#color signature  color245       color251
+#color tilde      color252       color251
+
+#color error      brightred      color251
+#color hdrdefault color245       color254
+#color markers    black          color210
+
+#color search     black          color226
+#color tree       brightcolor57  color251
+
+#color message    black          color251
+#color normal     black          color251
+
+#color index      brightcolor63  color251 ~N
+#color index      brightcolor63  color251 ~O
+#color index      color245       color251 ~D
+#color index      color33        color251 ~T
+#color index      color93        color251 ~F
+
+#color  index     color240    color251 '~f anthony.d'
+## color  index   color117    default '~f @facebookmail.com'
+## color  index   color117    default '~N ~f @facebookmail.com'
+## color  index   color117    default '~O ~f @facebookmail.com'
+## color  index   color21     default '~f abigail'
+## color  index   color21     default '~N ~f abigail'
+## color  index   color21     default '~O ~f abigail'
+## color  index   color160    default '~f @asu.edu'
+## color  index   color160    default '~N ~f @asu.edu'
+## color  index   color160    default '~O ~f @asu.edu'
+## color  index   color123    default '~f DiGirolamo'
+## color  index   color123    default '~N ~f DiGirolamo'
+## color  index   color123    default '~O ~f DiGirolamo'
+## color  index   color123    default '~f Rossi'
+## color  index   color123    default '~N ~f Rossi'
+## color  index   color123    default '~O ~f Rossi'
+
+#source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-16.muttrc
+#source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-light-16.muttrc
+source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
+#source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-light-256.muttrc
+
+
+# Key Bindings
+
+bind editor <space> noop
+macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index ga "<change-folder>=[Gmail].All Mail<enter>" "Go to all mail"
+macro index gs "<change-folder>=[Gmail].Starred<enter>" "Go to Sent Mail"
+macro index gd "<change-folder>=[Gmail].Drafts<enter>" "Go to drafts"
+
+macro index,pager gm "<change-folder-readonly>=Search<enter><shell-escape>mairix " "Run a Mairix search"
+
+bind pager A group-reply
+bind index A group-reply
+
+bind index "I" imap-fetch-mail
+
+bind pager G bottom
+bind generic G last-entry
+bind index G last-entry
+bind pager <End> bottom
+bind generic <End> last-entry
+bind index <End> last-entry
+
+bind generic gg first-entry
+bind index gg first-entry
+bind pager gg top
+bind generic <Home> first-entry
+bind index <Home> first-entry
+bind pager <Home> top
+
+bind index B bounce-message
+bind pager B bounce-message
+
+bind index \eD delete-thread
+bind pager \eD delete-thread
+
+bind attach q exit
+bind pager q exit
+
+#bind pager j next-line
+#bind pager k previous-line
+
+bind alias <Tab> next-entry
+
+bind index <Down> next-entry
+bind index j next-entry
+bind index <Up> previous-entry
+bind index k previous-entry
+
+bind pager <Down> next-line
+bind pager <Up> previous-line
+
+bind pager <Space> next-page
+bind pager b previous-page
+bind generic b previous-page
+bind index b previous-page
+

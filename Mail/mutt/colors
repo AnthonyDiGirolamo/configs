@@ -1,0 +1,169 @@
+# Theme 3
+# Color definitions
+#color attachment white     magenta
+#color body      cyan       default  "ftp://[^ ]*"
+#color body     brightgreen default "[[:alnum:]][-+.#_[:alnum:]]*@[-+.[:alnum:]]*[[:alnum:]]"
+#color body      cyan       default  "<URL:[^ ]*>"
+#color bold      green      default
+#color error     red        default
+#
+#color header    yellow     default  "^from"
+#color header    green      default  "^from:"
+#color header    green      default  "^to:"
+#color header    green      default  "^cc:"
+#color header    green      default  "^date:"
+#color header    yellow     default  "^newsgroups:"
+#color header    yellow     default  "^reply-to:"
+#color header    brightcyan default  "^subject:"
+#color header    red        default  "^x-spam-rule:"
+#color header    yellow     default  "^x-mailer:"
+#color header    yellow     default  "^message-id:"
+#color header    yellow     default  "^Organization:"
+#color header    yellow     default  "^Organisation:"
+#color header    yellow     default  "^User-Agent:"
+#color header    yellow     default  "^message-id: .*pine"
+#color header    yellow     default  "^X-Fnord:"
+#color header    yellow     default  "^X-WebTV-Stationery:"
+#color header    yellow     default  "^X-Message-Flag:"
+#color header    yellow     default  "^X-Spam-Status:"
+#color header    yellow     default  "^X-SpamProbe:"
+#color header    red        default  "^X-SpamProbe: SPAM"
+#
+#color indicator white      blue
+color indicator color245	color254
+#color markers   red        default
+#color message   white      blue
+#
+## Colorizing the body of messages (ie in the pager)
+#
+#color normal    white     default  # pager body
+#
+##  Coloring quoted text - coloring the first 7 levels:
+#color quoted    cyan      default
+#color quoted1   yellow    default
+#color quoted2   red       default
+#color quoted3   green     default
+#color quoted4   cyan      default
+#color quoted5   yellow    default
+#color quoted6   red       default
+#color quoted7   green     default
+#
+#color signature brightred      default
+#color status    white          blue
+#color tilde     blue           default
+#color tree      brightmagenta  default
+#color underline yellow         default
+#color body      yellow         default  "[;:]-[)/(|]"  # colorise smileys
+#color body      yellow         default  "[;:][)/(|]"
+##color body      brightblue     default  "(http|https|ftp|news|telnet|finger)://[^ ]*"
+#color body      brightblue     default  "\\b[^ ]+://[^ ]*"
+#
+#color index     yellow         default  ~N      # New
+#color index     yellow         default  ~O      # Old
+#color index     color5           default  '~f HotUKDeals'
+#color index     brightgreen    default  '~p'    # mail to myself
+#color index     brightcyan    default  '~P'    # mail from myself
+#color index     magenta        default  ~F      # Flagged
+#color index     blue           default  ~T      # Tagged
+#color index     red            default  ~D      # Deleted
+
+# Theme 4
+# Color definitions
+# white black green magenta blue cyan yellow red default colorx
+# intended for a dark bg
+# color normal 		color252		default
+# color quoted 		color24			default
+# color signature 	color126		default
+# color indicator 	brightcolor48	brightblack
+# color error 		red				default
+# color status 		color42 		brightblack #color237
+# color tree 			color48 		default	# the thread tree in the index menu
+# color tilde 		color245		default
+# color message 		yellow			default
+# color markers 		yellow			default
+# color attachment 	color221		default
+# color search 		color48			color240	# how to hilite search patterns in the pager
+# # smileys :)
+# color body 			brightyellow 	default '(\(:|:\)|;\)|:-\)|:>|8-\))'
+# color body 			brightblue 		default '(\):|:\(|:-\(|:\'()'
+# color body 			yellow 			default '(:D|:-D|=-O|:-[pP]|:-\*|>:o|:\/|:-\/)'
+#
+# color hdrdefault 	color238 		default
+# color header 		color243 		default "^(Date|From|Subject)"
+# color header 		color73 		default "^(To|Reply-To):"
+# color header 		color245		default "^(X-Original-To):"
+# color header 		color96			default "^(User-Agent|X-Editor):"
+# color body 			blue 			default "(ftp|http)://\w[^ ]+[^.]" # point out URLs
+# color body 			color128 		default '[-.+\w]+@[-.\w]+[^.]' # e-mail addresses
+# color underline 	brightgreen 	default
+#
+# # color-coding by sender/recipient
+#
+color index brightcolor220	default ~N
+color index brightcolor220	default ~O
+color index color91 		default ~T	# Tagged
+color index color238 		default ~D	# Deleted
+color index cyan 			default ~F	# Flagged
+
+#color index color19 default '~t "grant-family@---------"'
+#color index color21 default '~t "lee-family@---------"'
+#color index color27 default '~t "von-family@---------"'
+
+# self
+color index color123 		default '~f anthony.d'				# pale blue
+#color index color121 default '~f anthony.d'					# pale green
+
+color index color117 		default '~f @facebookmail.com'		# muted blue
+color index brightcolor117	default '~N ~f @facebookmail.com'	# muted blue
+color index brightcolor117	default '~O ~f @facebookmail.com'	# muted blue
+#color index color192 default '~t von(trapp)?[+][a-zA-Z]+@' 	# muted yellow
+
+color index color198		default '~f abigail'				# pink
+color index color201 		default '~N ~f abigail'				# red-pink
+color index color201 		default '~O ~f abigail'				# red-pink
+
+color index color192		default '~f @asu.edu'				# puke green: color70
+color index brightcolor192	default '~N ~f @asu.edu'
+color index brightcolor192	default '~O ~f @asu.edu'
+
+color index color46 		default '~f DiGirolamo'
+color index brightcolor46 	default '~N ~f DiGirolamo'
+color index brightcolor48 	default '~O ~f DiGirolamo'
+color index color46 		default '~f Rossi'
+color index brightcolor46 	default '~N ~f Rossi'
+color index brightcolor48 	default '~O ~f Rossi'
+#
+# #color index magenta default '~h X-SpamStop-'
+# #color index magenta default '~h X-RBL-Warning'
+# #color index magenta default '~h X-Razor-Warning'
+#
+# # attributes when using a mono terminal
+# mono header underline ^(From|Subject):
+# mono quoted bold
+
+# Inkpot
+#color   attachment  color61  color232
+#color   header      color10  color232 "^(From|Subject|cc|date|To|X-Spam-Level|User-Agent|X-Mailer):"
+#color   signature   color63  color232
+#color   tree        color63  color232
+#color   message     color37  color232
+#color   status      color247 color235
+#color   normal      color229 color232
+#color   error       color231 color196
+#color   indicator   color232 color215
+#color   markers     color37  color232
+#color   index       color63  color232 ~N
+#color   index       color63  color232 ~O
+#color   index       color196 color232 ~D
+#color   index       color196 color232 ~F
+#color   index       color49  color232 ~T
+#color   tilde       color63  color232
+#
+#color   body        color10  color232 "(http|https|ftp|news|telnet|finger|irc)://[^ \">\t\r\n]*"
+#color   body        color10  color232 "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+#color   body        color37  color232 "[;:=][-][)/(|]"
+#
+#color   quoted      color130 color232
+#color   quoted1     color25  color232
+#color   quoted2     color207 color232
+
