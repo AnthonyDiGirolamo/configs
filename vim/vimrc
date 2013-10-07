@@ -246,10 +246,6 @@ inoremap <s-tab> <c-n>
 " Use :C to run some ruby code
 " :command! -nargs=+ C :ruby puts <args>
 
-let g:user_zen_settings       = { 'erb' : { 'extends' : 'html' } }
-let g:user_zen_expandabbr_key = '<c-e>'
-let g:use_zen_complete_tag    = 1
-
 " Netrw settings
 " ==============
 "
