@@ -74,7 +74,7 @@ color index         color12         default         "~R"                        
 color index         blue            default         "~U"                        # unread messages
 color index         blue            default         "~U~$"                      # unread, unreferenced messages
 color index         brightyellow    default         "~v"                        # messages part of a collapsed thread
-color index         brightyellow    default         "~P"                        # messages from me
+color index         yellow          default         "~P"                        # messages from me
 #color index         cyan            default         "~p!~F"                     # messages to me
 color index         cyan            default         "~N~p!~F"                   # new messages to me
 color index         cyan            default         "~U~p!~F"                   # unread messages to me
@@ -115,7 +115,7 @@ color quoted        blue            default
 color quoted1       cyan            default
 color quoted2       yellow          default
 color quoted3       red             default
-color quoted4       brightred       default
+color quoted4       color9          default
 
 color signature     brightgreen     default
 color bold          black           default
