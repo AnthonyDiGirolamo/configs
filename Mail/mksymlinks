@@ -10,6 +10,6 @@ remove_link() {
 FILE=mutt ; remove_link
 FILE=imapfilter ; remove_link
 
-FILE=msmtprc ; remove_link
-FILE=offlineimaprc ; remove_link
+cp -v msmtprc ~/.msmtprc
+cp -v offlineimaprc ~/.offlineimaprc
 
