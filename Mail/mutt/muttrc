@@ -22,15 +22,23 @@ unignore From: Date: User-Agent: X-Mailer To: Cc: Reply-To: Subject:
 # set sendmail="msmtp"
 # set envelope_from=yes
 #
-# imap[s]://[user:pass@]hostname[:port]/mailbox
-# set folder="imaps://mail.ornl.gov:993/"
-# set imap_user=
-# set imap_pass=
+# set from=anthonyd@ornl.gov
+# # Mutt IMAP imap[s]://[user:pass@]hostname[:port]/mailbox
+# # set folder="imaps://mail.ornl.gov:993/"
+# # set imap_user=
+# # set imap_pass=
+#
+# # offlineimap maildir
+# set folder=$HOME/Mail
+# set mbox_type=Maildir
+#
 # set spoolfile="=INBOX"
 # set record="=Sent Items"
 # set postponed="=Drafts"
+#
+# # Mailboxes
 # mailboxes =INBOX =Archive =rt-accounts =rt-ccs =rt-log =rt-ncrc =rt-sw =uag =uag-notifications =Drafts "=Sent Items" "=Deleted Items" =titan
-
+# source ~/.muttrc_mailboxes
 source ~/.muttrc_accounts
 
 set mailcap_path = ~/.mutt/mailcap
