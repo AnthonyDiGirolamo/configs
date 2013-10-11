@@ -240,7 +240,7 @@ remoterepository = Remote
 # that day until today.  e.g. maxage = 3 to sync only the last 3 days
 # mail
 #
-# maxage =
+maxage = 365
 
 
 # Maildir file format uses colon (:) separator between uniq name and info.
@@ -409,7 +409,7 @@ remoteuser = lmd
 # cases, it may slow things down.  The safe answer is 1.  You should
 # probably never set it to a value more than 5.
 
-#maxconnections = 2
+maxconnections = 3
 
 # OfflineIMAP normally closes IMAP server connections between refreshes if
 # the global option autorefresh is specified.  If you wish it to keep the
@@ -418,7 +418,7 @@ remoteuser = lmd
 # next time and may use fewer server resources on connection, but uses
 # more server memory.  This setting has no effect if autorefresh is not set.
 #
-#holdconnectionopen = no
+holdconnectionopen = yes
 
 # If you want to have "keepalives" sent while waiting between syncs,
 # specify the amount of time IN SECONDS between keepalives here.  Note that
