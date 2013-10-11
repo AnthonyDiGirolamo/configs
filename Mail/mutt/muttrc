@@ -123,8 +123,9 @@ set sort_aux=last-date-received # showing threads with youngest message last
 
 #source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-16.muttrc
 #source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-light-16.muttrc
-source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
+#source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
 #source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-light-256.muttrc
+source ~/.mutt/base16-colors.muttrc
 
 
 # Key Bindings
