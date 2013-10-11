@@ -35,6 +35,8 @@ filetype plugin indent on
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 let g:airline_symbols = {}
 let g:airline_left_sep = '⮀'
@@ -217,7 +219,8 @@ nnoremap <C-L> :nohl<CR><C-L>
 nmap <leader>; :tabe<CR><C-P>
 nmap <leader>l :vs<CR><C-P>
 " nmap <leader>l <cr><c-w>50\|<c-w><c-w>
-nmap <leader>k :set foldcolumn=0\|:set nonumber<cr><c-w>50\|<c-w><c-w>:set foldcolumn=3\|:set number<cr>
+" nmap <leader>k :set foldcolumn=0\|:set nonumber<cr><c-w>50\|<c-w><c-w>:set foldcolumn=3\|:set number<cr>
+nmap <leader>k :set nonumber<cr><c-w>30\|<c-w><c-w>:set number<cr>
 
 " Bubble single lines
 nmap <C-k> [e
