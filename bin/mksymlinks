@@ -3,9 +3,9 @@ PREFS='Preferences'
 
 cd ~/$PREFS
 
-for FILE in fonts font.conf Xdefaults gitconfig irbrc ackrc rdebugrc vim/gvimrc vim/vimrc vim/vim aliases tmux/tmux.conf bash_profile bashrc
+for FILE in fonts fonts.conf Xdefaults gitconfig irbrc ackrc rdebugrc vim/gvimrc vim/vimrc vim/vim aliases tmux/tmux.conf bash_profile bashrc
 do
-	ln -svnf ~/$PREFS/$FILE ~/.`basename $FILE`
+  ln -svnf ~/$PREFS/$FILE ~/.`basename $FILE`
 done
 
 ln -svnf $HOME/$PREFS/prezto $HOME/.zprezto
