@@ -130,10 +130,11 @@ accounts = ORNL
 # The header, peritem, sep, and footer are all Python expressions passed
 # through eval, so you can (and must) use Python quoting.
 
-enabled = no
+enabled = yes
 filename = ~/.muttrc_mailboxes
 header = "mailboxes "
-peritem = "=%(accountname)s/%(foldername)s"
+# peritem = "=%(accountname)s/%(foldername)s"
+peritem = "=%(foldername)s"
 sep = " "
 footer = "\n"
 
@@ -240,7 +241,7 @@ remoterepository = Remote
 # that day until today.  e.g. maxage = 3 to sync only the last 3 days
 # mail
 #
-maxage = 365
+# maxage = 365
 
 
 # Maildir file format uses colon (:) separator between uniq name and info.
@@ -296,7 +297,8 @@ type = IMAP
 # remotepasseval = getcredentials("filename", "hostname", "passwd")
 
 # Specify the remote hostname.
-remotehost = mail.ornl.gov
+# remotehost = mail.ornl.gov
+remotehost = 127.0.0.1
 
 # Whether or not to use SSL.
 ssl = yes
@@ -327,6 +329,7 @@ ssl = yes
 
 # Specify the port.  If not specified, use a default port.
 # remoteport = 993
+remoteport = 9993
 
 # Specify the remote user name.
 remoteuser = lmd
@@ -492,6 +495,20 @@ holdconnectionopen = yes
 # folderfilter = lambda foldername: foldername in
 #        ['INBOX', 'Sent Mail', 'Deleted Items',
 #         'Received']
+
+folderfilter = lambda folder: folder in [ 'INBOX',
+  'Archive',
+  'rt-accounts',
+  'rt-ccs',
+  'rt-log',
+  'rt-ncrc',
+  'rt-sw',
+  'uag',
+  'uag-notifications',
+  'Drafts',
+  'Sent Items',
+  'Deleted Items',
+  'titan' ]
 
 
 
