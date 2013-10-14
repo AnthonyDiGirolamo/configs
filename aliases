@@ -128,6 +128,8 @@ export PATH=$HOME/Preferences/bin/els:$PATH
 # alias els='els --els-icons=fontawesome'
 
 alias mutt='TERM=xterm-256color LD_LIBRARY_PATH=$HOME/apps/gdbm/lib:$HOME/apps/w3m/lib PATH=$HOME/apps/w3m/bin:$HOME/apps/mutt/bin:$HOME/apps/gdbm/bin:$HOME/apps/msmtp/bin:$HOME/apps/imapfilter/bin:$PATH mutt'
+export MAILDIR=$HOME/Mail
+alias mu_mutt_aliases=mu find t:digirolamo --fields 'f'|sort|uniq|grep -v help@nccs.gov|grep -v 'via RT' |grep -v '@local'|ruby -e 'STDIN.readlines.each{|l| puts "alias #{$1.delete(" \",.")} #{$1.delete("\"")} <#{$2}>" if l =~ /^(.*?) <(.*?)>$/}'|uniq
 
 alias sshfoxy1='ssh lmd@login1.ornl.gov -L2222:uac2.ornl.gov:22'
 alias sshfoxy2='ssh -p 2222 lmd@localhost -D localhost:8888 -L9993:mail.ornl.gov:993 -L2525:smtp.ornl.gov:25'
