@@ -144,8 +144,6 @@ macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
 # macro index gs "<change-folder>=[Gmail].Starred<enter>" "Go to Sent Mail"
 # macro index gd "<change-folder>=[Gmail].Drafts<enter>" "Go to drafts"
 
-macro index,pager gm "<change-folder-readonly>=Search<enter><shell-escape>mairix " "Run a Mairix search"
-
 bind pager A group-reply
 bind index A group-reply
 
@@ -216,8 +214,8 @@ macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
 bind index B bounce-message
 
 # mutt macros for mu
-macro index <F8> "<shell-escape>mu find --clearlinks --format=links --linksdir=~/Mail/search " \
+macro index gm "<shell-escape>mu find --clearlinks --format=links --linksdir=~/Mail/search " \
   "mu find"
-macro index <F9> "<change-folder-readonly>~/Mail/search" \
+macro index gM "<change-folder-readonly>~/Mail/search" \
   "mu find results"
 
