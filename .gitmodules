@@ -73,3 +73,6 @@
 [submodule "vim/vim/bundle/emmet-vim.git"]
 	path = vim/vim/bundle/emmet-vim.git
 	url = https://github.com/mattn/emmet-vim.git
+[submodule "emacs/emacs.d/evil"]
+	path = emacs/emacs.d/evil
+	url = https://git.gitorious.org/evil/evil.git
