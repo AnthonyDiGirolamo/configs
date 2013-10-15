@@ -79,3 +79,9 @@
 [submodule "emacs/emacs.d/base16-emacs.git"]
 	path = emacs/emacs.d/base16-emacs.git
 	url = https://github.com/neil477/base16-emacs.git
+[submodule "emacs/emacs.d/emacs-color-theme-solarized.git"]
+	path = emacs/emacs.d/emacs-color-theme-solarized.git
+	url = https://github.com/sellout/emacs-color-theme-solarized.git
+[submodule "emacs/emacs.d/solarized-emacs.git"]
+	path = emacs/emacs.d/solarized-emacs.git
+	url = https://github.com/bbatsov/solarized-emacs.git
