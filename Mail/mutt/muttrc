@@ -78,7 +78,7 @@ send-hook . 'set signature=~/.signature'
 set menu_scroll
 #set status_on_top # swap status bars
 set pager_context=1
-set pager_index_lines=10
+set pager_index_lines=7
 
 set sort=threads # default sort messages by thread
 #set sort_browser=reverse-date # showing mbox list default to newest first
@@ -197,17 +197,15 @@ bind pager \cU half-up
 # set up the sidebar, default not visible
 set sidebar_width=20
 set sidebar_visible=yes
-set sidebar_delim='|'
-set sidebar_sort=no
+set sidebar_delim=' '
+# set sidebar_format='%B'
+set sidebar_sort=yes
 color sidebar_new yellow default
 # ctrl-n, ctrl-p to select next, prev folder
 # ctrl-o to open selected folder
-bind index \cP sidebar-prev
-bind index \cN sidebar-next
-bind index \cO sidebar-open
-bind pager \cP sidebar-prev
-bind pager \cN sidebar-next
-bind pager \cO sidebar-open
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \C] sidebar-open
 # b toggles sidebar visibility
 macro index b '<enter-command>toggle sidebar_visible<enter><refresh>'
 macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
