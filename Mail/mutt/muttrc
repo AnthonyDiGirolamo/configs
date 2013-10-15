@@ -147,7 +147,8 @@ macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
 bind pager A group-reply
 bind index A group-reply
 
-bind index "I" imap-fetch-mail
+# bind index "I" imap-fetch-mail
+macro index gI "<shell-escape>offlineimap<enter>" "run offlineimap"
 
 bind pager G bottom
 bind generic G last-entry
