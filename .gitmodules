@@ -76,3 +76,6 @@
 [submodule "emacs/emacs.d/evil"]
 	path = emacs/emacs.d/evil
 	url = https://git.gitorious.org/evil/evil.git
+[submodule "emacs/emacs.d/base16-emacs.git"]
+	path = emacs/emacs.d/base16-emacs.git
+	url = https://github.com/neil477/base16-emacs.git
