@@ -19,7 +19,7 @@ set laststatus=2               " always show the editing status bar at the botto
 set showcmd                    " display incomplete commands
 set incsearch                  " do incremental searching
 set autoindent
-set number                     " line numbering
+set nonumber                     " line numbering
 set tabstop=2                  " set tabs to 2 spaces
 set shiftwidth=2
 set expandtab
@@ -120,6 +120,8 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " Better syntax highlighting for python
 " au FileType python set complete+=k~/.vim/bundle/python_syntax/syntax/python.vim isk+=.,(
 " au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+
+" au FileType python map <leader>t :w\|:!py.test %<cr>
 
 " Color options
 " =============
@@ -254,7 +256,7 @@ inoremap <s-tab> <c-n>
 "
 set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tmp/*
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](html|\.git|\.hg|\.svn)$',
+  \ 'dir':  '\v[\/](env|html|\.git|\.hg|\.svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
@@ -371,7 +373,7 @@ function! RunTestFile(...)
   endif
 
   " Run the tests for the previously-marked file.
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+  let in_test_file = match(expand("%"), '\(_test.py\|.feature\|_spec.rb\)$') != -1
   if in_test_file
     call SetTestFile()
   elseif !exists("t:grb_test_file")
@@ -406,6 +408,8 @@ function! RunTests(filename)
       exec ":!script/test " . a:filename
     elseif filereadable("Gemfile")
       exec ":!bundle exec rspec --color " . a:filename
+    elseif filereadable("runtests.py")
+      exec ":!./runtests.py " . a:filename
     else
       exec ":!rspec --color " . a:filename
     end
