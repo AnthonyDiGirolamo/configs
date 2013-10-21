@@ -49,8 +49,8 @@ let g:airline_symbols.linenr = '⭡'
 
 " let g:airline_theme='powerlineish'
 " let g:airline_theme='dark'
-let g:airline_theme='base16'
-" let g:airline_theme='badwolf'
+" let g:airline_theme='base16'
+let g:airline_theme='badwolf'
 " let g:airline_theme='molokai'
 " let g:airline_theme='light'
 " let g:airline_theme='solarized'
@@ -120,7 +120,6 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " Better syntax highlighting for python
 " au FileType python set complete+=k~/.vim/bundle/python_syntax/syntax/python.vim isk+=.,(
 " au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-
 " au FileType python map <leader>t :w\|:!py.test %<cr>
 
 " Color options
@@ -257,7 +256,7 @@ inoremap <s-tab> <c-n>
 set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tmp/*
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](env|html|\.git|\.hg|\.svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'file': '\v\.(pyc|exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
 let g:netrw_winsize               = 80
@@ -409,7 +408,7 @@ function! RunTests(filename)
     elseif filereadable("Gemfile")
       exec ":!bundle exec rspec --color " . a:filename
     elseif filereadable("runtests.py")
-      exec ":!./runtests.py " . a:filename
+      exec ":!py.test " . a:filename
     else
       exec ":!rspec --color " . a:filename
     end
