@@ -122,6 +122,18 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 " au FileType python map <leader>t :w\|:!py.test %<cr>
 
+au FileType python set ts=4 sw=4
+
+" python-mode
+let g:pymode_lint = 0
+let g:pymode_lint_checker = "pyflakes,pep8,mccabe"
+let g:pymode_lint_write = 0
+let g:pymode_lint_ignore = "E221,E201,E202"
+
+let g:pymode_lint_signs = 0
+let g:pymode_motion = 0
+let g:pymode_virtualenv = 1
+
 " Color options
 " =============
 "
