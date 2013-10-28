@@ -122,8 +122,6 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 " au FileType python map <leader>t :w\|:!py.test %<cr>
 
-vnoremap <leader>p :!python -c 'import sys, pprint; pprint.PrettyPrinter(indent=4).pprint(eval(sys.stdin.read()))'<cr>
-
 au FileType python set ts=4 sw=4
 
 " python-mode
@@ -428,4 +426,6 @@ function! RunTests(filename)
     end
   end
 endfunction
+
+vnoremap <leader>p :!python -c 'import sys, pprint; pprint.PrettyPrinter(indent=4).pprint(eval(sys.stdin.read()))'<cr>
 
