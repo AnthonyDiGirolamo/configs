@@ -40,7 +40,7 @@ alias la='ls -a'
 alias l='ls -CF'
 
 alias ga='git add'
-alias gll='git hist'
+alias gll='git l'
 alias gs='git status'
 alias gc='git commit'
 alias gca='git commit -a'
