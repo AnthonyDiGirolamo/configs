@@ -267,7 +267,7 @@ inoremap <s-tab> <c-n>
 "
 set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tmp/*
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](env|html|\.git|\.hg|\.svn)$',
+  \ 'dir':  '\v[\/](env.*|html|\.git|\.hg|\.svn)$',
   \ 'file': '\v\.(pyc|exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }

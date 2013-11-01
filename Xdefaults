@@ -8,7 +8,7 @@ xft.hintstyle: hintslight
 ! xft-hintstyle = What degree of hinting to use (hintnone, hintslight, hintmedium, or hintfull)
 
 ! xterm
-xterm*faceName: xft:PragmataPro:pixelsize=24:antialias=true:hintstyle=hintslight
+xterm*faceName: xft:PragmataPro:pixelsize=27:antialias=true:hintstyle=hintslight
 xterm*dynamiccolors:    true
 !xterm*background:      lightblack
 !xterm*foreground:      lightblue
@@ -32,7 +32,7 @@ URxvt.borderless: false
 ! URxvt.letterSpace: -1
 ! URxvt.shading: 100
 URxvt*dynamicColors: on
-URxvt*font: xft:PragmataPro:pixelsize=24:antialias=true:hintstyle=hintslight
+URxvt*font: xft:PragmataPro:pixelsize=27:antialias=true:hintstyle=hintslight
 URxvt*letterSpace: -1
 URxvt.geometry: 90x30
 URxvt.imLocale: en_US.UTF-8
@@ -63,7 +63,7 @@ URxvt.visualBell: false
 *.colorBDMode: false
 !*.colorBD: cyan
 
-*.boldFont: xft:PragmataPro:pixelsize=24:antialias=true:hintstyle=hintslight
+*.boldFont: xft:PragmataPro:pixelsize=27:antialias=true:hintstyle=hintslight
 
 !#define base00 #2d2d2d
 !#define base01 #393939
