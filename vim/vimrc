@@ -125,6 +125,9 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 au FileType python set ts=4 sw=4
 let g:python_highlight_all = 1
 
+let g:jedi#usages_command = ""
+let g:jedi#rename_command = ""
+
 " python-mode
 let g:pymode_lint = 0
 let g:pymode_lint_checker = "pyflakes,pep8,mccabe"
