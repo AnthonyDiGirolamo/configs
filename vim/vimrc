@@ -235,8 +235,8 @@ nnoremap  <F12> :TagbarToggle<CR>
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
 
-nnoremap <leader>; :tabe<CR><C-P>
-nnoremap <leader>l :vs<CR><C-P>
+nmap <leader>; :tabe<CR><C-P>
+nmap <leader>l :vs<CR><C-P>
 " nnoremap <leader>l <cr><c-w>50\|<c-w><c-w>
 " nnoremap <leader>k :set foldcolumn=0\|:set nonumber<cr><c-w>50\|<c-w><c-w>:set foldcolumn=3\|:set number<cr>
 nnoremap <leader>k :set nonumber<cr><c-w>30\|<c-w><c-w>:set number<cr>
