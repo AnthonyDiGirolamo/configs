@@ -70,7 +70,7 @@ syntax on    " Switch syntax highlighting on, when the terminal has colors
 set hlsearch " Also switch on highlighting the last used search pattern.
 
 setlocal spell spelllang=en_us   " set the spellcheck to english
-map <F9> :setlocal spell! spelllang=en_us<cr>
+noremap <F9> :setlocal spell! spelllang=en_us<cr>
 set nospell
 
 set mousemodel=popup_setpos      " set the right click in gvim to spellcheck
@@ -120,7 +120,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " Better syntax highlighting for python
 " au FileType python set complete+=k~/.vim/bundle/python_syntax/syntax/python.vim isk+=.,(
 " au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-" au FileType python map <leader>t :w\|:!py.test %<cr>
+" au FileType python noremap <leader>t :w\|:!py.test %<cr>
 
 au FileType python set ts=4 sw=4
 let g:python_highlight_all = 1
@@ -180,65 +180,66 @@ endif
 let mapleader = ","
 
 " Macro Keybinding
-nmap <leader>d f"wdi"<esc>o<esc>p==kf"dW$bido <esc>o<i class="color-icon-"></i><esc>jo<% end %><esc>
+nnoremap <leader>d f"wdi"<esc>o<esc>p==kf"dW$bido <esc>o<i class="color-icon-"></i><esc>jo<% end %><esc>
 
-nmap <leader>v :tabedit $MYVIMRC<CR>
+nnoremap <leader>v :tabedit $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
-map <leader>p :set paste!<cr>
+noremap <leader>p :set paste!<cr>
 
 " Allow access to the gvim Menu by hitting F4 in vim
 " source $VIMRUNTIME/menu.vim
 " set wildmenu
 " set cpo-=<
 " set wcm=<C-Z>
-" map <F4> :emenu <C-Z>
+" noremap <F4> :emenu <C-Z>
 
 " Scrolling
-" nmap <C-E> jzz
-" nmap <C-Y> kzz
+" nnoremap <C-E> jzz
+" nnoremap <C-Y> kzz
 
 " Indent and unindent without leaving visual mode
-vmap < <gv
-vmap > >gv
+vnoremap < <gv
+vnoremap > >gv
 
 " Make :W same as :w
 command! W :w
 command! Q :q
 
 " MacVim is flaky with c-x c-*, set c-o to omnicomplete
-" imap <C-O> <C-X><C-O>
+" inoremap <C-O> <C-X><C-O>
 
 " Insert a hash rocket with <c-l>
-imap <c-l> <space>=><space>
+inoremap <c-l> <space>=><space>
 
 " Can't be bothered to understand ESC vs <c-c> in insert mode
-imap <c-c> <esc>
+inoremap <c-c> <esc>
 
 " Remap Esc
-" imap jj <Esc>l
+" inoremap jj <Esc>l
 
 " pressing space twice will move to the next split
-" map <space><space> <c-W>w
+" noremap <space><space> <c-W>w
 
 " F10 to make and view a latex pdf
-" map <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
-" imap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
+" noremap <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
+" inoremap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
 
 " Symbol listing - requires ctags
-nmap  <F12> :TagbarToggle<CR>
+nnoremap  <F12> :TagbarToggle<CR>
 
 " Alt-C and V copy and paste to and from the system clipboard
-" map <M-c> "*y
-" map <M-v> "*p
+" noremap <M-c> "*y
+" noremap <M-v> "*p
 
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
 
-nmap <leader>; :tabe<CR><C-P>
-nmap <leader>l :vs<CR><C-P>
-" nmap <leader>l <cr><c-w>50\|<c-w><c-w>
-" nmap <leader>k :set foldcolumn=0\|:set nonumber<cr><c-w>50\|<c-w><c-w>:set foldcolumn=3\|:set number<cr>
-nmap <leader>k :set nonumber<cr><c-w>30\|<c-w><c-w>:set number<cr>
+nnoremap <leader>; :tabe<CR><C-P>
+nnoremap <leader>l :vs<CR><C-P>
+" nnoremap <leader>l <cr><c-w>50\|<c-w><c-w>
+" nnoremap <leader>k :set foldcolumn=0\|:set nonumber<cr><c-w>50\|<c-w><c-w>:set foldcolumn=3\|:set number<cr>
+nnoremap <leader>k :set nonumber<cr><c-w>30\|<c-w><c-w>:set number<cr>
 
 " Bubble single lines
 nmap <C-k> [e
@@ -295,10 +296,10 @@ let Tlist_File_Fold_Auto_Close    = 1
 " let NERDTreeHijackNetrw=1
 
 " Vim and Grep Helpers
-nmap <leader>g :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e " . expand("<cword>") . " " <bar> cwindow<CR>
-nmap <leader>G :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e \"" . expand("<cWORD>") . "\" " <bar> cwindow<CR>
+" nnoremap <leader>g :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e " . expand("<cword>") . " " <bar> cwindow<CR>
+" nnoremap <leader>G :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e \"" . expand("<cWORD>") . "\" " <bar> cwindow<CR>
 
-cabbrev ack grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e "
+" cabbrev ack grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e "
 
 " " NeoComplCache Settings
 " " ======================
@@ -342,7 +343,7 @@ cabbrev ack grep -srnw --binary-files=without-match --exclude=tags --exclude-dir
 "
 " Color Scheme Helpers
 " Show syntax highlighting groups for word under cursor
-" nmap <leader>b :call <SID>SynStack()<CR>
+" nnoremap <leader>b :call <SID>SynStack()<CR>
 " function! <SID>SynStack()
 "   if !exists("*synstack")
 "     return
@@ -357,8 +358,8 @@ cabbrev ack grep -srnw --binary-files=without-match --exclude=tags --exclude-dir
 "   let @p = '{V}:s/\v\^|\| | \|/COL/g{V}:Align COLjV:s/COL/^/gjV}:s/COL/|/g{V}<'
 " endfunction
 
-" map <leader>k :call AlignDokuTable()<CR>@p
-" map <leader>l :call DokuLink()<CR>@l
+" noremap <leader>k :call AlignDokuTable()<CR>@p
+" noremap <leader>l :call DokuLink()<CR>@l
 
 " RENAME CURRENT FILE
 " ===================
@@ -371,15 +372,15 @@ function! RenameFile()
     redraw!
   endif
 endfunction
-map <leader>n :call RenameFile()<cr>
+noremap <leader>n :call RenameFile()<cr>
 
 " RUNNING TESTS
 " =============
-map <leader>t :call RunTestFile()<cr>
-map <leader>T :call RunNearestTest()<cr>
-map <leader>a :call RunTests('')<cr>
-map <leader>c :w\|:!bundle exec cucumber %<cr>
-map <leader>w :w\|:!script/features --profile @wip<cr>
+noremap <leader>t :call RunTestFile()<cr>
+noremap <leader>T :call RunNearestTest()<cr>
+noremap <leader>a :call RunTests('')<cr>
+noremap <leader>c :w\|:!bundle exec cucumber %<cr>
+noremap <leader>w :w\|:!script/features --profile @wip<cr>
 
 function! RunTestFile(...)
   if a:0
