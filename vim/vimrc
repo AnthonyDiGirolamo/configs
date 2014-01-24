@@ -69,10 +69,6 @@ autocmd InsertLeave * let &l:foldmethod=w:last_fdm
 syntax on    " Switch syntax highlighting on, when the terminal has colors
 set hlsearch " Also switch on highlighting the last used search pattern.
 
-setlocal spell spelllang=en_us   " set the spellcheck to english
-noremap <F9> :setlocal spell! spelllang=en_us<cr>
-set nospell
-
 set mousemodel=popup_setpos      " set the right click in gvim to spellcheck
 
 set thesaurus+=~/.vim/mthesaur-vim.txt " Thesaurus
@@ -178,6 +174,10 @@ endif
 " Key Mappings
 " ============
 let mapleader = ","
+
+setlocal spell spelllang=en_us   " set the spellcheck to english
+noremap <leader>s :setlocal spell! spelllang=en_us<cr>
+set nospell
 
 " Macro Keybinding
 nnoremap <leader>d f"wdi"<esc>o<esc>p==kf"dW$bido <esc>o<i class="color-icon-"></i><esc>jo<% end %><esc>
