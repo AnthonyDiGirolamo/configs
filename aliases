@@ -206,6 +206,7 @@ else
   alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
 fi
 
+alias vims="vim -c 'colors solarized'"
 alias emacs='TERM=xterm-16color emacs'
 
 # hostname -s | grep -qs -E 'cave|yona'
