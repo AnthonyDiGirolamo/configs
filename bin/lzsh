@@ -1,5 +1,7 @@
 #!/bin/sh
-if [ -e $HOME/apps/zsh/bin/zsh ]; then
+if [ -e /sw/cave/zsh/5.0.0/centos5.8_gnu4.1.2/bin/zsh ]; then
+  FPATH=/sw/cave/zsh/5.0.0/centos5.8_gnu4.1.2/zsh/functions exec /sw/cave/zsh/5.0.0/centos5.8_gnu4.1.2/bin/zsh $@
+elif [ -e $HOME/apps/zsh/bin/zsh ]; then
   FPATH=$HOME/apps/zsh/zsh/functions exec $HOME/apps/zsh/bin/zsh $@
 else
   exec zsh $@
