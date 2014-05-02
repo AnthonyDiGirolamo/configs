@@ -433,5 +433,6 @@ function! RunTests(filename)
   end
 endfunction
 
-vnoremap <leader>p :!python -c 'import sys, pprint; pprint.PrettyPrinter(indent=4).pprint(eval(sys.stdin.read()))'<cr>
+vnoremap <silent> <leader>p :!python -c 'import sys, pprint; pp = pprint.PrettyPrinter(indent=4, width=80).pprint; exec sys.stdin.read()'<cr>
 
+vnoremap <silent> <leader>r :!ruby -e 'require "pp"; eval(STDIN.read())'<cr>
