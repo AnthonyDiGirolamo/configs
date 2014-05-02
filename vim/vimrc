@@ -436,3 +436,6 @@ endfunction
 vnoremap <silent> <leader>p :!python -c 'import sys, pprint; pp = pprint.PrettyPrinter(indent=4, width=80).pprint; exec sys.stdin.read()'<cr>
 
 vnoremap <silent> <leader>r :!ruby -e 'require "pp"; eval(STDIN.read())'<cr>
+
+vmap <Enter> <Plug>(EasyAlign)
+

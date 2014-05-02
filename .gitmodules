@@ -85,3 +85,6 @@
 [submodule "vim/vim/bundle/jedi-vim.git"]
 	path = vim/vim/bundle/jedi-vim.git
 	url = https://github.com/davidhalter/jedi-vim.git
+[submodule "vim/vim/bundle/vim-easy-align.git"]
+	path = vim/vim/bundle/vim-easy-align.git
+	url = https://github.com/junegunn/vim-easy-align.git
