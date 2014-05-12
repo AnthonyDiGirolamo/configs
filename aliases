@@ -31,6 +31,8 @@ alias w="w|sed -e '/^USER.*$/d'|sort|less"
 alias grep='grep -i --color=auto'
 alias randmac="head /dev/urandom | openssl md5 | sed 's/\(..\)/\1:/g' | cut -c1-17"
 
+alias generate_self_signed_cert='openssl req -new -newkey rsa:2048 -sha1 -days 365 -nodes -x509 -keyout server.key -out server.crt'
+
 alias xdef='xrdb -load ~/.Xdefaults'
 
 alias lltr='ll -tr'
