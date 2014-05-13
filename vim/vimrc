@@ -187,6 +187,9 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 noremap <leader>p :set paste!<cr>
 
+noremap <leader>G :Gstatus<cr>
+noremap <leader>D :Gdiff<cr>
+
 " Allow access to the gvim Menu by hitting F4 in vim
 " source $VIMRUNTIME/menu.vim
 " set wildmenu

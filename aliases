@@ -33,6 +33,13 @@ alias randmac="head /dev/urandom | openssl md5 | sed 's/\(..\)/\1:/g' | cut -c1-
 
 alias generate_self_signed_cert='openssl req -new -newkey rsa:2048 -sha1 -days 365 -nodes -x509 -keyout server.key -out server.crt'
 
+function railsthinssl {
+  tail -n 0 -F log/development.log &
+  tailpid=`jobs -p | awk '/tail/ {print $3}'`
+  bundle exec thin start --ssl --ssl-verify --ssl-key-file server.key --ssl-cert-file server.crt
+  kill $tailpid
+}
+
 alias xdef='xrdb -load ~/.Xdefaults'
 
 alias lltr='ll -tr'
