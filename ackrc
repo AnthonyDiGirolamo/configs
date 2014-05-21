@@ -15,5 +15,8 @@
 --smart-case
 --sort-files
 --color
+--color-filename blue
+--color-lineno green
+--color-match on_magenta
 --follow
 --group
