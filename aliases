@@ -153,7 +153,7 @@ alias sshfsncrc2='ssh -p 2222 lmd@127.0.0.1 -L2223:cavern.ncrc.gov:22'
 alias sshfsncrc3='sshfs Anthony.DiGirolamo@127.0.0.1: $HOME/NCRC -p 2223 -o UserKnownHostsFile=/dev/null -o GlobalKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 
 alias sshhome='ssh lmd@home.ccs.ornl.gov -Y'
-alias sshcave='ssh lmd@cave -Y'
+alias sshcave='ssh lmd@cave.ccs.ornl.gov -Y'
 
 alias sshchester=" ssh -Y chester"
 alias sshjag="ssh -Y jaguarpf"
