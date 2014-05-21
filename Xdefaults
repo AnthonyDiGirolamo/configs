@@ -65,6 +65,7 @@ URxvt.visualBell: false
 
 *.boldFont: xft:PragmataPro:pixelsize=24:antialias=true:hintstyle=hintslight
 
+! Base16 eighties dark
 !#define base00 #2d2d2d
 !#define base01 #393939
 !#define base02 #515151
@@ -81,8 +82,6 @@ URxvt.visualBell: false
 !#define base0D #6699cc
 !#define base0E #cc99cc
 !#define base0F #d27b53
-
-! Base16 eighties dark
 *.foreground:   #d3d0c8
 *.background:   #2d2d2d
 *.cursorColor:  #d3d0c8
@@ -103,6 +102,63 @@ URxvt.visualBell: false
 *.color13:      #e8e6df
 *.color14:      #d27b53
 *.color15:      #f2f0ec
+!*.foreground: base05
+!*.background: base00
+!*.cursorColor: base05
+!*.color0: base00
+!*.color1: base08
+!*.color2: base0B
+!*.color3: base0A
+!*.color4: base0D
+!*.color5: base0E
+!*.color6: base0C
+!*.color7: base05
+!*.color8: base03
+!*.color9: base09
+!*.color10: base01
+!*.color11: base02
+!*.color12: base04
+!*.color13: base06
+!*.color14: base0F
+!*.color15: base07
+
+! Base16 solarized
+!#define base00 #002b36
+!#define base01 #073642
+!#define base02 #586e75
+!#define base03 #657b83
+!#define base04 #839496
+!#define base05 #93a1a1
+!#define base06 #eee8d5
+!#define base07 #fdf6e3
+!#define base08 #dc322f
+!#define base09 #cb4b16
+!#define base0A #b58900
+!#define base0B #859900
+!#define base0C #2aa198
+!#define base0D #268bd2
+!#define base0E #6c71c4
+!#define base0F #d33682
+!*.foreground: base05
+!*.background: base00
+!*.cursorColor: base05
+!*.color0: base00
+!*.color1: base08
+!*.color2: base0B
+!*.color3: base0A
+!*.color4: base0D
+!*.color5: base0E
+!*.color6: base0C
+!*.color7: base05
+!*.color8: base03
+!*.color9: base09
+!*.color10: base01
+!*.color11: base02
+!*.color12: base04
+!*.color13: base06
+!*.color14: base0F
+!*.color15: base07
+
 
 ! SOLARIZED HEX     16/8 TERMCOL       XTERM/HEX   L*A*B      RGB         HSB
 ! --------- ------- ---- -------       ----------- ---------- ----------- -----------
