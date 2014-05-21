@@ -88,3 +88,6 @@
 [submodule "vim/vim/bundle/vim-easy-align.git"]
 	path = vim/vim/bundle/vim-easy-align.git
 	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "vim/vim/bundle/ack.git"]
+	path = vim/vim/bundle/ack.git
+	url = https://github.com/mileszs/ack.vim.git
