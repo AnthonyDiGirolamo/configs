@@ -64,9 +64,6 @@
 [submodule "vim/vim/bundle/vim-dispatch.git"]
 	path = vim/vim/bundle/vim-dispatch.git
 	url = https://github.com/tpope/vim-dispatch.git
-[submodule "vim/vim/bundle/vim-ariline.git"]
-	path = vim/vim/bundle/vim-ariline.git
-	url = https://github.com/bling/vim-airline.git
 [submodule "vim/vim/bundle/base16-vim.git"]
 	path = vim/vim/bundle/base16-vim.git
 	url = https://github.com/chriskempson/base16-vim.git
@@ -91,3 +88,6 @@
 [submodule "vim/vim/bundle/ack.git"]
 	path = vim/vim/bundle/ack.git
 	url = https://github.com/mileszs/ack.vim.git
+[submodule "vim/vim/bundle/vim-airline.git"]
+	path = vim/vim/bundle/vim-airline.git
+	url = https://github.com/bling/vim-airline.git
