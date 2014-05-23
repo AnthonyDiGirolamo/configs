@@ -22,11 +22,11 @@ IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
 
 # interactive editor: use vim from within irb
-begin
-  require 'interactive_editor'
-rescue LoadError => err
-  warn "Couldn't load interactive_editor: #{err}"
-end
+# begin
+#   require 'interactive_editor'
+# rescue LoadError => err
+#   warn "Couldn't load interactive_editor: #{err}"
+# end
 
 require 'pp'
 # awesome print
