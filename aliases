@@ -220,7 +220,7 @@ else
 fi
 
 alias vims="vim -c 'colors solarized'"
-alias emacs='TERM=xterm-16color emacs'
+alias emacs='TERM=xterm-256color emacs'
 
 # hostname -s | grep -qs -E 'cave|yona'
 # if [ $? -eq 0 ]; then
