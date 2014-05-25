@@ -94,3 +94,18 @@
 [submodule "emacs/emacs.d/helm"]
 	path = emacs/emacs.d/helm
 	url = https://github.com/emacs-helm/helm
+[submodule "emacs/emacs.d/smex"]
+	path = emacs/emacs.d/smex
+	url = https://github.com/nonsequitur/smex.git
+[submodule "emacs/emacs.d/evil-surround"]
+	path = emacs/emacs.d/evil-surround
+	url = https://github.com/timcharper/evil-surround.git
+[submodule "emacs/emacs.d/evil-matchit"]
+	path = emacs/emacs.d/evil-matchit
+	url = https://github.com/redguardtoo/evil-matchit.git
+[submodule "emacs/emacs.d/powerline"]
+	path = emacs/emacs.d/powerline
+	url = https://github.com/Dewdrops/powerline.git
+[submodule "emacs/emacs.d/moe-theme"]
+	path = emacs/emacs.d/moe-theme
+	url = https://github.com/kuanyui/moe-theme.el.git
