@@ -109,3 +109,9 @@
 [submodule "emacs/emacs.d/moe-theme"]
 	path = emacs/emacs.d/moe-theme
 	url = https://github.com/kuanyui/moe-theme.el.git
+[submodule "emacs/emacs.d/smart-mode-line"]
+	path = emacs/emacs.d/smart-mode-line
+	url = https://github.com/Bruce-Connor/smart-mode-line.git
+[submodule "emacs/emacs.d/dash"]
+	path = emacs/emacs.d/dash
+	url = https://github.com/magnars/dash.el.git
