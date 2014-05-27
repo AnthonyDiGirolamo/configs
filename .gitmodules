@@ -91,9 +91,6 @@
 [submodule "vim/vim/bundle/vim-airline.git"]
 	path = vim/vim/bundle/vim-airline.git
 	url = https://github.com/bling/vim-airline.git
-[submodule "emacs/emacs.d/smex"]
-	path = emacs/emacs.d/smex
-	url = https://github.com/nonsequitur/smex.git
 [submodule "emacs/emacs.d/evil-surround"]
 	path = emacs/emacs.d/evil-surround
 	url = https://github.com/timcharper/evil-surround.git
