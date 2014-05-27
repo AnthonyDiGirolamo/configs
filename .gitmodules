@@ -91,9 +91,6 @@
 [submodule "vim/vim/bundle/vim-airline.git"]
 	path = vim/vim/bundle/vim-airline.git
 	url = https://github.com/bling/vim-airline.git
-[submodule "emacs/emacs.d/helm"]
-	path = emacs/emacs.d/helm
-	url = https://github.com/emacs-helm/helm
 [submodule "emacs/emacs.d/smex"]
 	path = emacs/emacs.d/smex
 	url = https://github.com/nonsequitur/smex.git
@@ -109,12 +106,6 @@
 [submodule "emacs/emacs.d/moe-theme"]
 	path = emacs/emacs.d/moe-theme
 	url = https://github.com/kuanyui/moe-theme.el.git
-[submodule "emacs/emacs.d/smart-mode-line"]
-	path = emacs/emacs.d/smart-mode-line
-	url = https://github.com/Bruce-Connor/smart-mode-line.git
-[submodule "emacs/emacs.d/dash"]
-	path = emacs/emacs.d/dash
-	url = https://github.com/magnars/dash.el.git
 [submodule "emacs/emacs.d/evil-leader"]
 	path = emacs/emacs.d/evil-leader
 	url = https://github.com/cofi/evil-leader.git
