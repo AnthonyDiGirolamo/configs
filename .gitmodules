@@ -115,3 +115,6 @@
 [submodule "emacs/emacs.d/dash"]
 	path = emacs/emacs.d/dash
 	url = https://github.com/magnars/dash.el.git
+[submodule "emacs/emacs.d/evil-leader"]
+	path = emacs/emacs.d/evil-leader
+	url = https://github.com/cofi/evil-leader.git
