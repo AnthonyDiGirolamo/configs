@@ -22,3 +22,4 @@ dmenu/dmenu_run
 dwm/dwm
 dwm/dwmstatus-1.0/dwmstatus
 *.swp
+emacs/emacs.d/ac-comphist.dat
