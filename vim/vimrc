@@ -60,7 +60,7 @@ let g:airline_theme='badwolf'
 
 " set foldcolumn=3
 set foldlevel=999
-set foldmethod=syntax " syntax manual indent
+set foldmethod=manual " syntax manual indent
 " Don't screw up folds when inserting text that might affect them, until
 " leaving insert mode. Foldmethod is local to the window.
 autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
@@ -441,4 +441,5 @@ vnoremap <silent> <leader>p :!python -c 'import sys, pprint; pp = pprint.PrettyP
 vnoremap <silent> <leader>r :!ruby -e 'require "pp"; eval(STDIN.read())'<cr>
 
 vmap <Enter> <Plug>(EasyAlign)
+let g:easy_align_bypass_fold = 1
 
