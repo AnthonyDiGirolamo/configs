@@ -23,3 +23,9 @@ dwm/dwm
 dwm/dwmstatus-1.0/dwmstatus
 *.swp
 emacs/emacs.d/ac-comphist.dat
+emacs/emacs.d/.python-environments/
+emacs/emacs.d/eshell/
+emacs/emacs.d/projectile-bookmarks.eld
+emacs/emacs.d/projectile.cache
+emacs/emacs.d/elpa/*.txt
+emacs/emacs.d/auto-save-list/
