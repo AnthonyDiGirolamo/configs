@@ -219,7 +219,7 @@ inoremap <c-l> <space>=><space>
 inoremap <c-c> <esc>
 
 " Remap Esc
-" inoremap jj <Esc>l
+inoremap jj <Esc>l
 
 " pressing space twice will move to the next split
 " noremap <space><space> <c-W>w
