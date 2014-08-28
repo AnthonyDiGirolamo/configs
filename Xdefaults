@@ -65,131 +65,96 @@ URxvt.visualBell: false
 
 *.boldFont: xft:PragmataPro:pixelsize=24:antialias=true:hintstyle=hintslight
 
-! Base16 solarized dark
-! #define base00 #002b36
-! #define base01 #073642
-! #define base02 #586e75
-! #define base03 #657b83
-! #define base04 #839496
-! #define base05 #93a1a1
-! #define base06 #eee8d5
-! #define base07 #fdf6e3
-! #define base08 #dc322f
-! #define base09 #cb4b16
-! #define base0A #b58900
-! #define base0B #859900
-! #define base0C #2aa198
-! #define base0D #268bd2
-! #define base0E #6c71c4
-! #define base0F #d33682
+! Base16 Eighties
+! Scheme: Chris Kempson (http://chriskempson.com)
+#define base00 #2d2d2d
+#define base01 #393939
+#define base02 #515151
+#define base03 #747369
+#define base04 #a09f93
+#define base05 #d3d0c8
+#define base06 #e8e6df
+#define base07 #f2f0ec
+#define base08 #f2777a
+#define base09 #f99157
+#define base0A #ffcc66
+#define base0B #99cc99
+#define base0C #66cccc
+#define base0D #6699cc
+#define base0E #cc99cc
+#define base0F #d27b53
+*.foreground:   base05
+*.background:   base00
+*.cursorColor:  base05
+*.color0:       base00
+*.color1:       base08
+*.color2:       base0B
+*.color3:       base0A
+*.color4:       base0D
+*.color5:       base0E
+*.color6:       base0C
+*.color7:       base05
+*.color8:       base03
+*.color9:       base08
+*.color10:      base0B
+*.color11:      base0A
+*.color12:      base0D
+*.color13:      base0E
+*.color14:      base0C
+*.color15:      base07
 
-! Base16 eighties dark
-! #define base00 #2d2d2d
-! #define base01 #393939
-! #define base02 #515151
-! #define base03 #747369
-! #define base04 #a09f93
-! #define base05 #d3d0c8
-! #define base06 #e8e6df
-! #define base07 #f2f0ec
-! #define base08 #f2777a
-! #define base09 #f99157
-! #define base0A #ffcc66
-! #define base0B #99cc99
-! #define base0C #66cccc
-! #define base0D #6699cc
-! #define base0E #cc99cc
-! #define base0F #d27b53
-
-! *.foreground: base05
-! *.background: base00
-! *.cursorColor: base05
-! *.cursorColor2: base05
-! *.color0: base00
-! *.color1: base08
-! *.color2: base0B
-! *.color3: base0A
-! *.color4: base0D
-! *.color5: base0E
-! *.color6: base0C
-! *.color7: base05
-! *.color8: base03
-! *.color9: base09
-! *.color10: base01
-! *.color11: base02
-! *.color12: base04
-! *.color13: base06
-! *.color14: base0F
-! *.color15: base07
-
-! Solarized color scheme for the X Window System
+!! Solarized color scheme for the X Window System
+!! http://ethanschoonover.com/solarized
+!! Common
+!#define S_yellow        #b58900
+!#define S_orange        #cb4b16
+!#define S_red           #dc322f
+!#define S_magenta       #d33682
+!#define S_violet        #6c71c4
+!#define S_blue          #268bd2
+!#define S_cyan          #2aa198
+!#define S_green         #859900
+!! Dark
+!! #define S_base03        #002b36
+!! #define S_base02        #073642
+!! #define S_base01        #586e75
+!! #define S_base00        #657b83
+!! #define S_base0         #839496
+!! #define S_base1         #93a1a1
+!! #define S_base2         #eee8d5
+!! #define S_base3         #fdf6e3
+!! Light
+!#define S_base03        #fdf6e3
+!#define S_base02        #eee8d5
+!#define S_base01        #93a1a1
+!#define S_base00        #839496
+!#define S_base0         #657b83
+!#define S_base1         #586e75
+!#define S_base2         #073642
+!#define S_base3         #002b36
 !
-! http://ethanschoonover.com/solarized
-
-
-! Common
-
-#define S_yellow        #b58900
-#define S_orange        #cb4b16
-#define S_red           #dc322f
-#define S_magenta       #d33682
-#define S_violet        #6c71c4
-#define S_blue          #268bd2
-#define S_cyan          #2aa198
-#define S_green         #859900
-
-
-! Dark
-
-#define S_base03        #002b36
-#define S_base02        #073642
-#define S_base01        #586e75
-#define S_base00        #657b83
-#define S_base0         #839496
-#define S_base1         #93a1a1
-#define S_base2         #eee8d5
-#define S_base3         #fdf6e3
-
-
-! Light
-
-! #define S_base03        #fdf6e3
-! #define S_base02        #eee8d5
-! #define S_base01        #93a1a1
-! #define S_base00        #839496
-! #define S_base0         #657b83
-! #define S_base1         #586e75
-! #define S_base2         #073642
-! #define S_base3         #002b36
-
-
-! To only apply colors to your terminal, for example, prefix
-! the color assignment statement with its name. Example:
+!*background:              S_base03
+!*foreground:              S_base0
+!*fading:                  40
+!*fadeColor:               S_base03
+!*cursorColor:             S_base1
+!*pointerColorBackground:  S_base01
+!*pointerColorForeground:  S_base1
 !
-! URxvt*background:            S_base03
-
-*background:              S_base03
-*foreground:              S_base0
-*fading:                  40
-*fadeColor:               S_base03
-*cursorColor:             S_base1
-*pointerColorBackground:  S_base01
-*pointerColorForeground:  S_base1
-
-*color0:                  S_base02
-*color1:                  S_red
-*color2:                  S_green
-*color3:                  S_yellow
-*color4:                  S_blue
-*color5:                  S_magenta
-*color6:                  S_cyan
-*color7:                  S_base2
-*color9:                  S_orange
-*color8:                  S_base03
-*color10:                 S_base01
-*color11:                 S_base00
-*color12:                 S_base0
-*color13:                 S_violet
-*color14:                 S_base1
-*color15:                 S_base3
+!*color0:                  S_base02
+!*color1:                  S_red
+!*color2:                  S_green
+!*color3:                  S_yellow
+!*color4:                  S_blue
+!*color5:                  S_magenta
+!*color6:                  S_cyan
+!*color7:                  S_base2
+!*color9:                  S_orange
+!*color8:                  S_base03
+!*color10:                 S_base01
+!*color11:                 S_base00
+!*color12:                 S_base0
+!*color13:                 S_violet
+!*color14:                 S_base1
+!*color15:                 S_base3
 

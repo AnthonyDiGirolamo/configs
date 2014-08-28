@@ -50,13 +50,13 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 " let g:airline_theme='powerlineish'
 " let g:airline_theme='dark'
 " let g:airline_theme='base16'
-let g:airline_theme='badwolf'
+" let g:airline_theme='badwolf'
 " let g:airline_theme='molokai'
 " let g:airline_theme='light'
-" let g:airline_theme='solarized'
+let g:airline_theme='solarized'
 " let g:airline_theme='simple'
 
-" set mouse=a " In many terminal emulators the mouse works just fine, thus enable it.
+set mouse=a " In many terminal emulators the mouse works just fine, thus enable it.
 
 " set foldcolumn=3
 set foldlevel=999
@@ -118,7 +118,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 " au FileType python noremap <leader>t :w\|:!py.test %<cr>
 
-au FileType python set ts=4 sw=4
+au FileType python set ts=4 sw=4 tw=0
 let g:python_highlight_all = 1
 
 let g:jedi#usages_command = ""
@@ -144,10 +144,10 @@ let g:pymode_virtualenv = 1
 "endif
 
 " set background=light
-set background=dark
-" colors solarized
+" set background=dark
+colors solarized
 " colors base16-ocean
-colors base16-eighties
+" colors base16-eighties
 " colors irblack
 " colors warm_grey
 " colors molokai
@@ -180,7 +180,9 @@ noremap <leader>s :setlocal spell! spelllang=en_us<cr>
 set nospell
 
 " Macro Keybinding
-nnoremap <leader>d f"wdi"<esc>o<esc>p==kf"dW$bido <esc>o<i class="color-icon-"></i><esc>jo<% end %><esc>
+" nnoremap <leader>d f"wdi"<esc>o<esc>p==kf"dW$bido <esc>o<i class="color-icon-"></i><esc>jo<% end %><esc>
+nnoremap <leader>d :diffput<CR>:diffupdate<CR>
+nnoremap <leader>B :TagbarToggle<CR>
 
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<cr>
