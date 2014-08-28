@@ -49,11 +49,11 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " let g:airline_theme='powerlineish'
 " let g:airline_theme='dark'
-" let g:airline_theme='base16'
+let g:airline_theme='base16'
 " let g:airline_theme='badwolf'
 " let g:airline_theme='molokai'
 " let g:airline_theme='light'
-let g:airline_theme='solarized'
+" let g:airline_theme='solarized'
 " let g:airline_theme='simple'
 
 set mouse=a " In many terminal emulators the mouse works just fine, thus enable it.
@@ -144,10 +144,11 @@ let g:pymode_virtualenv = 1
 "endif
 
 " set background=light
-" set background=dark
-colors solarized
+set background=dark
+" colors solarized
+let base16colorspace=256
 " colors base16-ocean
-" colors base16-eighties
+colors base16-default
 " colors irblack
 " colors warm_grey
 " colors molokai

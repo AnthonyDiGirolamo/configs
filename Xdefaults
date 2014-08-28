@@ -83,9 +83,14 @@ URxvt.visualBell: false
 #define base0D #6699cc
 #define base0E #cc99cc
 #define base0F #d27b53
-*.foreground:   base05
+!Dark
+*.foreground:   base04
 *.background:   base00
 *.cursorColor:  base05
+!Light
+!*.foreground:   base02
+!*.background:   base07
+!*.cursorColor:  base02
 *.color0:       base00
 *.color1:       base08
 *.color2:       base0B
@@ -102,6 +107,12 @@ URxvt.visualBell: false
 *.color13:      base0E
 *.color14:      base0C
 *.color15:      base07
+*.color16:      base09
+*.color17:      base0F
+*.color18:      base01
+*.color19:      base02
+*.color20:      base04
+*.color21:      base06
 
 !! Solarized color scheme for the X Window System
 !! http://ethanschoonover.com/solarized
