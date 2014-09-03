@@ -34,13 +34,13 @@ URxvt.borderless: false
 URxvt*dynamicColors: on
 URxvt*font: xft:PragmataPro:pixelsize=24:antialias=true:hintstyle=hintslight
 URxvt*letterSpace: -1
-URxvt.geometry: 90x30
+URxvt.geometry: 90x20
 URxvt.imLocale: en_US.UTF-8
 ! URxvt.internalBorder: 3
 URxvt.lineSpace: 0
 URxvt.loginShell: true
 URxvt.saveLines: 5000
-URxvt.scrollBar: true
+URxvt.scrollBar: false
 URxvt.scrollstyle: plain
 URxvt*termName: rxvt-unicode-256color
 URxvt.transparent: false
@@ -65,8 +65,25 @@ URxvt.visualBell: false
 
 *.boldFont: xft:PragmataPro:pixelsize=24:antialias=true:hintstyle=hintslight
 
+!! Base16 Flat
+!#define base00 #2C3E50
+!#define base01 #34495E
+!#define base02 #7F8C8D
+!#define base03 #95A5A6
+!#define base04 #BDC3C7
+!#define base05 #e0e0e0
+!#define base06 #f5f5f5
+!#define base07 #ECF0F1
+!#define base08 #E74C3C
+!#define base09 #E67E22
+!#define base0A #F1C40F
+!#define base0B #2ECC71
+!#define base0C #1ABC9C
+!#define base0D #3498DB
+!#define base0E #9B59B6
+!#define base0F #be643c
+
 ! Base16 Eighties
-! Scheme: Chris Kempson (http://chriskempson.com)
 #define base00 #2d2d2d
 #define base01 #393939
 #define base02 #515151
@@ -83,14 +100,18 @@ URxvt.visualBell: false
 #define base0D #6699cc
 #define base0E #cc99cc
 #define base0F #d27b53
-!Dark
-*.foreground:   base04
+
+! Dark
+*.foreground:   base05
 *.background:   base00
 *.cursorColor:  base05
-!Light
+*.cursorColor2:  base05
+! Light
 !*.foreground:   base02
 !*.background:   base07
 !*.cursorColor:  base02
+!*.cursorColor2:  base02
+
 *.color0:       base00
 *.color1:       base08
 *.color2:       base0B
@@ -126,23 +147,23 @@ URxvt.visualBell: false
 !#define S_cyan          #2aa198
 !#define S_green         #859900
 !! Dark
-!! #define S_base03        #002b36
-!! #define S_base02        #073642
-!! #define S_base01        #586e75
-!! #define S_base00        #657b83
-!! #define S_base0         #839496
-!! #define S_base1         #93a1a1
-!! #define S_base2         #eee8d5
-!! #define S_base3         #fdf6e3
+!#define S_base02        #073642
+!#define S_base03        #002b36
+!#define S_base01        #586e75
+!#define S_base00        #657b83
+!#define S_base0         #839496
+!#define S_base1         #93a1a1
+!#define S_base2         #eee8d5
+!#define S_base3         #fdf6e3
 !! Light
-!#define S_base03        #fdf6e3
-!#define S_base02        #eee8d5
-!#define S_base01        #93a1a1
-!#define S_base00        #839496
-!#define S_base0         #657b83
-!#define S_base1         #586e75
-!#define S_base2         #073642
-!#define S_base3         #002b36
+!!#define S_base03        #fdf6e3
+!!#define S_base02        #eee8d5
+!!#define S_base01        #93a1a1
+!!#define S_base00        #839496
+!!#define S_base0         #657b83
+!!#define S_base1         #586e75
+!!#define S_base2         #073642
+!!#define S_base3         #002b36
 !
 !*background:              S_base03
 !*foreground:              S_base0
