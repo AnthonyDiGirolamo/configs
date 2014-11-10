@@ -148,7 +148,7 @@ set background=dark
 " colors solarized
 let base16colorspace=256
 " colors base16-ocean
-colors base16-default
+colors base16-eighties
 " colors irblack
 " colors warm_grey
 " colors molokai
