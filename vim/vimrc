@@ -176,6 +176,8 @@ endif
 " ============
 let mapleader = ","
 
+noremap <leader>m :TagbarToggle<cr>
+
 setlocal spell spelllang=en_us   " set the spellcheck to english
 noremap <leader>s :setlocal spell! spelllang=en_us<cr>
 set nospell
