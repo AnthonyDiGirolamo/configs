@@ -112,3 +112,6 @@
 [submodule "base16-xresources"]
 	path = base16-xresources
 	url = https://github.com/chriskempson/base16-xresources.git
+[submodule "vim/vim/bundle/tmuxline.vim"]
+	path = vim/vim/bundle/tmuxline.vim
+	url = https://github.com/edkolev/tmuxline.vim.git
