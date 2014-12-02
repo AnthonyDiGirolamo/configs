@@ -50,6 +50,7 @@ let g:promptline_symbols = {
     \ 'vcs_branch' : ' ⭠ ',
     \ 'space'      : ' '}
 
+let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#left_sep = ' '
