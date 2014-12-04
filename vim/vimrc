@@ -406,8 +406,8 @@ noremap <leader>n :call RenameFile()<cr>
 noremap <leader>t :call RunTestFile()<cr>
 noremap <leader>T :call RunNearestTest()<cr>
 noremap <leader>a :call RunTests('')<cr>
-noremap <leader>c :w\|:!bundle exec cucumber %<cr>
-noremap <leader>w :w\|:!script/features --profile @wip<cr>
+noremap <leader>c :w\|:Dispatch bundle exec cucumber %<cr>
+" noremap <leader>w :w\|:!script/features --profile @wip<cr>
 
 function! RunTestFile(...)
   if a:0
@@ -439,23 +439,23 @@ endfunction
 function! RunTests(filename)
   " Write the file and run tests for the given filename
   :w
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   if match(a:filename, '\.feature$') != -1
     exec ":!script/features " . a:filename
   else
     if filereadable("script/test")
-      exec ":!script/test " . a:filename
+      exec ":Dispatch script/test " . a:filename
     elseif filereadable("Gemfile")
-      exec ":!bundle exec rspec --color " . a:filename
+      exec ":Dispatch bundle exec rspec --color " . a:filename
     elseif filereadable("runtests.py")
-      exec ":!py.test " . a:filename
+      exec ":Dispatch py.test " . a:filename
     else
-      exec ":!rspec --color " . a:filename
+      exec ":Dispatch rspec --color " . a:filename
     end
   end
 endfunction
