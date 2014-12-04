@@ -115,3 +115,6 @@
 [submodule "vim/vim/bundle/tmuxline.vim"]
 	path = vim/vim/bundle/tmuxline.vim
 	url = https://github.com/edkolev/tmuxline.vim.git
+[submodule "vim/vim/bundle/promptline.vim"]
+	path = vim/vim/bundle/promptline.vim
+	url = https://github.com/edkolev/promptline.vim.git

@@ -250,3 +250,5 @@ stty -ixon
 
 . ~/Preferences/base16-shell/base16-atelierdune.dark.sh
 
+. ~/.shell_prompt.sh
+
