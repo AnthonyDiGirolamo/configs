@@ -118,3 +118,9 @@
 [submodule "vim/vim/bundle/promptline.vim"]
 	path = vim/vim/bundle/promptline.vim
 	url = https://github.com/edkolev/promptline.vim.git
+[submodule "vim/vim/bundle/unite.vim"]
+	path = vim/vim/bundle/unite.vim
+	url = https://github.com/Shougo/unite.vim
+[submodule "vim/vim/bundle/vimproc.git"]
+	path = vim/vim/bundle/vimproc.git
+	url = https://github.com/Shougo/vimproc.vim

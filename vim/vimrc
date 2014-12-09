@@ -195,7 +195,17 @@ endif
 " ============
 let mapleader = ","
 
+" Unite Settings
+let g:unite_source_history_yank_enable = 1
+nnoremap <leader>y :<C-u>Unite history/yank<CR>
+nnoremap <leader>q :<C-u>Unite -start-insert file_rec/async:!<CR>
+nnoremap <leader>a :<C-u>Unite -start-insert grep:.<CR>
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#custom#profile('default', 'context', { 'start_insert': 1, 'winheight': 20, 'direction': 'botright' })
+
 noremap <leader>m :TagbarToggle<cr>
+noremap <leader>M :CtrlPBufTagAll<cr>
+noremap <leader>o :silent !ctags -R app/controllers/ app/helpers/ app/indices/ app/mailers/ app/models/ app/views/ lib/<cr>:CtrlPTag<cr>
 
 setlocal spell spelllang=en_us   " set the spellcheck to english
 noremap <leader>s :setlocal spell! spelllang=en_us<cr>
@@ -204,7 +214,6 @@ set nospell
 " Macro Keybinding
 " nnoremap <leader>d f"wdi"<esc>o<esc>p==kf"dW$bido <esc>o<i class="color-icon-"></i><esc>jo<% end %><esc>
 nnoremap <leader>d :diffput<CR>:diffupdate<CR>
-nnoremap <leader>B :TagbarToggle<CR>
 
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -252,9 +261,6 @@ inoremap jj <Esc>l
 " noremap <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
 " inoremap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
 
-" Symbol listing - requires ctags
-nnoremap  <F12> :TagbarToggle<CR>
-
 " Alt-C and V copy and paste to and from the system clipboard
 " noremap <M-c> "*y
 " noremap <M-v> "*p
@@ -297,13 +303,26 @@ inoremap <s-tab> <c-n>
 
 " Netrw settings
 " ==============
-"
+
 set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tmp/*
+" call unite#custom#source('file_rec', 'ignore_globs', split(&wildignore, ','))
+
+" let g:unite_source_rec_async_command = 'ack -f --nofilter'
+let g:unite_source_rec_async_command = 'ag --ignore-dir vendor/ruby --ignore-dir .git --ignore ''*.png'' --follow --nocolor --nogroup --hidden -g ""'
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts =
+\ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+\  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+let g:unite_source_grep_recursive_opt = ''
+
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](env.*|html|\.git|\.hg|\.svn)$',
   \ 'file': '\v\.(pyc|exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+
+let g:ctrlp_extensions = ['tag', 'buffertag'] ", 'quickfix', 'dir', 'rtscript', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
+
 let g:netrw_winsize               = 80
 "let g:netrw_liststyle             = 3
 "let g:netrw_list_hide             = '.*\.o$'
@@ -318,15 +337,6 @@ let Tlist_Use_SingleClick         = 0
 let Tlist_Sort_Type               = "name"
 let Tlist_Enable_Fold_Column      = 0
 let Tlist_File_Fold_Auto_Close    = 1
-
-" let NERDTreeMinimalUI=1
-" let NERDTreeHijackNetrw=1
-
-" Vim and Grep Helpers
-" nnoremap <leader>g :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e " . expand("<cword>") . " " <bar> cwindow<CR>
-" nnoremap <leader>G :execute " grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e \"" . expand("<cWORD>") . "\" " <bar> cwindow<CR>
-
-" cabbrev ack grep -srnw --binary-files=without-match --exclude=tags --exclude-dir=.git --exclude-dir=vendor --exclude-dir=pkg --exclude-dir=html . -e "
 
 " " NeoComplCache Settings
 " " ======================
@@ -405,7 +415,7 @@ noremap <leader>n :call RenameFile()<cr>
 " =============
 noremap <leader>t :call RunTestFile()<cr>
 noremap <leader>T :call RunNearestTest()<cr>
-noremap <leader>a :call RunTests('')<cr>
+noremap <leader>r :call RunTests('')<cr>
 noremap <leader>c :w\|:Dispatch bundle exec cucumber %<cr>
 " noremap <leader>w :w\|:!script/features --profile @wip<cr>
 
@@ -455,14 +465,13 @@ function! RunTests(filename)
     elseif filereadable("runtests.py")
       exec ":Dispatch py.test " . a:filename
     else
-      exec ":Dispatch rspec --color " . a:filename
+      exec ":Dispatch bundle exec rspec --color " . a:filename
     end
   end
 endfunction
 
-vnoremap <silent> <leader>p :!python -c 'import sys, pprint; pp = pprint.PrettyPrinter(indent=4, width=80).pprint; exec sys.stdin.read()'<cr>
-
-vnoremap <silent> <leader>r :!ruby -e 'require "pp"; eval(STDIN.read())'<cr>
+vnoremap <silent> <leader>P :!python -c 'import sys, pprint; pp = pprint.PrettyPrinter(indent=4, width=80).pprint; exec sys.stdin.read()'<cr>
+vnoremap <silent> <leader>R :!ruby -e 'require "pp"; pp(eval(STDIN.read()))'<cr>
 
 vmap <Enter> <Plug>(EasyAlign)
 let g:easy_align_bypass_fold = 1
