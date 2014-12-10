@@ -127,3 +127,6 @@
 [submodule "vim/vim/bundle/greplace.vim.git"]
 	path = vim/vim/bundle/greplace.vim.git
 	url = https://github.com/skwp/greplace.vim.git
+[submodule "vim/vim/bundle/jedi-vim.git"]
+	path = vim/vim/bundle/jedi-vim.git
+	url = https://github.com/davidhalter/jedi-vim.git

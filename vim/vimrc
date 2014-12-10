@@ -33,44 +33,6 @@ set shortmess=at
 
 filetype plugin indent on
 
-" Airline Settings
-" ----------------
-
-let g:airline_theme='murmur'
-
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-
-let g:airline_symbols = {}
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
-
-let g:tmuxline_separators = {
-    \ 'left' : '⮀',
-    \ 'left_alt': '⮁',
-    \ 'right' : '⮂',
-    \ 'right_alt' : '⮃',
-    \ 'space' : ' '}
-
-let g:promptline_symbols = {
-    \ 'left'       : '⮀',
-    \ 'left_alt'   : '⮁',
-    \ 'right' : '⮂',
-    \ 'right_alt' : '⮃',
-    \ 'dir_sep'    : '/',
-    \ 'truncation' : '...',
-    \ 'vcs_branch' : ' ⭠ ',
-    \ 'space'      : ' '}
-
-let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
-
 set mouse=a " In many terminal emulators the mouse works just fine, thus enable it.
 
 " set foldcolumn=3
@@ -90,7 +52,6 @@ set thesaurus+=~/.vim/mthesaur-vim.txt " Thesaurus
 " This will consider spaces and -'s as part of words in the thesaurus file
 " Really messes up syntax highlighting though, must be a better way
 " set iskeyword+=32,-
-
 
 " Autocommands
 " ============
@@ -149,96 +110,49 @@ let g:pymode_lint_signs = 0
 let g:pymode_motion = 0
 let g:pymode_virtualenv = 1
 
-
 " Color options
 " =============
-set t_Co=256 " set 256 color terminal
 
+set t_Co=256 " set 256 color terminal
 " set background=light
 set background=dark
 " colors solarized
 let base16colorspace=256
 colors base16-eighties
-" colors irblack
-" colors warm_grey
-" colors molokai
-" colors fine_blue
-" colors mac_classic
 
-" GUI vim (gvim) settings
-" =======================
+" Gvim settings
+" =============
+
 if has("gui_running")
   if has("gui_gtk2")
-    " set guifont=Anonymous\ Pro\ for\ PowerLine\ 14
     set guifont=PragmataPro\ 26
   elseif has("gui_macvim")
-    " set guifont=Anonymous\ Pro\ for\ PowerLine:h27
-    " set guifont=LettrGoth12\ BT:h23
     set guifont=PragmataPro:h26
   endif
-  set guioptions=agm
-  "set guioptions=aegimtT
+  set guioptions=agm " aegimtT
   set visualbell
   set vb t_vb=
 endif
 
 " Key Mappings
 " ============
+
 let mapleader = ","
 nnoremap <c-s> :w<cr>
 inoremap <c-s> <esc>:w<cr>
-
-let common_ag_options =
-  \ ' --ignore-dir ''vendor/ruby''' .
-  \ ' --ignore-dir ''log''' .
-  \ ' --ignore-dir ''.hg''' .
-  \ ' --ignore-dir ''.svn''' .
-  \ ' --ignore-dir ''.git''' .
-  \ ' --ignore-dir ''.bzr''' .
-  \ ' --ignore ''*.eot''' .
-  \ ' --ignore ''*.woff''' .
-  \ ' --ignore ''*.ttf''' .
-  \ ' --ignore ''*.svg''' .
-  \ ' --ignore ''*.gif''' .
-  \ ' --ignore ''*.png''' .
-  \ ' --ignore ''*.jpg''' .
-  \ ' --ignore ''tags''' .
-  \ ' '
-
-" Greplace Settings
-" =================
-set grepprg=ag
-let g:grep_cmd_opts = '-i --line-numbers --noheading --nocolor --nogroup --hidden ' . common_ag_options
-
-" Unite Settings
-" ==============
-let g:unite_source_history_yank_enable = 1
 
 nnoremap <leader>y :<C-u>Unite history/yank<CR>
 nnoremap <leader>q :<C-u>Unite -start-insert file_rec/async:!<CR>
 nnoremap <leader>a :<C-u>Unite -start-insert grep:.<CR>
 
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#profile('default', 'context', { 'start_insert': 1, 'winheight': 20, 'direction': 'botright' })
+noremap <leader>m :TagbarToggle<cr>
 
-let g:unite_source_rec_async_command  = 'ag ' . common_ag_options . ' --follow --nocolor --nogroup --hidden -g ""'
-let g:unite_source_grep_command       = 'ag'
-let g:unite_source_grep_default_opts  = '-i --line-numbers --nocolor --nogroup --hidden ' . common_ag_options
-let g:unite_source_grep_recursive_opt = ''
-
-" CtrlP Settings
-" ==============
 noremap <leader>M :CtrlPBufTagAll<cr>
 noremap <leader>o :silent !ctags -R app/controllers/ app/helpers/ app/indices/ app/mailers/ app/models/ app/views/ lib/<cr>:CtrlPTag<cr>
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](env.*|html|\.git|\.hg|\.svn)$',
-  \ 'file': '\v\.(pyc|exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-let g:ctrlp_extensions = ['tag', 'buffertag'] ", 'quickfix', 'dir', 'rtscript', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
+vmap <Enter> <Plug>(EasyAlign)
 
-noremap <leader>m :TagbarToggle<cr>
+noremap <leader>G :Gstatus<cr>
+noremap <leader>D :Gdiff<cr>
 
 setlocal spell spelllang=en_us   " set the spellcheck to english
 noremap <leader>s :setlocal spell! spelllang=en_us<cr>
@@ -252,9 +166,6 @@ nnoremap <leader>v :tabedit $MYVIMRC<CR>
 " nnoremap <leader>sv :source $MYVIMRC<cr>
 
 noremap <leader>p :set paste!<cr>
-
-noremap <leader>G :Gstatus<cr>
-noremap <leader>D :Gdiff<cr>
 
 " Allow access to the gvim Menu by hitting F4 in vim
 " source $VIMRUNTIME/menu.vim
@@ -316,10 +227,102 @@ vmap <C-j> ]egv
 vnoremap <silent> <leader>P :!python -c 'import sys, pprint; pp = pprint.PrettyPrinter(indent=4, width=80).pprint; exec sys.stdin.read()'<cr>
 vnoremap <silent> <leader>R :!ruby -e 'require "pp"; pp(eval(STDIN.read()))'<cr>
 
-vmap <Enter> <Plug>(EasyAlign)
+" Plugin Settings
+" ===============
+
+" Airline Settings
+" ================
+
+let g:airline_theme='murmur'
+
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+let g:airline_symbols = {}
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
+
+let g:tmuxline_separators = {
+    \ 'left' : '⮀',
+    \ 'left_alt': '⮁',
+    \ 'right' : '⮂',
+    \ 'right_alt' : '⮃',
+    \ 'space' : ' '}
+
+let g:promptline_symbols = {
+    \ 'left'       : '⮀',
+    \ 'left_alt'   : '⮁',
+    \ 'right' : '⮂',
+    \ 'right_alt' : '⮃',
+    \ 'dir_sep'    : '/',
+    \ 'truncation' : '...',
+    \ 'vcs_branch' : ' ⭠ ',
+    \ 'space'      : ' '}
+
+let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
+
+
 let g:easy_align_bypass_fold = 1
 
-" MULTIPURPOSE TAB KEY
+let common_ag_options =
+  \ ' --follow' .
+  \ ' --nocolor' .
+  \ ' --nogroup' .
+  \ ' --hidden' .
+  \ ' --ignore-dir ''vendor/ruby''' .
+  \ ' --ignore-dir ''log''' .
+  \ ' --ignore-dir ''.hg''' .
+  \ ' --ignore-dir ''.svn''' .
+  \ ' --ignore-dir ''.git''' .
+  \ ' --ignore-dir ''.bzr''' .
+  \ ' --ignore ''*.eot''' .
+  \ ' --ignore ''*.woff''' .
+  \ ' --ignore ''*.ttf''' .
+  \ ' --ignore ''*.svg''' .
+  \ ' --ignore ''*.gif''' .
+  \ ' --ignore ''*.png''' .
+  \ ' --ignore ''*.jpg''' .
+  \ ' --ignore ''tags''' .
+  \ ' '
+
+" Greplace Settings
+" =================
+
+set grepprg=ag
+let g:grep_cmd_opts = '-i --line-numbers --noheading ' . common_ag_options
+
+" Unite Settings
+" ==============
+
+let g:unite_source_history_yank_enable = 1
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#custom#profile('default', 'context', { 'start_insert': 1, 'winheight': 20, 'direction': 'botright' })
+
+let g:unite_source_rec_async_command  = 'ag ' . common_ag_options . ' -g ""'
+let g:unite_source_grep_command       = 'ag'
+let g:unite_source_grep_default_opts  = '--ignore-case --line-numbers ' . common_ag_options
+let g:unite_source_grep_recursive_opt = ''
+
+" CtrlP Settings
+" ==============
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](env.*|html|\.git|\.hg|\.svn)$',
+  \ 'file': '\v\.(pyc|exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+let g:ctrlp_extensions = ['tag', 'buffertag'] ", 'quickfix', 'dir', 'rtscript', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
+
+" Multipurpose Tab Key
 " Indent if we're at the beginning of a line. Else, do completion.
 " ================================================================
 function! InsertTabWrapper()
@@ -361,7 +364,7 @@ let Tlist_File_Fold_Auto_Close    = 1
 "   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 " endfunc
 
-" RENAME CURRENT FILE
+" Rename current file
 " ===================
 function! RenameFile()
   let old_name = expand('%')
@@ -374,7 +377,7 @@ function! RenameFile()
 endfunction
 noremap <leader>n :call RenameFile()<cr>
 
-" RUNNING TESTS
+" Running tests
 " =============
 noremap <leader>tt :call RunTestFile()<cr>
 noremap <leader>tn :call RunNearestTest()<cr>
