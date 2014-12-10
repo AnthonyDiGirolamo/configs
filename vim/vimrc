@@ -308,7 +308,7 @@ set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tm
 " call unite#custom#source('file_rec', 'ignore_globs', split(&wildignore, ','))
 
 " let g:unite_source_rec_async_command = 'ack -f --nofilter'
-let g:unite_source_rec_async_command = 'ag --ignore-dir vendor/ruby --ignore-dir .git --ignore ''*.png'' --follow --nocolor --nogroup --hidden -g ""'
+let g:unite_source_rec_async_command = 'ag --ignore-dir vendor/ruby --ignore-dir .git --ignore ''*.eot'' --ignore ''*.woff'' --ignore ''*.ttf'' --ignore ''*.svg'' --ignore ''*.gif'' --ignore ''*.png'' --ignore ''*.jpg'' --follow --nocolor --nogroup --hidden -g ""'
 let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_default_opts =
 \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
