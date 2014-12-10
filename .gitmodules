@@ -43,9 +43,6 @@
 [submodule "vim/vim/bundle/todo.txt"]
 	path = vim/vim/bundle/todo.txt
 	url = https://github.com/AnthonyDiGirolamo/todo.txt-vim.git
-[submodule "vim/vim/bundle/neocomplcache.git"]
-	path = vim/vim/bundle/neocomplcache.git
-	url = https://github.com/Shougo/neocomplcache.git
 [submodule "vim/vim/bundle/vim-ragtag.git"]
 	path = vim/vim/bundle/vim-ragtag.git
 	url = https://github.com/tpope/vim-ragtag.git

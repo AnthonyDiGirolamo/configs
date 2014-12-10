@@ -242,9 +242,6 @@ vnoremap > >gv
 command! W :w
 command! Q :q
 
-" MacVim is flaky with c-x c-*, set c-o to omnicomplete
-" inoremap <C-O> <C-X><C-O>
-
 " Insert a hash rocket with <c-l>
 inoremap <c-l> <space>=><space>
 
@@ -295,17 +292,7 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
-" Plugin Options
-" ==============
-"
-" Use :C to run some ruby code
-" :command! -nargs=+ C :ruby puts <args>
-
-" Netrw settings
-" ==============
-
 set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tmp/*
-" call unite#custom#source('file_rec', 'ignore_globs', split(&wildignore, ','))
 
 " let g:unite_source_rec_async_command = 'ack -f --nofilter'
 let g:unite_source_rec_async_command = 'ag --ignore-dir vendor/ruby --ignore-dir .git --ignore ''*.eot'' --ignore ''*.woff'' --ignore ''*.ttf'' --ignore ''*.svg'' --ignore ''*.gif'' --ignore ''*.png'' --ignore ''*.jpg'' --follow --nocolor --nogroup --hidden -g ""'
@@ -323,6 +310,8 @@ let g:ctrlp_custom_ignore = {
 
 let g:ctrlp_extensions = ['tag', 'buffertag'] ", 'quickfix', 'dir', 'rtscript', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 
+" Netrw settings
+" ==============
 let g:netrw_winsize               = 80
 "let g:netrw_liststyle             = 3
 "let g:netrw_list_hide             = '.*\.o$'
@@ -338,47 +327,7 @@ let Tlist_Sort_Type               = "name"
 let Tlist_Enable_Fold_Column      = 0
 let Tlist_File_Fold_Auto_Close    = 1
 
-" " NeoComplCache Settings
-" " ======================
-" " neocomplcache
-" " A beter autocomplete system!
-" let g:neocomplcache_enable_at_startup = 0
-" let g:neocomplcache_enable_camel_case_completion = 1
-" let g:neocomplcache_enable_underbar_completion = 1
-" let g:neocomplcache_enable_smart_case = 1
-" " default # of completions is 100, that's crazy
-" let g:neocomplcache_max_list = 5
-" " words less than 3 letters long aren't worth completing
-" let g:neocomplcache_auto_completion_start_length = 3
-" " Map standard Ctrl-N completion to Cmd-Space
-" inoremap <D-Space> <C-n>
-" " This makes sure we use neocomplcache completefunc instead of
-" " the one in rails.vim, otherwise this plugin will crap out
-" let g:neocomplcache_force_overwrite_completefunc = 1
-" " Define keyword.
-" if !exists('g:neocomplcache_keyword_patterns')
-"   let g:neocomplcache_keyword_patterns = {}
-" endif
-" let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-" " Enable omni completion.
-" autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
-" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType python        setlocal omnifunc=pythoncomplete#Complete
-" autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
-" autocmd FileType ruby          setlocal omnifunc=rubycomplete#Complete
-" " Enable heavy omni completion.
-" if !exists('g:neocomplcache_omni_patterns')
-"   let g:neocomplcache_omni_patterns = {}
-" endif
-" let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-" " Prevent hanging with python: https://github.com/skwp/dotfiles/issues/163
-" let g:neocomplcache_omni_patterns['python'] = ''
-
-" Custom Functions
-" ================
-"
-" Color Scheme Helpers
+" Color Scheme Helper
 " Show syntax highlighting groups for word under cursor
 " nnoremap <leader>b :call <SID>SynStack()<CR>
 " function! <SID>SynStack()
@@ -387,16 +336,6 @@ let Tlist_File_Fold_Auto_Close    = 1
 "   endif
 "   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 " endfunc
-
-" function! DokuLink()
-"   let @l = 'BysW]ysW]EbbywPa|$'
-" endfunction
-" function! AlignDokuTable()
-"   let @p = '{V}:s/\v\^|\| | \|/COL/g{V}:Align COLjV:s/COL/^/gjV}:s/COL/|/g{V}<'
-" endfunction
-
-" noremap <leader>k :call AlignDokuTable()<CR>@p
-" noremap <leader>l :call DokuLink()<CR>@l
 
 " RENAME CURRENT FILE
 " ===================
