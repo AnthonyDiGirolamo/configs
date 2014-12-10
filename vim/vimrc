@@ -3,7 +3,7 @@
 set nocompatible
 
 filetype off
-call pathogen#incubate() " Load Pathogen
+call pathogen#incubate()       " Load Pathogen
 
 runtime macros/matchit.vim     " Load the matchit plugin.
 set shell=sh
@@ -33,6 +33,25 @@ set shortmess=at
 
 filetype plugin indent on
 
+" Airline Settings
+" ----------------
+
+let g:airline_theme='murmur'
+
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+let g:airline_symbols = {}
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
+
 let g:tmuxline_separators = {
     \ 'left' : '⮀',
     \ 'left_alt': '⮁',
@@ -51,29 +70,6 @@ let g:promptline_symbols = {
     \ 'space'      : ' '}
 
 let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-
-let g:airline_symbols = {}
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
-
-" let g:airline_theme='powerlineish'
-" let g:airline_theme='dark'
-" let g:airline_theme='base16'
-" let g:airline_theme='badwolf'
-" let g:airline_theme='molokai'
-" let g:airline_theme='light'
-let g:airline_theme='murmur'
-" let g:airline_theme='solarized'
-" let g:airline_theme='simple'
 
 set mouse=a " In many terminal emulators the mouse works just fine, thus enable it.
 
@@ -156,17 +152,12 @@ let g:pymode_virtualenv = 1
 
 " Color options
 " =============
-"
-"if $TERM == 'xterm-256color'
-  set t_Co=256 " set 256 color terminal
-  "let g:solarized_termcolors=256
-"endif
+set t_Co=256 " set 256 color terminal
 
 " set background=light
 set background=dark
 " colors solarized
 let base16colorspace=256
-" colors base16-ocean
 colors base16-eighties
 " colors irblack
 " colors warm_grey
@@ -196,16 +187,33 @@ endif
 let mapleader = ","
 
 " Unite Settings
+" ==============
 let g:unite_source_history_yank_enable = 1
 nnoremap <leader>y :<C-u>Unite history/yank<CR>
 nnoremap <leader>q :<C-u>Unite -start-insert file_rec/async:!<CR>
 nnoremap <leader>a :<C-u>Unite -start-insert grep:.<CR>
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#custom#profile('default', 'context', { 'start_insert': 1, 'winheight': 20, 'direction': 'botright' })
+" let g:unite_source_rec_async_command = 'ack -f --nofilter'
+let g:unite_source_rec_async_command = 'ag --ignore-dir vendor/ruby --ignore-dir .git --ignore ''*.eot'' --ignore ''*.woff'' --ignore ''*.ttf'' --ignore ''*.svg'' --ignore ''*.gif'' --ignore ''*.png'' --ignore ''*.jpg'' --follow --nocolor --nogroup --hidden -g ""'
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts =
+\ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+\  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+let g:unite_source_grep_recursive_opt = ''
 
-noremap <leader>m :TagbarToggle<cr>
+" CtrlP Settings
+" ==============
 noremap <leader>M :CtrlPBufTagAll<cr>
 noremap <leader>o :silent !ctags -R app/controllers/ app/helpers/ app/indices/ app/mailers/ app/models/ app/views/ lib/<cr>:CtrlPTag<cr>
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](env.*|html|\.git|\.hg|\.svn)$',
+  \ 'file': '\v\.(pyc|exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+let g:ctrlp_extensions = ['tag', 'buffertag'] ", 'quickfix', 'dir', 'rtscript', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
+
+noremap <leader>m :TagbarToggle<cr>
 
 setlocal spell spelllang=en_us   " set the spellcheck to english
 noremap <leader>s :setlocal spell! spelllang=en_us<cr>
@@ -278,6 +286,13 @@ nmap <C-j> ]e
 vmap <C-k> [egv
 vmap <C-j> ]egv
 
+" Python and Ruby Evals
+vnoremap <silent> <leader>P :!python -c 'import sys, pprint; pp = pprint.PrettyPrinter(indent=4, width=80).pprint; exec sys.stdin.read()'<cr>
+vnoremap <silent> <leader>R :!ruby -e 'require "pp"; pp(eval(STDIN.read()))'<cr>
+
+vmap <Enter> <Plug>(EasyAlign)
+let g:easy_align_bypass_fold = 1
+
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
 " ================================================================
@@ -292,26 +307,9 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
-set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tmp/*
-
-" let g:unite_source_rec_async_command = 'ack -f --nofilter'
-let g:unite_source_rec_async_command = 'ag --ignore-dir vendor/ruby --ignore-dir .git --ignore ''*.eot'' --ignore ''*.woff'' --ignore ''*.ttf'' --ignore ''*.svg'' --ignore ''*.gif'' --ignore ''*.png'' --ignore ''*.jpg'' --follow --nocolor --nogroup --hidden -g ""'
-let g:unite_source_grep_command = 'ag'
-let g:unite_source_grep_default_opts =
-\ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-\  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-let g:unite_source_grep_recursive_opt = ''
-
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](env.*|html|\.git|\.hg|\.svn)$',
-  \ 'file': '\v\.(pyc|exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-
-let g:ctrlp_extensions = ['tag', 'buffertag'] ", 'quickfix', 'dir', 'rtscript', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
-
-" Netrw settings
+" Netrw Settings
 " ==============
+set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tmp/*
 let g:netrw_winsize               = 80
 "let g:netrw_liststyle             = 3
 "let g:netrw_list_hide             = '.*\.o$'
@@ -352,11 +350,10 @@ noremap <leader>n :call RenameFile()<cr>
 
 " RUNNING TESTS
 " =============
-noremap <leader>t :call RunTestFile()<cr>
-noremap <leader>T :call RunNearestTest()<cr>
-noremap <leader>r :call RunTests('')<cr>
-noremap <leader>c :w\|:Dispatch bundle exec cucumber %<cr>
-" noremap <leader>w :w\|:!script/features --profile @wip<cr>
+noremap <leader>tt :call RunTestFile()<cr>
+noremap <leader>tn :call RunNearestTest()<cr>
+noremap <leader>tr :call RunTests('')<cr>
+noremap <leader>tc :w\|:Dispatch bundle exec cucumber<cr>
 
 function! RunTestFile(...)
   if a:0
@@ -388,30 +385,17 @@ endfunction
 function! RunTests(filename)
   " Write the file and run tests for the given filename
   :w
-  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   if match(a:filename, '\.feature$') != -1
-    exec ":!script/features " . a:filename
+    exec ":Dispatch bundle exec cucumber " . a:filename
   else
-    if filereadable("script/test")
-      exec ":Dispatch script/test " . a:filename
-    elseif filereadable("Gemfile")
+    if filereadable("Gemfile")
       exec ":Dispatch bundle exec rspec --color " . a:filename
     elseif filereadable("runtests.py")
       exec ":Dispatch py.test " . a:filename
-    else
-      exec ":Dispatch bundle exec rspec --color " . a:filename
+    elseif filereadable("script/test")
+      exec ":Dispatch script/test " . a:filename
     end
   end
 endfunction
-
-vnoremap <silent> <leader>P :!python -c 'import sys, pprint; pp = pprint.PrettyPrinter(indent=4, width=80).pprint; exec sys.stdin.read()'<cr>
-vnoremap <silent> <leader>R :!ruby -e 'require "pp"; pp(eval(STDIN.read()))'<cr>
-
-vmap <Enter> <Plug>(EasyAlign)
-let g:easy_align_bypass_fold = 1
 
