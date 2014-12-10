@@ -52,9 +52,6 @@
 [submodule "vim/vim/bundle/vim-endwise.git"]
 	path = vim/vim/bundle/vim-endwise.git
 	url = https://github.com/tpope/vim-endwise.git
-[submodule "vim/vim/bundle/ack.vim.git"]
-	path = vim/vim/bundle/ack.vim.git
-	url = https://github.com/mileszs/ack.vim.git
 [submodule "bin/els"]
 	path = bin/els
 	url = https://github.com/AnthonyDiGirolamo/els.git
@@ -82,9 +79,6 @@
 [submodule "vim/vim/bundle/vim-easy-align.git"]
 	path = vim/vim/bundle/vim-easy-align.git
 	url = https://github.com/junegunn/vim-easy-align.git
-[submodule "vim/vim/bundle/ack.git"]
-	path = vim/vim/bundle/ack.git
-	url = https://github.com/mileszs/ack.vim.git
 [submodule "vim/vim/bundle/vim-airline.git"]
 	path = vim/vim/bundle/vim-airline.git
 	url = https://github.com/bling/vim-airline.git
@@ -124,3 +118,9 @@
 [submodule "vim/vim/bundle/vimproc.git"]
 	path = vim/vim/bundle/vimproc.git
 	url = https://github.com/Shougo/vimproc.vim
+[submodule "vim/vim/bundle/vim-bundler.git"]
+	path = vim/vim/bundle/vim-bundler.git
+	url = https://github.com/tpope/vim-bundler.git
+[submodule "vim/vim/bundle/vim-rake.git"]
+	path = vim/vim/bundle/vim-rake.git
+	url = https://github.com/tpope/vim-rake.git
