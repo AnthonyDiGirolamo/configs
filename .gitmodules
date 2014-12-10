@@ -124,3 +124,6 @@
 [submodule "vim/vim/bundle/vim-gitgutter.git"]
 	path = vim/vim/bundle/vim-gitgutter.git
 	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "vim/vim/bundle/greplace.vim.git"]
+	path = vim/vim/bundle/greplace.vim.git
+	url = https://github.com/skwp/greplace.vim.git

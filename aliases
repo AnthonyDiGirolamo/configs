@@ -248,7 +248,7 @@ fi
 
 stty -ixon
 
-. ~/Preferences/base16-shell/base16-atelierdune.dark.sh
+. ~/Preferences/base16-shell/base16-twilight.dark.sh
 
 . ~/.shell_prompt.sh
 

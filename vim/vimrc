@@ -19,7 +19,7 @@ set laststatus=2               " always show the editing status bar at the botto
 set showcmd                    " display incomplete commands
 set incsearch                  " do incremental searching
 set autoindent
-set nonumber                     " line numbering
+set number                     " line numbering
 set tabstop=2                  " set tabs to 2 spaces
 set shiftwidth=2
 set expandtab
@@ -185,21 +185,46 @@ endif
 " Key Mappings
 " ============
 let mapleader = ","
+nnoremap <c-s> :w<cr>
+inoremap <c-s> <esc>:w<cr>
+
+let common_ag_options =
+  \ ' --ignore-dir ''vendor/ruby''' .
+  \ ' --ignore-dir ''log''' .
+  \ ' --ignore-dir ''.hg''' .
+  \ ' --ignore-dir ''.svn''' .
+  \ ' --ignore-dir ''.git''' .
+  \ ' --ignore-dir ''.bzr''' .
+  \ ' --ignore ''*.eot''' .
+  \ ' --ignore ''*.woff''' .
+  \ ' --ignore ''*.ttf''' .
+  \ ' --ignore ''*.svg''' .
+  \ ' --ignore ''*.gif''' .
+  \ ' --ignore ''*.png''' .
+  \ ' --ignore ''*.jpg''' .
+  \ ' --ignore ''tags''' .
+  \ ' '
+
+" Greplace Settings
+" =================
+set grepprg=ag
+let g:grep_cmd_opts = '-i --line-numbers --noheading --nocolor --nogroup --hidden ' . common_ag_options
 
 " Unite Settings
 " ==============
 let g:unite_source_history_yank_enable = 1
+
 nnoremap <leader>y :<C-u>Unite history/yank<CR>
 nnoremap <leader>q :<C-u>Unite -start-insert file_rec/async:!<CR>
 nnoremap <leader>a :<C-u>Unite -start-insert grep:.<CR>
+
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#profile('default', 'context', { 'start_insert': 1, 'winheight': 20, 'direction': 'botright' })
-" let g:unite_source_rec_async_command = 'ack -f --nofilter'
-let g:unite_source_rec_async_command = 'ag --ignore-dir vendor/ruby --ignore-dir .git --ignore ''*.eot'' --ignore ''*.woff'' --ignore ''*.ttf'' --ignore ''*.svg'' --ignore ''*.gif'' --ignore ''*.png'' --ignore ''*.jpg'' --follow --nocolor --nogroup --hidden -g ""'
-let g:unite_source_grep_command = 'ag'
-let g:unite_source_grep_default_opts =
-\ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-\  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+
+let g:unite_source_rec_async_command  = 'ag ' . common_ag_options . ' --follow --nocolor --nogroup --hidden -g ""'
+let g:unite_source_grep_command       = 'ag'
+let g:unite_source_grep_default_opts  = '-i --line-numbers --nocolor --nogroup --hidden ' . common_ag_options
 let g:unite_source_grep_recursive_opt = ''
 
 " CtrlP Settings
@@ -224,7 +249,7 @@ set nospell
 nnoremap <leader>d :diffput<CR>:diffupdate<CR>
 
 nnoremap <leader>v :tabedit $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<cr>
+" nnoremap <leader>sv :source $MYVIMRC<cr>
 
 noremap <leader>p :set paste!<cr>
 
@@ -282,6 +307,7 @@ nnoremap <leader>k :set nonumber<cr><c-w>30\|<c-w><c-w>:set number<cr>
 " Bubble single lines
 nmap <C-k> [e
 nmap <C-j> ]e
+
 " " Bubble multiple lines
 vmap <C-k> [egv
 vmap <C-j> ]egv
