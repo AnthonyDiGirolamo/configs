@@ -136,6 +136,3 @@
 [submodule "vim/vim/bundle/vim-sparkup.git"]
 	path = vim/vim/bundle/vim-sparkup.git
 	url = https://github.com/tristen/vim-sparkup.git
-[submodule "vim/vim/bundle/vim-multiple-cursors.git"]
-	path = vim/vim/bundle/vim-multiple-cursors.git
-	url = https://github.com/terryma/vim-multiple-cursors.git
