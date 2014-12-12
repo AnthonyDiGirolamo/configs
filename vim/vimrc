@@ -100,16 +100,6 @@ let g:python_highlight_all = 1
 let g:jedi#usages_command = ""
 let g:jedi#rename_command = ""
 
-" python-mode
-let g:pymode_lint = 0
-let g:pymode_lint_checker = "pyflakes,pep8,mccabe"
-let g:pymode_lint_write = 0
-let g:pymode_lint_ignore = "E221,E201,E202"
-
-let g:pymode_lint_signs = 0
-let g:pymode_motion = 0
-let g:pymode_virtualenv = 1
-
 " Color options
 " =============
 
@@ -162,8 +152,7 @@ set nospell
 " nnoremap <leader>d f"wdi"<esc>o<esc>p==kf"dW$bido <esc>o<i class="color-icon-"></i><esc>jo<% end %><esc>
 nnoremap <leader>d :diffput<CR>:diffupdate<CR>
 
-nnoremap <leader>v :tabedit $MYVIMRC<CR>
-" nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>v :sp $MYVIMRC<CR><c-w>_
 
 noremap <leader>p :set paste!<cr>
 
@@ -186,17 +175,10 @@ vnoremap > >gv
 command! W :w
 command! Q :q
 
-" Insert a hash rocket with <c-l>
-inoremap <c-l> <space>=><space>
-
-" Can't be bothered to understand ESC vs <c-c> in insert mode
 inoremap <c-c> <esc>
 
 " Remap Esc
 inoremap jj <Esc>l
-
-" pressing space twice will move to the next split
-" noremap <space><space> <c-W>w
 
 " F10 to make and view a latex pdf
 " noremap <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
@@ -209,11 +191,9 @@ inoremap jj <Esc>l
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
 
-nmap <leader>; :tabe<CR><C-P>
-nmap <leader>l :vs<CR><C-P>
-" nnoremap <leader>l <cr><c-w>50\|<c-w><c-w>
-" nnoremap <leader>k :set foldcolumn=0\|:set nonumber<cr><c-w>50\|<c-w><c-w>:set foldcolumn=3\|:set number<cr>
-nnoremap <leader>k :set nonumber<cr><c-w>30\|<c-w><c-w>:set number<cr>
+nnoremap <leader>l :set nonumber nowrap\|vertical resize 30<cr><c-w><c-w>:set number wrap<cr>
+nnoremap <leader>k :resize 6<cr><c-w><c-w>
+nnoremap <leader>K <c-w><c-w><c-w>_
 
 " Bubble single lines
 nmap <C-k> [e
@@ -229,6 +209,11 @@ vnoremap <silent> <leader>R :!ruby -e 'require "pp"; pp(eval(STDIN.read()))'<cr>
 
 " Plugin Settings
 " ===============
+
+" Syntastic
+" =========
+
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 
 " Airline Settings
 " ================

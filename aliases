@@ -220,8 +220,10 @@ else
 fi
 
 alias vims="vim -c 'colors solarized'"
+alias v=vim
 alias emacs='TERM=xterm-256color emacs'
-alias em='TERM=xterm-256color emacs'
+alias em=emacs
+alias e=emacs
 export VISUAL='vim'
 
 

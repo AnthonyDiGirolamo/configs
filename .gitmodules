@@ -61,9 +61,6 @@
 [submodule "vim/vim/bundle/base16-vim.git"]
 	path = vim/vim/bundle/base16-vim.git
 	url = https://github.com/chriskempson/base16-vim.git
-[submodule "vim/vim/bundle/emmet-vim.git"]
-	path = vim/vim/bundle/emmet-vim.git
-	url = https://github.com/mattn/emmet-vim.git
 [submodule "emacs/emacs.d/evil"]
 	path = emacs/emacs.d/evil
 	url = https://git.gitorious.org/evil/evil.git
@@ -130,3 +127,12 @@
 [submodule "vim/vim/bundle/jedi-vim.git"]
 	path = vim/vim/bundle/jedi-vim.git
 	url = https://github.com/davidhalter/jedi-vim.git
+[submodule "vim/vim/bundle/syntastic.git"]
+	path = vim/vim/bundle/syntastic.git
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "vim/vim/bundle/vim-sleuth.git"]
+	path = vim/vim/bundle/vim-sleuth.git
+	url = https://github.com/tpope/vim-sleuth.git
+[submodule "vim/vim/bundle/vim-sparkup.git"]
+	path = vim/vim/bundle/vim-sparkup.git
+	url = https://github.com/tristen/vim-sparkup.git
