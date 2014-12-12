@@ -20,8 +20,7 @@ set showcmd                    " display incomplete commands
 set incsearch                  " do incremental searching
 set autoindent
 set number                     " line numbering
-set tabstop=2                  " set tabs to 2 spaces
-set shiftwidth=2
+" set tabstop=2 shiftwidth=2   " not needed with vim-sleuth
 set expandtab
 set linebreak                  " wrap on words rather than characters
 set textwidth=80               " insert EOL after 75 columns
@@ -33,7 +32,7 @@ set shortmess=at
 
 filetype plugin indent on
 
-set mouse=a " In many terminal emulators the mouse works just fine, thus enable it.
+set mouse=a " Enable the mouse
 
 " set foldcolumn=3
 set foldlevel=999
@@ -57,28 +56,23 @@ set thesaurus+=~/.vim/mthesaur-vim.txt " Thesaurus
 " ============
 
 " Jump to last position in a file
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 " Clear trailing whitespace before a save
 autocmd BufWritePre * :%s/\s\+$//e | retab
 
-" Set filetype options based on extensions
 augroup arduino
-au BufNewFile,BufRead *.ino set ft=cpp syntax=cpp shiftwidth=2 tabstop=2
-augroup END
-
-augroup markdown
-au BufNewFile,BufRead *.mkd set ft=markdown.liquid syntax=markdown.liquid shiftwidth=3 tabstop=3
+autocmd BufNewFile,BufRead *.ino set ft=cpp syntax=cpp
 augroup END
 
 augroup htmlerb
-au BufNewFile,BufRead *.html set ft=html.liquid syntax=liquid
-au BufNewFile,BufRead *.erb set ft=html.eruby.eruby-rails syntax=eruby
-au BufNewFile,BufRead *.less set ft=css
+autocmd BufNewFile,BufRead *.html set ft=html.liquid syntax=liquid
+autocmd BufNewFile,BufRead *.erb set ft=html.eruby.eruby-rails syntax=eruby
+autocmd BufNewFile,BufRead *.less set ft=css
 augroup END
 
-au FileType *eruby* let g:surround_{char2nr("-")} = "<% \r %>"
-au FileType *eruby* let g:surround_{char2nr("=")} = "<%= \r %>"
+autocmd FileType *eruby* let g:surround_{char2nr("-")} = "<% \r %>"
+autocmd FileType *eruby* let g:surround_{char2nr("=")} = "<%= \r %>"
 
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
@@ -90,11 +84,12 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " endif
 
 " Better syntax highlighting for python
-" au FileType python set complete+=k~/.vim/bundle/python_syntax/syntax/python.vim isk+=.,(
-" au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-" au FileType python noremap <leader>t :w\|:!py.test %<cr>
+" autocmd FileType python set complete+=k~/.vim/bundle/python_syntax/syntax/python.vim isk+=.,(
+" autocmd FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+" autocmd FileType python noremap <leader>t :w\|:!py.test %<cr>
 
-au FileType python set ts=4 sw=4 tw=0
+" autocmd FileType python set ts=4 sw=4 tw=0
+
 let g:python_highlight_all = 1
 
 let g:jedi#usages_command = ""
@@ -131,12 +126,16 @@ let mapleader = ","
 nnoremap <c-s> :w<cr>
 inoremap <c-s> <esc>:w<cr>
 
+nnoremap / /\v
+cnoremap %s/ %s/\v
+
 nnoremap <leader>y :<C-u>Unite history/yank<CR>
 nnoremap <leader>q :<C-u>Unite -start-insert file_rec/async:!<CR>
 nnoremap <leader>a :<C-u>Unite -start-insert grep:.<CR>
 
 noremap <leader>m :TagbarToggle<cr>
 
+noremap <leader>b :CtrlPBuffer<cr>
 noremap <leader>M :CtrlPBufTagAll<cr>
 noremap <leader>o :silent !ctags -R app/controllers/ app/helpers/ app/indices/ app/mailers/ app/models/ app/views/ lib/<cr>:CtrlPTag<cr>
 vmap <Enter> <Plug>(EasyAlign)
@@ -152,7 +151,7 @@ set nospell
 " nnoremap <leader>d f"wdi"<esc>o<esc>p==kf"dW$bido <esc>o<i class="color-icon-"></i><esc>jo<% end %><esc>
 nnoremap <leader>d :diffput<CR>:diffupdate<CR>
 
-nnoremap <leader>v :sp $MYVIMRC<CR><c-w>_
+nnoremap <leader>v :tabe $MYVIMRC<CR>
 
 noremap <leader>p :set paste!<cr>
 
@@ -210,6 +209,12 @@ vnoremap <silent> <leader>R :!ruby -e 'require "pp"; pp(eval(STDIN.read()))'<cr>
 " Plugin Settings
 " ===============
 
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<C-m>'
+let g:multi_cursor_prev_key='<C-b>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
 " Syntastic
 " =========
 
@@ -261,21 +266,7 @@ let common_ag_options =
   \ ' --nocolor' .
   \ ' --nogroup' .
   \ ' --hidden' .
-  \ ' --ignore-dir ''vendor/ruby''' .
-  \ ' --ignore-dir ''log''' .
-  \ ' --ignore-dir ''.hg''' .
-  \ ' --ignore-dir ''.svn''' .
-  \ ' --ignore-dir ''.git''' .
-  \ ' --ignore-dir ''.bzr''' .
-  \ ' --ignore ''*.eot''' .
-  \ ' --ignore ''*.woff''' .
-  \ ' --ignore ''*.ttf''' .
-  \ ' --ignore ''*.svg''' .
-  \ ' --ignore ''*.gif''' .
-  \ ' --ignore ''*.png''' .
-  \ ' --ignore ''*.jpg''' .
-  \ ' --ignore ''tags''' .
-  \ ' '
+  \ $AG_IGNORES
 
 " Greplace Settings
 " =================
