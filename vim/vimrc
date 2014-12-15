@@ -125,18 +125,20 @@ endif
 let mapleader = ","
 nnoremap <c-s> :w<cr>
 inoremap <c-s> <esc>:w<cr>
+vnoremap <c-s> <esc>:w<cr>
 
 nnoremap / /\v
-cnoremap %s/ %s/\v
+" cnoremap %s/ %s/\v
 
+nnoremap <leader>r :e routes<cr>ggdGV!rake routes<cr>:set nowrap<cr>:w<cr>
 nnoremap <leader>y :<C-u>Unite history/yank<CR>
 nnoremap <leader>q :<C-u>Unite -start-insert file_rec/async:!<CR>
 nnoremap <leader>a :<C-u>Unite -start-insert grep:.<CR>
 
-noremap <leader>m :TagbarToggle<cr>
+noremap <leader>M :TagbarToggle<cr>
 
 noremap <leader>b :CtrlPBuffer<cr>
-noremap <leader>M :CtrlPBufTagAll<cr>
+noremap <leader>m :CtrlPBufTagAll<cr>
 noremap <leader>o :silent !ctags -R app/controllers/ app/helpers/ app/indices/ app/mailers/ app/models/ app/views/ lib/<cr>:CtrlPTag<cr>
 vmap <Enter> <Plug>(EasyAlign)
 
@@ -190,9 +192,8 @@ inoremap jj <Esc>l
 " Map <C-L> (redraw screen) to also turn off search highlighting until the next search
 nnoremap <C-L> :nohl<CR><C-L>
 
-nnoremap <leader>l :set nonumber nowrap\|vertical resize 30<cr><c-w><c-w>:set number wrap<cr>
-nnoremap <leader>k :resize 6<cr><c-w><c-w>
-nnoremap <leader>K <c-w><c-w><c-w>_
+" nnoremap <leader>l :set nonumber nowrap\|vertical resize 30<cr><c-w><c-w>:set number wrap<cr>
+nnoremap <leader>l :call RotateWindowFocus()<cr>
 
 " Bubble single lines
 nmap <C-k> [e
@@ -352,7 +353,8 @@ noremap <leader>n :call RenameFile()<cr>
 noremap <leader>tt :call RunTestFile()<cr>
 noremap <leader>tn :call RunNearestTest()<cr>
 noremap <leader>tr :call RunTests('')<cr>
-noremap <leader>tc :w\|:Dispatch bundle exec cucumber<cr>
+noremap <leader>tC :w\|:Dispatch bundle exec cucumber<cr>
+noremap <leader>tc :w\|:Dispatch NORESET=true bundle exec cucumber %<cr>
 
 function! RunTestFile(...)
   if a:0
