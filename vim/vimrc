@@ -193,7 +193,7 @@ inoremap jj <Esc>l
 nnoremap <C-L> :nohl<CR><C-L>
 
 " nnoremap <leader>l :set nonumber nowrap\|vertical resize 30<cr><c-w><c-w>:set number wrap<cr>
-nnoremap <leader>l :call RotateWindowFocus()<cr>
+nnoremap <silent> <leader>l :call RotateWindowFocus()<cr>
 
 " Bubble single lines
 nmap <C-k> [e

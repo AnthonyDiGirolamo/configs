@@ -11,16 +11,16 @@ function! RotateWindowFocus()
   let window_widths = [0]
   windo call add(window_widths, winwidth('wnr'))
 
-  windo set nonumber nowrap
   exe current_window . "wincmd w"
+  set nonumber nowrap
   vertical resize 30
-  exe next_window . "wincmd w"
 
+  exe next_window . "wincmd w"
+  set number wrap
   if window_heights[current_window] != window_heights[next_window]
     exe "wincmd _"
-    exe 6 . "wincmd -"
+    exe 5 . "wincmd -"
   endif
-  set number wrap
 endfunction
 
   " tabnew
