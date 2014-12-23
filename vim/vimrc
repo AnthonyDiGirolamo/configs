@@ -88,7 +88,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 " autocmd FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 " autocmd FileType python noremap <leader>t :w\|:!py.test %<cr>
 
-" autocmd FileType python set ts=4 sw=4 tw=0
+autocmd FileType python set softtabstop=4 sw=4 tw=0
 
 let g:python_highlight_all = 1
 
@@ -132,7 +132,7 @@ nnoremap / /\v
 
 nnoremap <leader>r :e routes<cr>ggdGV!rake routes<cr>:set nowrap<cr>:w<cr>
 nnoremap <leader>y :<C-u>Unite history/yank<CR>
-nnoremap <leader>q :<C-u>Unite -start-insert file_rec/async:!<CR>
+nnoremap <leader>p :<C-u>Unite -start-insert file_rec/async:!<CR>
 nnoremap <leader>a :<C-u>Unite -start-insert grep:.<CR>
 
 noremap <leader>M :TagbarToggle<cr>
@@ -142,12 +142,12 @@ noremap <leader>m :CtrlPBufTagAll<cr>
 noremap <leader>o :silent !ctags -R app/controllers/ app/helpers/ app/indices/ app/mailers/ app/models/ app/views/ lib/<cr>:CtrlPTag<cr>
 vmap <Enter> <Plug>(EasyAlign)
 
-noremap <leader>G :Gstatus<cr>
+noremap <leader>g :Gstatus<cr>
 noremap <leader>D :Gdiff<cr>
 
 setlocal spell spelllang=en_us   " set the spellcheck to english
 noremap <leader>s :setlocal spell! spelllang=en_us<cr>
-set nospell
+" set nospell
 
 " Macro Keybinding
 " nnoremap <leader>d f"wdi"<esc>o<esc>p==kf"dW$bido <esc>o<i class="color-icon-"></i><esc>jo<% end %><esc>
@@ -155,7 +155,7 @@ nnoremap <leader>d :diffput<CR>:diffupdate<CR>
 
 nnoremap <leader>v :tabe $MYVIMRC<CR>
 
-noremap <leader>p :set paste!<cr>
+noremap <leader>P :set paste!<cr>
 
 " Allow access to the gvim Menu by hitting F4 in vim
 " source $VIMRUNTIME/menu.vim
@@ -214,6 +214,7 @@ vnoremap <silent> <leader>R :!ruby -e 'require "pp"; pp(eval(STDIN.read()))'<cr>
 " =========
 
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+let g:syntastic_haml_checkers = ['haml_lint']
 
 " Airline Settings
 " ================
@@ -353,8 +354,7 @@ noremap <leader>n :call RenameFile()<cr>
 noremap <leader>tt :call RunTestFile()<cr>
 noremap <leader>tn :call RunNearestTest()<cr>
 noremap <leader>tr :call RunTests('')<cr>
-noremap <leader>tC :w\|:Dispatch bundle exec cucumber<cr>
-noremap <leader>tc :w\|:Dispatch NORESET=true bundle exec cucumber %<cr>
+noremap <leader>tc :w\|:Dispatch bundle exec cucumber<cr>
 
 function! RunTestFile(...)
   if a:0
@@ -388,10 +388,10 @@ function! RunTests(filename)
   :w
   " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   if match(a:filename, '\.feature$') != -1
-    exec ":Dispatch bundle exec cucumber " . a:filename
+    exec ":Dispatch NORESET=true bundle exec cucumber " . a:filename
   else
     if filereadable("Gemfile")
-      exec ":Dispatch bundle exec rspec --color " . a:filename
+      exec ":Dispatch NORESET=true bundle exec rspec --color " . a:filename
     elseif filereadable("runtests.py")
       exec ":Dispatch py.test " . a:filename
     elseif filereadable("script/test")
