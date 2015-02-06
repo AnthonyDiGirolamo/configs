@@ -243,6 +243,7 @@ else
   alias rrm='/bin/rm'
   alias rm='mv --verbose -i --target-directory ~/.Trash/'
   alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
+  alias f12insert='xmodmap -e "keycode 96 = Insert"'
 fi
 
 alias vims="vim -c 'colors solarized'"
@@ -258,6 +259,9 @@ export VISUAL='vim'
 #   alias vim='/usr/bin/vim'
 #   export EDITOR='/usr/bin/vim'
 # fi
+
+# For default ruby on arch linux
+export PATH=$HOME/.gem/ruby/2.2.0/bin:$PATH
 
 if [ -e /usr/local/var/rbenv ] ; then
   export RBENV_ROOT=/usr/local/var/rbenv
