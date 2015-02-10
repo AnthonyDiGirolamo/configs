@@ -284,3 +284,5 @@ stty -ixon
 
 . ~/.shell_prompt.sh
 
+alias rats='cd ~/projects/rats && dotbin'
+

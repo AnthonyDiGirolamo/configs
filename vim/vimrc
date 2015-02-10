@@ -42,6 +42,8 @@ set foldmethod=manual " syntax manual indent
 autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
 autocmd InsertLeave * let &l:foldmethod=w:last_fdm
 
+set re=1
+
 syntax on    " Switch syntax highlighting on, when the terminal has colors
 set hlsearch " Also switch on highlighting the last used search pattern.
 
@@ -142,7 +144,7 @@ noremap <leader>m :CtrlPBufTagAll<cr>
 noremap <leader>o :silent !ctags -R app/controllers/ app/helpers/ app/indices/ app/mailers/ app/models/ app/views/ lib/<cr>:CtrlPTag<cr>
 vmap <Enter> <Plug>(EasyAlign)
 
-noremap <leader>g :Gstatus<cr>
+noremap <leader>g :Gstatus<cr><c-w>10+
 noremap <leader>D :Gdiff<cr>
 
 setlocal spell spelllang=en_us   " set the spellcheck to english
@@ -151,6 +153,9 @@ noremap <leader>s :setlocal spell! spelllang=en_us<cr>
 
 " Macro Keybinding
 " nnoremap <leader>d f"wdi"<esc>o<esc>p==kf"dW$bido <esc>o<i class="color-icon-"></i><esc>jo<% end %><esc>
+
+let @d = 'V%:s/\vDateTime.now|Time.zone.now/current_time/g{jocurrent_time = Time.zone.now.change(usec: 0)}'
+
 nnoremap <leader>d :diffput<CR>:diffupdate<CR>
 
 nnoremap <leader>v :tabe $MYVIMRC<CR>
@@ -219,7 +224,8 @@ let g:syntastic_haml_checkers = ['haml_lint']
 " Airline Settings
 " ================
 
-let g:airline_theme='murmur'
+" let g:airline_theme='murmur'
+let g:airline_theme='base16'
 
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
