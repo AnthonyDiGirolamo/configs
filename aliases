@@ -1,4 +1,7 @@
 #!/bin/sh
+if [ -z "$PS1" ]; then
+  return;
+fi
 
 export LC=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
@@ -222,6 +225,7 @@ if [ $? -eq 0 ]; then
   export EDITOR='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
   # xmodmap -e "keycode 119 = Insert"
   alias f12insert='xmodmap -e "keycode 119 = Insert"'
+  stty -ixon
 else
 # Linux
   #eval "`dircolors -b`"
@@ -277,8 +281,6 @@ if [[ -n $MODULESHOME ]]; then
   fi
   declare -f module &> /dev/null && module load git ruby
 fi
-
-stty -ixon
 
 . ~/Preferences/base16-shell/base16-twilight.dark.sh
 
