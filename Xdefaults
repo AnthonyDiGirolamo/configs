@@ -8,8 +8,8 @@
 ! What degree of hinting to use (hintnone, hintslight, hintmedium, or hintfull)
 ! xft.hintstyle: hintfull
 
-#define FONTSIZE 9
-!#define FONTSIZE 16
+!#define FONTSIZE 9
+#define FONTSIZE 16
 
 xterm*faceName: xft:PragmataPro:size=FONTSIZE
 *font: xft:PragmataPro:size=FONTSIZE
