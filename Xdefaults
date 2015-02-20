@@ -1,15 +1,29 @@
+! Font options - ~/.fonts.conf seems to override this
+! Resolution for Xft in dots per inch (e.g. 96)
 ! xft.dpi:       108
-! xft-dpi = Resolution for Xft in dots per inch (e.g. 96)
-xft.antialias: true
-xft.rgba:      rgba
-! xft-rgba = Type of subpixel antialiasing (none, rgb, bgr, vrgb or vbgr)
-xft.hinting:   true
-xft.hintstyle: hintslight
-! xft-hintstyle = What degree of hinting to use (hintnone, hintslight, hintmedium, or hintfull)
+! Type of subpixel antialiasing (none, rgb, bgr, vrgb or vbgr)
+! xft.rgba:      rgba
+! xft.antialias: true
+! xft.hinting:   true
+! What degree of hinting to use (hintnone, hintslight, hintmedium, or hintfull)
+! xft.hintstyle: hintfull
 
+#define FONTSIZE 9
+!#define FONTSIZE 16
+
+xterm*faceName: xft:PragmataPro:size=FONTSIZE
+*font: xft:PragmataPro:size=FONTSIZE
+*.boldFont: xft:PragmataPro:size=FONTSIZE
+! Extra options for xft font spec - ~/.fonts.conf seems to override this
+!:antialias=false:hintstyle=hintfull
+
+#define WINDOWGEOMETRY 90x20
 ! xterm
-xterm*faceName: xft:PragmataPro:pixelsize=24:antialias=true:hintstyle=hintslight
 xterm*dynamiccolors:    true
+xterm*utf8:             2
+xterm*geometry:         WINDOWGEOMETRY
+xterm*visualBell: off
+xterm*highlightSelection: true
 !xterm*background:      lightblack
 !xterm*foreground:      lightblue
 !xterm*colorMode:       on
@@ -20,23 +34,13 @@ xterm*dynamiccolors:    true
 !xterm*scrollTtyOutput: false
 !xterm*scrollKey:       true
 !xterm*scrollBar:       true
-xterm*utf8:             2
-xterm*geometry:         90x20
-xterm*visualBell: off
-xterm*highlightSelection: true
 
 ! URXVT
 URxvt.borderless: false
-! URxvt.cursorBlink: true
-! URxvt.depth: 24
-! URxvt.letterSpace: -1
-! URxvt.shading: 100
 URxvt*dynamicColors: on
-URxvt*font: xft:PragmataPro:pixelsize=24:antialias=true:hintstyle=hintslight
 URxvt*letterSpace: -1
-URxvt.geometry: 90x20
+URxvt.geometry: WINDOWGEOMETRY
 URxvt.imLocale: en_US.UTF-8
-! URxvt.internalBorder: 3
 URxvt.lineSpace: 0
 URxvt.loginShell: true
 URxvt.saveLines: 5000
@@ -44,26 +48,30 @@ URxvt.scrollBar: false
 URxvt.scrollstyle: plain
 URxvt*termName: rxvt-unicode-256color
 URxvt.transparent: false
-!URxvt.urgentOnBell: true
-! URxvt.urlLauncher: chrome
 URxvt.visualBell: false
 
-!URxvt.perl-ext-common:  default,tabbed
-!,clipboard
-!URxvt.tabbed.tabbar-fg: 4
-!URxvt.tabbed.tabbar-bg: 0
-!URxvt.tabbed.tab-fg:    9
-!URxvt.tabbed.tab-bg:    0
-!URxvt.keysym.M-c:   perl:clipboard:copy
-!URxvt.keysym.M-v:   perl:clipboard:paste
+! URxvt.urgentOnBell: true
+! URxvt.urlLauncher: chrome
+! URxvt.internalBorder: 3
+! URxvt.cursorBlink: true
+! URxvt.depth: 24
+! URxvt.letterSpace: -1
+! URxvt.shading: 100
+
+! URxvt.perl-ext-common:  default,tabbed
+! ,clipboard
+! URxvt.tabbed.tabbar-fg: 4
+! URxvt.tabbed.tabbar-bg: 0
+! URxvt.tabbed.tab-fg:    9
+! URxvt.tabbed.tab-bg:    0
+! URxvt.keysym.M-c:   perl:clipboard:copy
+! URxvt.keysym.M-v:   perl:clipboard:paste
 
 ! Colors
 
 *.boldMode: true
 *.colorBDMode: false
 !*.colorBD: cyan
-
-*.boldFont: xft:PragmataPro:pixelsize=24:antialias=true:hintstyle=hintslight
 
 !! Base16 Flat
 !#define base00 #2C3E50
