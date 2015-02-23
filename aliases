@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ -z "$PS1" ]; then
   return;
 fi
@@ -186,7 +186,7 @@ export AG_IGNORES=" \
  --ignore '*.jpg' \
  --ignore 'tags' "
 
-alias ag=ag $AG_IGNORES
+alias ag="ag $AG_IGNORES"
 
 function vimag {
   vim -f $(ag -l $@)
