@@ -147,6 +147,8 @@ export PATH=$HOME/Preferences/bin/els:$PATH
 
 # alias els='els --els-icons=fontawesome'
 
+alias psme="ps afxu|grep $(whoami)"
+
 alias mutt='TERM=xterm-256color LD_LIBRARY_PATH=$HOME/apps/gdbm/lib:$HOME/apps/w3m/lib PATH=$HOME/apps/w3m/bin:$HOME/apps/mutt/bin:$HOME/apps/gdbm/bin:$HOME/apps/msmtp/bin:$HOME/apps/imapfilter/bin:$PATH mutt'
 export MAILDIR=$HOME/Mail
 alias mu_mutt_aliases='mu find t:digirolamo --fields "f"|sort|uniq|grep -v help@nccs.gov|grep -v "via RT" |grep -v "@local"|ruby -e "STDIN.readlines.each{|l| puts "alias #{$1.delete(" \",.")} #{$1.delete("\"")} <#{$2}>" if l =~ /^(.*?) <(.*?)>$/}"|uniq'
@@ -231,23 +233,24 @@ else
   #eval "`dircolors -b`"
   alias ls='ls --color=auto'
 
-  # if [ -f /etc/redhat-release ]; then
-  #   alias vim=$HOME/apps/vim-7.3_rhel6/bin/vim
-  #   export PATH=$HOME/apps/vim-7.3_rhel6/bin:$PATH
-  # else
-    # alias vim=$HOME/apps/vim/bin/vim
-    export PATH=/sw/cave/vim/7.3/centos5.8_gnu4.1.2/bin:$PATH
-    export PATH=/sw/cave/zsh/5.0.0/centos5.8_gnu4.1.2/bin:$PATH
-    export PATH=/sw/cave/bash/4.2/centos5.8_gnu4.1.2/bin:$PATH
-    export PATH=/sw/cave/tmux/1.7/centos5.8_gnu4.1.2/bin:$PATH
-    export PATH=$HOME/apps/vim/bin:$PATH
-  # fi
+  if [ -f /etc/redhat-release ]; then
+    export PATH=/sw/redhat6/vim/7.4/rhel6.4_gnu4.4.7/bin:$PATH
+  elif [ -f /etc/SuSE-release ]; then
+    export PATH=/sw/xk6/vim/7.4/sles11.1_gnu4.3.4/bin:$PATH
+  fi
+  # alias vim=$HOME/apps/vim/bin/vim
+  # export PATH=/sw/cave/vim/7.3/centos5.8_gnu4.1.2/bin:$PATH
+  export PATH=/sw/cave/zsh/5.0.0/centos5.8_gnu4.1.2/bin:$PATH
+  export PATH=/sw/cave/bash/4.2/centos5.8_gnu4.1.2/bin:$PATH
+  export PATH=/sw/cave/tmux/1.7/centos5.8_gnu4.1.2/bin:$PATH
+  # export PATH=$HOME/apps/vim/bin:$PATH
   export EDITOR=vim
 
   alias rrm='/bin/rm'
   alias rm='mv --verbose -i --target-directory ~/.Trash/'
   alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
   alias f12insert='xmodmap -e "keycode 96 = Insert"'
+  unset LESS
 fi
 
 alias vims="vim -c 'colors solarized'"
