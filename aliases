@@ -227,7 +227,6 @@ if [ $? -eq 0 ]; then
   export EDITOR='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
   # xmodmap -e "keycode 119 = Insert"
   alias f12insert='xmodmap -e "keycode 119 = Insert"'
-  stty -ixon
 else
 # Linux
   #eval "`dircolors -b`"
@@ -252,6 +251,9 @@ else
   alias f12insert='xmodmap -e "keycode 96 = Insert"'
   unset LESS
 fi
+
+# Disable CTRL-S Freeze
+stty -ixon
 
 alias vims="vim -c 'colors solarized'"
 alias v=vim
@@ -287,7 +289,7 @@ fi
 
 . ~/Preferences/base16-shell/base16-twilight.dark.sh
 
-. ~/.shell_prompt.sh
+# . ~/.shell_prompt.sh
 
 alias rats='cd ~/projects/rats && dotbin'
 
