@@ -24,6 +24,7 @@ function fixp_noaa {
   chgrp -Rv ncrcstaff $@
 }
 
+alias which='which -a'
 alias b="bundle"
 alias bi="b install --path vendor"
 alias bu="b update"
@@ -287,7 +288,6 @@ if [[ -n $MODULESHOME ]]; then
   declare -f module &> /dev/null && module load git ruby
 fi
 
-# . ~/Preferences/base16-shell/base16-twilight.dark.sh
 . ~/Preferences/base16-shell/base16-eighties.dark.sh
 
 . ~/.shell_prompt.sh

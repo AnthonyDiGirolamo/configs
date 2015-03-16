@@ -155,6 +155,7 @@ noremap <leader>s :setlocal spell! spelllang=en_us<cr>
 " nnoremap <leader>d f"wdi"<esc>o<esc>p==kf"dW$bido <esc>o<i class="color-icon-"></i><esc>jo<% end %><esc>
 
 let @d = 'V%:s/\vDateTime.now|Time.zone.now/current_time/g{jocurrent_time = Time.zone.now.change(usec: 0)}'
+let @j = 'V:s/\\//gV:s/,/,\r/gvip=vip:s/":\[/": [\r/gvip:s/":{/": {\r/gvip:s/{"/{ "/gvip=vip:'
 
 nnoremap <leader>d :diffput<CR>:diffupdate<CR>
 
@@ -231,6 +232,7 @@ let g:syntastic_haml_checkers = ['haml_lint']
 
 " let g:airline_theme='murmur'
 let g:airline_theme='base16'
+" let g:airline_theme='kolor'
 
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
@@ -299,7 +301,7 @@ let g:unite_source_grep_recursive_opt = ''
 " ==============
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](env.*|html|\.git|\.hg|\.svn)$',
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn)$',
   \ 'file': '\v\.(pyc|exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
