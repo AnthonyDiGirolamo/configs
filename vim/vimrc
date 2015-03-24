@@ -220,7 +220,7 @@ vnoremap <silent> <leader>R :!ruby -e 'require "pp"; pp(eval(STDIN.read()))'<cr>
 " =========
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
@@ -323,7 +323,7 @@ inoremap <s-tab> <c-n>
 
 " Netrw Settings
 " ==============
-set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tmp/*
+set wildignore+=.git,*vendor/cache/*,*vendor/rails/*,*vendor/ruby/*,*/pkg/*,*/tmp/*,*node_modules*,*bower_components*
 let g:netrw_winsize               = 80
 "let g:netrw_liststyle             = 3
 "let g:netrw_list_hide             = '.*\.o$'
