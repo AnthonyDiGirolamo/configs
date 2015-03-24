@@ -148,6 +148,7 @@ export PATH=$HOME/Preferences/bin/els:$PATH
 
 # alias els='els --els-icons=fontawesome'
 
+alias which="which -a"
 alias psme="ps afxu|grep $(whoami)"
 
 alias mutt='TERM=xterm-256color LD_LIBRARY_PATH=$HOME/apps/gdbm/lib:$HOME/apps/w3m/lib PATH=$HOME/apps/w3m/bin:$HOME/apps/mutt/bin:$HOME/apps/gdbm/bin:$HOME/apps/msmtp/bin:$HOME/apps/imapfilter/bin:$PATH mutt'
