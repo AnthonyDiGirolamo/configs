@@ -277,6 +277,7 @@ export PATH=$HOME/.gem/ruby/2.2.0/bin:$PATH
 if [ -e /usr/local/var/rbenv ] ; then
   export RBENV_ROOT=/usr/local/var/rbenv
 fi
+export PATH="$HOME/.rbenv/bin:$PATH"
 which rbenv &> /dev/null && eval "$(rbenv init -)"
 
 if [[ -n $MODULESHOME ]]; then
@@ -294,4 +295,11 @@ fi
 . ~/.shell_prompt.sh
 
 alias rats='cd ~/projects/rats && dotbin'
+
+NPM_PACKAGES="$HOME/.npm-packages"
+mkdir -p "$NPM_PACKAGES"
+PATH="$NPM_PACKAGES/bin:$PATH"
+MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+echo "prefix = $NPM_PACKAGES" > ~/.npmrc
 

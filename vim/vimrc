@@ -67,6 +67,10 @@ augroup arduino
 autocmd BufNewFile,BufRead *.ino set ft=cpp syntax=cpp
 augroup END
 
+augroup markdown
+autocmd BufNewFile,BufRead *.ronn set ft=markdown
+augroup END
+
 augroup htmlerb
 autocmd BufNewFile,BufRead *.html set ft=html.liquid syntax=liquid
 autocmd BufNewFile,BufRead *.erb set ft=html.eruby.eruby-rails syntax=eruby
@@ -401,10 +405,10 @@ function! RunTests(filename)
   :w
   " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   if match(a:filename, '\.feature$') != -1
-    exec ":Dispatch NORESET=true bundle exec cucumber " . a:filename
+    exec ":Dispatch bundle exec cucumber " . a:filename
   else
     if filereadable("Gemfile")
-      exec ":Dispatch NORESET=true bundle exec rspec --color " . a:filename
+      exec ":Dispatch bundle exec rspec --color " . a:filename
     elseif filereadable("runtests.py")
       exec ":Dispatch py.test " . a:filename
     elseif filereadable("script/test")
