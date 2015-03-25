@@ -136,3 +136,6 @@
 [submodule "vim/vim/bundle/vim-sparkup.git"]
 	path = vim/vim/bundle/vim-sparkup.git
 	url = https://github.com/tristen/vim-sparkup.git
+[submodule "vim/vim/bundle/vim-mustache-handlebars.git"]
+	path = vim/vim/bundle/vim-mustache-handlebars.git
+	url = https://github.com/mustache/vim-mustache-handlebars.git
