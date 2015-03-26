@@ -81,6 +81,7 @@ autocmd BufNewFile,BufRead *.hbs set softtabstop=2 sw=2 tw=0
 
 autocmd FileType *eruby* let g:surround_{char2nr("-")} = "<% \r %>"
 autocmd FileType *eruby* let g:surround_{char2nr("=")} = "<%= \r %>"
+autocmd FileType *handlebars* let g:surround_{char2nr("[")} = "{{\r}}"
 
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
