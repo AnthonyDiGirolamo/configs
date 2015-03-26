@@ -1,0 +1,7 @@
+/usr/bin/VBoxClient-all
+xset r rate 200 25
+setxkbmap -layout us -variant colemak
+xmodmap -e "keycode 96 = Insert"
+xrdb -load ~/.Xdefaults
+#export PATH=$PATH
+exec dwm
