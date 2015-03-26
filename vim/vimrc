@@ -439,6 +439,8 @@ nmap <C-n> ]e
 " Bubble multiple lines
 vmap <C-e> [egv
 vmap <C-n> ]egv
-nnoremap ; :|xnoremap ; :|
+
 inoremap nn <Esc>l
+
+nnoremap ; :|xnoremap ; :|
 
