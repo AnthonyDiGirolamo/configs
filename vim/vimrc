@@ -77,6 +77,8 @@ autocmd BufNewFile,BufRead *.erb set ft=html.eruby.eruby-rails syntax=eruby
 autocmd BufNewFile,BufRead *.less set ft=css
 augroup END
 
+autocmd BufNewFile,BufRead *.hbs set softtabstop=2 sw=2 tw=0
+
 autocmd FileType *eruby* let g:surround_{char2nr("-")} = "<% \r %>"
 autocmd FileType *eruby* let g:surround_{char2nr("=")} = "<%= \r %>"
 

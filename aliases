@@ -292,7 +292,7 @@ fi
 
 . ~/Preferences/base16-shell/base16-eighties.dark.sh
 
-. ~/.shell_prompt.sh
+# . ~/.shell_prompt.sh
 
 alias rats='cd ~/projects/rats && dotbin'
 
