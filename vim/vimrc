@@ -196,6 +196,7 @@ inoremap jj <Esc>l
 " F10 to make and view a latex pdf
 " noremap <F10> :w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
 " inoremap <F10> <ESC>:w<CR>:!make clean; make `basename % .tex`; evince `basename % .tex`.pdf &<cr>
+noremap <leader>xl :w<CR>:!make `basename % .tex`; open `basename % .tex`.pdf &<cr>
 
 " Alt-C and V copy and paste to and from the system clipboard
 " noremap <M-c> "*y
@@ -418,4 +419,25 @@ function! RunTests(filename)
     end
   end
 endfunction
+
+" Minimal Colemak Settings
+
+" nnoremap h h|xnoremap h h|onoremap h h|
+nnoremap n gj|xnoremap n gj|onoremap n gj|
+nnoremap e gk|xnoremap e gk|onoremap e gk|
+" nnoremap i l|xnoremap i l|onoremap i l|
+nnoremap k n|xnoremap k n|onoremap k n|
+nnoremap K N|xnoremap K N|onoremap K N|
+" nnoremap <silent> H @='5h'<CR>|xnoremap <silent> H @='5h'<CR>|onoremap <silent> H @='5h'<CR>|
+nnoremap <silent> N @='5gj'<CR>|xnoremap <silent> N @='5gj'<CR>|onoremap <silent> N @='5gj'<CR>|
+nnoremap <silent> E @='5gk'<CR>|xnoremap <silent> E @='5gk'<CR>|onoremap <silent> E @='5gk'<CR>|
+" nnoremap <silent> I @='5l'<CR>|xnoremap <silent> I @='5l'<CR>|onoremap <silent> I @='5l'<CR>|
+" Bubble single lines
+nmap <C-e> [e
+nmap <C-n> ]e
+" Bubble multiple lines
+vmap <C-e> [egv
+vmap <C-n> ]egv
+nnoremap ; :|xnoremap ; :|
+inoremap nn <Esc>l
 
