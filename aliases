@@ -94,7 +94,7 @@ alias u='cd ..'
 # alias h='history 1'
 
 alias du='du -hsc'
-alias df='df -hTP'
+alias df='df -h'
 
 # GTD Stuff
 # alias t='vim ~/Notes/GTD.mkd'
