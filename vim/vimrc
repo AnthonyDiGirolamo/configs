@@ -440,4 +440,5 @@ vmap <C-e> [egv
 vmap <C-n> ]egv
 
 nnoremap ; :|xnoremap ; :|
+nnoremap q; q:|xnoremap q; q:|
 
