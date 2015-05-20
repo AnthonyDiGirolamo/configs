@@ -148,6 +148,7 @@ export PATH=$HOME/Preferences/bin/els:$PATH
 
 # alias els='els --els-icons=fontawesome'
 
+alias wd="pwd"
 alias which="which -a"
 alias psme="ps afxu|grep $(whoami)"
 
