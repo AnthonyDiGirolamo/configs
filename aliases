@@ -293,7 +293,9 @@ fi
 
 . ~/Preferences/base16-shell/base16-eighties.dark.sh
 
-# . ~/.shell_prompt.sh
+if [[ -n ${BASH_VERSION-} ]]; then
+  . ~/.shell_prompt.sh
+fi
 
 alias rats='cd ~/projects/rats && dotbin'
 
