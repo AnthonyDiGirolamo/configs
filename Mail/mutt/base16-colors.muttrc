@@ -31,7 +31,7 @@ color message       cyan            default
 color markers       red             white
 color attachment    white           default
 color search        black   yellow
-color status        color12         color10
+color status        color12         color18
 color indicator     brightblack     yellow
 color tree          color9          default  # arrow in threads
 
@@ -45,7 +45,7 @@ color tree          color9          default  # arrow in threads
 # color7  white
 # color8  brightblack
 # color9  brightred
-# color10 brightgreen
+# color18 brightgreen
 # color11 brightyellow
 # color12 brightblue
 # color13 brightmagenta
@@ -103,11 +103,11 @@ color index         yellow          red             "~v~(~D)"                   
 
 # message headers ------------------------------------------------------
 
-#color header        green     color10         "^"
-color hdrdefault    green     color10
-color header        yellow    color10         "^(From)"
-color header        blue      color10         "^(Subject)"
-color header        cyan      color10         "^(To)"
+#color header        green     color18         "^"
+color hdrdefault    color18     color18
+color header        yellow    color18         "^(From)"
+color header        cyan      color18         "^(To)"
+color header        blue      color18         "^(Subject)"
 
 # body -----------------------------------------------------------------
 

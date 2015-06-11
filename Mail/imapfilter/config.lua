@@ -5,6 +5,9 @@ options.info = true
 
 account1 = IMAP {
     server = 'mail.ornl.gov',
+    port = 993,
+    -- server = '127.0.0.1',
+    -- port = 9993,
     username = 'lmd',
     password = '',
     ssl = 'ssl3',
@@ -28,7 +31,8 @@ account1.INBOX:check_status()
 -- Get all the messages in the mailbox.
 --results = account1.INBOX:select_all()
 
-unseen_messages = account1.INBOX:is_unseen()
+unseen_messages = account1.INBOX:is_newer(5)
+-- unseen_messages = account1.INBOX:select_all()
 
 results = unseen_messages:match_from('rt-log@ccs.ornl.gov')
 results:move_messages(account1['rt-log'])
@@ -43,18 +47,21 @@ results = unseen_messages:match_subject('NCCS Downtime Report for') +
           unseen_messages:match_subject('Downtime database populated')
 results:move_messages(account1['uag-notifications'])
 
+results = unseen_messages:match_from('RATS notifier')
+results:move_messages(account1['exception_notifier'])
+
+--results = unseen_messages:match_from('rt-acceptance@ccs.ornl.gov') +
+          --unseen_messages:match_from('rt-acceptance-comment@ccs.ornl.gov') +
+          --unseen_messages:match_to('titan-acceptance@ccs.ornl.gov') +
+          --unseen_messages:match_cc('titan-acceptance@ccs.ornl.gov')
+--results:move_messages(account1['titan'])
+
+results = unseen_messages:match_from('help@nccs.gov')
+        -- unseen_messages:match_from('ua-forms@ccs.ornl.gov')
+results:move_messages(account1['rt-ccs'])
+
 results = unseen_messages:match_to('nccs-uag@email.ornl.gov')
 results:move_messages(account1['uag'])
-
-results = unseen_messages:match_from('rt-acceptance@ccs.ornl.gov') +
-          unseen_messages:match_from('rt-acceptance-comment@ccs.ornl.gov') +
-          unseen_messages:match_to('titan-acceptance@ccs.ornl.gov') +
-          unseen_messages:match_cc('titan-acceptance@ccs.ornl.gov')
-results:move_messages(account1['titan'])
-
-results = unseen_messages:match_from('help@nccs.gov') +
-          unseen_messages:match_from('ua-forms@ccs.ornl.gov')
-results:move_messages(account1['rt-ccs'])
 
 results = unseen_messages:match_to('ncrc-status@ccs.ornl.gov')
 results:move_messages(account1['ncrc-status'])
@@ -64,6 +71,15 @@ results:move_messages(account1['ncrc-rt'])
 
 results = unseen_messages:match_from('rt-software@ccs.ornl.gov')
 results:move_messages(account1['rt-sw'])
+
+-- results = unseen_messages:match_from('ua-prod1.ccs.ornl.gov') +
+--           unseen_messages:match_from('wwwadm-dev1.ccs.ornl.gov')
+-- results:move_messages(account1['cron'])
+
+results = unseen_messages:match_to('ratsadm@ccs.ornl.gov') +
+          unseen_messages:match_to('rats@ccs.ornl.gov') +
+          unseen_messages:match_subject('RATS Admin')
+results:move_messages(account1['rats'])
 
 --results:mark_flagged()
 

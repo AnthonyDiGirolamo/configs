@@ -39,7 +39,7 @@ unignore From: Date: User-Agent: X-Mailer To: Cc: Reply-To: Subject:
 # # Mailboxes
 # mailboxes =INBOX =Archive =rt-accounts =rt-ccs =rt-log =rt-ncrc =rt-sw =uag =uag-notifications =Drafts "=Sent Items" "=Deleted Items" =titan
 # source ~/.muttrc_mailboxes
-source ~/.muttrc_accounts
+# source ~/.muttrc_accounts
 
 set mailcap_path = ~/.mutt/mailcap
 auto_view text/html
@@ -194,23 +194,23 @@ bind index b previous-page
 bind pager \cD half-down
 bind pager \cU half-up
 
-# set up the sidebar, default not visible
-set sidebar_width=20
-set sidebar_visible=no
-set sidebar_delim=' '
-# set sidebar_format='%B'
-set sidebar_sort=yes
-color sidebar_new yellow default
-# ctrl-n, ctrl-p to select next, prev folder
-# ctrl-o to open selected folder
-bind index,pager \CP sidebar-prev
-bind index,pager \CN sidebar-next
-bind index,pager \C] sidebar-open
-# b toggles sidebar visibility
-macro index b '<enter-command>toggle sidebar_visible<enter><refresh>'
-macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
-# Remap bounce-message function to “B”
-bind index B bounce-message
+# # set up the sidebar, default not visible
+# set sidebar_width=20
+# set sidebar_visible=no
+# set sidebar_delim=' '
+# # set sidebar_format='%B'
+# set sidebar_sort=yes
+# color sidebar_new yellow default
+# # ctrl-n, ctrl-p to select next, prev folder
+# # ctrl-o to open selected folder
+# bind index,pager \CP sidebar-prev
+# bind index,pager \CN sidebar-next
+# bind index,pager \C] sidebar-open
+# # b toggles sidebar visibility
+# macro index b '<enter-command>toggle sidebar_visible<enter><refresh>'
+# macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+# # Remap bounce-message function to “B”
+# bind index B bounce-message
 
 # mutt macros for mu
 macro index gm "<shell-escape>mu find --clearlinks --format=links --linksdir=~/Mail/search " \
