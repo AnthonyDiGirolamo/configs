@@ -423,8 +423,8 @@ endfunction
 
 " Minimal Colemak Settings
 
-" nn remmaped to esc
-inoremap nn <Esc>l
+" ii remmaped to esc
+inoremap ii <Esc>l
 " h/l stay in default colemak locations
 " n/e remapped to down up
 nnoremap n gj|xnoremap n gj|onoremap n gj|
