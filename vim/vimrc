@@ -207,7 +207,7 @@ noremap <leader>xl :w<CR>:!make `basename % .tex`; open `basename % .tex`.pdf &<
 nnoremap <C-L> :nohl<CR><C-L>
 
 " nnoremap <leader>l :set nonumber nowrap\|vertical resize 30<cr><c-w><c-w>:set number wrap<cr>
-nnoremap <silent> <leader>l :call RotateWindowFocus()<cr>
+nnoremap <silent> <leader>k :call RotateWindowFocus()<cr>
 
 " Bubble single lines
 nmap <C-k> [e
@@ -421,10 +421,13 @@ function! RunTests(filename)
   end
 endfunction
 
+nnoremap <leader>w g<C-g>
+
 " Minimal Colemak Settings
 
 " ii remmaped to esc
 inoremap ii <Esc>l
+
 " h/l stay in default colemak locations
 " n/e remapped to down up
 nnoremap n gj|xnoremap n gj|onoremap n gj|
@@ -441,4 +444,3 @@ vmap <C-n> ]egv
 
 nnoremap ; :|xnoremap ; :|
 nnoremap q; q:|xnoremap q; q:|
-
