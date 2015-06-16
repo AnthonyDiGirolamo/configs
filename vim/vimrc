@@ -42,7 +42,9 @@ set foldmethod=manual " syntax manual indent
 autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
 autocmd InsertLeave * let &l:foldmethod=w:last_fdm
 
-set re=1
+if v:version > 703
+  set re=1
+endif
 
 syntax on    " Switch syntax highlighting on, when the terminal has colors
 set hlsearch " Also switch on highlighting the last used search pattern.
