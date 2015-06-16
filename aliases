@@ -266,6 +266,7 @@ alias em=emacs
 alias e=emacs
 export VISUAL='vim'
 
+alias tmux='tmux -2'
 
 # hostname -s | grep -qs -E 'cave|yona'
 # if [ $? -eq 0 ]; then

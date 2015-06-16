@@ -210,12 +210,12 @@ nnoremap <C-L> :nohl<CR><C-L>
 nnoremap <silent> <leader>k :call RotateWindowFocus()<cr>
 
 " Bubble single lines
-nmap <C-k> [e
-nmap <C-j> ]e
+" nmap <C-k> [e
+" nmap <C-j> ]e
 
 " " Bubble multiple lines
-vmap <C-k> [egv
-vmap <C-j> ]egv
+" vmap <C-k> [egv
+" vmap <C-j> ]egv
 
 " Python and Ruby Evals
 vnoremap <silent> <leader>P :!python -c 'import sys, pprint; pp = pprint.PrettyPrinter(indent=4, width=80).pprint; exec sys.stdin.read()'<cr>
@@ -436,11 +436,19 @@ nnoremap e gk|xnoremap e gk|onoremap e gk|
 nnoremap k n|xnoremap k n|onoremap k n|
 nnoremap K N|xnoremap K N|onoremap K N|
 " Bubble single lines
-nmap <C-e> [e
-nmap <C-n> ]e
+" nmap <C-e> [e
+" nmap <C-n> ]e
 " Bubble multiple lines
 vmap <C-e> [egv
 vmap <C-n> ]egv
 
 nnoremap ; :|xnoremap ; :|
 nnoremap q; q:|xnoremap q; q:|
+
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-n> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-e> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
+
