@@ -31,9 +31,6 @@
 [submodule "vim/vim/bundle/vim-ruby.git"]
 	path = vim/vim/bundle/vim-ruby.git
 	url = https://github.com/vim-ruby/vim-ruby.git
-[submodule "vim/vim/bundle/ctrlp.vim.git"]
-	path = vim/vim/bundle/ctrlp.vim.git
-	url = https://github.com/kien/ctrlp.vim.git
 [submodule "vim/vim/bundle/tagbar.git"]
 	path = vim/vim/bundle/tagbar.git
 	url = https://github.com/majutsushi/tagbar.git
@@ -148,3 +145,9 @@
 [submodule "dwmstatus"]
 	path = dwmstatus
 	url = http://git.suckless.org/dwmstatus
+[submodule "vim/vim/bundle/ctrlp-extensions.vim.git"]
+	path = vim/vim/bundle/ctrlp-extensions.vim.git
+	url = https://github.com/sgur/ctrlp-extensions.vim.git
+[submodule "vim/vim/bundle/ctrlp-community.vim.git"]
+	path = vim/vim/bundle/ctrlp-community.vim.git
+	url = https://github.com/ctrlpvim/ctrlp.vim.git
