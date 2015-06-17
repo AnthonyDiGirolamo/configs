@@ -154,3 +154,6 @@
 [submodule "vim/vim/bundle/vim-tmux-navigator.git"]
 	path = vim/vim/bundle/vim-tmux-navigator.git
 	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "vim/vim/bundle/vim-easymotion.git"]
+	path = vim/vim/bundle/vim-easymotion.git
+	url = https://github.com/Lokaltog/vim-easymotion.git

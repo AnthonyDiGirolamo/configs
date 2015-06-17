@@ -454,5 +454,7 @@ nnoremap <silent> <c-e> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
 
-nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+let g:EasyMotion_smartcase = 1
+nmap t <Plug>(easymotion-s2)
+nmap s <Plug>(easymotion-s)
+
