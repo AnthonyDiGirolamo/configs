@@ -455,6 +455,14 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
 
 let g:EasyMotion_smartcase = 1
+let g:EasyMotion_keys = 'gpldhtnfusewyriaorisecmvk'
+let g:EasyMotion_re_anywhere = '\v' .
+    \       '(<.|^$)' . '|' .
+    \       '(.>|^$)' . '|' .
+    \       '(\l)\zs(\u)' . '|' .
+    \       '(_\zs.)' . '|' .
+    \       '(#\zs.)'
+" nmap s <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-jumptoanywhere)
 nmap t <Plug>(easymotion-s2)
-nmap s <Plug>(easymotion-s)
 
