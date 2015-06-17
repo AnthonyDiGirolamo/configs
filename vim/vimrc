@@ -447,6 +447,10 @@ vmap <C-n> ]egv
 nnoremap ; :|xnoremap ; :|
 nnoremap q; q:|xnoremap q; q:|
 
+nnoremap <cr> :
+nnoremap g<cr> <cr>
+nnoremap q<cr> q:
+
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-n> :TmuxNavigateDown<cr>
@@ -466,8 +470,8 @@ let g:EasyMotion_re_anywhere = '\v' .
 nmap s <Plug>(easymotion-jumptoanywhere)
 nmap t <Plug>(easymotion-s2)
 
-nmap / <Plug>(easymotion-sn)
-xmap / <Esc><Plug>(easymotion-sn)\v%V
-omap / <Plug>(easymotion-tn)
-nnoremap g/ /
+" nmap / <Plug>(easymotion-sn)
+" xmap / <Esc><Plug>(easymotion-sn)\v%V
+" omap / <Plug>(easymotion-tn)
+" nnoremap g/ /
 
