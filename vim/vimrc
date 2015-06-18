@@ -475,3 +475,20 @@ nmap t <Plug>(easymotion-s2)
 " omap / <Plug>(easymotion-tn)
 " nnoremap g/ /
 
+" Arpeggio Setup
+function! SmartDot()
+  if getline(".")[col(".") - 2] == "."
+    return ""
+  else
+    return "."
+  endif
+endfunction
+
+let g:arpeggio_timeoutlen=30
+function! ChordsSetup()
+  Arpeggio inoremap def def<CR>end<Esc>kA<Space>
+  Arpeggio inoremap ne <ESC>
+  Arpeggio inoremap sel <C-R>=SmartDot()<CR>select {  }<Left><Left>
+endfunction
+autocmd VimEnter * call ChordsSetup()
+
