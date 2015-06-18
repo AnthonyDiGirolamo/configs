@@ -32,8 +32,8 @@ unignore From: Date: User-Agent: X-Mailer To: Cc: Reply-To: Subject:
 # set folder=$HOME/Mail
 # set mbox_type=Maildir
 #
-# set spoolfile="=INBOX"
-# set record="=Sent Items"
+set spoolfile="=INBOX"
+set record="=Sent Items"
 # set postponed="=Drafts"
 #
 # # Mailboxes
@@ -179,9 +179,17 @@ bind pager q exit
 bind alias <Tab> next-entry
 
 bind index <Down> next-entry
-bind index j next-entry
 bind index <Up> previous-entry
-bind index k previous-entry
+
+# NE colemak rebinding
+bind index n next-entry
+bind index e previous-entry
+bind pager n next-entry
+bind pager e previous-entry
+bind index k search-next
+bind index E edit
+bind pager k search-next
+bind pager E edit
 
 bind pager <Down> next-line
 bind pager <Up> previous-line
@@ -193,6 +201,7 @@ bind index b previous-page
 
 bind pager \cD half-down
 bind pager \cU half-up
+
 
 # # set up the sidebar, default not visible
 # set sidebar_width=20

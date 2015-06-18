@@ -103,11 +103,13 @@ color index         yellow          red             "~v~(~D)"                   
 
 # message headers ------------------------------------------------------
 
-#color header        green     color18         "^"
-color hdrdefault    color18     color18
-color header        yellow    color18         "^(From)"
-color header        cyan      color18         "^(To)"
-color header        blue      color18         "^(Subject)"
+#color header       green     color18         "^"
+color header        red       color18     "^(Date)"
+color header        color16   color18     "^(From)"
+color header        yellow    color18     "^(To)"
+color header        green     color18     "^(CC)"
+color header        cyan      color18     "^(Subject)"
+color hdrdefault    blue      color18
 
 # body -----------------------------------------------------------------
 
