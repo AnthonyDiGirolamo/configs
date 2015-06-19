@@ -424,11 +424,12 @@ function! RunTests(filename)
 endfunction
 
 nnoremap <leader>w g<C-g>
+nnoremap <leader>c :copen<cr>
 
 " Minimal Colemak Settings
 
 " ii remmaped to esc
-inoremap ii <Esc>l
+" inoremap ii <Esc>l
 
 " h/l stay in default colemak locations
 " n/e remapped to down up

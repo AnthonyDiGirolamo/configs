@@ -293,6 +293,13 @@ if [[ -n $MODULESHOME ]]; then
   declare -f module &> /dev/null && module load git ruby
 fi
 
+function random-colors {
+  FILES=( ~/Preferences/base16-shell/base16-*.dark.sh )
+  rf=$FILES[$RANDOM%$#FILES+1]
+  echo $rf
+  . $rf
+}
+
 . ~/Preferences/base16-shell/base16-eighties.dark.sh
 
 if [[ -n ${BASH_VERSION-} ]]; then
@@ -300,6 +307,7 @@ if [[ -n ${BASH_VERSION-} ]]; then
 fi
 
 alias rats='cd ~/projects/rats && dotbin'
+alias rats-reporting='cd ~/projects/rats-reporting && dotbin'
 
 NPM_PACKAGES="$HOME/.npm-packages"
 mkdir -p "$NPM_PACKAGES"
