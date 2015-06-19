@@ -205,8 +205,8 @@ noremap <leader>xl :w<CR>:!make `basename % .tex`; open `basename % .tex`.pdf &<
 " noremap <M-c> "*y
 " noremap <M-v> "*p
 
-" Map <C-L> (redraw screen) to also turn off search highlighting until the next search
-nnoremap <C-L> :nohl<CR><C-L>
+" Map (redraw screen) to also turn off search highlighting until the next search
+nnoremap <leader>/ :nohl<CR><C-L>
 
 " nnoremap <leader>l :set nonumber nowrap\|vertical resize 30<cr><c-w><c-w>:set number wrap<cr>
 nnoremap <silent> <leader>k :call RotateWindowFocus()<cr>
