@@ -58,9 +58,6 @@
 [submodule "vim/vim/bundle/base16-vim.git"]
 	path = vim/vim/bundle/base16-vim.git
 	url = https://github.com/chriskempson/base16-vim.git
-[submodule "emacs/emacs.d/evil"]
-	path = emacs/emacs.d/evil
-	url = https://git.gitorious.org/evil/evil.git
 [submodule "emacs/emacs.d/emacs-color-theme-solarized.git"]
 	path = emacs/emacs.d/emacs-color-theme-solarized.git
 	url = https://github.com/sellout/emacs-color-theme-solarized.git
@@ -73,21 +70,12 @@
 [submodule "vim/vim/bundle/vim-airline.git"]
 	path = vim/vim/bundle/vim-airline.git
 	url = https://github.com/bling/vim-airline.git
-[submodule "emacs/emacs.d/evil-surround"]
-	path = emacs/emacs.d/evil-surround
-	url = https://github.com/timcharper/evil-surround.git
-[submodule "emacs/emacs.d/evil-matchit"]
-	path = emacs/emacs.d/evil-matchit
-	url = https://github.com/redguardtoo/evil-matchit.git
 [submodule "emacs/emacs.d/powerline"]
 	path = emacs/emacs.d/powerline
 	url = https://github.com/Dewdrops/powerline.git
 [submodule "emacs/emacs.d/moe-theme"]
 	path = emacs/emacs.d/moe-theme
 	url = https://github.com/kuanyui/moe-theme.el.git
-[submodule "emacs/emacs.d/evil-leader"]
-	path = emacs/emacs.d/evil-leader
-	url = https://github.com/cofi/evil-leader.git
 [submodule "vim/vim/bundle/vim-coffee-script.git"]
 	path = vim/vim/bundle/vim-coffee-script.git
 	url = https://github.com/kchmck/vim-coffee-script.git
