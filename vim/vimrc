@@ -469,7 +469,7 @@ let g:EasyMotion_re_anywhere = '\v' .
     \       '(#\zs.)'
 " nmap s <Plug>(easymotion-s)
 nmap s <Plug>(easymotion-jumptoanywhere)
-nmap t <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-s)
 
 " nmap / <Plug>(easymotion-sn)
 " xmap / <Esc><Plug>(easymotion-sn)\v%V
