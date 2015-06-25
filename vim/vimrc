@@ -209,7 +209,7 @@ noremap <leader>xl :w<CR>:!make `basename % .tex`; open `basename % .tex`.pdf &<
 nnoremap <leader>/ :nohl<CR><C-L>
 
 " nnoremap <leader>l :set nonumber nowrap\|vertical resize 30<cr><c-w><c-w>:set number wrap<cr>
-nnoremap <silent> <leader>k :call RotateWindowFocus()<cr>
+nnoremap <silent> <leader>e :call RotateWindowFocus()<cr>
 
 " Bubble single lines
 " nmap <C-k> [e
