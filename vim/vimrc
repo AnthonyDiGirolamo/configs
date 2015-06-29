@@ -429,7 +429,7 @@ nnoremap <leader>c :copen<cr>
 " Minimal Colemak Settings
 
 " ii remmaped to esc
-" inoremap ii <Esc>l
+inoremap ii <Esc>l
 
 " h/l stay in default colemak locations
 " n/e remapped to down up
@@ -488,7 +488,7 @@ endfunction
 let g:arpeggio_timeoutlen=30
 function! ChordsSetup()
   Arpeggio inoremap def def<CR>end<Esc>kA<Space>
-  Arpeggio inoremap ne <ESC>
+  " Arpeggio inoremap ne <ESC>
   Arpeggio inoremap sel <C-R>=SmartDot()<CR>select {  }<Left><Left>
 endfunction
 autocmd VimEnter * call ChordsSetup()
