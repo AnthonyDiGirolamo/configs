@@ -70,9 +70,6 @@
 [submodule "vim/vim/bundle/vim-airline.git"]
 	path = vim/vim/bundle/vim-airline.git
 	url = https://github.com/bling/vim-airline.git
-[submodule "emacs/emacs.d/moe-theme"]
-	path = emacs/emacs.d/moe-theme
-	url = https://github.com/kuanyui/moe-theme.el.git
 [submodule "vim/vim/bundle/vim-coffee-script.git"]
 	path = vim/vim/bundle/vim-coffee-script.git
 	url = https://github.com/kchmck/vim-coffee-script.git

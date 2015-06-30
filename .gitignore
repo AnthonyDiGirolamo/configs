@@ -32,3 +32,4 @@ emacs/emacs.d/elpa/*.txt
 emacs/emacs.d/auto-save-list/
 emacs/emacs.d/places
 emacs/emacs.d/smex-items
+emacs/emacs.d/recentf
