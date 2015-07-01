@@ -206,7 +206,7 @@ noremap <leader>xl :w<CR>:!make `basename % .tex`; open `basename % .tex`.pdf &<
 " noremap <M-v> "*p
 
 " Map (redraw screen) to also turn off search highlighting until the next search
-nnoremap <leader>/ :nohl<CR><C-L>
+nnoremap <C-L> :nohl<CR><C-L>
 
 " nnoremap <leader>l :set nonumber nowrap\|vertical resize 30<cr><c-w><c-w>:set number wrap<cr>
 nnoremap <silent> <leader>e :call RotateWindowFocus()<cr>
@@ -452,12 +452,12 @@ nnoremap <cr> :
 nnoremap g<cr> <cr>
 nnoremap q<cr> q:
 
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-n> :TmuxNavigateDown<cr>
-nnoremap <silent> <c-e> :TmuxNavigateUp<cr>
-nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
+" let g:tmux_navigator_no_mappings = 1
+" nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+" nnoremap <silent> <c-n> :TmuxNavigateDown<cr>
+" nnoremap <silent> <c-e> :TmuxNavigateUp<cr>
+" nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+" nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
 
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_keys = 'gpldhtnfusewyriaorisecmvk'
