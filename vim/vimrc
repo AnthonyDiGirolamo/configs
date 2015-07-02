@@ -439,8 +439,8 @@ nnoremap e gk|xnoremap e gk|onoremap e gk|
 nnoremap k n|xnoremap k n|onoremap k n|
 nnoremap K N|xnoremap K N|onoremap K N|
 " Bubble single lines
-" nmap <C-e> [e
-" nmap <C-n> ]e
+nmap <C-e> [e
+nmap <C-n> ]e
 " Bubble multiple lines
 vmap <C-e> [egv
 vmap <C-n> ]egv
