@@ -166,7 +166,8 @@ noremap <leader>s :setlocal spell! spelllang=en_us<cr>
 let @d = 'V%:s/\vDateTime.now|Time.zone.now/current_time/g{jocurrent_time = Time.zone.now.change(usec: 0)}'
 let @j = 'V:s/\\//gV:s/,/,\r/gvip=vip:s/":\[/": [\r/gvip:s/":{/": {\r/gvip:s/{"/{ "/gvip=vip:'
 
-nnoremap <leader>d :diffput<CR>:diffupdate<CR>
+" nnoremap <leader>d :diffput<CR>:diffupdate<CR>
+nnoremap <leader>d :Ex<CR>
 
 nnoremap <leader>v :tabe $MYVIMRC<CR>
 
@@ -492,4 +493,3 @@ function! ChordsSetup()
   Arpeggio inoremap sel <C-R>=SmartDot()<CR>select {  }<Left><Left>
 endfunction
 autocmd VimEnter * call ChordsSetup()
-
