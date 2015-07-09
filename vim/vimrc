@@ -414,7 +414,9 @@ function! RunTests(filename)
   if match(a:filename, '\.feature$') != -1
     exec ":Dispatch bundle exec cucumber " . a:filename
   else
-    if filereadable("Gemfile")
+    if filereadable("./bin/rspec")
+      exec ":Dispatch ./bin/rspec --color " . a:filename
+    elseif filereadable("Gemfile")
       exec ":Dispatch bundle exec rspec --color " . a:filename
     elseif filereadable("runtests.py")
       exec ":Dispatch py.test " . a:filename
