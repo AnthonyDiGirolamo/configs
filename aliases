@@ -302,9 +302,9 @@ function random-colors {
 
 . ~/Preferences/base16-shell/base16-eighties.dark.sh
 
-# if [[ -n ${BASH_VERSION-} ]]; then
+if [[ -n ${BASH_VERSION-} ]]; then
   . ~/.shell_prompt.sh
-# fi
+fi
 
 alias rats='cd ~/projects/rats && dotbin'
 alias rats-reporting='cd ~/projects/rats-reporting && dotbin'
@@ -317,4 +317,5 @@ NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 # echo "prefix = $NPM_PACKAGES" > ~/.npmrc
 
 alias c=cd
+xset r rate 200 30
 
