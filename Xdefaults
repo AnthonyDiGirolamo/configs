@@ -36,6 +36,7 @@ xterm*highlightSelection: true
 !xterm*scrollBar:       true
 
 ! URXVT
+URxvt.modifier: mod1
 URxvt*loginShell: true
 URxvt.borderless: false
 URxvt*dynamicColors: on

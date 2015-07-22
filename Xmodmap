@@ -1,0 +1,4 @@
+clear Mod1
+keycode 66 = Meta_L
+keycode 69 = Meta_R
+add Mod1 = Meta_L Meta_R
