@@ -300,7 +300,9 @@ function random-colors {
   . $rf
 }
 
-. ~/Preferences/base16-shell/base16-eighties.dark.sh
+alias base16='source ~/Preferences/base16-shell/base16-eighties.dark.sh'
+alias solarized='source ~/Preferences/base16-shell/base16-solarized.dark.sh'
+base16
 
 if [[ -n ${BASH_VERSION-} ]]; then
   . ~/.shell_prompt.sh
