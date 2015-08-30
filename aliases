@@ -319,5 +319,5 @@ NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 # echo "prefix = $NPM_PACKAGES" > ~/.npmrc
 
 alias c=cd
-xset r rate 200 30
+which xset &> /dev/null && xset r rate 200 30
 
