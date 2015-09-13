@@ -5,7 +5,7 @@ bin/dwm
 dmenu/dmenu
 icons/
 original_mac
-fonts/FSD - PragmataPro.ttf
+fonts/FSD - PragmataPro*
 themes
 vim/vim/.VimballRecord
 vim/vim/.netrwhist
