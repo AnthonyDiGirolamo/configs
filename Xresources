@@ -1,12 +1,13 @@
 ! Font options - ~/.fonts.conf seems to override this
 ! Resolution for Xft in dots per inch (e.g. 96)
-xft.dpi:       108
+Xft.dpi:       108
 ! Type of subpixel antialiasing (none, rgb, bgr, vrgb or vbgr)
-xft.rgba:      rgba
-xft.antialias: true
-xft.hinting:   true
+Xft.rgba:      rgba
+Xft.antialias: 1
+Xft.hinting:   1
+Xft.autohint:  0
 ! What degree of hinting to use (hintnone, hintslight, hintmedium, or hintfull)
-xft.hintstyle: hintfull
+Xft.hintstyle: hintfull
 
 #define FONTSIZE 15
 
