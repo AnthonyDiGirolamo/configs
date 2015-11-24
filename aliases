@@ -231,6 +231,8 @@ if [ $? -eq 0 ]; then
   export EDITOR='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
   # xmodmap -e "keycode 119 = Insert"
   alias f12insert='xmodmap -e "keycode 119 = Insert"'
+  alias mission_controll_animation_disable='defaults write com.apple.dock expose-animation-duration -float 0; killall Dock'
+  alias mission_controll_animation_enable='defaults delete com.apple.dock expose-animation-duration; killall Dock'
 else
 # Linux
   #eval "`dircolors -b`"
