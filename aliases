@@ -264,8 +264,8 @@ stty -ixon
 alias vims="vim -c 'colors solarized'"
 alias v=vim
 alias emacs='TERM=xterm-256color emacs -nw'
-alias em=emacs
 alias e=emacs
+alias ec="emacsclient --alternate-editor='' --no-wait --create-frame"
 export VISUAL='vim'
 
 alias tmux='tmux -2'
@@ -335,4 +335,3 @@ export NPM_CONFIG_PREFIX=$NPM_PACKAGES
 
 alias c=cd
 which xset &> /dev/null &&  [ ! -z "$DISPLAY" ] &&  xset r rate 200 30
-
