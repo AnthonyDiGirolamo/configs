@@ -1,5 +1,8 @@
-AllCops:
-  RunRailsCops: true
+# AllCops:
+#   RunRailsCops: true
+
+Rails:
+  Enabled: true
 
 Style/Encoding:
   Enabled: true
