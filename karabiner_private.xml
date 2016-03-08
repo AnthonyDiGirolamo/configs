@@ -84,7 +84,8 @@
     <appendix></appendix>
     <appendix>You must check at least this box to activate the SpaceFN features.</appendix>
     <appendix></appendix>
-    <appendix>ARROWS:  Space+NEHL=arrows</appendix> nene
+    <appendix>ARROWS:  Space+NEHL=arrows</appendix>
+    <appendix>Space+b=autorepeat space</appendix>
     <identifier>remap.KB607_colemakarrows</identifier>
 
     <!-- Space is our new Fn modifier -->
@@ -100,6 +101,10 @@
                           KeyCode::CURSOR_DOWN</autogen>
     <autogen>--KeyToKey-- KeyCode::U, ModifierFlag::EXTRA4,
                           KeyCode::CURSOR_RIGHT</autogen>
+    <!-- space+B is an autorepeat space -->
+    <autogen>--KeyToKey-- KeyCode::B, ModifierFlag::EXTRA4,
+                          KeyCode::SPACE</autogen>
+
   </item>
 
   <item>
