@@ -263,9 +263,16 @@ stty -ixon
 
 alias vims="vim -c 'colors solarized'"
 alias v=vim
+
+EMACSHOMEPREFIX=$HOME/apps/emacs245
+if [ -e $EMACSHOMEPREFIX ] ; then
+  export PATH="$EMACSHOMEPREFIX/bin:$PATH"
+fi
+
 alias emacs='TERM=xterm-256color emacs -nw'
 alias e=emacs
-alias ec="emacsclient --alternate-editor='' --no-wait --create-frame"
+alias ecg="emacsclient --alternate-editor='' --no-wait --create-frame"
+alias ec="emacsclient --alternate-editor='' -nw"
 export VISUAL='vim'
 
 alias tmux='tmux -2'

@@ -49,7 +49,7 @@ URxvt.loginShell: true
 URxvt.saveLines: 5000
 URxvt.scrollBar: false
 URxvt.scrollstyle: plain
-URxvt*termName: screen-256color
+URxvt*termName: xterm-256color
 URxvt.transparent: false
 URxvt.visualBell: false
 
