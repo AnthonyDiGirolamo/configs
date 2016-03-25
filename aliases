@@ -225,7 +225,8 @@ if [ $? -eq 0 ]; then
   export PATH=/opt/local/bin:$PATH
   # brew install coreutils
   # eval "`gdircolors -b`"
-  alias ls='/usr/local/bin/gls --color=auto'
+  unalias gls
+  alias ls='gls --color=auto'
   alias gvim=mvim
   alias vim='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
   export EDITOR='TERM=xterm-256color /Applications/MacVim.app/Contents/MacOS/Vim'
