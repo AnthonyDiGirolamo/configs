@@ -272,7 +272,7 @@ fi
 
 alias emacs='TERM=xterm-256color emacs -nw'
 alias e=emacs
-alias ecg="emacsclient --alternate-editor='' --no-wait --create-frame"
+alias ecg="emacsclient --alternate-editor='' --no-wait --create-frame &"
 alias ec="emacsclient --alternate-editor='' -nw"
 export VISUAL='vim'
 
