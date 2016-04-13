@@ -222,7 +222,6 @@ function setupenv_full {
 # MacOS Specific Settings
 uname -a | grep -qs Darwin
 if [ $? -eq 0 ]; then
-  export PATH=/opt/local/bin:$PATH
   # brew install coreutils
   # eval "`gdircolors -b`"
   unalias gls
@@ -257,6 +256,29 @@ else
   alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
   alias f12insert='xmodmap -e "keycode 96 = Insert"'
   unset LESS
+
+  if [ -d "$HOME/homebrew/bin" ]; then
+    export PATH=$HOME/homebrew/bin:$PATH
+  fi
+
+  function restartgpgagent {
+    if test -f $HOME/.gpg-agent-info && \
+       kill -0 `cut -d: -f 2 $HOME/.gpg-agent-info` 2>/dev/null; then
+      GPG_AGENT_INFO=`cat $HOME/.gpg-agent-info`
+      export GPG_AGENT_INFO
+    else
+      eval `gpg-agent --daemon --write-env-file`
+    fi
+  }
+
+  if [ -f "${HOME}/.gpg-agent-info" ]; then
+      . "${HOME}/.gpg-agent-info"
+      export GPG_AGENT_INFO
+      export SSH_AUTH_SOCK
+  fi
+
+  GPG_TTY=$(tty)
+  export GPG_TTY
 fi
 
 # Disable CTRL-S Freeze
@@ -336,7 +358,7 @@ alias rats-reporting='cd ~/projects/rats-reporting && dotbin'
 NPM_PACKAGES="$HOME/.npm-packages"
 mkdir -p $NPM_PACKAGES/bin
 export PATH="$NPM_PACKAGES/bin:$PATH"
-export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+export MANPATH="$NPM_PACKAGES/share/man:$MANPATH"
 # NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 # echo "prefix = $NPM_PACKAGES" > ~/.npmrc
 export NPM_CONFIG_PREFIX=$NPM_PACKAGES
