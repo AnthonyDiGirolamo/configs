@@ -24,6 +24,11 @@ function fixp_noaa {
   chgrp -Rv ncrcstaff $@
 }
 
+alias base16='source ~/Preferences/base16-shell/base16-eighties.dark.sh'
+base16
+alias solarized='source ~/Preferences/base16-shell/base16-solarized.dark.sh'
+alias c=cd
+
 alias which='which -a'
 alias b="bundle"
 alias bi="b install --path vendor"
@@ -62,6 +67,7 @@ alias gs='git status'
 alias gc='git commit'
 alias gca='git commit -a'
 #alias gd='git diff --no-color | vim -'
+
 function gd {
   git diff --no-color $@ | vim +'set bt=nowrite' -
 }
@@ -84,7 +90,6 @@ function git_isolate_directory_history {
   git gc --aggressive
   git prune
 }
-
 
 alias d='dirs -v'
 alias p='pushd'
@@ -233,19 +238,31 @@ if [ $? -eq 0 ]; then
   alias f12insert='xmodmap -e "keycode 119 = Insert"'
   alias mission_controll_animation_disable='defaults write com.apple.dock expose-animation-duration -float 0; killall Dock'
   alias mission_controll_animation_enable='defaults delete com.apple.dock expose-animation-duration; killall Dock'
+  function clipboard_as_html {
+    osascript -e 'the clipboard as "HTML"' | ruby -ne 'puts([$_[10..-3]].pack("H*"))'
+  }
 
   if [ -d "$HOME/homebrew/bin" ]; then
     export PATH=$HOME/homebrew/bin:$PATH
+    export MANPATH=$HOME/homebrew/share/man:$MANPATH
   fi
 
-  function restartgpgagent {
-    if test -f $HOME/.gpg-agent-info && \
-       kill -0 `cut -d: -f 2 $HOME/.gpg-agent-info` 2>/dev/null; then
-      GPG_AGENT_INFO=`cat $HOME/.gpg-agent-info`
-      export GPG_AGENT_INFO
-    else
-      eval `gpg-agent --daemon --write-env-file`
-    fi
+  function gpgastart {
+    eval `gpg-agent --daemon --write-env-file` && \
+    cat ~/.gpg-agent-info
+  }
+
+  function gpgarestart {
+    # if test -f $HOME/.gpg-agent-info && \
+    #    kill -0 `cut -d: -f 2 $HOME/.gpg-agent-info` 2>/dev/null; then
+    #   GPG_AGENT_INFO=`cat $HOME/.gpg-agent-info`
+    #   export GPG_AGENT_INFO
+    # else
+    #   eval `gpg-agent --daemon --write-env-file`
+    # fi
+    killall -v -u $USER gpg-agent && \
+    rm -f ~/.gpg-agent-info && \
+    gpgastart
   }
 
   if [ -f "${HOME}/.gpg-agent-info" ]; then
@@ -279,6 +296,8 @@ else
   alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
   alias f12insert='xmodmap -e "keycode 96 = Insert"'
   unset LESS
+
+  which xset &> /dev/null &&  [ ! -z "$DISPLAY" ] &&  xset r rate 200 30
 fi
 
 # Disable CTRL-S Freeze
@@ -333,10 +352,6 @@ function random-colors {
   . $rf
 }
 
-alias base16='source ~/Preferences/base16-shell/base16-eighties.dark.sh'
-alias solarized='source ~/Preferences/base16-shell/base16-solarized.dark.sh'
-base16
-
 function load_qwerty_xorg {
   setxkbmap -layout us
 }
@@ -349,12 +364,19 @@ function load_colemak_console {
   sudo loadkeys colemak
 }
 
+function mailfetchloop {
+  while [ 1 ]
+  do
+    mbsync -V gmail
+    date
+    sleep 120
+  done
+}
+alias mfl=mailfetchloop
+
 if [[ -n ${BASH_VERSION-} ]]; then
   . ~/.shell_prompt.sh
 fi
-
-alias rats='cd ~/projects/rats && dotbin'
-alias rats-reporting='cd ~/projects/rats-reporting && dotbin'
 
 NPM_PACKAGES="$HOME/.npm-packages"
 mkdir -p $NPM_PACKAGES/bin
@@ -364,5 +386,3 @@ export MANPATH="$NPM_PACKAGES/share/man:$MANPATH"
 # echo "prefix = $NPM_PACKAGES" > ~/.npmrc
 export NPM_CONFIG_PREFIX=$NPM_PACKAGES
 
-alias c=cd
-which xset &> /dev/null &&  [ ! -z "$DISPLAY" ] &&  xset r rate 200 30
