@@ -268,6 +268,60 @@
                           KeyCode::PC_PAUSE</autogen>
   </item>
 
+  <item>
+    <name>Fn+{letter,number,symbol} to `Hyper` (⌃⌥⌘)+{letter,number,symbol}</name>
+    <appendix>Fn+Escape,Space,Tab to ⌃⌥⌘+ Escape,Space,Tab</appendix>
+    <appendix>(+ Fn+click to ⌃⌥⌘+click)</appendix>
+    <appendix/>
+    <appendix>Makes Fn key behave as a ⌃⌥⌘ key, but only when pressed in combination with</appendix>
+    <appendix>a letter, number, symbol or escape,space,tab. Fn behaves as a normal Fn key otherwise.</appendix>
+    <identifier>remap.fnletter_to_ctrlletter_noshift</identifier>
+
+    <include path="{{ ENV_Karabiner_Resources }}/include/checkbox/commons/wrap_keys/alphabet.xml">
+      <replacementdef>
+        <replacementname>BEFORE</replacementname>
+        <replacementvalue>ModifierFlag::FN</replacementvalue>
+      </replacementdef>
+      <replacementdef>
+        <replacementname>AFTER</replacementname>
+        <replacementvalue>ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::COMMAND_L </replacementvalue>
+      </replacementdef>
+    </include>
+    <include path="{{ ENV_Karabiner_Resources }}/include/checkbox/commons/wrap_keys/number.xml">
+      <replacementdef>
+        <replacementname>BEFORE</replacementname>
+        <replacementvalue>ModifierFlag::FN</replacementvalue>
+      </replacementdef>
+      <replacementdef>
+        <replacementname>AFTER</replacementname>
+        <replacementvalue>ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::COMMAND_L </replacementvalue>
+      </replacementdef>
+    </include>
+    <include path="{{ ENV_Karabiner_Resources }}/include/checkbox/commons/wrap_keys/symbol.xml">
+      <replacementdef>
+        <replacementname>BEFORE</replacementname>
+        <replacementvalue>ModifierFlag::FN</replacementvalue>
+      </replacementdef>
+      <replacementdef>
+        <replacementname>AFTER</replacementname>
+        <replacementvalue>ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::COMMAND_L </replacementvalue>
+      </replacementdef>
+    </include>
+    <include path="{{ ENV_Karabiner_Resources }}/include/checkbox/commons/wrap_keys/pointing_button.xml">
+      <replacementdef>
+        <replacementname>BEFORE</replacementname>
+        <replacementvalue>ModifierFlag::FN</replacementvalue>
+      </replacementdef>
+      <replacementdef>
+        <replacementname>AFTER</replacementname>
+        <replacementvalue>ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::COMMAND_L </replacementvalue>
+      </replacementdef>
+    </include>
+    <autogen>__KeyToKey__ KeyCode::ESCAPE, ModifierFlag::FN, KeyCode::ESCAPE, ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::COMMAND_L </autogen>
+    <autogen>__KeyToKey__ KeyCode::SPACE,  ModifierFlag::FN, KeyCode::SPACE,  ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::COMMAND_L </autogen>
+    <autogen>__KeyToKey__ KeyCode::TAB,    ModifierFlag::FN, KeyCode::TAB,    ModifierFlag::CONTROL_L | ModifierFlag::OPTION_L | ModifierFlag::COMMAND_L </autogen>
+  </item>
+
 </root>
 
 
