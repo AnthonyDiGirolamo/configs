@@ -157,6 +157,7 @@ alias wd="pwd"
 alias sqltop="watch \"mysql -u root information_schema -e 'select * from processlist;'\""
 alias which="which -a"
 alias psme='ps afxu|grep -E "^$(whoami)"'
+alias psa='ps afxu| vim +"set bt=nowrite nowrap" -'
 
 # alias mutt='TERM=xterm-256color LD_LIBRARY_PATH=$HOME/apps/gdbm/lib:$HOME/apps/w3m/lib PATH=$HOME/apps/w3m/bin:$HOME/apps/mutt/bin:$HOME/apps/gdbm/bin:$HOME/apps/msmtp/bin:$HOME/apps/imapfilter/bin:$PATH mutt'
 export MAILDIR=$HOME/Mail
