@@ -298,7 +298,13 @@ else
   alias f12insert='xmodmap -e "keycode 96 = Insert"'
   unset LESS
 
-  which xset &> /dev/null &&  [ ! -z "$DISPLAY" ] &&  xset r rate 200 30
+  which xset &> /dev/null &&  [ ! -z "$DISPLAY" ] && xset r rate 200 30
+
+  function set-input-prefs {
+    xset r rate 200 30
+    xinput set-prop "anthony’s trackpad" "Synaptics Two-Finger Scrolling" 1, 1
+    xinput set-prop "anthony’s trackpad" "Synaptics Scrolling Distance" -156, -156
+  }
 fi
 
 # Disable CTRL-S Freeze
@@ -312,9 +318,9 @@ if [ -e $EMACSHOMEPREFIX ] ; then
   export PATH="$EMACSHOMEPREFIX/bin:$PATH"
 fi
 
-alias emacs='TERM=xterm-256color emacs -nw'
+alias e='TERM=xterm-256color emacs -nw'
+alias eg='emacs &'
 alias ew='emacs-w32 &'
-alias e=emacs
 alias ecg="emacsclient --alternate-editor='' --no-wait --create-frame &"
 alias ec="emacsclient --alternate-editor='' -nw"
 export VISUAL='vim'
@@ -386,4 +392,3 @@ export MANPATH="$NPM_PACKAGES/share/man:$MANPATH"
 # NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 # echo "prefix = $NPM_PACKAGES" > ~/.npmrc
 export NPM_CONFIG_PREFIX=$NPM_PACKAGES
-
