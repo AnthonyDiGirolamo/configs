@@ -136,6 +136,8 @@ URxvt.visualBell: false
 *.background:   base00
 *.cursorColor:  base05
 *.cursorColor2:  base05
+*.cursorUnderline: true
+
 ! Light
 !*.foreground:   base02
 !*.background:   base07
@@ -221,4 +223,3 @@ URxvt.visualBell: false
 !*color15:                 S_base3
 
 Xcursor.size: 32
-
