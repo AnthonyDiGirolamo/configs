@@ -319,6 +319,7 @@ if [ -e $EMACSHOMEPREFIX ] ; then
 fi
 
 alias e='TERM=xterm-256color emacs -nw'
+alias ea='/Applications/Emacs.app/Contents/MacOS/Emacs &'
 alias eg='emacs &'
 alias ew='emacs-w32 &'
 alias ecg="emacsclient --alternate-editor='' --no-wait --create-frame &"
