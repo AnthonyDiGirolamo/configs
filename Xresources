@@ -56,7 +56,6 @@ URxvt.visualBell: false
 ! URxvt.urgentOnBell: true
 ! URxvt.urlLauncher: chrome
 ! URxvt.internalBorder: 3
-! URxvt.cursorBlink: true
 ! URxvt.depth: 24
 ! URxvt.letterSpace: -1
 ! URxvt.shading: 100
@@ -137,6 +136,7 @@ URxvt.visualBell: false
 *.cursorColor:  base05
 *.cursorColor2:  base05
 *.cursorUnderline: true
+*.cursorBlink: true
 
 ! Light
 !*.foreground:   base02

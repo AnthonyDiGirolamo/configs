@@ -308,11 +308,15 @@ else
 
   which xset &> /dev/null &&  [ ! -z "$DISPLAY" ] && xset r rate 200 30
 
-  function set-input-prefs {
+  function setinputprefs {
     xset r rate 200 30
-    xinput set-prop "anthony’s trackpad" "Synaptics Two-Finger Scrolling" 1, 1
-    xinput set-prop "anthony’s trackpad" "Synaptics Scrolling Distance" -156, -156
+    xinput list --name-only | grep -qs 'anthony’s trackpad'
+    if [ $? -eq 0 ]; then
+      xinput set-prop 'anthony’s trackpad' 'Synaptics Two-Finger Scrolling' 1, 1
+      xinput set-prop 'anthony’s trackpad' 'Synaptics Scrolling Distance' -156, -156
+    fi
   }
+  setinputprefs
 fi
 
 # Disable CTRL-S Freeze
