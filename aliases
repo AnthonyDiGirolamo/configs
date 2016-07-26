@@ -307,8 +307,6 @@ else
   alias f12insert='xmodmap -e "keycode 96 = Insert"'
   unset LESS
 
-  which xset &> /dev/null &&  [ ! -z "$DISPLAY" ] && xset r rate 200 30
-
   function setinputprefs {
     xset r rate 200 30
     xinput list --name-only | grep -qs 'anthony’s trackpad'
@@ -317,7 +315,10 @@ else
       xinput set-prop 'anthony’s trackpad' 'Synaptics Scrolling Distance' -156, -156
     fi
   }
-  setinputprefs
+
+  if which xset &> /dev/null &&  [ ! -z "$DISPLAY" ]; then
+    setinputprefs
+  fi
 fi
 
 # Disable CTRL-S Freeze
