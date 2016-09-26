@@ -11,6 +11,9 @@ Xft.hintstyle: hintslight
 
 #define FONTSIZE 16
 
+! xterm*faceName: 6x9
+! URxvt*font:     6x9
+! URxvt*boldFont: 6x9
 xterm*faceName: xft:PragmataPro:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=96
 URxvt*font:     xft:PragmataPro:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=96
 URxvt*boldFont: xft:PragmataPro:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=96

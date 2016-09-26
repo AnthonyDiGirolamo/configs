@@ -27,13 +27,13 @@ function fixp_noaa {
 alias base16='source ~/Preferences/base16-shell/base16-eighties.dark.sh'
 alias solarized='source ~/Preferences/base16-shell/base16-solarized.dark.sh'
 
-if [[ $TERM == *"eterm"* ]]
-then
-    export TERM=xterm-256color
-else
-    # If not in emacs load base16 shell colors
-    base16
-fi
+# if [[ $TERM == *"eterm"* ]]
+# then
+#     export TERM=xterm-256color
+# else
+#     # If not in emacs load base16 shell colors
+#     base16
+# fi
 
 
 alias which='which -a'
@@ -58,6 +58,10 @@ function railsthinssl {
   tailpid=`jobs -p | awk '/tail/ {print $3}'`
   bundle exec thin start --ssl --ssl-verify --ssl-key-file server.key --ssl-cert-file server.crt
   kill $tailpid
+}
+
+function linenumber () {
+  sed -n "$1p" $2
 }
 
 alias xdef='xrdb -load ~/.Xdefaults'
@@ -412,5 +416,8 @@ export MANPATH="$NPM_PACKAGES/share/man:$MANPATH"
 # NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 # echo "prefix = $NPM_PACKAGES" > ~/.npmrc
 export NPM_CONFIG_PREFIX=$NPM_PACKAGES
+
+# for python pip install --user
+export PATH="$HOME/.local/bin:$PATH"
 
 . ~/.aliases-local
