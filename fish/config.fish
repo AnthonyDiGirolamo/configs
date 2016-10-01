@@ -1,13 +1,8 @@
-# . /Users/anthony/Preferences/fish/vi-mode.fish
-# function fish_user_key_bindings
-#   vi_mode_insert
-# end
-
 # function fish_prompt
 #   printf '[%s]%s %s@%s %s⮀ %s %s⮀%s %s ' $vi_mode (set_color -b black) (whoami) (hostname|cut -d .  -f 1) (set_color -b blue black) (prompt_pwd) (set_color -b normal blue) (set_color normal)
 # end
 
-fish_vi_mode
+fish_vi_key_bindings
 
 function pd
   pushd $argv
@@ -30,3 +25,6 @@ function dl
     echo $dir
   end
 end
+
+bind \cp prevd-or-backward-word
+bind \cn nextd-or-forward-word
