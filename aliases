@@ -67,6 +67,7 @@ function linenumber () {
 alias xdef='xrdb -load ~/.Xdefaults'
 
 alias lltr='ll -tr'
+alias llsr='ll -Sr'
 alias lla='ls -lha'
 alias ll='ls -lh'
 alias la='ls -a'
@@ -341,6 +342,7 @@ alias eg='emacs &'
 
 uname -a | grep -qs Darwin ; if [ $? -eq 0 ]; then
     alias ew='/Applications/Emacs.app/Contents/MacOS/Emacs &'
+    alias e='/Applications/Emacs.app/Contents/MacOS/Emacs -nw'
 else
     alias ew='emacs-w32 &'
 fi
