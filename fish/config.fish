@@ -63,29 +63,32 @@ function fish_mode_prompt --description "Displays the current mode"
   end
 end
 
-# aliases
-alias lltr='ll -tr'
-alias llsr='ll -Sr'
-alias lla='ls -lha'
-alias ll='ls -lh'
-alias la='ls -a'
-alias l='ls -CF'
+function set-my-aliases
+  # aliases
+  alias lltr='ll -tr'
+  alias llsr='ll -Sr'
+  alias lla='ls -lha'
+  alias ll='ls -lh'
+  alias la='ls -a'
+  alias l='ls -CF'
 
-alias gll='git l'
-alias gs='git status'
-alias ga='git add'
-alias gc='git commit'
-alias gca='git commit -a'
-alias gwd='git diff'
-alias gwdc='git diff --cached'
-alias gp='git pull'
-alias gpp='git push'
-alias gco='git checkout'
+  alias gll='git l'
+  alias gs='git status'
+  alias ga='git add'
+  alias gc='git commit'
+  alias gca='git commit -a'
+  alias gwd='git diff'
+  alias gwdc='git diff --cached'
+  alias gp='git pull'
+  alias gpp='git push'
+  alias gco='git checkout'
 
-# fish specific aliases
-alias u='cd ..'
-alias o=prevd
-alias d=dirh
+  # fish specific aliases
+  alias u='cd ..'
+  alias o=prevd
+  alias d=dirh
+end
+set-my-aliases
 
 function dl --description "always vertical dirh"
   for dir in $dirprev
@@ -106,7 +109,7 @@ end
 
 function source-bash-aliases --description "Try to source bash aliases, not fully working"
   bash -i -c 'alias' > ~/.active_aliases
-  for line in (cat .active_aliases)
+  for line in (cat ~/.active_aliases) # | grep 'vim\|emacs'
     set_color -b normal $powerline_blue2
     echo $line
     set_color -b normal normal
