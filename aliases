@@ -27,13 +27,13 @@ function fixp_noaa {
 alias base16='source ~/Preferences/base16-shell/base16-eighties.dark.sh'
 alias solarized='source ~/Preferences/base16-shell/base16-solarized.dark.sh'
 
-# if [[ $TERM == *"eterm"* ]]
-# then
-#     export TERM=xterm-256color
-# else
-#     # If not in emacs load base16 shell colors
-#     base16
-# fi
+if [[ $TERM == *"eterm"* ]]
+then
+    export TERM=xterm-256color
+else
+    # If not in emacs load base16 shell colors
+    base16
+fi
 
 
 alias which='which -a'
@@ -195,23 +195,23 @@ alias loadsmithy='source /sw/tools/smithy/environment.sh'
 
 alias gem_uninstall_all='gem list | cut -d" " -f1 | xargs gem uninstall -aIx'
 
-export AG_IGNORES=" \
- --ignore-dir 'vendor/ruby' \
- --ignore-dir 'log' \
- --ignore-dir '.hg' \
- --ignore-dir '.svn' \
- --ignore-dir '.git' \
- --ignore-dir '.bzr' \
- --ignore '*.eot' \
- --ignore '*.woff' \
- --ignore '*.ttf' \
- --ignore '*.svg' \
- --ignore '*.gif' \
- --ignore '*.png' \
- --ignore '*.jpg' \
- --ignore 'tags' "
+# export AG_IGNORES=" \
+#  --ignore-dir 'vendor/ruby' \
+#  --ignore-dir 'log' \
+#  --ignore-dir '.hg' \
+#  --ignore-dir '.svn' \
+#  --ignore-dir '.git' \
+#  --ignore-dir '.bzr' \
+#  --ignore '*.eot' \
+#  --ignore '*.woff' \
+#  --ignore '*.ttf' \
+#  --ignore '*.svg' \
+#  --ignore '*.gif' \
+#  --ignore '*.png' \
+#  --ignore '*.jpg' \
+#  --ignore 'tags' "
 
-alias ag="ag $AG_IGNORES"
+# alias ag="ag $AG_IGNORES"
 
 function vimag {
   vim -f $(ag -l $@)
