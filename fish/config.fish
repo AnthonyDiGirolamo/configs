@@ -77,9 +77,10 @@ alias ga='git add'
 alias gc='git commit'
 alias gca='git commit -a'
 alias gwd='git diff'
-alias gdc='git diff --cached'
+alias gwdc='git diff --cached'
 alias gp='git pull'
 alias gpp='git push'
+alias gco='git checkout'
 
 # fish specific aliases
 alias u='cd ..'
