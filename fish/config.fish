@@ -17,6 +17,7 @@ if string match -r 'Android' (uname -a)
   set using_android 1
   set powerline_right_arrow ''
 else
+  set using_android 0
   set powerline_right_arrow '⮀'
 end
 
@@ -26,7 +27,6 @@ set powerline_blue2 87afff
 
 function fish_prompt
   set_color -b $powerline_blue1 black
-  # echo -n '' (prompt_pwd) ''
   if test 1 != $using_android
     printf ' %s@%s ' (whoami) (hostname|cut -d .  -f 1)
   end
