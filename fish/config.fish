@@ -13,8 +13,14 @@ bind -M insert \cn nextd-or-forward-word
 fish_vi_key_bindings
 
 # Prompt Setup
-set powerline_right_arrow ''
-set powerline_right_arrow '⮀'
+switch (uname -o)
+  case Android
+    set using_android 1
+    set powerline_right_arrow ''
+  case '*'
+    set powerline_right_arrow '⮀'
+end
+
 set powerline_insert 5f5fff
 set powerline_blue1 5f87ff
 set powerline_blue2 87afff
@@ -22,7 +28,9 @@ set powerline_blue2 87afff
 function fish_prompt
   set_color -b $powerline_blue1 black
   # echo -n '' (prompt_pwd) ''
-  printf ' %s@%s ' (whoami) (hostname|cut -d .  -f 1)
+  if test 1 != $using_android
+    printf ' %s@%s ' (whoami) (hostname|cut -d .  -f 1)
+  end
   set_color -b $powerline_blue2 $powerline_blue1
   echo -n $powerline_right_arrow
 
