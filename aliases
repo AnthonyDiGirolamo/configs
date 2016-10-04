@@ -421,5 +421,7 @@ export NPM_CONFIG_PREFIX=$NPM_PACKAGES
 
 # for python pip install --user
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/Library/Python/2.7/bin:$PATH"
+
 
 . ~/.aliases-local
