@@ -13,12 +13,11 @@ bind -M insert \cn nextd-or-forward-word
 fish_vi_key_bindings
 
 # Prompt Setup
-switch (uname -o)
-  case Android
-    set using_android 1
-    set powerline_right_arrow ''
-  case '*'
-    set powerline_right_arrow '⮀'
+if string match -r 'Android' (uname -a)
+  set using_android 1
+  set powerline_right_arrow ''
+else
+  set powerline_right_arrow '⮀'
 end
 
 set powerline_insert 5f5fff
