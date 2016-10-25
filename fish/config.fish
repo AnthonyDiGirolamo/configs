@@ -9,11 +9,14 @@ bind \cn nextd-or-forward-word
 bind -M insert \cp prevd-or-backward-word
 bind -M insert \cn nextd-or-forward-word
 
+bind o history-token-search-backward
+bind p history-token-search-forward
+
 # turn on vi mode
 fish_vi_key_bindings
 
 # Prompt Setup
-if string match -r 'Android' (uname -a)
+if string match -q -r 'Android' (uname -a)
   set using_android 1
   set powerline_right_arrow ''
 else
@@ -78,6 +81,10 @@ function set-my-aliases
   alias ll='ls -lh'
   alias la='ls -a'
   alias l='ls -CF'
+
+  alias e='emacs -nw'
+  alias eg='emacs'
+  alias v='vim'
 
   alias gll='git l'
   alias gs='git status'
