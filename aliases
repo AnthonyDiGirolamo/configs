@@ -411,6 +411,11 @@ if [[ -n ${BASH_VERSION-} ]]; then
   . ~/.shell_prompt.sh
 fi
 
+function setgitauthor {
+  git config user.name "AnthonyDiGirolamo"
+  git config user.email "anthony.digirolamo@gmail.com"
+}
+
 NPM_PACKAGES="$HOME/.npm-packages"
 mkdir -p $NPM_PACKAGES/bin
 export PATH="$NPM_PACKAGES/bin:$PATH"
@@ -423,8 +428,9 @@ export NPM_CONFIG_PREFIX=$NPM_PACKAGES
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 
-. ~/.aliases-local
-
 if [[ -n ${ZSH_VERSION-} ]]; then
   setopt clobber
 fi
+
+. ~/.aliases-local
+
