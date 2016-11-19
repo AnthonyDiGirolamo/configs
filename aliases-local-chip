@@ -1,0 +1,10 @@
+xmodmap ~/.Xmodmap
+alias stickymods="xkbset sticky -twokey -latchlock ; xkbset exp 1 '=accessx' '=sticky' '=twokey' '=latchlock'"
+
+xset r rate 300 30
+
+alias b0='echo 0 > /sys/class/backlight/backlight/brightness'
+alias b1='echo 1 > /sys/class/backlight/backlight/brightness'
+alias b2='echo 2 > /sys/class/backlight/backlight/brightness'
+alias b3='echo 3 > /sys/class/backlight/backlight/brightness'
+

@@ -19,6 +19,9 @@ fish_vi_key_bindings
 if string match -q -r 'Android' (uname -a)
   set using_android 1
   set powerline_right_arrow ''
+else if string match -q -r 'chip' (uname -a)
+  set using_android 0
+  set powerline_right_arrow ''
 else
   set using_android 0
   set powerline_right_arrow '⮀'

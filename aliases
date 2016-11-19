@@ -321,9 +321,9 @@ else
     fi
   }
 
-  if which xset &> /dev/null &&  [ ! -z "$DISPLAY" ]; then
-    setinputprefs
-  fi
+  # if which xset &> /dev/null &&  [ ! -z "$DISPLAY" ]; then
+  #   setinputprefs
+  # fi
 fi
 
 # Disable CTRL-S Freeze
@@ -423,5 +423,8 @@ export NPM_CONFIG_PREFIX=$NPM_PACKAGES
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 
-
 . ~/.aliases-local
+
+if [[ -n ${ZSH_VERSION-} ]]; then
+  setopt clobber
+fi
