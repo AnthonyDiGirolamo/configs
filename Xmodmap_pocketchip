@@ -34,3 +34,4 @@ keycode 111 = Up NoSymbol Prior
 keycode 113 = Left NoSymbol Home
 keycode 114 = Right NoSymbol End
 keycode 116 = Down NoSymbol Next
+keycode 124 = Super_L
