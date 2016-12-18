@@ -1,0 +1,2 @@
+xkbcomp -I$HOME/.xkb ~/.xkb/keymap/mykbd $DISPLAY
+xcape -e 'Control_L=Escape'
