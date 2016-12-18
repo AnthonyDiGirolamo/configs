@@ -1,0 +1,4 @@
+xkb_symbols "swap_l_super_control" {
+    replace key <LWIN>  { [ Control_L ] };
+    replace key <LCTL> { [ Super_L ] };
+};
