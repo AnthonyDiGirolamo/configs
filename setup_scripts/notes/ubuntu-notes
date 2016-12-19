@@ -1,0 +1,22 @@
+sudo apt-get install zsh vim tmux
+
+sudo dpkg-reconfigure locales
+
+# add-apt-repository command
+sudo apt-get install software-properties-common
+
+# latest git
+sudo add-apt-repository ppa:git-core/ppa
+sudo apt-get update
+sudo apt-get install git
+
+# numix
+sudo add-apt-repository ppa:numix/ppa
+sudo apt-get update
+sudo apt-get install numix-gtk-theme numix-icon-theme-square
+
+# setup xcape
+sudo apt-get install git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
+git clone https://github.com/alols/xcape.git
+
+sudo apt-get install gtk-redshift
