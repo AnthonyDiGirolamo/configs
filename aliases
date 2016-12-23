@@ -428,6 +428,8 @@ export NPM_CONFIG_PREFIX=$NPM_PACKAGES
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 
+export PATH="$HOME/.luarocks/bin:$PATH"
+
 if [[ -n ${ZSH_VERSION-} ]]; then
   setopt clobber
 fi
