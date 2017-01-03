@@ -1,3 +1,8 @@
+function fish_title
+  true
+end
+echo $TERM
+
 # Bindings
 # Defaults:
 #   Alt+Up or Down to move through last argument history
