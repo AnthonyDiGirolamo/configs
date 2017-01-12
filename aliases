@@ -3,6 +3,18 @@ if [ -z "$PS1" ]; then
   return;
 fi
 
+if [[ "$TERM" == "dumb" ]]
+then
+    PS1='$ '
+    if [[ -n ${ZSH_VERSION-} ]]; then
+        unsetopt zle
+        unsetopt prompt_cr
+        unsetopt prompt_subst
+        unfunction precmd
+        unfunction preexec
+    fi
+fi
+
 export LC=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -435,4 +447,3 @@ if [[ -n ${ZSH_VERSION-} ]]; then
 fi
 
 . ~/.aliases-local
-

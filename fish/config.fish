@@ -1,7 +1,6 @@
 function fish_title
   true
 end
-echo $TERM
 
 # Bindings
 # Defaults:
@@ -17,8 +16,10 @@ bind -M insert \cn nextd-or-forward-word
 bind o history-token-search-backward
 bind p history-token-search-forward
 
-# turn on vi mode
-fish_vi_key_bindings
+if not set -q INSIDE_EMACS
+  # turn on vi mode
+  fish_vi_key_bindings
+end
 
 # Prompt Setup
 if string match -q -r 'Android' (uname -a)
