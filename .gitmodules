@@ -19,8 +19,8 @@
 [submodule "dwmstatus"]
 	path = dwmstatus
 	url = http://git.suckless.org/dwmstatus
-[submodule "emacs"]
-	path = emacs
+[submodule "emacs.d"]
+	path = emacs.d
 	url = https://github.com/AnthonyDiGirolamo/dotemacs
 [submodule "vim"]
 	path = vim
