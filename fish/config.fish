@@ -7,19 +7,17 @@ end
 #   Alt+Up or Down to move through last argument history
 #   Alt+Left or Right to move through dirhist
 
-# Ctrl+n or p to move through dirhist
-bind \cp prevd-or-backward-word
-bind \cn nextd-or-forward-word
-bind -M insert \cp prevd-or-backward-word
-bind -M insert \cn nextd-or-forward-word
+#   Alt+n or e to move through last argument history
+bind \e\cn history-token-search-forward
+bind \e\ce history-token-search-backward
+#   Alt+h or l to move through dirhist
+bind \e\ch prevd-or-backward-word
+bind \e\cl nextd-or-forward-word
 
-bind o history-token-search-backward
-bind p history-token-search-forward
-
-if not set -q INSIDE_EMACS
-  # turn on vi mode
-  fish_vi_key_bindings
-end
+# if not set -q INSIDE_EMACS
+#   # turn on vi mode
+#   fish_vi_key_bindings
+# end
 
 # Prompt Setup
 if string match -q -r 'Android' (uname -a)
