@@ -2,6 +2,7 @@ function fish_title
   true
 end
 
+function fish_user_key_bindings
 # Bindings
 # Defaults:
 #   Alt+Up or Down to move through last argument history
@@ -13,6 +14,7 @@ bind \e\ce history-token-search-backward
 #   Alt+h or l to move through dirhist
 bind \e\ch prevd-or-backward-word
 bind \e\cl nextd-or-forward-word
+end
 
 # if not set -q INSIDE_EMACS
 #   # turn on vi mode
