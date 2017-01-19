@@ -2,18 +2,18 @@ function fish_title
   true
 end
 
-function fish_user_key_bindings
 # Bindings
 # Defaults:
 #   Alt+Up or Down to move through last argument history
 #   Alt+Left or Right to move through dirhist
 
-#   Alt+n or e to move through last argument history
-bind \e\cn history-token-search-forward
-bind \e\ce history-token-search-backward
-#   Alt+h or l to move through dirhist
-bind \e\ch prevd-or-backward-word
-bind \e\cl nextd-or-forward-word
+function fish_user_key_bindings
+  # Alt+n or e to move through last argument history
+  bind \e\cn history-token-search-forward
+  bind \e\ce history-token-search-backward
+  # Alt+h or l to move through dirhist
+  bind \e\ch prevd-or-backward-word
+  bind \e\cl nextd-or-forward-word
 end
 
 # if not set -q INSIDE_EMACS
@@ -21,15 +21,14 @@ end
 #   fish_vi_key_bindings
 # end
 
+set using_android 0
 # Prompt Setup
 if string match -q -r 'Android' (uname -a)
   set using_android 1
   set powerline_right_arrow ''
 else if string match -q -r 'chip' (uname -a)
-  set using_android 0
   set powerline_right_arrow ''
 else
-  set using_android 0
   set powerline_right_arrow '⮀'
 end
 
@@ -39,9 +38,11 @@ set powerline_blue2 87afff
 
 function fish_prompt
   set_color -b $powerline_blue1 black
+  echo -n ' '
   if test 1 != $using_android
     printf ' %s@%s ' (whoami) (hostname|cut -d .  -f 1)
   end
+
   set_color -b $powerline_blue2 $powerline_blue1
   echo -n $powerline_right_arrow
 
@@ -77,9 +78,8 @@ function fish_mode_prompt --description "Displays the current mode"
         set_color --background $powerline_blue1 magenta
     end
     echo $powerline_right_arrow
-    set_color normal
-    # echo -n ' '
   end
+    set_color normal
 end
 
 function set-my-aliases
