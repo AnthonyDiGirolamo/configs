@@ -44,7 +44,8 @@ then
     export TERM=xterm-256color
 else
     # If not in emacs load base16 shell colors
-    base16
+    # base16
+    echo -n ''
 fi
 
 

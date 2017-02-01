@@ -35,6 +35,7 @@ end
 set powerline_insert 5f5fff
 set powerline_blue1 5f87ff
 set powerline_blue2 87afff
+set powerline_blue3 dfdfff
 
 function fish_prompt
   set_color -b $powerline_blue1 black
@@ -48,8 +49,20 @@ function fish_prompt
 
   set_color -b $powerline_blue2 black
   echo -n '' (prompt_pwd) ''
-  set_color -b normal $powerline_blue2
-  echo -n $powerline_right_arrow
+
+  if test -d .git
+    set_color -b $powerline_blue3 $powerline_blue2
+    echo -n $powerline_right_arrow
+
+    set_color -b $powerline_blue3 black
+    echo -n '' (git rev-parse --abbrev-ref HEAD) ''
+
+    set_color -b normal $powerline_blue3
+    echo -n $powerline_right_arrow
+  else
+    set_color -b normal $powerline_blue2
+    echo -n $powerline_right_arrow
+  end
 
   echo -n ' '
   set_color normal
