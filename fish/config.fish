@@ -21,15 +21,15 @@ end
 #   fish_vi_key_bindings
 # end
 
-set using_android 0
 # Prompt Setup
+set using_android 0
 if string match -q -r 'Android' (uname -a)
   set using_android 1
-  set powerline_right_arrow ''
-else if string match -q -r 'chip' (uname -a)
+end
+
+set powerline_right_arrow ''
+if string match -q -r 'chip' (uname -a)
   set powerline_right_arrow ''
-else
-  set powerline_right_arrow '⮀'
 end
 
 set powerline_insert 5f5fff
@@ -39,9 +39,10 @@ set powerline_blue3 dfdfff
 
 function fish_prompt
   set_color -b $powerline_blue1 black
-  echo -n ' '
   if test 1 != $using_android
     printf ' %s@%s ' (whoami) (hostname|cut -d .  -f 1)
+  else
+    echo -n ' '
   end
 
   set_color -b $powerline_blue2 $powerline_blue1
