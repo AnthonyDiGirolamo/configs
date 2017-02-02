@@ -36,8 +36,10 @@ function fixp_noaa {
   chgrp -Rv ncrcstaff $@
 }
 
-alias base16='source ~/Preferences/base16-shell/base16-eighties.dark.sh'
-alias solarized='source ~/Preferences/base16-shell/base16-solarized.dark.sh'
+alias base16dark='source ~/Preferences/base16-shell/base16-eighties.dark.sh'
+alias base16light='source ~/Preferences/base16-shell/base16-eighties.light.sh'
+alias solarizeddark='source ~/Preferences/base16-shell/base16-solarized.dark.sh'
+alias solarizedlight='source ~/Preferences/base16-shell/base16-solarized.light.sh'
 
 if [[ $TERM == *"eterm"* ]]
 then
@@ -391,7 +393,7 @@ if [[ -n $MODULESHOME ]]; then
   declare -f module &> /dev/null && module load git ruby
 fi
 
-function random-colors {
+function random-colors-dark {
   FILES=( ~/Preferences/base16-shell/base16-*.dark.sh )
   rf=$FILES[$RANDOM%$#FILES+1]
   echo $rf
