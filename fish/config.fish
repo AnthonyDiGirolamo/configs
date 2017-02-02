@@ -20,15 +20,19 @@ end
 #   fish_vi_key_bindings
 # end
 
+# Prepend PATH variable
+set -x PATH $HOME/.local/bin $PATH
+set -x fish_color_history_current yellow
 
 function set-my-aliases
-  # aliases
   alias lltr='ll -tr'
   alias llsr='ll -Sr'
   alias lla='ls -lha'
   alias ll='ls -lh'
   alias la='ls -a'
   alias l='ls -CF'
+
+  alias u='cd ..'
 
   alias e='emacs -nw'
   alias eg='emacs'
@@ -46,28 +50,27 @@ function set-my-aliases
   alias gco='git checkout'
 
   # fish specific aliases
-  alias u='cd ..'
   alias o=prevd
   alias d=dirh
+
+  function h --description "merge history from other sessions and display with less"
+    history --merge
+    history
+  end
 end
 set-my-aliases
 
-function dl --description "always vertical dirh"
-  for dir in $dirprev
-    echo $dir
-  end
-  set_color cyan
-  echo (pwd)
-  set_color normal
-  for dir in $dirnext
-    echo $dir
-  end
-end
-
-function h --description "merge history from other sessions and display with less"
-  history --merge
-  history
-end
+# function dl --description "always vertical dirh"
+#   for dir in $dirprev
+#     echo $dir
+#   end
+#   set_color cyan
+#   echo (pwd)
+#   set_color normal
+#   for dir in $dirnext
+#     echo $dir
+#   end
+# end
 
 # Prompt Setup
 set using_android 0
