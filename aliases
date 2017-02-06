@@ -447,6 +447,7 @@ export PATH="$HOME/.luarocks/bin:$PATH"
 
 if [[ -n ${ZSH_VERSION-} ]]; then
   setopt clobber
+  prompt kylewest
 fi
 
 . ~/.aliases-local
