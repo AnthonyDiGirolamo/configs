@@ -23,6 +23,7 @@ end
 # Prepend PATH variable
 set -x PATH $HOME/.local/bin $PATH
 set -x fish_color_history_current yellow
+set -x SHELL fish
 
 function set-my-aliases
   alias lltr='ll -tr'

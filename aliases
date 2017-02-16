@@ -308,19 +308,6 @@ else
   #eval "`dircolors -b`"
   alias ls='ls --color=auto'
 
-  if [ -f /etc/redhat-release ]; then
-    export PATH=/sw/redhat6/vim/7.4/rhel6.4_gnu4.4.7/bin:$PATH
-  elif [ -f /etc/SuSE-release ]; then
-    export PATH=/sw/xk6/vim/7.4/sles11.1_gnu4.3.4/bin:$PATH
-  fi
-  # alias vim=$HOME/apps/vim/bin/vim
-  # export PATH=/sw/cave/vim/7.3/centos5.8_gnu4.1.2/bin:$PATH
-  export PATH=/sw/cave/zsh/5.0.0/centos5.8_gnu4.1.2/bin:$PATH
-  export PATH=/sw/cave/bash/4.2/centos5.8_gnu4.1.2/bin:$PATH
-  export PATH=/sw/cave/tmux/1.7/centos5.8_gnu4.1.2/bin:$PATH
-  # export PATH=$HOME/apps/vim/bin:$PATH
-  export EDITOR=vim
-
   alias rrm='/bin/rm'
   alias rm='mv --verbose -i --target-directory ~/.Trash/'
   alias empty='/bin/rm -rvf ~/.Trash/* ; /bin/rm -rvf ~/.Trash/.*'
@@ -335,7 +322,6 @@ else
       xinput set-prop 'anthony’s trackpad' 'Synaptics Scrolling Distance' -156, -156
     fi
   }
-
   # if which xset &> /dev/null &&  [ ! -z "$DISPLAY" ]; then
   #   setinputprefs
   # fi
@@ -347,24 +333,33 @@ stty -ixon
 alias vims="vim -c 'colors solarized'"
 alias v=vim
 
-EMACSHOMEPREFIX=$HOME/apps/emacs245
+EMACSHOMEPREFIX=$HOME/apps/emacs251
 if [ -e $EMACSHOMEPREFIX ] ; then
   export PATH="$EMACSHOMEPREFIX/bin:$PATH"
 fi
 
-alias e='TERM=xterm-256color emacs -nw'
-alias eg='emacs &'
+alias ew='emacs-w32 &'
 
 uname -a | grep -qs Darwin ; if [ $? -eq 0 ]; then
-    alias ew='/Applications/Emacs.app/Contents/MacOS/Emacs &'
-    alias e='/Applications/Emacs.app/Contents/MacOS/Emacs -nw'
-else
-    alias ew='emacs-w32 &'
+  alias emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
 fi
 
-alias ecg="emacsclient --alternate-editor='' --no-wait --create-frame &"
-alias ec="emacsclient --alternate-editor='' -nw"
-export VISUAL='vim'
+alias e='TERM=xterm-256color emacs -nw'
+alias eg='emacs &'
+alias ed='emacs --daemon'
+alias ec="emacsclient --alternate-editor='' --no-wait"
+alias ecg="emacsclient --alternate-editor='' --no-wait --create-frame"
+
+if [ -z ${DISPLAY+x} ];
+then
+  # no display
+  export EDITOR="emacsclient --alternate-editor='' --no-wait"
+else
+  # display set
+  export EDITOR="emacsclient --alternate-editor='' --no-wait --create-frame"
+fi
+
+export VISUAL=$EDITOR
 
 alias tmux='tmux -2'
 
