@@ -80,7 +80,7 @@ if string match -q -r 'Android' (uname -a)
 end
 
 set powerline_right_arrow ''
-if string match -q -r 'chip' (uname -a)
+if string match -q -r 'raspberrypi|chip' (uname -a)
   set powerline_right_arrow ''
 end
 
