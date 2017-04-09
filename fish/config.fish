@@ -53,6 +53,8 @@ function set-my-aliases
   # fish specific aliases
   alias o=prevd
   alias d=dirh
+  alias pd=prevd
+  alias nd=nextd
 
   function h --description "merge history from other sessions and display with less"
     history --merge
