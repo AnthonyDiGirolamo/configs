@@ -10,9 +10,10 @@ then
         unsetopt zle
         unsetopt prompt_cr
         unsetopt prompt_subst
-        unfunction precmd
-        unfunction preexec
+        # unfunction precmd
+        # unfunction preexec
     fi
+    return;
 fi
 
 export LC=en_US.UTF-8
