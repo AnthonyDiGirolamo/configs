@@ -35,7 +35,7 @@ function set-my-aliases
 
   alias u='cd ..'
 
-  alias gll='git l'
+  alias gll='git log --abbrev-commit --graph --decorate --date=relative --all --pretty=format:\'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\''
   alias gs='git status'
   alias ga='git add'
   alias gc='git commit'
@@ -85,23 +85,30 @@ function set-my-aliases
   if test -d $EMACSHOMEPREFIX
     set -x PATH $EMACSHOMEPREFIX $PATH
   end
+
   if string match -q -r 'Darwin' (uname -a)
     alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
   end
 
-  alias ew='emacs-w32 &'
-  alias e='TERM=xterm-256color emacs -nw'
-  alias eg='emacs &'
-  alias ed='emacs --daemon'
+  alias ew="emacs-w32 &"
+  alias e="TERM=xterm-256color emacs -nw"
+  alias eg="emacs &"
+  alias ed="emacs --daemon"
   alias ec="emacsclient --alternate-editor='' -nw"
   alias ecg="emacsclient --alternate-editor='' --no-wait --create-frame"
-  if test -z $DISPLAY
-    # no display
-    set -x EDITOR "emacsclient --alternate-editor='' -nw"
-  else
-    # display set
-    set -x EDITOR "emacsclient --alternate-editor='' --no-wait --create-frame"
+
+  set -x EDITOR "vim"
+
+  if which emacsclient 1>/dev/null
+    if test -z $DISPLAY
+        # no display
+        set -x EDITOR "emacsclient --alternate-editor='' -nw"
+    else
+        # display set
+        set -x EDITOR "emacsclient --alternate-editor='' --no-wait --create-frame"
+    end
   end
+
   set -x VISUAL $EDITOR
 end
 set-my-aliases
