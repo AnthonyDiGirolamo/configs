@@ -354,10 +354,10 @@ alias ecg="emacsclient --alternate-editor='' --no-wait --create-frame"
 if [ -z ${DISPLAY+x} ];
 then
   # no display
-  export EDITOR="emacsclient --alternate-editor='' -nw"
+  export EDITOR="emacsclient --alternate-editor=''"
 else
   # display set
-  export EDITOR="emacsclient --alternate-editor='' --no-wait --create-frame"
+  export EDITOR="emacsclient --alternate-editor='' --create-frame"
 fi
 
 export VISUAL=$EDITOR
