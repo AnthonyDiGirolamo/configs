@@ -1,6 +1,6 @@
 ! Font options - ~/.fonts.conf seems to override this
 ! Resolution for Xft in dots per inch (e.g. 96)
-Xft.dpi:       112
+Xft.dpi:       101
 ! Type of subpixel antialiasing (none, rgb, bgr, vrgb or vbgr)
 Xft.rgba:      rgba
 Xft.antialias: 1
@@ -9,14 +9,14 @@ Xft.autohint:  0
 ! What degree of hinting to use (hintnone, hintslight, hintmedium, or hintfull)
 Xft.hintstyle: hintslight
 
-#define FONTSIZE 16
+#define FONTSIZE 18
 
 ! xterm*faceName: 6x9
 ! URxvt*font:     6x9
 ! URxvt*boldFont: 6x9
-xterm*faceName: xft:PragmataPro:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=96
-URxvt*font:     xft:PragmataPro:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=96
-URxvt*boldFont: xft:PragmataPro:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=96
+xterm*faceName: xft:PragmataPro:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=101
+URxvt*font:     xft:PragmataPro:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=101
+URxvt*boldFont: xft:PragmataPro:size=FONTSIZE:antialias=true:hinting=true:autohint=false:hintstyle=hintnone:dpi=101
 
 ! Extra options for xft font spec - ~/.fonts.conf seems to override this
 !:antialias=false:hintstyle=hintfull
@@ -44,7 +44,7 @@ URxvt.modifier: mod1
 URxvt*loginShell: true
 URxvt.borderless: false
 URxvt*dynamicColors: on
-URxvt*letterSpace: -1
+URxvt*letterSpace: -2
 URxvt.geometry: WINDOWGEOMETRY
 URxvt.imLocale: en_US.UTF-8
 URxvt.lineSpace: 0
