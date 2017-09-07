@@ -10,15 +10,6 @@
 [submodule "base16-xresources"]
 	path = base16-xresources
 	url = https://github.com/chriskempson/base16-xresources.git
-[submodule "dwm"]
-	path = dwm
-	url = http://git.suckless.org/dwm
-[submodule "dmenu"]
-	path = dmenu
-	url = http://git.suckless.org/dmenu
-[submodule "dwmstatus"]
-	path = dwmstatus
-	url = http://git.suckless.org/dwmstatus
 [submodule "emacs.d"]
 	path = emacs.d
 	url = https://github.com/AnthonyDiGirolamo/dotemacs
