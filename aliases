@@ -334,7 +334,7 @@ stty -ixon
 alias vims="vim -c 'colors solarized'"
 alias v=vim
 
-EMACSHOMEPREFIX=$HOME/apps/emacs251
+EMACSHOMEPREFIX=$HOME/apps/emacs
 if [ -e $EMACSHOMEPREFIX ] ; then
   export PATH="$EMACSHOMEPREFIX/bin:$PATH"
 fi
