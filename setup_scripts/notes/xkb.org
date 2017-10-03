@@ -31,6 +31,33 @@
   };
   :END:
 
+  #+BEGIN_SRC sh :results table drawer replace output
+    localectl list-x11-keymap-variants us
+  #+END_SRC
+
+  #+RESULTS:
+  :RESULTS:
+  | alt-intl        |
+  | altgr-intl      |
+  | chr             |
+  | colemak         |
+  | dvorak          |
+  | dvorak-alt-intl |
+  | dvorak-classic  |
+  | dvorak-intl     |
+  | dvorak-l        |
+  | dvorak-r        |
+  | dvp             |
+  | euro            |
+  | hbs             |
+  | intl            |
+  | mac             |
+  | olpc2           |
+  | rus             |
+  | workman         |
+  | workman-intl    |
+  :END:
+
 * xkb setup with ctrl super swap
 
   #+BEGIN_SRC text :tangle ~/.xkb/symbols/myswap

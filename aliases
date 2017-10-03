@@ -427,6 +427,7 @@ function setgitauthor {
   git config user.email "anthony.digirolamo@gmail.com"
 }
 
+export PATH="$HOME/apps/node-v8.5.0-linux-x64/bin:$PATH"
 NPM_PACKAGES="$HOME/.npm-packages"
 mkdir -p $NPM_PACKAGES/bin
 export PATH="$NPM_PACKAGES/bin:$PATH"
