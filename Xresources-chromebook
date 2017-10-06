@@ -21,7 +21,7 @@ URxvt*boldFont: xft:PragmataPro:size=FONTSIZE:antialias=true:hinting=true:autohi
 ! Extra options for xft font spec - ~/.fonts.conf seems to override this
 !:antialias=false:hintstyle=hintfull
 
-#define WINDOWGEOMETRY 90x20
+#define WINDOWGEOMETRY 119x32
 ! xterm
 xterm*dynamiccolors:      true
 xterm*utf8:               2
