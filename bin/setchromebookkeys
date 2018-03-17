@@ -1,3 +1,8 @@
 #!/bin/bash
-xkbcomp -I$HOME/.xkb ~/.xkb/keymap/mykbd $DISPLAY
+# xkbcomp -I$HOME/.xkb ~/.xkb/keymap/mykbd $DISPLAY
+# xcape -e 'Control_L=Escape'
+
+# View Layout
+# setxkbmap -print -verbose 10
+setxkbmap -layout us -variant colemak -option ctrl:swap_lwin_lctl
 xcape -e 'Control_L=Escape'
