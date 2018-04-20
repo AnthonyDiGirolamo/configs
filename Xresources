@@ -229,7 +229,7 @@ URxvt.perl-ext-common:
 
 Xcursor.size: 32
 
-! "Enabled modi" Set from: Default
+! "Enabled modi" Set from: XResources
 rofi.modi:                           window,run,ssh,drun
 ! "Window width" Set from: Default
 ! rofi.width:                          50
@@ -237,7 +237,7 @@ rofi.modi:                           window,run,ssh,drun
 ! rofi.lines:                          15
 ! "Number of columns" Set from: Default
 ! rofi.columns:                        1
-! "Font to use" Set from: Default
+! "Font to use" Set from: XResources
 rofi.font:                           PragmataProMono 32
 ! "Border width" Set from: Default
 ! rofi.bw:                             1
@@ -251,8 +251,8 @@ rofi.font:                           PragmataProMono 32
 ! rofi.xoffset:                        0
 ! "Always show number of lines" Set from: Default
 ! rofi.fixed-num-lines:                true
-! "Whether to load and show icons" Set from: Default
-! rofi.show-icons:                     false
+! "Whether to load and show icons" Set from: XResources
+rofi.show-icons:                     true
 ! "Terminal to use" Set from: Default
 ! rofi.terminal:                       rofi-sensible-terminal
 ! "Ssh client to use" Set from: Default
@@ -267,12 +267,8 @@ rofi.font:                           PragmataProMono 32
 ! rofi.run-shell-command:              {terminal} -e {cmd}
 ! "Command executed on accep-entry-custom for window modus" Set from: Default
 ! rofi.window-command:                 xkill -id {window}
-! "Window fields to match in window mode" Set from: Default
-! rofi.window-match-fields:            all
 ! "Theme to use to look for icons" Set from: Default
 ! rofi.drun-icon-theme:
-! "Desktop entry fields to match in drun" Set from: Default
-! rofi.drun-match-fields:              name,generic,exec,categories
 ! "Disable history in run/ssh" Set from: Default
 ! rofi.disable-history:                false
 ! "Use sorting" Set from: Default
@@ -341,12 +337,10 @@ rofi.font:                           PragmataProMono 32
 ! rofi.color-active:
 ! "Color scheme window" Set from: Default
 ! rofi.color-window:
-! "Max history size (WARNING: can cause slowdowns when set to high)." Set from: Default
-! rofi.max-history-size:               25
-! "Hide the prefix mode prefix on the combi view." Set from: Default
-! rofi.combi-hide-mode-prefix:         false
+! "Directory containing plugins" Set from: Default
+! rofi.plugin-path:                    /usr/lib/x86_64-linux-gnu/rofi
 ! "Pidfile location" Set from: Default
-! rofi.pid:                            /run/user/1000/rofi.pid
+! rofi.pid:                            /run/user/372438/rofi.pid
 ! "The display name of this browser" Set from: Default
 ! rofi.display-window:
 ! "The display name of this browser" Set from: Default
@@ -490,16 +484,16 @@ rofi.font:                           PragmataProMono 32
 ! "Select row 10" Set from: Default
 ! rofi.kb-select-10:                   Super+0
 ! "Go to the previous column" Set from: Default
-! rofi.ml-row-left:                    ScrollLeft
+! rofi.ml-row-left:                    Mouse6
 ! "Go to the next column" Set from: Default
-! rofi.ml-row-right:                   ScrollRight
+! rofi.ml-row-right:                   Mouse7
 ! "Select previous entry" Set from: Default
-! rofi.ml-row-up:                      ScrollUp
+! rofi.ml-row-up:                      Mouse4
 ! "Select next entry" Set from: Default
-! rofi.ml-row-down:                    ScrollDown
+! rofi.ml-row-down:                    Mouse5
 ! "Select hovered row" Set from: Default
-! rofi.me-select-entry:                MousePrimary
+! rofi.me-select-entry:                Mouse1
 ! "Accept hovered row" Set from: Default
-! rofi.me-accept-entry:                MouseDPrimary
+! rofi.me-accept-entry:                MouseD1
 ! "Accept hovered row with custom action" Set from: Default
-! rofi.me-accept-custom:               Control+MouseDPrimary
+! rofi.me-accept-custom:               Control+MouseD1

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+killall xcape
+setxkbmap -model pc105 -layout us -variant colemak -option caps:ctrl_modifier
+killall xcape
+xcape -e Caps_Lock=Escape
