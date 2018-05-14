@@ -4,5 +4,6 @@
 
 # View Layout
 # setxkbmap -print -verbose 10
+killall xcape
 setxkbmap -layout us -variant colemak -option ctrl:swap_lwin_lctl
 xcape -e 'Control_L=Escape'
