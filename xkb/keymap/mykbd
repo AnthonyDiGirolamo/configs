@@ -2,8 +2,6 @@ xkb_keymap {
         xkb_keycodes  { include "evdev+chromebook_m(media)+aliases(qwerty)"     };
         xkb_types     { include "complete"      };
         xkb_compat    { include "complete+chromebook"   };
-        xkb_symbols   { include "pc+us+inet(evdev)+chromebook_m_ralt(overlay)+us(colemak):2+myswap(swap_l_super_control)" };
-        # xkb_symbols   { include "pc+us+inet(evdev)+chromebook_m_ralt(overlay)" };
+        xkb_symbols   { include "pc+us(colemak)+inet(evdev)+chromebook_m_ralt(overlay)+ctrl(swap_lwin_lctl)"    };
         xkb_geometry  { include "pc(pc104)"     };
 };
-
