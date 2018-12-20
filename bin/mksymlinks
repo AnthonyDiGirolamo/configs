@@ -3,7 +3,7 @@ PREFS='Preferences'
 
 cd ~/$PREFS
 
-for FILE in fonts Xresources Xmodmap gitconfig irbrc ackrc rdebugrc vim/gvimrc vim/vimrc vim/vim aliases tmux/tmux.conf bash_profile bashrc emacs.d rubocop.yml pryrc
+for FILE in fonts Xresources Xmodmap gitconfig irbrc ackrc rdebugrc vim/gvimrc vim/vimrc vim/vim aliases tmux/tmux.conf bash_profile bashrc emacs.d rubocop.yml pryrc gdbinit
 do
   ln -svnf ~/$PREFS/$FILE ~/.`basename $FILE`
 done

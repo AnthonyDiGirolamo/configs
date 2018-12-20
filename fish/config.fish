@@ -7,21 +7,45 @@ function fish_user_key_bindings
   #   Alt+Up or Down to move through last argument history
   #   Alt+Left or Right to move through dirhist
 
-  # Alt+n or e to move through last argument history
+  # Alt+Ctrl+n or e to move through last argument history
   bind \e\cn history-token-search-forward
   bind \e\ce history-token-search-backward
-  # Alt+h or l to move through dirhist
+  bind -M insert \e\cn history-token-search-forward
+  bind -M insert \e\ce history-token-search-backward
+
+  # Alt+Ctrl+h or l to move through dirhist
   bind \e\ch prevd-or-backward-word
   bind \e\cl nextd-or-forward-word
+  bind -M insert \e\ch prevd-or-backward-word
+  bind -M insert \e\cl nextd-or-forward-word
+
+  # Ctrl-e accept current completion
+  bind -M insert \ce forward-char
+
+  # sync history accross sessions before reverse history search
+  bind -k up 'history --merge; up-or-search'
+  bind -M insert -k up 'history --merge; up-or-search'
+
+  # Also Use Ctrl-p and Ctrl-n for reverse history search
+  bind -M insert \cp 'history --merge; up-or-search'
+  bind -M insert \cn down-or-search
+  bind \cp 'history --merge; up-or-search'
+  bind \cn down-or-search
 end
 
-# if not set -q INSIDE_EMACS
-#   # turn on vi mode
-#   fish_vi_key_bindings
-# end
+if set -q INSIDE_EMACS
+  fish_default_key_bindings
+else
+  fish_vi_key_bindings
+end
 
 # Prepend PATH variable
+set -x PATH /usr/local/go/bin $PATH
 set -x PATH $HOME/.local/bin $PATH
+set -x PATH $HOME/.rbenv/bin $PATH
+set -x PATH $HOME/.cargo/bin $PATH
+set -x PATH $HOME/.luarocks/bin $PATH
+set -x PATH $HOME/.npm-packages/bin $PATH
 set -x fish_color_history_current yellow
 set -x SHELL fish
 
@@ -132,7 +156,7 @@ if string match -q -r 'Android' (uname -a)
 end
 
 set powerline_right_arrow ''
-if string match -q -r 'raspberrypi|chip' (uname -a)
+if set -q INSIDE_EMACS; or string match -q -r 'raspberrypi|chip' (uname -a)
   set powerline_right_arrow ''
 end
 
