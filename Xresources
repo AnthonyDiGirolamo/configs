@@ -9,7 +9,8 @@ Xft.autohint:  0
 ! What degree of hinting to use (hintnone, hintslight, hintmedium, or hintfull)
 Xft.hintstyle: hintslight
 
-#define FONTSIZE 18
+#define FONTSIZE 31
+! #define FONTSIZE 18
 
 ! xterm*faceName: 6x9
 ! URxvt*font:     6x9

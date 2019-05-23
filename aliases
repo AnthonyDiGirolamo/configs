@@ -316,14 +316,15 @@ else
   alias f12insert='xmodmap -e "keycode 96 = Insert"'
   unset LESS
 
-  function setinputprefs {
-    xset r rate 200 30
-    xinput list --name-only | grep -qs 'anthony’s trackpad'
-    if [ $? -eq 0 ]; then
-      xinput set-prop 'anthony’s trackpad' 'Synaptics Two-Finger Scrolling' 1, 1
-      xinput set-prop 'anthony’s trackpad' 'Synaptics Scrolling Distance' -156, -156
-    fi
-  }
+  # function setinputprefs {
+  #   xset r rate 200 30
+  #   xinput list --name-only | grep -qs 'anthony’s trackpad'
+  #   if [ $? -eq 0 ]; then
+  #     xinput set-prop 'anthony’s trackpad' 'Synaptics Two-Finger Scrolling' 1, 1
+  #     xinput set-prop 'anthony’s trackpad' 'Synaptics Scrolling Distance' -156, -156
+  #   fi
+  # }
+
   # if which xset &> /dev/null &&  [ ! -z "$DISPLAY" ]; then
   #   setinputprefs
   # fi

@@ -14,5 +14,5 @@ temp_readings = []
 end
 # readings.reject!(&:nil?)
 # puts " " + readings.join(" ‖ ") + " "
-puts "CPU  #{fan_readings[0]}  #{temp_readings[0]}"
-puts "GPU  #{fan_readings[1]}  #{temp_readings[1]}"
+puts "<txt><span fgcolor='White'>CPU  #{fan_readings[0]}  #{temp_readings[0]}"
+puts "GPU  #{fan_readings[1]}  #{temp_readings[1]}</span></txt>"
