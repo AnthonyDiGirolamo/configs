@@ -1,4 +1,7 @@
 #!/bin/bash
+! xfconf-query --channel xsettings --property /Xft/DPI 2>/dev/null 1>/dev/null \
+  && xfconf-query --channel xsettings --property /Xft/DPI --create --type int --set 100
+
 CURRENT_DPI=$(xfconf-query -c xsettings -p /Xft/DPI)
 
 case "$CURRENT_DPI" in
