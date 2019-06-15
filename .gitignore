@@ -14,9 +14,6 @@ vimperator/vimperator/info/
 zsh/zhistory
 zsh/zsh/cache
 *.o
-*.zip
-*.bz2
-*.tar.gz
 dmenu/dmenu
 dmenu/lsx
 dmenu/dmenu_run
