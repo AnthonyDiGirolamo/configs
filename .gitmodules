@@ -13,9 +13,6 @@
 [submodule "emacs.d"]
 	path = emacs.d
 	url = https://github.com/AnthonyDiGirolamo/dotemacs
-[submodule "vim"]
-	path = vim
-	url = https://github.com/AnthonyDiGirolamo/dotvim.git
 [submodule "xcape"]
 	path = xcape
 	url = https://github.com/alols/xcape.git
