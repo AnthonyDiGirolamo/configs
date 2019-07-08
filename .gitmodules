@@ -16,3 +16,6 @@
 [submodule "xcape"]
 	path = xcape
 	url = https://github.com/alols/xcape.git
+[submodule "vim"]
+	path = vim
+	url = git@gitlab.com:anthonydigirolamo/dotvim-thesecond.git
