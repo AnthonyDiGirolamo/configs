@@ -172,6 +172,7 @@ function unzip_list_trim {
   unzip -l $@ | ruby -e 'STDIN.readlines.tap{|f| f.shift(3); f.pop(2) }.each{|l| puts l.sub(/^\s+\S+\s+\S+\s+\S+\s+[^\/]+\//,"")}'
 }
 
+export PATH=$HOME/apps:$PATH
 export PATH=$HOME/apps/git/bin:$PATH
 export PATH=$HOME/apps/ctags/bin:$PATH
 export PATH=$HOME/apps/tree/bin:$PATH

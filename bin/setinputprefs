@@ -7,8 +7,9 @@ DEVICE_NAME='anthony’s trackpad'
 if [ $? -eq 0 ]
 then
     xinput list-props "${DEVICE_NAME}"
-    xinput set-prop "${DEVICE_NAME}" 'Synaptics Two-Finger Scrolling' 1, 1
-    xinput set-prop "${DEVICE_NAME}" 'Synaptics Scrolling Distance' -156, -156
+    xinput set-prop "${DEVICE_NAME}" 'libinput Tapping Enabled' 1
+    xinput set-prop "${DEVICE_NAME}" 'libinput Natural Scrolling Enabled' 1
+    xinput set-prop "${DEVICE_NAME}" 'libinput Accel Speed' 0.7
 fi
 # xinput list-props "${DEVICE_NAME}"
 

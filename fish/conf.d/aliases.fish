@@ -27,14 +27,6 @@ history --merge
 history
 end
 
-function setinputprefs
-  xset r rate 200 30
-  if xinput list --name-only | grep -qs 'anthony’s trackpad'
-    xinput set-prop 'anthony’s trackpad' 'Synaptics Two-Finger Scrolling' 1, 1
-    xinput set-prop 'anthony’s trackpad' 'Synaptics Scrolling Distance' -156, -156
-  end
-end
-
 function setgitauthor
   git config user.name "AnthonyDiGirolamo"
   git config user.email "anthony.digirolamo@gmail.com"
