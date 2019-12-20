@@ -456,3 +456,4 @@ if [[ -n ${ZSH_VERSION-} ]]; then
 fi
 
 . ~/.aliases-local
+alias dfasfx=startx
