@@ -1,4 +1,5 @@
 #!/bin/bash
+setinputprefs
 
 killall xcape
 setxkbmap -model pc105 -layout us -variant colemak -option caps:ctrl_modifier
