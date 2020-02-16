@@ -7,6 +7,12 @@ CURRENT_DPI=$(xfconf-query -c xsettings -p /Xft/DPI)
 case "$CURRENT_DPI" in
     "96")
         echo Currently $CURRENT_DPI
+        echo Setting 120 DPI
+        xfconf-query -c xsettings -p /Xft/DPI -s 120
+        xfconf-query -c xfce4-panel -p /panels/panel-1/size -s 32
+        ;;
+    "120")
+        echo Currently $CURRENT_DPI
         echo Setting 144 DPI
         xfconf-query -c xsettings -p /Xft/DPI -s 144
         xfconf-query -c xfce4-panel -p /panels/panel-1/size -s 32
