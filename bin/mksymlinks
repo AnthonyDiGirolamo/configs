@@ -20,3 +20,5 @@ mkdir -p ~/.config/fish/
 ln -svnf ~/$PREFS/fish/config.fish ~/.config/fish/
 ln -svnf ~/$PREFS/fish/functions ~/.config/fish/
 
+tic -x -o ~/.terminfo ~/$PREFS/terminfo-24bit.src
+
