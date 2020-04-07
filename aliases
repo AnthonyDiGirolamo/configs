@@ -421,9 +421,9 @@ function mailfetchloop {
 }
 alias mfl=mailfetchloop
 
-if [[ -n ${BASH_VERSION-} ]]; then
-  . ~/.shell_prompt.sh
-fi
+# if [[ -n ${BASH_VERSION-} ]]; then
+#   . ~/.shell_prompt.sh
+# fi
 
 function setgitauthor {
   git config user.name "AnthonyDiGirolamo"
@@ -444,7 +444,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 
 export PATH="$HOME/.luarocks/bin:$PATH"
-which luarocks >/dev/null && eval $(luarocks path)
+which luarocks 2>/dev/null && eval $(luarocks path)
 
 export PATH="$HOME/.cargo/bin:$PATH"
 
