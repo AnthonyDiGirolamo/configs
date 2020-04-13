@@ -17,6 +17,11 @@ set powerline_blue2 87afff
 set powerline_blue3 dfdfff
 
 function fish_prompt
+  if set -q INSIDE_EMACS
+    echo -n (prompt_pwd) ' $ '
+    return
+  end
+
   set_color -b $powerline_blue1 black
   if test 1 != $using_android
     printf ' %s@%s ' (whoami) (hostname|cut -d .  -f 1)

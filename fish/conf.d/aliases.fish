@@ -23,8 +23,8 @@ alias pd=prevd
 alias nd=nextd
 
 function h --description "merge history from other sessions and display with less"
-history --merge
-history
+  history --merge
+  history
 end
 
 function setgitauthor
@@ -34,10 +34,6 @@ end
 
 alias v='vim'
 alias tmux='tmux -2'
-
-if test -d $EMACSHOMEPREFIX
-  set -x PATH $EMACSHOMEPREFIX $PATH
-end
 
 if string match -q -r 'Darwin' (uname -a)
   alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'

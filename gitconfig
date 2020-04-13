@@ -11,8 +11,3 @@
   hist = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [core]
   editor = vim
-[url "https://"]
-  insteadOf = git://
-[user]
-	name = AnthonyDiGirolamo
-	email = anthony.digirolamo@gmail.com

@@ -2,4 +2,5 @@
 xset r rate 200 30
 killall xcape
 xcape -e 'Control_R=Escape'
+# -e 'Control_L=Escape'
 
