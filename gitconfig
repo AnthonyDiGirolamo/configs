@@ -13,3 +13,6 @@
   editor = vim
 [url "https://"]
   insteadOf = git://
+[user]
+	name = AnthonyDiGirolamo
+	email = anthony.digirolamo@gmail.com

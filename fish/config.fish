@@ -39,7 +39,9 @@ add_directory_to_path $HOME/.npm-packages/bin
 # Use Vim, it's faster for this use case
 set -x EDITOR "vim"
 set -x VISUAL $EDITOR
-set -x TERM xterm-24bit
+if not set -q INSIDE_EMACS
+    set -x TERM xterm-24bit
+end
 
 function source-bash-aliases --description "Try to source bash aliases, not fully working"
   bash -i -c 'alias' > ~/.active_aliases
